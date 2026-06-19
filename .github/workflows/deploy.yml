@@ -33,8 +33,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # Use "/" after you connect a custom domain in GitHub Pages settings
-          BASE_PATH: /${{ github.event.repository.name }}/
+          BASE_PATH: /
 
       - name: SPA fallback for client-side routing
         run: cp dist/index.html dist/404.html
