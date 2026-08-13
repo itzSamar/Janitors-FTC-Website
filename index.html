@@ -442,6 +442,115 @@
     @keyframes broomx{0%{transform:translateX(-80vw)}100%{transform:translateX(152vw)}}
     @keyframes bristle{0%{transform:translateY(-50%) rotate(-2deg)}50%{transform:translateY(-50%) rotate(26deg)}100%{transform:translateY(-50%) rotate(-2deg)}}
     @keyframes dustpuff{0%{opacity:0;transform:translate(0,0) scale(.45)}14%{opacity:.9}100%{opacity:0;transform:translate(-230px,-96px) scale(1.5)}}
+    .jl-apply input[type="text"],
+    .jl-apply input[type="email"],
+    .jl-apply input[type="number"],
+    .jl-apply textarea{
+      width:100%;
+      background:var(--bg);
+      color:var(--text);
+      border:1px solid var(--rule);
+      border-radius:0;
+      padding:14px 16px;
+      font-family:var(--disp);
+      font-size:16px;
+      line-height:1.4;
+      outline:none;
+      transition:border-color .18s ease, box-shadow .18s ease;
+    }
+    .jl-apply textarea{min-height:110px; resize:vertical;}
+    .jl-apply input:focus,
+    .jl-apply textarea:focus{
+      border-color:var(--accent);
+      box-shadow:0 0 0 1px var(--accent);
+    }
+    .jl-apply input::placeholder,
+    .jl-apply textarea::placeholder{color:var(--muted); opacity:.7;}
+    .jl-apply .jl-q{
+      display:grid;
+      gap:10px;
+      padding:22px 0;
+      border-bottom:1px solid var(--rule);
+    }
+    .jl-apply .jl-q .jl-qlabel{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:baseline;
+      gap:10px 14px;
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+    .jl-apply .jl-q .jl-qlabel .jl-qn{
+      color:var(--accent);
+      font-weight:700;
+    }
+    .jl-apply .jl-q .jl-qlabel .jl-qt{
+      color:var(--text);
+      letter-spacing:.04em;
+      text-transform:none;
+      font-family:var(--disp);
+      font-size:17px;
+      font-weight:600;
+    }
+    .jl-apply .jl-interests{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+      gap:10px;
+    }
+    .jl-apply .jl-chip{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid var(--rule);
+      background:var(--bg);
+      cursor:pointer;
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--muted);
+      transition:border-color .15s ease, color .15s ease, background .15s ease;
+      user-select:none;
+    }
+    .jl-apply .jl-chip:hover{border-color:var(--accent); color:var(--text);}
+    .jl-apply .jl-chip.is-on{
+      border-color:var(--accent);
+      color:var(--ink);
+      background:var(--accent);
+    }
+    .jl-apply .jl-chip input{position:absolute; opacity:0; pointer-events:none;}
+    .jl-apply .jl-submit{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:var(--accent);
+      color:var(--ink);
+      border:0;
+      padding:16px 24px;
+      font-family:var(--mono);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:filter .15s ease, transform .1s ease;
+    }
+    .jl-apply .jl-submit:hover{filter:brightness(1.06);}
+    .jl-apply .jl-submit:disabled{opacity:.55; cursor:wait;}
+    .jl-apply .jl-status{
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+      min-height:1.2em;
+    }
+    .jl-apply .jl-status.is-ok{color:var(--accent);}
+    .jl-apply .jl-status.is-err{color:#ff8a80;}
   </style>
 </helmet>
 
@@ -1508,12 +1617,92 @@
     </div>
   </section>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
+  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
     <div style="display:flex; flex-direction:column; border-top:1px solid var(--rule);">
       <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:20px; align-items:center; padding:26px 0; border-bottom:1px solid var(--rule); transition:padding-left .2s ease;" style-hover="padding-left:16px;"><span style="font-size:clamp(22px,2.8vw,36px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">reach out</span><span style="font-size:15px; color:var(--muted);">Email us or message us. Tell us what you're into.</span></div>
       <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:20px; align-items:center; padding:26px 0; border-bottom:1px solid var(--rule); transition:padding-left .2s ease;" style-hover="padding-left:16px;"><span style="font-size:clamp(22px,2.8vw,36px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">visit a meeting</span><span style="font-size:15px; color:var(--muted);">Drop by a meeting. Watch it run, or watch it break. Both happen.</span></div>
       <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:20px; align-items:center; padding:26px 0; border-bottom:1px solid var(--rule); transition:padding-left .2s ease;" style-hover="padding-left:16px;"><span style="font-size:clamp(22px,2.8vw,36px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">build with us</span><span style="font-size:15px; color:var(--muted);">Pick a subteam and get your hands on it. We're short-staffed on all four.</span></div>
     </div>
+  </section>
+
+  <section id="apply" class="jl-apply" style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
+    <div style="flex:1 1 100%; width:100%; display:grid; grid-template-columns:minmax(0,auto) minmax(0,1fr); gap:clamp(16px,3vw,40px);">
+      <div style="font-family:var(--mono); text-transform:uppercase; padding-right:clamp(10px,2vw,24px);">
+        <div style="position:relative; width:44px; height:48px; display:flex; align-items:center; justify-content:center; flex:none;">
+          <svg sc-camel-view-box="0 0 120 120" style="position:absolute; inset:0; width:100%; height:100%; overflow:visible;" fill="none"><g stroke="var(--rule)" stroke-linejoin="round"><path d="M60 6 L106 32 L106 88 L60 114 L14 88 L14 32 Z" stroke-width="6"></path><path d="M60 18 L96 38 L96 82 L60 102 L24 82 L24 38 Z" stroke-width="2" opacity="0.5"></path><circle cx="60" cy="6" r="5" fill="var(--accent)" stroke="none"></circle><circle cx="106" cy="32" r="5" fill="var(--rule)" stroke="none"></circle><circle cx="14" cy="32" r="5" fill="var(--rule)" stroke="none"></circle></g></svg>
+          <span style="position:relative; font-size:13px; letter-spacing:.1em; color:var(--text);">Ø2</span>
+        </div>
+        <div style="font-size:11px; letter-spacing:.2em; color:var(--muted); margin-top:9px; white-space:nowrap;">Application</div>
+      </div>
+      <div style="border-left:1px solid var(--rule); padding-left:clamp(18px,3vw,40px); min-width:0;">
+        <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">apply</h2>
+        <p style="margin-top:16px; max-width:46ch; font-size:16.5px; line-height:1.6; color:var(--muted);">Fill out the questions below to apply!</p>
+      </div>
+    </div>
+
+    <form id="jl-apply-form" style="margin-top:clamp(28px,3.5vw,44px); border-top:1px solid var(--rule); max-width:820px;">
+      <div class="jl-q">
+        <label class="jl-qlabel" for="q-name"><span class="jl-qn">Q1</span><span class="jl-qt">Name</span></label>
+        <input id="q-name" name="name" type="text" required autocomplete="name" placeholder="Your full name">
+      </div>
+      <div class="jl-q">
+        <label class="jl-qlabel" for="q-age"><span class="jl-qn">Q2</span><span class="jl-qt">Age</span></label>
+        <input id="q-age" name="age" type="number" min="1" max="99" required placeholder="Age">
+      </div>
+      <div class="jl-q">
+        <label class="jl-qlabel" for="q-location"><span class="jl-qn">Q3</span><span class="jl-qt">City, state, country</span></label>
+        <input id="q-location" name="location" type="text" required placeholder="San Francisco, CA, USA">
+      </div>
+      <div class="jl-q">
+        <label class="jl-qlabel" for="q-email"><span class="jl-qn">Q4</span><span class="jl-qt">Email (so we can reach out)</span></label>
+        <input id="q-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com">
+      </div>
+      <div class="jl-q">
+        <label class="jl-qlabel" for="q-ftc"><span class="jl-qn">Q5</span><span class="jl-qt">Have you done FTC before? If so, what team and what did you do?</span></label>
+        <textarea id="q-ftc" name="ftc" placeholder="Team number, role, years — or “No”"></textarea>
+      </div>
+      <div class="jl-q">
+        <label class="jl-qlabel" for="q-outreach"><span class="jl-qn">Q6</span><span class="jl-qt">Outreach experience (if applicable)</span></label>
+        <textarea id="q-outreach" name="outreach" placeholder="Optional"></textarea>
+      </div>
+      <div class="jl-q">
+        <label class="jl-qlabel" for="q-design"><span class="jl-qn">Q7</span><span class="jl-qt">Design experience (if applicable)</span></label>
+        <textarea id="q-design" name="design" placeholder="Optional — CAD, graphics, video, etc."></textarea>
+      </div>
+      <div class="jl-q">
+        <label class="jl-qlabel" for="q-hardware"><span class="jl-qn">Q8</span><span class="jl-qt">Hardware or fabrication experience (if applicable)</span></label>
+        <textarea id="q-hardware" name="hardware" placeholder="Optional"></textarea>
+      </div>
+      <div class="jl-q">
+        <label class="jl-qlabel" for="q-programming"><span class="jl-qn">Q9</span><span class="jl-qt">Programming experience (if applicable)</span></label>
+        <textarea id="q-programming" name="programming" placeholder="Optional"></textarea>
+      </div>
+      <div class="jl-q">
+        <div class="jl-qlabel"><span class="jl-qn">Q10</span><span class="jl-qt">What are you possibly interested in doing on the team? <span style="color:var(--muted); font-weight:500;">(select two max)</span></span></div>
+        <div class="jl-interests" data-interests="">
+          <label class="jl-chip"><input type="checkbox" name="interests" value="software">software</label>
+          <label class="jl-chip"><input type="checkbox" name="interests" value="hardware">hardware</label>
+          <label class="jl-chip"><input type="checkbox" name="interests" value="fabrication">fabrication</label>
+          <label class="jl-chip"><input type="checkbox" name="interests" value="design">design</label>
+          <label class="jl-chip"><input type="checkbox" name="interests" value="outreach">outreach</label>
+          <label class="jl-chip"><input type="checkbox" name="interests" value="driveteam">driveteam</label>
+          <label class="jl-chip"><input type="checkbox" name="interests" value="scouting">scouting</label>
+        </div>
+      </div>
+      <div class="jl-q">
+        <label class="jl-qlabel" for="q-why"><span class="jl-qn">Q11</span><span class="jl-qt">Why do you want to join the team?</span></label>
+        <textarea id="q-why" name="why" required placeholder="Tell us why"></textarea>
+      </div>
+      <div class="jl-q" style="border-bottom:0;">
+        <label class="jl-qlabel" for="q-other"><span class="jl-qn">Q12</span><span class="jl-qt">Anything else you would like to add?</span></label>
+        <textarea id="q-other" name="other" placeholder="Optional"></textarea>
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; align-items:center; gap:16px; padding-top:28px;">
+        <button class="jl-submit" type="submit">Submit application</button>
+        <div class="jl-status" id="jl-apply-status" aria-live="polite"></div>
+      </div>
+    </form>
   </section>
   </div>
   </sc-if>
@@ -1600,7 +1789,7 @@ class Component extends DCLogic {
     this.swapTimer = setTimeout(() => {
       this.setState({ page: p });
       this.jumpTo(0);
-      setTimeout(() => { this.clearCache(); if (this.scanReveals) this.scanReveals(); this.drawBot(); this.drawRoute(); }, 30);
+      setTimeout(() => { this.clearCache(); if (this.scanReveals) this.scanReveals(); this.drawBot(); this.drawRoute(); if (this.setupApplyForm) this.setupApplyForm(); }, 30);
     }, 420);
     this.scrambleTimer = setTimeout(() => this.scrambleText(), 780);
   }
@@ -1700,7 +1889,6 @@ class Component extends DCLogic {
     this.wipeTimer = setTimeout(() => { if (host.parentNode) host.remove(); }, 1000);
   }
 
-
   componentDidMount() {
     if (typeof window !== "undefined" && !window.janitorsBootShown) {
       window.janitorsBootShown = true;
@@ -1724,7 +1912,104 @@ class Component extends DCLogic {
       this.frameId = requestAnimationFrame(this.renderLoop);
     };
     this.frameId = requestAnimationFrame(this.renderLoop);
-    setTimeout(() => { this.clearCache(); this.setupReveals(); this.scrambleText(); this.setupDriving(); this.drawRoute(); }, 140);
+    this.setupApplyForm = () => {
+      if (typeof document === "undefined") return;
+      const form = document.getElementById("jl-apply-form");
+      if (!form || form.dataset.wired === "1") return;
+      form.dataset.wired = "1";
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyt-RvoCoFjTvpwPWJMAEm-WPEq2zqeDXjlaavH7Uao_IaNZUjKOUf1DJUQDPB7V2Vq/exec";
+      const status = document.getElementById("jl-apply-status");
+      const chips = form.querySelectorAll("[data-interests] .jl-chip");
+      const syncChips = () => {
+        chips.forEach((chip) => {
+          const input = chip.querySelector('input[type="checkbox"]');
+          chip.classList.toggle("is-on", !!(input && input.checked));
+        });
+      };
+      chips.forEach((chip) => {
+        chip.addEventListener("click", (e) => {
+          e.preventDefault();
+          const input = chip.querySelector('input[type="checkbox"]');
+          if (!input) return;
+          const checked = form.querySelectorAll('input[name="interests"]:checked');
+          if (!input.checked && checked.length >= 2) {
+            if (status) {
+              status.textContent = "Pick up to two interests";
+              status.className = "jl-status is-err";
+            }
+            return;
+          }
+          input.checked = !input.checked;
+          syncChips();
+          if (status && status.classList.contains("is-err")) {
+            status.textContent = "";
+            status.className = "jl-status";
+          }
+        });
+      });
+      syncChips();
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        const fd = new FormData(form);
+        const interests = fd.getAll("interests").map((v) => String(v));
+        if (interests.length === 0) {
+          if (status) {
+            status.textContent = "Select at least one interest (max two)";
+            status.className = "jl-status is-err";
+          }
+          return;
+        }
+        if (interests.length > 2) {
+          if (status) {
+            status.textContent = "Pick up to two interests";
+            status.className = "jl-status is-err";
+          }
+          return;
+        }
+        const val = (key) => String(fd.get(key) || "").trim();
+        const payload = {
+          name: val("name"),
+          age: val("age"),
+          location: val("location"),
+          email: val("email"),
+          ftc: val("ftc"),
+          outreach: val("outreach"),
+          design: val("design"),
+          hardware: val("hardware"),
+          programming: val("programming"),
+          interests: interests.join(", "),
+          why: val("why"),
+          other: val("other"),
+        };
+        if (btn) btn.disabled = true;
+        if (status) {
+          status.textContent = "Sending…";
+          status.className = "jl-status";
+        }
+        fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload),
+        }).then(() => {
+          form.reset();
+          syncChips();
+          if (status) {
+            status.textContent = "Application sent — we'll be in touch";
+            status.className = "jl-status is-ok";
+          }
+        }).catch(() => {
+          if (status) {
+            status.textContent = "Send failed — email 36721@thejanitors.team";
+            status.className = "jl-status is-err";
+          }
+        }).then(() => {
+          if (btn) btn.disabled = false;
+        });
+      });
+    };
+    setTimeout(() => { this.clearCache(); this.setupReveals(); this.scrambleText(); this.setupDriving(); this.drawRoute(); this.setupApplyForm(); }, 140);
     this.viewer = { rx: -16, ry: -28, dragging: false, lx: 0, ly: 0 };
     this.handleViewerMove = (e) => { if (!this.viewer.dragging) return; const x = e.touches ? e.touches[0].clientX : e.clientX; const y = e.touches ? e.touches[0].clientY : e.clientY; this.viewer.ry += (x - this.viewer.lx) * 0.55; this.viewer.rx = Math.max(-82, Math.min(82, this.viewer.rx - (y - this.viewer.ly) * 0.4)); this.viewer.lx = x; this.viewer.ly = y; this.applyViewerRotation(); };
     this.handleViewerRelease = () => { this.viewer.dragging = false; };
