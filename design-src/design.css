@@ -1,0 +1,126 @@
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* greek */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* greek */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* greek */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+
+    :root{--pad:clamp(18px,4vw,44px);--mono:'JetBrains Mono',ui-monospace,monospace;--disp:'Space Grotesk','Archivo',system-ui,sans-serif;}
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{margin:0;background:#07090A;font-family:'Archivo',system-ui,sans-serif;font-feature-settings:'ss01';-webkit-font-smoothing:antialiased;}
+    a{text-decoration:none;color:inherit;cursor:pointer;}
+    h1,h2,h3,p{margin:0;}
+    image-slot{display:block;}
+    @media print{
+      nav,footer,#scroll-bar,[data-noprint]{display:none !important}
+      *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      section{break-inside:avoid;page-break-inside:avoid}
+      @page{margin:14mm}
+    }
+    @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}html{scroll-behavior:auto;}}
+    @keyframes jl-cog{to{transform:rotate(360deg)}}
+    @keyframes tick{to{transform:translateX(-50%)}}
+    @keyframes blink{0%,45%{opacity:1}50%,100%{opacity:.12}}
+    @keyframes bar{0%{height:12%}100%{height:96%}}
+    @keyframes sweep{0%{transform:translateX(-101%)}100%{transform:translateX(101%)}}
+    @keyframes boot{0%,68%{opacity:1}100%{opacity:0}}
+    @keyframes load{0%{width:2%}100%{width:100%}}
+    @keyframes spinslow{to{transform:rotate(360deg)}}
+    @keyframes rise{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:none}}
+    @keyframes slideL{0%{opacity:0;transform:translateX(-54px)}100%{opacity:1;transform:none}}
+    @keyframes slideR{0%{opacity:0;transform:translateX(54px)}100%{opacity:1;transform:none}}
+    @keyframes zoomIn{0%{opacity:0;transform:scale(.94)}100%{opacity:1;transform:none}}
+    @keyframes dash{to{background-position:44px 0}}
+    @keyframes tickr{from{transform:translateX(-50%)}to{transform:none}}
+    @keyframes caret{0%,49%{opacity:1}50%,100%{opacity:0}}
+    @keyframes drop{0%{opacity:0;transform:translateY(-8px)}100%{opacity:1;transform:none}}
+    @keyframes widen{from{width:0}to{width:100%}}
+    @keyframes wipe{0%{transform:translateX(-102%)}100%{transform:translateX(102%)}}
+    @keyframes wipeBack{0%{transform:translateX(102%)}100%{transform:translateX(-102%)}}
+    @keyframes pageIn{0%{transform:translateY(18px)}100%{transform:none}}
+    @keyframes led{0%,100%{opacity:.55}50%{opacity:1}}
+    @keyframes swell{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+    @keyframes halo{0%{transform:scale(.7);opacity:.5}100%{transform:scale(2.1);opacity:0}}
+    @keyframes broomdown{0%{transform:translateY(-118vh)}100%{transform:translateY(112vh)}}
+    @keyframes rock{0%{transform:translateX(-50%) rotate(-9deg)}50%{transform:translateX(-50%) rotate(9deg)}100%{transform:translateX(-50%) rotate(-9deg)}}
+    @keyframes dustA{0%{opacity:0;transform:translate(0,0) scale(.4)}12%{opacity:.75}100%{opacity:0;transform:translate(-240px,-400px) scale(2.4)}}
+    @keyframes dustB{0%{opacity:0;transform:translate(0,0) scale(.45)}12%{opacity:.65}100%{opacity:0;transform:translate(40px,-470px) scale(2.6)}}
+    @keyframes dustC{0%{opacity:0;transform:translate(0,0) scale(.35)}12%{opacity:.8}100%{opacity:0;transform:translate(265px,-380px) scale(2.2)}}
+    @keyframes reveal{0%{opacity:0;transform:translateY(26px);filter:blur(10px)}100%{opacity:1;transform:none;filter:blur(0)}}
+    @keyframes broomx{0%{transform:translateX(-80vw)}100%{transform:translateX(152vw)}}
+    @keyframes bristle{0%{transform:translateY(-50%) rotate(-2deg)}50%{transform:translateY(-50%) rotate(26deg)}100%{transform:translateY(-50%) rotate(-2deg)}}
+    @keyframes dustpuff{0%{opacity:0;transform:translate(0,0) scale(.45)}14%{opacity:.9}100%{opacity:0;transform:translate(-230px,-96px) scale(1.5)}}
+  
