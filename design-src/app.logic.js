@@ -11,18 +11,85 @@ class Component extends DCLogic {
     const from = ord.indexOf(this.state.page || "home");
     const to = ord.indexOf(p);
     const back = to > -1 && from > -1 && to < from;
-    this.setState({ wiping: true, wipeBack: back });
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined") {
+      this.setState({ page: p });
+      return;
+    }
     if (this.swapTimer) clearTimeout(this.swapTimer);
     if (this.wipeTimer) clearTimeout(this.wipeTimer);
     if (this.scrambleTimer) clearTimeout(this.scrambleTimer);
+    this.playMopWipe(back);
     this.swapTimer = setTimeout(() => {
       this.setState({ page: p });
       this.jumpTo(0);
       setTimeout(() => { this.clearCache(); if (this.scanReveals) this.scanReveals(); this.drawBot(); this.drawRoute(); }, 30);
-    }, 430);
-    this.scrambleTimer = setTimeout(() => this.scrambleText(), 820);
-    this.wipeTimer = setTimeout(() => this.setState({ wiping: false }), 1080);
+    }, 420);
+    this.scrambleTimer = setTimeout(() => this.scrambleText(), 780);
+  }
+  playMopWipe(back) {
+    if (typeof document === "undefined") return;
+    const prev = document.getElementById("jl-mop-wipe");
+    if (prev) prev.remove();
+    const finishName = (() => {
+      try {
+        const finishes = { "Blackout": 1, "Lab Grey": 1 };
+        const defaultFinish = finishes[this.props.finish] ? this.props.finish : "Blackout";
+        return this.state.noir ? (defaultFinish === "Blackout" ? "Lab Grey" : "Blackout") : defaultFinish;
+      } catch (e) { return "Blackout"; }
+    })();
+    const accent = (this.props && this.props.accentColor) || "#22D3EE";
+    // Match page bg — never flash white/cream
+    const veil = finishName === "Lab Grey" ? "#DBDBD5" : "#07090A";
+    const figure = finishName === "Lab Grey" ? "#11161A" : "#E9F6F8";
+    const figureMute = finishName === "Lab Grey" ? "rgba(17,22,26,.55)" : "rgba(233,246,248,.45)";
+    const edgeGlow = back
+      ? "linear-gradient(90deg, transparent 0%, " + accent + "00 40%, " + accent + "55 100%)"
+      : "linear-gradient(90deg, " + accent + "55 0%, " + accent + "00 60%, transparent 100%)";
+    const flip = back ? "scaleX(-1)" : "none";
+    const host = document.createElement("div");
+    host.id = "jl-mop-wipe";
+    host.setAttribute("aria-hidden", "true");
+    host.style.cssText = "position:fixed;inset:0;z-index:90;pointer-events:none;overflow:hidden;";
+    host.innerHTML = `
+      <div class="${back ? "jl-wipe-back" : "jl-wipe-fwd"}" style="position:absolute;top:0;bottom:0;left:0;width:128%;">
+        <div style="display:flex;height:100%;width:100%;flex-direction:${back ? "row-reverse" : "row"};">
+          <div style="flex:1 1 auto;height:100%;background:${veil};"></div>
+          <div style="position:relative;flex:0 0 0;width:0;height:100%;">
+            <div style="position:absolute;top:0;bottom:0;${back ? "left:0;" : "right:0;transform:translateX(-100%);"}width:72px;background:${edgeGlow};pointer-events:none;"></div>
+            <div style="position:absolute;top:-4%;bottom:-4%;left:0;width:2px;transform:translateX(-50%);background:${accent};box-shadow:0 0 12px ${accent};animation:mopWet .35s ease-in-out infinite;"></div>
+            <div style="position:absolute;left:0;bottom:12%;transform:translate(-58%,0) ${flip};width:78px;height:110px;animation:jlRun .28s ease-in-out infinite;">
+              <svg viewBox="0 0 78 110" width="78" height="110" style="display:block;overflow:visible;">
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <g style="transform-origin:36px 18px;animation:jlMop .28s ease-in-out infinite;">
+                    <line x1="58" y1="8" x2="22" y2="62" stroke="${figure}" stroke-width="3.2"></line>
+                    <path d="M10 58 L34 54 L38 72 Q22 78 12 74 Q6 71 8 64 Z" fill="${figure}" stroke="${figureMute}" stroke-width="1"></path>
+                    <g stroke="${figureMute}" stroke-width="1.4">
+                      <path d="M14 70 Q12 86 11 96"></path>
+                      <path d="M20 72 Q20 88 20 98"></path>
+                      <path d="M26 71 Q28 87 30 97"></path>
+                    </g>
+                    <circle cx="58" cy="8" r="2.2" fill="${accent}"></circle>
+                  </g>
+                  <circle cx="36" cy="22" r="7" fill="${figure}"></circle>
+                  <path d="M36 29 L36 52" stroke="${figure}" stroke-width="4.5"></path>
+                  <path d="M36 34 L22 48" stroke="${figure}" stroke-width="3.2"></path>
+                  <path d="M36 36 L48 44" stroke="${figure}" stroke-width="3.2"></path>
+                  <g style="transform-origin:36px 52px;animation:jlLegL .28s ease-in-out infinite;">
+                    <path d="M36 52 L28 78" stroke="${figure}" stroke-width="3.4"></path>
+                    <path d="M28 78 L22 78" stroke="${figure}" stroke-width="3"></path>
+                  </g>
+                  <g style="transform-origin:36px 52px;animation:jlLegR .28s ease-in-out infinite;">
+                    <path d="M36 52 L46 78" stroke="${figure}" stroke-width="3.4"></path>
+                    <path d="M46 78 L54 78" stroke="${figure}" stroke-width="3"></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    document.body.appendChild(host);
+    this.wipeTimer = setTimeout(() => { if (host.parentNode) host.remove(); }, 1000);
   }
   componentDidMount() {
     if (typeof window !== "undefined" && !window.janitorsBootShown) {
@@ -667,12 +734,7 @@ class Component extends DCLogic {
       clockBarStyle: { height: "100%", width: ((150 - secs) / 150 * 100).toFixed(1) + "%", background: "var(--accent)", transition: "width 1s linear" },
       rootStyle,
       booting: !!this.state.booting,
-      wiping: !!this.state.wiping,
-      wipeStyle: {
-        position: "absolute", top: 0, bottom: 0, left: 0, width: "120%",
-        background: theme.ink, borderLeft: "3px solid " + accent, borderRight: "3px solid " + accent,
-        animation: (this.state.wipeBack ? "wipeBack" : "wipe") + " 1.05s cubic-bezier(.72,0,.24,1) forwards",
-      },
+
 
       scrollTopFn: () => this.scrollToTop(),
       onRobotDown: (e) => this.startViewerDrag(e),

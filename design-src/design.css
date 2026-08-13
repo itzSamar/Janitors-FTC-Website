@@ -1,81 +1,3 @@
-/* vietnamese */
-
-/* latin-ext */
-
-/* latin */
-
-/* vietnamese */
-
-/* latin-ext */
-
-/* latin */
-
-/* vietnamese */
-
-/* latin-ext */
-
-/* latin */
-
-/* vietnamese */
-
-/* latin-ext */
-
-/* latin */
-
-/* cyrillic-ext */
-
-/* cyrillic */
-
-/* greek */
-
-/* vietnamese */
-
-/* latin-ext */
-
-/* latin */
-
-/* cyrillic-ext */
-
-/* cyrillic */
-
-/* greek */
-
-/* vietnamese */
-
-/* latin-ext */
-
-/* latin */
-
-/* cyrillic-ext */
-
-/* cyrillic */
-
-/* greek */
-
-/* vietnamese */
-
-/* latin-ext */
-
-/* latin */
-
-/* vietnamese */
-
-/* latin-ext */
-
-/* latin */
-
-/* vietnamese */
-
-/* latin-ext */
-
-/* latin */
-
-/* vietnamese */
-
-/* latin-ext */
-
-/* latin */
-
 
     :root{--pad:clamp(18px,4vw,44px);--mono:'JetBrains Mono',ui-monospace,monospace;--disp:'Space Grotesk','Archivo',system-ui,sans-serif;}
     *{box-sizing:border-box;}
@@ -116,6 +38,13 @@
     @keyframes halo{0%{transform:scale(.7);opacity:.5}100%{transform:scale(2.1);opacity:0}}
     @keyframes broomdown{0%{transform:translateY(-118vh)}100%{transform:translateY(112vh)}}
     @keyframes rock{0%{transform:translateX(-50%) rotate(-9deg)}50%{transform:translateX(-50%) rotate(9deg)}100%{transform:translateX(-50%) rotate(-9deg)}}
+    @keyframes jlRun{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+    @keyframes jlLegL{0%,100%{transform:rotate(28deg)}50%{transform:rotate(-32deg)}}
+    @keyframes jlLegR{0%,100%{transform:rotate(-32deg)}50%{transform:rotate(28deg)}}
+    @keyframes jlMop{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(-8deg)}}
+    @keyframes mopWet{0%,100%{opacity:.4}50%{opacity:1}}
+    .jl-wipe-fwd{animation:wipe .95s cubic-bezier(.76,0,.18,1) forwards;will-change:transform}
+    .jl-wipe-back{animation:wipeBack .95s cubic-bezier(.76,0,.18,1) forwards;will-change:transform}
     @keyframes dustA{0%{opacity:0;transform:translate(0,0) scale(.4)}12%{opacity:.75}100%{opacity:0;transform:translate(-240px,-400px) scale(2.4)}}
     @keyframes dustB{0%{opacity:0;transform:translate(0,0) scale(.45)}12%{opacity:.65}100%{opacity:0;transform:translate(40px,-470px) scale(2.6)}}
     @keyframes dustC{0%{opacity:0;transform:translate(0,0) scale(.35)}12%{opacity:.8}100%{opacity:0;transform:translate(265px,-380px) scale(2.2)}}

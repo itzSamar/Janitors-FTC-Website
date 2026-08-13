@@ -427,6 +427,14 @@
     @keyframes halo{0%{transform:scale(.7);opacity:.5}100%{transform:scale(2.1);opacity:0}}
     @keyframes broomdown{0%{transform:translateY(-118vh)}100%{transform:translateY(112vh)}}
     @keyframes rock{0%{transform:translateX(-50%) rotate(-9deg)}50%{transform:translateX(-50%) rotate(9deg)}100%{transform:translateX(-50%) rotate(-9deg)}}
+    @keyframes jlBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+    @keyframes jlPush{0%,100%{transform:rotate(0deg)}50%{transform:rotate(3deg)}}
+    @keyframes jlThighBack{0%{transform:rotate(32deg)}50%{transform:rotate(-38deg)}100%{transform:rotate(32deg)}}
+    @keyframes jlThighFront{0%{transform:rotate(-38deg)}50%{transform:rotate(32deg)}100%{transform:rotate(-38deg)}}
+    @keyframes jlMopScrub{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(5deg)}}
+    @keyframes mopWet{0%,100%{opacity:.4}50%{opacity:1}}
+    .jl-wipe-fwd{animation:wipe .95s cubic-bezier(.76,0,.18,1) forwards;will-change:transform}
+    .jl-wipe-back{animation:wipeBack .95s cubic-bezier(.76,0,.18,1) forwards;will-change:transform}
     @keyframes dustA{0%{opacity:0;transform:translate(0,0) scale(.4)}12%{opacity:.75}100%{opacity:0;transform:translate(-240px,-400px) scale(2.4)}}
     @keyframes dustB{0%{opacity:0;transform:translate(0,0) scale(.45)}12%{opacity:.65}100%{opacity:0;transform:translate(40px,-470px) scale(2.6)}}
     @keyframes dustC{0%{opacity:0;transform:translate(0,0) scale(.35)}12%{opacity:.8}100%{opacity:0;transform:translate(265px,-380px) scale(2.2)}}
@@ -585,10 +593,6 @@
       </div>
     </div>
   </div>
-  </sc-if>
-
-  <sc-if value="{{ wiping }}" hint-placeholder-val="{{ false }}">
-  <div style="position:fixed; inset:0; z-index:50; pointer-events:none; overflow:hidden;"><div style="{{ wipeStyle }}"></div></div>
   </sc-if>
 
   <nav aria-label="Main" style="position:sticky; top:0; z-index:60; background:var(--bg); border-bottom:1px solid var(--rule);">
@@ -1585,19 +1589,118 @@ class Component extends DCLogic {
     const from = ord.indexOf(this.state.page || "home");
     const to = ord.indexOf(p);
     const back = to > -1 && from > -1 && to < from;
-    this.setState({ wiping: true, wipeBack: back });
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined") {
+      this.setState({ page: p });
+      return;
+    }
     if (this.swapTimer) clearTimeout(this.swapTimer);
     if (this.wipeTimer) clearTimeout(this.wipeTimer);
     if (this.scrambleTimer) clearTimeout(this.scrambleTimer);
+    this.playMopWipe(back);
     this.swapTimer = setTimeout(() => {
       this.setState({ page: p });
       this.jumpTo(0);
       setTimeout(() => { this.clearCache(); if (this.scanReveals) this.scanReveals(); this.drawBot(); this.drawRoute(); }, 30);
-    }, 430);
-    this.scrambleTimer = setTimeout(() => this.scrambleText(), 820);
-    this.wipeTimer = setTimeout(() => this.setState({ wiping: false }), 1080);
+    }, 420);
+    this.scrambleTimer = setTimeout(() => this.scrambleText(), 780);
   }
+  playMopWipe(back) {
+    if (typeof document === "undefined") return;
+    const prev = document.getElementById("jl-mop-wipe");
+    if (prev) prev.remove();
+    const finishName = (() => {
+      try {
+        const finishes = { "Blackout": 1, "Lab Grey": 1 };
+        const defaultFinish = finishes[this.props.finish] ? this.props.finish : "Blackout";
+        return this.state.noir ? (defaultFinish === "Blackout" ? "Lab Grey" : "Blackout") : defaultFinish;
+      } catch (e) { return "Blackout"; }
+    })();
+    const accent = (this.props && this.props.accentColor) || "#22D3EE";
+    const veil = finishName === "Lab Grey" ? "#DBDBD5" : "#07090A";
+    // Dark uniform — matches site aesthetic (not high-contrast white)
+    const suit = "#2E3A40";
+    const suitDark = "#1A2226";
+    const skin = "#C4A484";
+    const wood = "#B8956A";
+    const bristle = "#F2F0EA";
+    const shoe = "#0B0E10";
+    const edgeGlow = back
+      ? "linear-gradient(90deg, transparent 0%, " + accent + "00 40%, " + accent + "55 100%)"
+      : "linear-gradient(90deg, " + accent + "55 0%, " + accent + "00 60%, transparent 100%)";
+    const face = back ? "scaleX(-1)" : "scaleX(1)";
+    const host = document.createElement("div");
+    host.id = "jl-mop-wipe";
+    host.setAttribute("aria-hidden", "true");
+    host.style.cssText = "position:fixed;inset:0;z-index:90;pointer-events:none;overflow:hidden;";
+    host.innerHTML = `
+      <div class="${back ? "jl-wipe-back" : "jl-wipe-fwd"}" style="position:absolute;top:0;bottom:0;left:0;width:128%;">
+        <div style="display:flex;height:100%;width:100%;flex-direction:${back ? "row-reverse" : "row"};">
+          <div style="flex:1 1 auto;height:100%;background:${veil};"></div>
+          <div style="position:relative;flex:0 0 0;width:0;height:100%;">
+            <div style="position:absolute;top:0;bottom:0;${back ? "left:0;" : "right:0;transform:translateX(-100%);"}width:90px;background:${edgeGlow};pointer-events:none;"></div>
+            <div style="position:absolute;top:-4%;bottom:-4%;left:0;width:2px;transform:translateX(-50%);background:${accent};box-shadow:0 0 14px ${accent};animation:mopWet .35s ease-in-out infinite;"></div>
+            <div style="position:absolute;left:0;bottom:3%;width:min(320px,66vw);height:min(300px,58vh);transform:translate(-42%,0) ${face};transform-origin:50% 100%;">
+              <div style="width:100%;height:100%;animation:jlBob .28s ease-in-out infinite;">
+                <svg viewBox="0 0 260 200" width="100%" height="100%" style="display:block;overflow:visible;">
+                  <style>
+                    .jp{animation:jlPush .28s ease-in-out infinite;transform-origin:120px 140px}
+                    .jm{animation:jlMopScrub .28s ease-in-out infinite;transform-origin:210px 186px}
+                    .jhip{transform-box:fill-box;transform-origin:50% 0%}
+                    .jlegA{animation:jlThighBack .28s linear infinite}
+                    .jlegB{animation:jlThighFront .28s linear infinite}
+                  </style>
+                  <ellipse cx="214" cy="188" rx="48" ry="6" fill="${accent}" opacity=".16"></ellipse>
+                  <g class="jp" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="jm">
+                      <line x1="132" y1="100" x2="200" y2="168" stroke="${wood}" stroke-width="9"></line>
+                      <path d="M176 162 L236 154 L244 182 Q208 192 178 184 Z" fill="${bristle}" stroke="${shoe}" stroke-width="1.5"></path>
+                      <g stroke="${shoe}" stroke-width="2.4" opacity=".65">
+                        <line x1="186" y1="170" x2="182" y2="186"></line>
+                        <line x1="198" y1="172" x2="196" y2="188"></line>
+                        <line x1="210" y1="172" x2="210" y2="188"></line>
+                        <line x1="222" y1="170" x2="226" y2="186"></line>
+                      </g>
+                      <rect x="182" y="158" width="50" height="10" rx="2" fill="${wood}"></rect>
+                    </g>
+
+                    <!-- legs pivot at hips — actual run cycle -->
+                    <g class="jhip jlegA">
+                      <path d="M112 132 L96 158" fill="none" stroke="${suitDark}" stroke-width="17"></path>
+                      <path d="M96 158 L84 178" fill="none" stroke="${suitDark}" stroke-width="15"></path>
+                      <path d="M76 178 L66 178 L68 186 L90 186 Z" fill="${shoe}"></path>
+                    </g>
+                    <g class="jhip jlegB">
+                      <path d="M120 132 L140 156" fill="none" stroke="${suit}" stroke-width="17"></path>
+                      <path d="M140 156 L156 176" fill="none" stroke="${suit}" stroke-width="15"></path>
+                      <path d="M150 176 L172 176 L170 186 L148 186 Z" fill="${shoe}"></path>
+                    </g>
+
+                    <ellipse cx="116" cy="130" rx="20" ry="15" fill="${suitDark}"></ellipse>
+                    <path d="M96 76 C110 70 132 72 140 84 L146 124 C138 134 100 136 92 124 Z" fill="${suit}"></path>
+                    <path d="M118 78 L122 126" stroke="${accent}" stroke-width="3.5"></path>
+                    <rect x="126" y="100" width="14" height="12" rx="2" fill="${suitDark}"></rect>
+
+                    <path d="M136 94 C148 98 158 106 168 116" fill="none" stroke="${suit}" stroke-width="15"></path>
+                    <path d="M164 112 C170 118 174 124 176 128" fill="none" stroke="${accent}" stroke-width="13"></path>
+                    <ellipse cx="152" cy="110" rx="8" ry="7" fill="${accent}" transform="rotate(28 152 110)"></ellipse>
+
+                    <rect x="112" y="62" width="14" height="18" rx="5" fill="${skin}"></rect>
+                    <path d="M108 56 C108 40 128 36 138 46 C146 52 146 64 138 68 C130 74 110 72 108 56 Z" fill="${skin}"></path>
+                    <circle cx="134" cy="54" r="2.4" fill="${shoe}"></circle>
+                    <path d="M104 50 C116 34 142 34 148 50 L148 56 L104 56 Z" fill="${accent}"></path>
+                    <path d="M148 50 L164 56 L148 58 Z" fill="${accent}"></path>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    document.body.appendChild(host);
+    this.wipeTimer = setTimeout(() => { if (host.parentNode) host.remove(); }, 1000);
+  }
+
+
   componentDidMount() {
     if (typeof window !== "undefined" && !window.janitorsBootShown) {
       window.janitorsBootShown = true;
@@ -2241,12 +2344,7 @@ class Component extends DCLogic {
       clockBarStyle: { height: "100%", width: ((150 - secs) / 150 * 100).toFixed(1) + "%", background: "var(--accent)", transition: "width 1s linear" },
       rootStyle,
       booting: !!this.state.booting,
-      wiping: !!this.state.wiping,
-      wipeStyle: {
-        position: "absolute", top: 0, bottom: 0, left: 0, width: "120%",
-        background: theme.ink, borderLeft: "3px solid " + accent, borderRight: "3px solid " + accent,
-        animation: (this.state.wipeBack ? "wipeBack" : "wipe") + " 1.05s cubic-bezier(.72,0,.24,1) forwards",
-      },
+
 
       scrollTopFn: () => this.scrollToTop(),
       onRobotDown: (e) => this.startViewerDrag(e),
