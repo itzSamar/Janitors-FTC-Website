@@ -1602,20 +1602,12 @@
     </div>
   </header>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
-    <div style="display:flex; flex-direction:column; border-top:1px solid var(--rule);">
-      <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:20px; align-items:center; padding:26px 0; border-bottom:1px solid var(--rule); transition:padding-left .2s ease;" style-hover="padding-left:16px;"><span style="font-size:clamp(22px,2.8vw,36px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">reach out</span><span style="font-size:15px; color:var(--muted);">Email us or message us. Tell us what you're into.</span></div>
-      <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:20px; align-items:center; padding:26px 0; border-bottom:1px solid var(--rule); transition:padding-left .2s ease;" style-hover="padding-left:16px;"><span style="font-size:clamp(22px,2.8vw,36px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">visit a meeting</span><span style="font-size:15px; color:var(--muted);">Drop by a meeting. Watch it run, or watch it break. Both happen.</span></div>
-      <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:20px; align-items:center; padding:26px 0; border-bottom:1px solid var(--rule); transition:padding-left .2s ease;" style-hover="padding-left:16px;"><span style="font-size:clamp(22px,2.8vw,36px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">build with us</span><span style="font-size:15px; color:var(--muted);">Pick a subteam and get your hands on it. We're short-staffed on all four.</span></div>
-    </div>
-  </section>
-
   <section id="apply" class="jl-apply" style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
     <div style="flex:1 1 100%; width:100%; display:grid; grid-template-columns:minmax(0,auto) minmax(0,1fr); gap:clamp(16px,3vw,40px);">
       <div style="font-family:var(--mono); text-transform:uppercase; padding-right:clamp(10px,2vw,24px);">
         <div style="position:relative; width:44px; height:48px; display:flex; align-items:center; justify-content:center; flex:none;">
           <svg sc-camel-view-box="0 0 120 120" style="position:absolute; inset:0; width:100%; height:100%; overflow:visible;" fill="none"><g stroke="var(--rule)" stroke-linejoin="round"><path d="M60 6 L106 32 L106 88 L60 114 L14 88 L14 32 Z" stroke-width="6"></path><path d="M60 18 L96 38 L96 82 L60 102 L24 82 L24 38 Z" stroke-width="2" opacity="0.5"></path><circle cx="60" cy="6" r="5" fill="var(--accent)" stroke="none"></circle><circle cx="106" cy="32" r="5" fill="var(--rule)" stroke="none"></circle><circle cx="14" cy="32" r="5" fill="var(--rule)" stroke="none"></circle></g></svg>
-          <span style="position:relative; font-size:13px; letter-spacing:.1em; color:var(--text);">Ø2</span>
+          <span style="position:relative; font-size:13px; letter-spacing:.1em; color:var(--text);">Ø1</span>
         </div>
         <div style="font-size:11px; letter-spacing:.2em; color:var(--muted); margin-top:9px; white-space:nowrap;">Application</div>
       </div>
@@ -1902,7 +1894,7 @@ class Component extends DCLogic {
       const form = document.getElementById("jl-apply-form");
       if (!form || form.dataset.wired === "1") return;
       form.dataset.wired = "1";
-      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyt-RvoCoFjTvpwPWJMAEm-WPEq2zqeDXjlaavH7Uao_IaNZUjKOUf1DJUQDPB7V2Vq/exec";
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwl379SYNtF8FJ5dtF92BofDh6KkkjonFBWh3ZJq_CZmXkIYYRC9SDUX0caWDfgPidk9Q/exec";
       const status = document.getElementById("jl-apply-status");
       const chips = form.querySelectorAll("[data-interests] .jl-chip");
       const syncChips = () => {
