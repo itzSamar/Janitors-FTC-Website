@@ -636,9 +636,53 @@
       width:20px;
       height:20px;
     }
+    .jl-hero-meta-line{font-size:14px; color:var(--muted);}
+    @media (max-width:900px){
+      .jl-hero-bottom{
+        grid-template-columns:1fr !important;
+        gap:22px !important;
+        align-items:stretch !important;
+      }
+    }
     @media (max-width:720px){
-      .jl-hero-bottom{grid-template-columns:1fr !important; gap:22px !important;}
-      .jl-hero-socials{margin-top:4px;}
+      .jl-hero-track{
+        height:auto !important;
+      }
+      .jl-hero-sticky{
+        position:relative !important;
+        top:auto !important;
+        height:auto !important;
+        min-height:calc(100svh - var(--navh,64px));
+        overflow:visible !important;
+        grid-template-rows:auto auto auto !important;
+        row-gap:18px !important;
+        padding-top:20px !important;
+        padding-bottom:28px !important;
+        align-items:stretch !important;
+      }
+      .jl-hero-sticky [data-mark]{
+        align-self:center !important;
+        transform:scale(.92);
+        transform-origin:left center;
+      }
+      .jl-hero-sticky [data-sweep]{
+        display:none !important;
+      }
+      .jl-hero-bottom{
+        gap:18px !important;
+        padding-top:16px !important;
+      }
+      .jl-hero-socials{
+        gap:8px !important;
+      }
+      .jl-hero-socials .jl-social-btn{
+        padding:14px 16px !important;
+        font-size:11px !important;
+      }
+      .jl-hero-meta-line{
+        font-size:12.5px;
+        line-height:1.45;
+      }
     }
     @media (max-width:640px){
       .jl-social-list a{
@@ -646,6 +690,9 @@
         gap:12px;
       }
       .jl-social-list .jl-social-desc{display:none;}
+      .jl-hero-sticky [data-mark]{
+        transform:scale(.84);
+      }
     }
   </style>
 </helmet>
@@ -837,8 +884,8 @@
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
-  <header data-track="" style="position:relative; z-index:1; height:300vh; border-bottom:1px solid var(--rule);">
-    <div style="position:sticky; top:var(--navh,64px); height:calc(100vh - var(--navh,64px)); overflow:hidden; display:grid; grid-template-rows:auto 1fr auto; align-items:center; row-gap:clamp(18px,3.5vh,48px); padding:clamp(26px,4.5vh,54px) var(--pad) clamp(26px,4.5vh,58px);">
+  <header data-track="" class="jl-hero-track" style="position:relative; z-index:1; height:300vh; border-bottom:1px solid var(--rule);">
+    <div class="jl-hero-sticky" style="position:sticky; top:var(--navh,64px); height:calc(100vh - var(--navh,64px)); overflow:hidden; display:grid; grid-template-rows:auto 1fr auto; align-items:center; row-gap:clamp(18px,3.5vh,48px); padding:clamp(26px,4.5vh,54px) var(--pad) clamp(26px,4.5vh,58px);">
 
       <div style="display:flex; flex-wrap:wrap; gap:10px 26px; justify-content:space-between; align-items:baseline; font-family:var(--mono); font-size:clamp(9px,.85vw,11px); letter-spacing:.1em; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--rule); padding-bottom:12px;">
         <span style="min-width:0;">36721 · first tech challenge · dublin, ca</span>
@@ -876,7 +923,7 @@
             <a sc-camel-on-click="{{ navJoin }}" data-magnet="" style="display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:var(--ink); padding:14px 22px; font-size:16px; font-weight:700; will-change:transform;">join the team</a>
             <a sc-camel-on-click="{{ navRobot }}" data-magnet="" style="display:inline-flex; align-items:center; gap:10px; background:var(--key); color:var(--text); border:1px solid var(--rule); padding:14px 22px; font-size:16px; will-change:transform;" style-hover="background:var(--keytop); color:var(--accent);">open robot file</a>
           </div>
-          <div style="font-size:14px; color:var(--muted);">rookie 2026 · dublin, ca · tue &amp; thu · room 114 · scroll to sweep ↓</div>
+          <div class="jl-hero-meta-line">rookie 2026 · dublin, ca · tue &amp; thu · room 114 · scroll to sweep ↓</div>
         </div>
         <div class="jl-hero-socials" style="display:flex; flex-direction:column; gap:10px; min-width:0;">
           <div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:2px;">find us</div>
