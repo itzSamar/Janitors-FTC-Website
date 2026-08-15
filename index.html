@@ -723,6 +723,17 @@
         line-height:1.45;
       }
     }
+    @media (max-width:980px){
+      .jl-team-members > div:last-child{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+      }
+    }
+    @media (max-width:720px){
+      .jl-team-captains > div:last-child,
+      .jl-team-members > div:last-child{
+        grid-template-columns:1fr !important;
+      }
+    }
     @media (max-width:640px){
       .jl-social-list a{
         grid-template-columns:auto minmax(0,1fr) auto;
@@ -1585,16 +1596,67 @@
 
   <header style="position:relative; z-index:1; padding:clamp(52px,6vw,88px) var(--pad); border-bottom:1px solid var(--rule); display:flex; align-items:flex-end; justify-content:space-between; gap:30px; flex-wrap:wrap;">
     <div><div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 29 L12 17 Q9.5 17 9.5 14.5 Q9.5 12 12 12 L13 12 L13 6.5 Q13 4 15.5 4 Q18 4 18 6.5 L18 12 L20.5 12 Q23 12 23 15 L23 29 Z"></path></svg><span style="white-space:nowrap;">roster · 36721</span></div><h1 data-scramble="" style="font-size:clamp(44px,7vw,104px); font-family:var(--disp); font-weight:700; line-height:.82; letter-spacing:-.042em;">the team</h1></div>
-    <p style="max-width:34ch; font-size:16px; line-height:1.6; color:var(--muted);">Six students and two coaches. Everyone owns part of the robot.</p>
+    <p style="max-width:34ch; font-size:16px; line-height:1.6; color:var(--muted);">Two captains, four leads, two coaches. Everyone owns a piece of the robot.</p>
   </header>
 
-  <section style="position:relative; z-index:1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:var(--rule); border-bottom:1px solid var(--rule);">
-      <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);"><image-slot id="team-1" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot><div style="padding:clamp(24px,2.8vw,34px);"><div style="font-size:clamp(22px,1.9vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Maya R.</div><div style="margin-top:5px; font-size:15px; color:var(--accent);">captain</div><p style="margin-top:14px; font-size:15.5px; line-height:1.6; color:var(--muted);">Runs the build schedule, keeps the notebook current, and speaks for the team in judging.</p><p style="margin-top:12px; font-size:15.5px; line-height:1.6; color:var(--text);">“The hardest part was learning to cut a design we all liked.”</p></div></div>
-      <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);"><image-slot id="team-2" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot><div style="padding:clamp(24px,2.8vw,34px);"><div style="font-size:clamp(22px,1.9vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Devin K.</div><div style="margin-top:5px; font-size:15px; color:var(--accent);">lead builder</div><p style="margin-top:14px; font-size:15.5px; line-height:1.6; color:var(--muted);">Machines and assembles every mechanism, and trains new members on the mill and the drill press.</p><p style="margin-top:12px; font-size:15.5px; line-height:1.6; color:var(--text);">“I had never used a mill in January. Now I train the new members on it.”</p></div></div>
-      <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);"><image-slot id="team-3" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot><div style="padding:clamp(24px,2.8vw,34px);"><div style="font-size:clamp(22px,1.9vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Priya S.</div><div style="margin-top:5px; font-size:15px; color:var(--accent);">programmer</div><p style="margin-top:14px; font-size:15.5px; line-height:1.6; color:var(--muted);">Writes the autonomous routine, driver control, and the vision pipeline in Java.</p><p style="margin-top:12px; font-size:15.5px; line-height:1.6; color:var(--text);">“Our auto worked the first time and I did not trust it. I was right not to.”</p></div></div>
-      <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);"><image-slot id="team-4" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot><div style="padding:clamp(24px,2.8vw,34px);"><div style="font-size:clamp(22px,1.9vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Leo T.</div><div style="margin-top:5px; font-size:15px; color:var(--accent);">cad lead</div><p style="margin-top:14px; font-size:15.5px; line-height:1.6; color:var(--muted);">Models the robot in CAD before anything gets cut, and owns the drawings the build team works from.</p><p style="margin-top:12px; font-size:15.5px; line-height:1.6; color:var(--text);">“I redrew the lift eleven times. Version eleven is the one that fits.”</p></div></div>
-      <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);"><image-slot id="team-5" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot><div style="padding:clamp(24px,2.8vw,34px);"><div style="font-size:clamp(22px,1.9vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Sana M.</div><div style="margin-top:5px; font-size:15px; color:var(--accent);">driver</div><p style="margin-top:14px; font-size:15.5px; line-height:1.6; color:var(--muted);">Drives in matches and runs practice cycles to shave seconds off the scoring loop.</p><p style="margin-top:12px; font-size:15.5px; line-height:1.6; color:var(--text);">“Driving practice is mostly learning what not to do at full speed.”</p></div></div>
-      <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);"><image-slot id="team-6" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot><div style="padding:clamp(24px,2.8vw,34px);"><div style="font-size:clamp(22px,1.9vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Owen B.</div><div style="margin-top:5px; font-size:15px; color:var(--accent);">strategy &amp; outreach</div><p style="margin-top:14px; font-size:15.5px; line-height:1.6; color:var(--muted);">Scouts other teams at events, plans alliances, and handles sponsors and community workshops.</p><p style="margin-top:12px; font-size:15.5px; line-height:1.6; color:var(--text);">“Scouting is just writing things down until the pattern shows up.”</p></div></div>
+  <section class="jl-team-captains" style="position:relative; z-index:1; border-bottom:1px solid var(--rule);">
+    <div style="padding:18px var(--pad); border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted);">lead captains</div>
+    <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:var(--rule);">
+      <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);">
+        <image-slot id="team-1" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot>
+        <div style="padding:clamp(24px,2.8vw,34px);">
+          <div style="font-size:clamp(22px,1.9vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Samar B.</div>
+          <div style="margin-top:8px; font-size:14px; line-height:1.55; color:var(--accent);">team captain · software lead · strategy lead · driver</div>
+          <p style="margin-top:16px; font-size:15px; line-height:1.65; color:var(--muted);">From a young age, I’ve always asked myself, “What problem can I solve?” That question led me to start coding in 3rd grade, where I fell in love with it while making Python Turtle projects with my dad teaching me what a function was. That core memory eventually inspired me to learn 4 more languages while joining FLL in 3rd grade and FTC at Team X in 6th grade, where over four years I developed strong programming foundations, learned good practices in robotics, contributed to outreach, and served as a driver every year, even making it to regionals, followed by one year of FRC on Team 7419. I love robotics because it combines programming, problem-solving, teamwork, and the opportunity to turn ideas into something that can make an impact. I hope to build on my skills and contribute as a programmer, driver, and team member wherever I’m needed to help take this team to great success at worlds in Houston. One line of code, practice scrim, and night alongside my teammates at a time.</p>
+        </div>
+      </div>
+      <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);">
+        <image-slot id="team-2" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot>
+        <div style="padding:clamp(24px,2.8vw,34px);">
+          <div style="font-size:clamp(22px,1.9vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Mayukh M.</div>
+          <div style="margin-top:8px; font-size:14px; line-height:1.55; color:var(--accent);">team captain · hardware &amp; fabrication lead · finance lead</div>
+          <p style="margin-top:16px; font-size:15px; line-height:1.65; color:var(--muted);">My passion for engineering started with LEGOs, driven by an early desire to bring static builds to life using motors, microcontrollers, and code. Over the past six years, that curiosity has evolved into extensive hands-on experience across FIRST competitions and custom Arduino projects. Through countless cycles of CAD design, rapid prototyping, and precision fabrication, I have developed strong electromechanical intuition alongside practical experience in team budgeting and resource management. As a Team Captain, I combine this technical depth with organized leadership to ensure our build season is both structurally sound and fiscally strategic. I'm focused on streamlining our engineering workflow, pushing our competitive limits, and leading the team to a dominant World Championship run.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="jl-team-members" style="position:relative; z-index:1; border-bottom:1px solid var(--rule);">
+    <div style="padding:18px var(--pad); border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted);">team leads</div>
+    <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:var(--rule);">
+      <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);">
+        <image-slot id="team-3" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot>
+        <div style="padding:clamp(20px,2.4vw,28px);">
+          <div style="font-size:clamp(20px,1.7vw,26px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Arnav J.</div>
+          <div style="margin-top:8px; font-size:13.5px; line-height:1.5; color:var(--accent);">software co-lead · hardware &amp; fabrication co-lead</div>
+          <p style="margin-top:14px; font-size:14.5px; line-height:1.6; color:var(--muted);">Bio coming soon.</p>
+        </div>
+      </div>
+      <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);">
+        <image-slot id="team-4" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot>
+        <div style="padding:clamp(20px,2.4vw,28px);">
+          <div style="font-size:clamp(20px,1.7vw,26px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Adarsh U.</div>
+          <div style="margin-top:8px; font-size:13.5px; line-height:1.5; color:var(--accent);">design lead · strategy co-lead</div>
+          <p style="margin-top:14px; font-size:14.5px; line-height:1.6; color:var(--muted);">Bio coming soon.</p>
+        </div>
+      </div>
+      <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);">
+        <image-slot id="team-5" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot>
+        <div style="padding:clamp(20px,2.4vw,28px);">
+          <div style="font-size:clamp(20px,1.7vw,26px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Yajat</div>
+          <div style="margin-top:8px; font-size:13.5px; line-height:1.5; color:var(--accent);">outreach lead</div>
+          <p style="margin-top:14px; font-size:14.5px; line-height:1.6; color:var(--muted);">Bio coming soon.</p>
+        </div>
+      </div>
+      <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);">
+        <image-slot id="team-6" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot>
+        <div style="padding:clamp(20px,2.4vw,28px);">
+          <div style="font-size:clamp(20px,1.7vw,26px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Niraj</div>
+          <div style="margin-top:8px; font-size:13.5px; line-height:1.5; color:var(--accent);">outreach co-lead</div>
+          <p style="margin-top:14px; font-size:14.5px; line-height:1.6; color:var(--muted);">Bio coming soon.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
