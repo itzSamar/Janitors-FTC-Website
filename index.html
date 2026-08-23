@@ -20,8 +20,7 @@
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#07090A">
   <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="apple-touch-icon" href="/logo-black.png">
+  <link rel="apple-touch-icon" href="/logo-transparent.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <style>/* vietnamese */
@@ -668,8 +667,8 @@
       flex:none;
       display:block;
       border-radius:4px;
-      object-fit:cover;
-      background:#000;
+      object-fit:contain;
+      background:transparent;
     }
     .jl-brand-mark-lg{
       width:30px;
@@ -727,12 +726,48 @@
       .jl-team-members > div:last-child{
         grid-template-columns:repeat(2,minmax(0,1fr)) !important;
       }
+      .jl-sponsor-calc{
+        grid-template-columns:1fr !important;
+      }
     }
     @media (max-width:720px){
       .jl-team-captains > div:last-child,
       .jl-team-members > div:last-child{
         grid-template-columns:1fr !important;
       }
+    }
+    .jl-hero-track.jl-sweep-done{
+      height:auto !important;
+    }
+    .jl-hero-track.jl-sweep-done .jl-hero-sticky{
+      position:relative !important;
+      top:auto !important;
+      height:auto !important;
+      overflow:visible !important;
+    }
+    .jl-hero-track.jl-sweep-done [data-sweep]{
+      display:none !important;
+    }
+    .jl-sponsor-calc{
+      display:grid;
+      grid-template-columns:minmax(280px,1fr) minmax(260px,.55fr);
+      gap:clamp(18px,3vw,36px);
+      margin-top:clamp(30px,3.4vw,42px);
+      align-items:start;
+    }
+    .jl-sponsor-calc-bars{
+      display:grid;
+      grid-template-columns:minmax(72px,110px) minmax(0,1fr) minmax(64px,88px);
+      gap:12px;
+      align-items:center;
+    }
+    .jl-sponsor-tier-card{
+      position:relative;
+      z-index:1;
+      min-width:0;
+      background:var(--bg);
+      border:1px solid var(--rule);
+      padding:clamp(22px,2.6vw,30px);
     }
     @media (max-width:640px){
       .jl-social-list a{
@@ -900,7 +935,7 @@
   <nav aria-label="Main" style="position:sticky; top:0; z-index:60; background:var(--bg); border-bottom:1px solid var(--rule);">
     <div style="display:flex; align-items:center; justify-content:space-between; gap:clamp(10px,2vw,26px); padding:10px var(--pad); min-width:0;">
       <a sc-camel-on-click="{{ navHome }}" role="link" sc-camel-tab-index="0" aria-label="The Janitors, team 36721 — home" style="display:flex; align-items:center; gap:10px; flex:0 1 auto; min-width:0;">
-        <img class="jl-brand-mark" src="/logo-black.png" width="28" height="28" alt="" decoding="async">
+        <img class="jl-brand-mark" src="/logo-transparent.png" width="28" height="28" alt="" decoding="async">
         <span style="font-size:clamp(16px,1.7vw,20px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; color:var(--text); white-space:nowrap;">the janitors</span>
         <span style="font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.1em; color:var(--ink); background:var(--accent); padding:4px 7px; flex:none; white-space:nowrap;">36721</span>
       </a>
@@ -1478,18 +1513,6 @@
     </div>
   </section>
 
-  <section data-lag="0.05" style="position:relative; z-index:1; background:var(--accent); color:var(--ink); padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule); overflow:hidden;">
-    <svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="position:absolute; right:2%; top:50%; transform:translateY(-50%) rotate(9deg); width:clamp(180px,20vw,300px); height:auto; color:var(--ink); opacity:.12; pointer-events:none;" fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3 L16 12"></path><path d="M9 12 L23 12"></path><path d="M10.5 12 Q9.4 21 12 29 M13.6 12 Q13.2 21 14.2 29 M18.4 12 Q18.8 21 17.8 29 M21.5 12 Q22.6 21 20 29"></path></svg>
-    <div style="position:relative; display:grid; grid-template-columns:minmax(0,1.4fr) minmax(240px,.6fr); gap:clamp(24px,4vw,56px); align-items:end;">
-      <p style="max-width:26ch; font-size:clamp(24px,3.8vw,54px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:1.03; text-wrap:pretty;">“They had a room full of fourth graders writing their first lines of code by the end of the hour.”</p>
-      <div style="display:flex; flex-direction:column; gap:10px; font-size:16px;">
-        <div style="border-bottom:1px solid rgba(0,0,0,.3); padding-bottom:8px; font-weight:700;">Ms. Rivera</div>
-        <div style="border-bottom:1px solid rgba(0,0,0,.3); padding-bottom:8px;">District STEM coordinator</div>
-        <div>Bayview STEM Night, November</div>
-      </div>
-    </div>
-  </section>
-
   <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
     <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,auto) minmax(0,1fr); gap:clamp(16px,3vw,40px);">
     <div style="font-family:var(--mono); text-transform:uppercase; padding-right:clamp(10px,2vw,24px);"><div style="position:relative; width:44px; height:48px; display:flex; align-items:center; justify-content:center; flex:none;"><svg sc-camel-view-box="0 0 120 120" style="position:absolute; inset:0; width:100%; height:100%; overflow:visible;" fill="none"><g stroke="var(--rule)" stroke-linejoin="round"><path d="M60 6 L106 32 L106 88 L60 114 L14 88 L14 32 Z" stroke-width="6"></path><path d="M60 18 L96 38 L96 82 L60 102 L24 82 L24 38 Z" stroke-width="2" opacity="0.5"></path><circle cx="60" cy="6" r="5" fill="var(--accent)" stroke="none"></circle><circle cx="106" cy="32" r="5" fill="var(--rule)" stroke="none"></circle><circle cx="14" cy="32" r="5" fill="var(--rule)" stroke="none"></circle></g></svg><span style="position:relative; font-size:13px; letter-spacing:.1em; color:var(--text);">Ø4</span></div><div style="font-size:11px; letter-spacing:.2em; color:var(--muted); margin-top:9px; white-space:nowrap;">Gallery</div></div>
@@ -1545,25 +1568,25 @@
     <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">what we spend it on</h2>
     </div>
     </div>
-    <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(250px,.55fr); gap:14px; margin-top:clamp(30px,3.4vw,42px);">
-      <div style="border-top:1px solid var(--rule); padding:clamp(24px,2.8vw,34px) 0;">
-        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px;">
+    <div class="jl-sponsor-calc">
+      <div style="border-top:1px solid var(--rule); padding:clamp(24px,2.8vw,34px) 0; min-width:0;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap;">
           <span style="flex:none; font-size:17px; color:var(--muted);">If you gave</span>
           <span style="flex:none; font-size:clamp(28px,3.4vw,44px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; font-variant-numeric:tabular-nums;">{{ amountLabel }}</span>
         </div>
         <input aria-label="Contribution amount in dollars" type="range" min="100" max="5000" step="50" value="{{ amount }}" sc-camel-on-input="{{ setAmount }}" style="width:100%; margin-top:18px; accent-color:var(--accent); cursor:pointer;">
         <div style="display:flex; flex-direction:column; gap:12px; margin-top:24px;">
-          <div style="display:grid; grid-template-columns:150px minmax(0,1fr) 92px; gap:14px; align-items:center;"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">parts</span><span style="height:10px; background:var(--rule);"><span style="{{ barParts }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtParts }}</span></div>
-          <div style="display:grid; grid-template-columns:150px minmax(0,1fr) 92px; gap:14px; align-items:center;"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">travel</span><span style="height:10px; background:var(--rule);"><span style="{{ barTravel }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtTravel }}</span></div>
-          <div style="display:grid; grid-template-columns:150px minmax(0,1fr) 92px; gap:14px; align-items:center;"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">tools &amp; shop</span><span style="height:10px; background:var(--rule);"><span style="{{ barTools }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtTools }}</span></div>
-          <div style="display:grid; grid-template-columns:150px minmax(0,1fr) 92px; gap:14px; align-items:center;"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">outreach</span><span style="height:10px; background:var(--rule);"><span style="{{ barOut }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtOut }}</span></div>
+          <div class="jl-sponsor-calc-bars"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">parts</span><span style="height:10px; background:var(--rule); min-width:0;"><span style="{{ barParts }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtParts }}</span></div>
+          <div class="jl-sponsor-calc-bars"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">travel</span><span style="height:10px; background:var(--rule); min-width:0;"><span style="{{ barTravel }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtTravel }}</span></div>
+          <div class="jl-sponsor-calc-bars"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">tools &amp; shop</span><span style="height:10px; background:var(--rule); min-width:0;"><span style="{{ barTools }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtTools }}</span></div>
+          <div class="jl-sponsor-calc-bars"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">outreach</span><span style="height:10px; background:var(--rule); min-width:0;"><span style="{{ barOut }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtOut }}</span></div>
         </div>
       </div>
-      <div style="border-top:1px solid var(--rule); padding:clamp(24px,2.8vw,34px) 0; display:flex; flex-direction:column; justify-content:center; gap:12px;">
+      <div class="jl-sponsor-tier-card" style="border-top:1px solid var(--rule); display:flex; flex-direction:column; justify-content:center; gap:12px;">
         <div style="font-size:17px; color:var(--muted);">That makes you a</div>
         <div style="font-size:clamp(30px,4vw,52px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:.92;">{{ tierName }}</div>
         <div style="font-family:var(--mono); font-size:12px; line-height:1.9; color:var(--muted); border-top:1px solid var(--rule); padding-top:14px; margin-top:8px;">{{ tierPerks }}</div>
-        <a href="mailto:janitorsftcteam@googlegroups.com" data-magnet="" data-click="" style="margin-top:12px; display:inline-flex; align-items:center; justify-content:center; gap:9px; background:var(--accent); color:var(--ink); padding:13px 18px; font-size:17px; font-weight:600; white-space:nowrap;">Talk to us</a>
+        <a href="mailto:janitorsftcteam@googlegroups.com" data-click="" style="margin-top:12px; display:inline-flex; align-items:center; justify-content:center; gap:9px; background:var(--accent); color:var(--ink); padding:13px 18px; font-size:17px; font-weight:600; white-space:nowrap; align-self:flex-start;">Talk to us</a>
       </div>
     </div>
     <div style="display:flex; flex-direction:column; gap:18px; margin-top:clamp(30px,3.4vw,42px);">
@@ -1831,7 +1854,7 @@
       <div><span style="color:var(--accent);">Days</span> &nbsp;&nbsp; Tue &amp; Thu</div>
       <div><span style="color:var(--accent);">Time</span> &nbsp;&nbsp; 4:00 – 7:00 PM</div>
       <div><span style="color:var(--accent);">Room</span> &nbsp;&nbsp; The Shop — 114</div>
-      <div><span style="color:var(--accent);">Dues</span> &nbsp;&nbsp; None</div>
+      <div><span style="color:var(--accent);">Dues</span> &nbsp;&nbsp; $500</div>
       <div><span style="color:var(--accent);">Team</span> &nbsp;&nbsp; 36721</div>
     </div>
   </header>
@@ -1916,7 +1939,6 @@
     <div class="jl-socials">
       <p>Or reach out on Discord, Instagram, TikTok, or email</p>
       <div class="jl-social-list">
-        <!-- Add more socials as new <a> rows below (copy a block; swap icon + href) -->
         <a href="https://discord.gg/HDxthJTbzb" target="_blank" rel="noopener noreferrer">
           <span class="jl-social-ico" aria-hidden="true"><svg sc-camel-view-box="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.8 19.8 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.3 18.3 0 0 0-5.487 0 12.6 12.6 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.7 19.7 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.08.08 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14 14 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.8 19.8 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path></svg></span>
           <span class="jl-social-name">Discord</span>
@@ -1952,7 +1974,7 @@
     <div style="padding:clamp(40px,5vw,68px) var(--pad) clamp(26px,3vw,40px); display:grid; grid-template-columns:1.5fr 1fr 1fr 1.2fr; gap:clamp(28px,4vw,56px);">
       <div>
         <div style="display:flex; align-items:center; gap:12px;">
-          <img class="jl-brand-mark jl-brand-mark-lg" src="/logo-black.png" width="30" height="30" alt="" decoding="async">
+          <img class="jl-brand-mark jl-brand-mark-lg" src="/logo-transparent.png" width="30" height="30" alt="" decoding="async">
           <span style="font-size:20px; font-family:var(--disp); font-weight:700; letter-spacing:-.03em;">the janitors</span>
           <span style="font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.1em; color:var(--ink); background:var(--accent); padding:3px 6px;">36721</span>
         </div>
@@ -2009,7 +2031,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script="" data-props="{&quot;finish&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Blackout&quot;,&quot;Lab Grey&quot;],&quot;default&quot;:&quot;Blackout&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#22D3EE&quot;,&quot;#FF5C1A&quot;,&quot;#F5B524&quot;,&quot;#B9FF3C&quot;],&quot;default&quot;:&quot;#22D3EE&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;signalColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#F2A93B&quot;,&quot;#FF5C1A&quot;,&quot;#B9FF3C&quot;,&quot;#E8E6E1&quot;],&quot;default&quot;:&quot;#F2A93B&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { page: "home", sub: 0, booting: false };
+  state = { page: "home", sub: 0, booting: false, sound: false };
   buildLog() { return (window.TEAM && window.TEAM.buildLog) || []; }
   matchResults() { return (window.TEAM && window.TEAM.matches) || []; }
   routeSteps() { return (window.TEAM && window.TEAM.routeSteps) || []; }
@@ -2455,24 +2477,50 @@ class Component extends DCLogic {
     }
     const track = this.trackEl || (this.trackEl = document.querySelector("[data-track]"));
     if (track) {
-      const r = track.getBoundingClientRect();
-      const span = r.height - window.innerHeight;
-      const p = span > 0 ? Math.max(0, Math.min(1, -r.top / span)) : 0;
-      const raw = Math.min(1, p * 1.18);
-      if (window.janitorsSwept === undefined || raw > window.janitorsSwept) window.janitorsSwept = raw;
-      const swept = 0.045 + window.janitorsSwept * 0.955;
-      const wipe = this.wipeEl || (this.wipeEl = document.querySelector("[data-wipe]"));
-      if (wipe) wipe.style.clipPath = "inset(0 " + ((1 - swept) * 100).toFixed(2) + "% 0 0)";
-      const sweep = this.sweepEl || (this.sweepEl = document.querySelector("[data-sweep]"));
-      if (sweep) { sweep.style.left = (swept * 100).toFixed(2) + "%"; sweep.style.opacity = swept > 0.995 ? "0" : "1"; }
-      const readout = this.sweptEl || (this.sweptEl = document.querySelector("[data-swept]"));
-      if (readout) { const s = "swept " + String(Math.round(swept * 100)).padStart(3, "0") + "%"; if (readout.textContent !== s) readout.textContent = s; }
-      const dust = this.speckEls || (this.speckEls = document.querySelectorAll("[data-speck]"));
-      for (let i = 0; i < dust.length; i++) {
-        const at = parseFloat(dust[i].getAttribute("data-speck"));
-        const gone = swept > at;
-        dust[i].style.opacity = gone ? "0" : ".5";
-        dust[i].style.transform = gone ? "translate(14px,-8px)" : "none";
+      try {
+        if (window.janitorsSwept === undefined) {
+          const saved = window.sessionStorage && sessionStorage.getItem("jl-swept");
+          if (saved === "1") window.janitorsSwept = 1;
+        }
+      } catch (e) {}
+      const done = window.janitorsSwept >= 0.995;
+      if (done) {
+        if (!track.classList.contains("jl-sweep-done")) track.classList.add("jl-sweep-done");
+        const wipe = this.wipeEl || (this.wipeEl = document.querySelector("[data-wipe]"));
+        if (wipe) wipe.style.clipPath = "inset(0 0% 0 0)";
+        const sweep = this.sweepEl || (this.sweepEl = document.querySelector("[data-sweep]"));
+        if (sweep) sweep.style.opacity = "0";
+        const readout = this.sweptEl || (this.sweptEl = document.querySelector("[data-swept]"));
+        if (readout && readout.textContent !== "swept 100%") readout.textContent = "swept 100%";
+        const dust = this.speckEls || (this.speckEls = document.querySelectorAll("[data-speck]"));
+        for (let i = 0; i < dust.length; i++) {
+          dust[i].style.opacity = "0";
+          dust[i].style.transform = "translate(14px,-8px)";
+        }
+      } else {
+        const r = track.getBoundingClientRect();
+        const span = r.height - window.innerHeight;
+        const p = span > 0 ? Math.max(0, Math.min(1, -r.top / span)) : 0;
+        const raw = Math.min(1, p * 1.18);
+        if (window.janitorsSwept === undefined || raw > window.janitorsSwept) window.janitorsSwept = raw;
+        const swept = 0.045 + window.janitorsSwept * 0.955;
+        const wipe = this.wipeEl || (this.wipeEl = document.querySelector("[data-wipe]"));
+        if (wipe) wipe.style.clipPath = "inset(0 " + ((1 - swept) * 100).toFixed(2) + "% 0 0)";
+        const sweep = this.sweepEl || (this.sweepEl = document.querySelector("[data-sweep]"));
+        if (sweep) { sweep.style.left = (swept * 100).toFixed(2) + "%"; sweep.style.opacity = swept > 0.995 ? "0" : "1"; }
+        const readout = this.sweptEl || (this.sweptEl = document.querySelector("[data-swept]"));
+        if (readout) { const s = "swept " + String(Math.round(swept * 100)).padStart(3, "0") + "%"; if (readout.textContent !== s) readout.textContent = s; }
+        const dust = this.speckEls || (this.speckEls = document.querySelectorAll("[data-speck]"));
+        for (let i = 0; i < dust.length; i++) {
+          const at = parseFloat(dust[i].getAttribute("data-speck"));
+          const gone = swept > at;
+          dust[i].style.opacity = gone ? "0" : ".5";
+          dust[i].style.transform = gone ? "translate(14px,-8px)" : "none";
+        }
+        if (window.janitorsSwept >= 0.995) {
+          track.classList.add("jl-sweep-done");
+          try { if (window.sessionStorage) sessionStorage.setItem("jl-swept", "1"); } catch (e) {}
+        }
       }
     }
     const rb = this.viewerEl || (this.viewerEl = document.getElementById("viewer-model"));
@@ -2617,7 +2665,7 @@ class Component extends DCLogic {
     }
   }
   playClick(kind) {
-    if (this.state.sound === false) return;
+    if (!this.state.sound) return;
     try {
       const AC = window.AudioContext || window.webkitAudioContext;
       if (!AC) return;
@@ -2860,12 +2908,12 @@ class Component extends DCLogic {
       tierName: tier.name, tierPerks: tier.perks,
       menuOpen: !!this.state.menuOpen,
       toggleMenu: () => this.setState({ menuOpen: !this.state.menuOpen }),
-      toggleSound: () => this.setState({ sound: this.state.sound === false }),
+      toggleSound: () => this.setState({ sound: !this.state.sound }),
       toggleFinish: () => this.setState({ noir: !this.state.noir }),
       replayBoot: () => { this.setState({ menuOpen: false }); this.startBootSequence(); },
       bootStep0: bp(0, "ok"), bletter1: bp(1, "ok"), bletter2: bp(2, "ok"), bletter3: bp(3, "ok"), bletter4: bp(4, "5 / 5"),
       gearStyle: { width: "15px", height: "15px", display: "block", transition: "transform .45s cubic-bezier(.2,.8,.3,1)", transform: this.state.menuOpen ? "rotate(90deg)" : "none" },
-      soundToggle: toggleTrack(this.state.sound !== false), soundToggleKnob: knob(this.state.sound !== false),
+      soundToggle: toggleTrack(!!this.state.sound), soundToggleKnob: knob(!!this.state.sound),
       finishToggle: toggleTrack(!!this.state.noir), finishToggleKnob: knob(!!this.state.noir),
       menuButtonStyle: {
         display: "inline-flex", alignItems: "center", justifyContent: "center", marginRight: "4px",
