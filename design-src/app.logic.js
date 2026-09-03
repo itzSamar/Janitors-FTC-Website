@@ -1,6 +1,5 @@
-
 class Component extends DCLogic {
-  state = { page: "home", sub: 0, booting: false };
+  state = { page: "home", sub: 0, booting: false, sound: false };
   buildLog() { return (window.TEAM && window.TEAM.buildLog) || []; }
   matchResults() { return (window.TEAM && window.TEAM.matches) || []; }
   routeSteps() { return (window.TEAM && window.TEAM.routeSteps) || []; }
@@ -22,7 +21,7 @@ class Component extends DCLogic {
     this.swapTimer = setTimeout(() => {
       this.setState({ page: p });
       this.jumpTo(0);
-      setTimeout(() => { this.clearCache(); if (this.scanReveals) this.scanReveals(); this.drawBot(); this.drawRoute(); }, 30);
+      setTimeout(() => { this.clearCache(); if (this.scanReveals) this.scanReveals(); this.drawBot(); this.drawRoute(); if (this.setupApplyForm) this.setupApplyForm(); }, 30);
     }, 420);
     this.scrambleTimer = setTimeout(() => this.scrambleText(), 780);
   }
@@ -38,14 +37,18 @@ class Component extends DCLogic {
       } catch (e) { return "Blackout"; }
     })();
     const accent = (this.props && this.props.accentColor) || "#22D3EE";
-    // Match page bg — never flash white/cream
     const veil = finishName === "Lab Grey" ? "#DBDBD5" : "#07090A";
-    const figure = finishName === "Lab Grey" ? "#11161A" : "#E9F6F8";
-    const figureMute = finishName === "Lab Grey" ? "rgba(17,22,26,.55)" : "rgba(233,246,248,.45)";
+    // Dark uniform — matches site aesthetic (not high-contrast white)
+    const suit = "#2E3A40";
+    const suitDark = "#1A2226";
+    const skin = "#C4A484";
+    const wood = "#B8956A";
+    const bristle = "#F2F0EA";
+    const shoe = "#0B0E10";
     const edgeGlow = back
       ? "linear-gradient(90deg, transparent 0%, " + accent + "00 40%, " + accent + "55 100%)"
       : "linear-gradient(90deg, " + accent + "55 0%, " + accent + "00 60%, transparent 100%)";
-    const flip = back ? "scaleX(-1)" : "none";
+    const face = back ? "scaleX(-1)" : "scaleX(1)";
     const host = document.createElement("div");
     host.id = "jl-mop-wipe";
     host.setAttribute("aria-hidden", "true");
@@ -55,35 +58,61 @@ class Component extends DCLogic {
         <div style="display:flex;height:100%;width:100%;flex-direction:${back ? "row-reverse" : "row"};">
           <div style="flex:1 1 auto;height:100%;background:${veil};"></div>
           <div style="position:relative;flex:0 0 0;width:0;height:100%;">
-            <div style="position:absolute;top:0;bottom:0;${back ? "left:0;" : "right:0;transform:translateX(-100%);"}width:72px;background:${edgeGlow};pointer-events:none;"></div>
-            <div style="position:absolute;top:-4%;bottom:-4%;left:0;width:2px;transform:translateX(-50%);background:${accent};box-shadow:0 0 12px ${accent};animation:mopWet .35s ease-in-out infinite;"></div>
-            <div style="position:absolute;left:0;bottom:12%;transform:translate(-58%,0) ${flip};width:78px;height:110px;animation:jlRun .28s ease-in-out infinite;">
-              <svg viewBox="0 0 78 110" width="78" height="110" style="display:block;overflow:visible;">
-                <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <g style="transform-origin:36px 18px;animation:jlMop .28s ease-in-out infinite;">
-                    <line x1="58" y1="8" x2="22" y2="62" stroke="${figure}" stroke-width="3.2"></line>
-                    <path d="M10 58 L34 54 L38 72 Q22 78 12 74 Q6 71 8 64 Z" fill="${figure}" stroke="${figureMute}" stroke-width="1"></path>
-                    <g stroke="${figureMute}" stroke-width="1.4">
-                      <path d="M14 70 Q12 86 11 96"></path>
-                      <path d="M20 72 Q20 88 20 98"></path>
-                      <path d="M26 71 Q28 87 30 97"></path>
+            <div style="position:absolute;top:0;bottom:0;${back ? "left:0;" : "right:0;transform:translateX(-100%);"}width:90px;background:${edgeGlow};pointer-events:none;"></div>
+            <div style="position:absolute;top:-4%;bottom:-4%;left:0;width:2px;transform:translateX(-50%);background:${accent};box-shadow:0 0 14px ${accent};animation:mopWet .35s ease-in-out infinite;"></div>
+            <div style="position:absolute;left:0;bottom:3%;width:min(320px,66vw);height:min(300px,58vh);transform:translate(-42%,0) ${face};transform-origin:50% 100%;">
+              <div style="width:100%;height:100%;animation:jlBob .28s ease-in-out infinite;">
+                <svg viewBox="0 0 260 200" width="100%" height="100%" style="display:block;overflow:visible;">
+                  <style>
+                    .jp{animation:jlPush .28s ease-in-out infinite;transform-origin:120px 140px}
+                    .jm{animation:jlMopScrub .28s ease-in-out infinite;transform-origin:210px 186px}
+                    .jhip{transform-box:fill-box;transform-origin:50% 0%}
+                    .jlegA{animation:jlThighBack .28s linear infinite}
+                    .jlegB{animation:jlThighFront .28s linear infinite}
+                  </style>
+                  <ellipse cx="214" cy="188" rx="48" ry="6" fill="${accent}" opacity=".16"></ellipse>
+                  <g class="jp" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="jm">
+                      <line x1="132" y1="100" x2="200" y2="168" stroke="${wood}" stroke-width="9"></line>
+                      <path d="M176 162 L236 154 L244 182 Q208 192 178 184 Z" fill="${bristle}" stroke="${shoe}" stroke-width="1.5"></path>
+                      <g stroke="${shoe}" stroke-width="2.4" opacity=".65">
+                        <line x1="186" y1="170" x2="182" y2="186"></line>
+                        <line x1="198" y1="172" x2="196" y2="188"></line>
+                        <line x1="210" y1="172" x2="210" y2="188"></line>
+                        <line x1="222" y1="170" x2="226" y2="186"></line>
+                      </g>
+                      <rect x="182" y="158" width="50" height="10" rx="2" fill="${wood}"></rect>
                     </g>
-                    <circle cx="58" cy="8" r="2.2" fill="${accent}"></circle>
+
+                    <!-- legs pivot at hips — actual run cycle -->
+                    <g class="jhip jlegA">
+                      <path d="M112 132 L96 158" fill="none" stroke="${suitDark}" stroke-width="17"></path>
+                      <path d="M96 158 L84 178" fill="none" stroke="${suitDark}" stroke-width="15"></path>
+                      <path d="M76 178 L66 178 L68 186 L90 186 Z" fill="${shoe}"></path>
+                    </g>
+                    <g class="jhip jlegB">
+                      <path d="M120 132 L140 156" fill="none" stroke="${suit}" stroke-width="17"></path>
+                      <path d="M140 156 L156 176" fill="none" stroke="${suit}" stroke-width="15"></path>
+                      <path d="M150 176 L172 176 L170 186 L148 186 Z" fill="${shoe}"></path>
+                    </g>
+
+                    <ellipse cx="116" cy="130" rx="20" ry="15" fill="${suitDark}"></ellipse>
+                    <path d="M96 76 C110 70 132 72 140 84 L146 124 C138 134 100 136 92 124 Z" fill="${suit}"></path>
+                    <path d="M118 78 L122 126" stroke="${accent}" stroke-width="3.5"></path>
+                    <rect x="126" y="100" width="14" height="12" rx="2" fill="${suitDark}"></rect>
+
+                    <path d="M136 94 C148 98 158 106 168 116" fill="none" stroke="${suit}" stroke-width="15"></path>
+                    <path d="M164 112 C170 118 174 124 176 128" fill="none" stroke="${accent}" stroke-width="13"></path>
+                    <ellipse cx="152" cy="110" rx="8" ry="7" fill="${accent}" transform="rotate(28 152 110)"></ellipse>
+
+                    <rect x="112" y="62" width="14" height="18" rx="5" fill="${skin}"></rect>
+                    <path d="M108 56 C108 40 128 36 138 46 C146 52 146 64 138 68 C130 74 110 72 108 56 Z" fill="${skin}"></path>
+                    <circle cx="134" cy="54" r="2.4" fill="${shoe}"></circle>
+                    <path d="M104 50 C116 34 142 34 148 50 L148 56 L104 56 Z" fill="${accent}"></path>
+                    <path d="M148 50 L164 56 L148 58 Z" fill="${accent}"></path>
                   </g>
-                  <circle cx="36" cy="22" r="7" fill="${figure}"></circle>
-                  <path d="M36 29 L36 52" stroke="${figure}" stroke-width="4.5"></path>
-                  <path d="M36 34 L22 48" stroke="${figure}" stroke-width="3.2"></path>
-                  <path d="M36 36 L48 44" stroke="${figure}" stroke-width="3.2"></path>
-                  <g style="transform-origin:36px 52px;animation:jlLegL .28s ease-in-out infinite;">
-                    <path d="M36 52 L28 78" stroke="${figure}" stroke-width="3.4"></path>
-                    <path d="M28 78 L22 78" stroke="${figure}" stroke-width="3"></path>
-                  </g>
-                  <g style="transform-origin:36px 52px;animation:jlLegR .28s ease-in-out infinite;">
-                    <path d="M36 52 L46 78" stroke="${figure}" stroke-width="3.4"></path>
-                    <path d="M46 78 L54 78" stroke="${figure}" stroke-width="3"></path>
-                  </g>
-                </g>
-              </svg>
+                </svg>
+              </div>
             </div>
           </div>
         </div>
@@ -91,6 +120,7 @@ class Component extends DCLogic {
     document.body.appendChild(host);
     this.wipeTimer = setTimeout(() => { if (host.parentNode) host.remove(); }, 1000);
   }
+
   componentDidMount() {
     if (typeof window !== "undefined" && !window.janitorsBootShown) {
       window.janitorsBootShown = true;
@@ -98,12 +128,26 @@ class Component extends DCLogic {
     }
     this.initialize();
   }
+  measureLockup() {
+    if (typeof window === "undefined") return;
+    const run = () => {
+      const el = document.querySelector("[data-mark]");
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const y = r.top + r.height / 2;
+      if (y > 0 && Math.abs(y - (this.state.lockY || 0)) > 0.5) this.setState({ lockY: y });
+    };
+    requestAnimationFrame(run);
+    [120, 400, 900, 1600].forEach((ms) => setTimeout(run, ms));
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+  }
   initialize() {
     if (this.initialized || typeof window === "undefined") return;
     this.initialized = true;
     this.handleScroll = () => { this.scrollDirty = true; };
-    this.handleResize = () => { this.scrollDirty = true; this.measureNav(); };
+    this.handleResize = () => { this.scrollDirty = true; this.measureNav(); this.measureLockup(); };
     this.measureNav();
+    this.measureLockup();
     window.addEventListener("scroll", this.handleScroll, { passive: true });
     window.addEventListener("resize", this.handleResize);
     this.secondTimer = setInterval(() => { const p = this.state.page; if (p === "season" || p === "home") this.setState({ now: Date.now() }); }, 1000);
@@ -114,7 +158,104 @@ class Component extends DCLogic {
       this.frameId = requestAnimationFrame(this.renderLoop);
     };
     this.frameId = requestAnimationFrame(this.renderLoop);
-    setTimeout(() => { this.clearCache(); this.setupReveals(); this.scrambleText(); this.setupDriving(); this.drawRoute(); }, 140);
+    this.setupApplyForm = () => {
+      if (typeof document === "undefined") return;
+      const form = document.getElementById("jl-apply-form");
+      if (!form || form.dataset.wired === "1") return;
+      form.dataset.wired = "1";
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwl379SYNtF8FJ5dtF92BofDh6KkkjonFBWh3ZJq_CZmXkIYYRC9SDUX0caWDfgPidk9Q/exec";
+      const status = document.getElementById("jl-apply-status");
+      const chips = form.querySelectorAll("[data-interests] .jl-chip");
+      const syncChips = () => {
+        chips.forEach((chip) => {
+          const input = chip.querySelector('input[type="checkbox"]');
+          chip.classList.toggle("is-on", !!(input && input.checked));
+        });
+      };
+      chips.forEach((chip) => {
+        chip.addEventListener("click", (e) => {
+          e.preventDefault();
+          const input = chip.querySelector('input[type="checkbox"]');
+          if (!input) return;
+          const checked = form.querySelectorAll('input[name="interests"]:checked');
+          if (!input.checked && checked.length >= 2) {
+            if (status) {
+              status.textContent = "Pick up to two interests";
+              status.className = "jl-status is-err";
+            }
+            return;
+          }
+          input.checked = !input.checked;
+          syncChips();
+          if (status && status.classList.contains("is-err")) {
+            status.textContent = "";
+            status.className = "jl-status";
+          }
+        });
+      });
+      syncChips();
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        const fd = new FormData(form);
+        const interests = fd.getAll("interests").map((v) => String(v));
+        if (interests.length === 0) {
+          if (status) {
+            status.textContent = "Select at least one interest (max two)";
+            status.className = "jl-status is-err";
+          }
+          return;
+        }
+        if (interests.length > 2) {
+          if (status) {
+            status.textContent = "Pick up to two interests";
+            status.className = "jl-status is-err";
+          }
+          return;
+        }
+        const val = (key) => String(fd.get(key) || "").trim();
+        const payload = {
+          name: val("name"),
+          age: val("age"),
+          location: val("location"),
+          email: val("email"),
+          ftc: val("ftc"),
+          outreach: val("outreach"),
+          design: val("design"),
+          hardware: val("hardware"),
+          programming: val("programming"),
+          interests: interests.join(", "),
+          why: val("why"),
+          other: val("other"),
+        };
+        if (btn) btn.disabled = true;
+        if (status) {
+          status.textContent = "Sending…";
+          status.className = "jl-status";
+        }
+        fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload),
+        }).then(() => {
+          form.reset();
+          syncChips();
+          if (status) {
+            status.textContent = "Application sent — we'll be in touch";
+            status.className = "jl-status is-ok";
+          }
+        }).catch(() => {
+          if (status) {
+            status.textContent = "Send failed — email janitorsftcteam@googlegroups.com";
+            status.className = "jl-status is-err";
+          }
+        }).then(() => {
+          if (btn) btn.disabled = false;
+        });
+      });
+    };
+    setTimeout(() => { this.clearCache(); this.setupReveals(); this.scrambleText(); this.setupDriving(); this.drawRoute(); this.setupApplyForm(); }, 140);
     this.viewer = { rx: -16, ry: -28, dragging: false, lx: 0, ly: 0 };
     this.handleViewerMove = (e) => { if (!this.viewer.dragging) return; const x = e.touches ? e.touches[0].clientX : e.clientX; const y = e.touches ? e.touches[0].clientY : e.clientY; this.viewer.ry += (x - this.viewer.lx) * 0.55; this.viewer.rx = Math.max(-82, Math.min(82, this.viewer.rx - (y - this.viewer.ly) * 0.4)); this.viewer.lx = x; this.viewer.ly = y; this.applyViewerRotation(); };
     this.handleViewerRelease = () => { this.viewer.dragging = false; };
@@ -318,24 +459,50 @@ class Component extends DCLogic {
     }
     const track = this.trackEl || (this.trackEl = document.querySelector("[data-track]"));
     if (track) {
-      const r = track.getBoundingClientRect();
-      const span = r.height - window.innerHeight;
-      const p = span > 0 ? Math.max(0, Math.min(1, -r.top / span)) : 0;
-      const raw = Math.min(1, p * 1.18);
-      if (window.janitorsSwept === undefined || raw > window.janitorsSwept) window.janitorsSwept = raw;
-      const swept = 0.045 + window.janitorsSwept * 0.955;
-      const wipe = this.wipeEl || (this.wipeEl = document.querySelector("[data-wipe]"));
-      if (wipe) wipe.style.clipPath = "inset(0 " + ((1 - swept) * 100).toFixed(2) + "% 0 0)";
-      const sweep = this.sweepEl || (this.sweepEl = document.querySelector("[data-sweep]"));
-      if (sweep) { sweep.style.left = (swept * 100).toFixed(2) + "%"; sweep.style.opacity = swept > 0.995 ? "0" : "1"; }
-      const readout = this.sweptEl || (this.sweptEl = document.querySelector("[data-swept]"));
-      if (readout) { const s = "swept " + String(Math.round(swept * 100)).padStart(3, "0") + "%"; if (readout.textContent !== s) readout.textContent = s; }
-      const dust = this.speckEls || (this.speckEls = document.querySelectorAll("[data-speck]"));
-      for (let i = 0; i < dust.length; i++) {
-        const at = parseFloat(dust[i].getAttribute("data-speck"));
-        const gone = swept > at;
-        dust[i].style.opacity = gone ? "0" : ".5";
-        dust[i].style.transform = gone ? "translate(14px,-8px)" : "none";
+      try {
+        if (window.janitorsSwept === undefined) {
+          const saved = window.sessionStorage && sessionStorage.getItem("jl-swept");
+          if (saved === "1") window.janitorsSwept = 1;
+        }
+      } catch (e) {}
+      const done = window.janitorsSwept >= 0.995;
+      if (done) {
+        if (!track.classList.contains("jl-sweep-done")) track.classList.add("jl-sweep-done");
+        const wipe = this.wipeEl || (this.wipeEl = document.querySelector("[data-wipe]"));
+        if (wipe) wipe.style.clipPath = "inset(0 0% 0 0)";
+        const sweep = this.sweepEl || (this.sweepEl = document.querySelector("[data-sweep]"));
+        if (sweep) sweep.style.opacity = "0";
+        const readout = this.sweptEl || (this.sweptEl = document.querySelector("[data-swept]"));
+        if (readout && readout.textContent !== "swept 100%") readout.textContent = "swept 100%";
+        const dust = this.speckEls || (this.speckEls = document.querySelectorAll("[data-speck]"));
+        for (let i = 0; i < dust.length; i++) {
+          dust[i].style.opacity = "0";
+          dust[i].style.transform = "translate(14px,-8px)";
+        }
+      } else {
+        const r = track.getBoundingClientRect();
+        const span = r.height - window.innerHeight;
+        const p = span > 0 ? Math.max(0, Math.min(1, -r.top / span)) : 0;
+        const raw = Math.min(1, p * 1.18);
+        if (window.janitorsSwept === undefined || raw > window.janitorsSwept) window.janitorsSwept = raw;
+        const swept = 0.045 + window.janitorsSwept * 0.955;
+        const wipe = this.wipeEl || (this.wipeEl = document.querySelector("[data-wipe]"));
+        if (wipe) wipe.style.clipPath = "inset(0 " + ((1 - swept) * 100).toFixed(2) + "% 0 0)";
+        const sweep = this.sweepEl || (this.sweepEl = document.querySelector("[data-sweep]"));
+        if (sweep) { sweep.style.left = (swept * 100).toFixed(2) + "%"; sweep.style.opacity = swept > 0.995 ? "0" : "1"; }
+        const readout = this.sweptEl || (this.sweptEl = document.querySelector("[data-swept]"));
+        if (readout) { const s = "swept " + String(Math.round(swept * 100)).padStart(3, "0") + "%"; if (readout.textContent !== s) readout.textContent = s; }
+        const dust = this.speckEls || (this.speckEls = document.querySelectorAll("[data-speck]"));
+        for (let i = 0; i < dust.length; i++) {
+          const at = parseFloat(dust[i].getAttribute("data-speck"));
+          const gone = swept > at;
+          dust[i].style.opacity = gone ? "0" : ".5";
+          dust[i].style.transform = gone ? "translate(14px,-8px)" : "none";
+        }
+        if (window.janitorsSwept >= 0.995) {
+          track.classList.add("jl-sweep-done");
+          try { if (window.sessionStorage) sessionStorage.setItem("jl-swept", "1"); } catch (e) {}
+        }
       }
     }
     const rb = this.viewerEl || (this.viewerEl = document.getElementById("viewer-model"));
@@ -388,6 +555,12 @@ class Component extends DCLogic {
   stepDriving() {
     const b = this.bot, k = this.heldKeys;
     if (!b || !k) return;
+    if (!Number.isFinite(b.vx)) b.vx = 0;
+    if (!Number.isFinite(b.vy)) b.vy = 0;
+    if (!Number.isFinite(b.vh)) b.vh = 0;
+    if (!Number.isFinite(b.x)) b.x = 0;
+    if (!Number.isFinite(b.y)) b.y = 0;
+    if (!Number.isFinite(b.h)) b.h = 0;
     const held = k.ArrowUp || k.ArrowDown || k.ArrowLeft || k.ArrowRight;
     const moving = held || Math.abs(b.vx) > 0.01 || Math.abs(b.vy) > 0.01 || Math.abs(b.vh) > 0.01;
     if (!moving) return;
@@ -422,12 +595,18 @@ class Component extends DCLogic {
   }
   drawBot() {
     const b = this.bot; if (!b) return;
+    const x = Number.isFinite(b.x) ? b.x : 0;
+    const y = Number.isFinite(b.y) ? b.y : 0;
+    const h = Number.isFinite(b.h) ? b.h : 0;
+    if (!Number.isFinite(b.x) || !Number.isFinite(b.y) || !Number.isFinite(b.h)) {
+      this.bot = { x: 0, y: 0, h: 0, vx: 0, vy: 0, vh: 0 };
+    }
     const g = document.getElementById("sim-robot");
-    if (g) g.style.transform = "translate(" + b.x.toFixed(2) + "px," + b.y.toFixed(2) + "px) rotate(" + b.h.toFixed(2) + "deg)";
+    if (g) g.style.transform = "translate(" + x.toFixed(2) + "px," + y.toFixed(2) + "px) rotate(" + h.toFixed(2) + "deg)";
     const px = document.getElementById("sim-x"), py = document.getElementById("sim-y"), ph = document.getElementById("sim-heading");
-    if (px) px.textContent = (b.x / 100).toFixed(2) + " m";
-    if (py) py.textContent = (-b.y / 100).toFixed(2) + " m";
-    if (ph) ph.textContent = (((b.h % 360) + 360) % 360).toFixed(0) + "\u00B0";
+    if (px) px.textContent = (x / 100).toFixed(2) + " m";
+    if (py) py.textContent = (-y / 100).toFixed(2) + " m";
+    if (ph) ph.textContent = (((h % 360) + 360) % 360).toFixed(0) + "\u00B0";
   }
   drawRoute() {
     const path = document.getElementById("route-path");
@@ -468,7 +647,7 @@ class Component extends DCLogic {
     }
   }
   playClick(kind) {
-    if (this.state.sound === false) return;
+    if (!this.state.sound) return;
     try {
       const AC = window.AudioContext || window.webkitAudioContext;
       if (!AC) return;
@@ -523,7 +702,10 @@ class Component extends DCLogic {
   }
   measureNav() {
     const nav = document.querySelector("nav");
-    if (nav) document.documentElement.style.setProperty("--navh", Math.round(nav.getBoundingClientRect().height) + "px");
+    if (!nav) return;
+    const bar = nav.closest("[style*='position:sticky'], [style*='position: sticky']");
+    const h = Math.ceil(((bar || nav).getBoundingClientRect().height) || 0);
+    if (h > 0) document.documentElement.style.setProperty("--navh", h + "px");
   }
   clearCache() { this.measureNav(); this.scrollDirty = true; this.barEl = null; this.percentEl = null; this.plateEl = null; this.trackEl = null; this.viewerEl = null; this.wipeEl = null; this.sweepEl = null; this.sweptEl = null; this.speckEls = null; this.magnetEls = null; this.tiltEls = null; this.parallaxEls = null; }
   sortBy(k) {
@@ -591,7 +773,7 @@ class Component extends DCLogic {
       fontSize: "16px", transition: "transform .1s ease, box-shadow .1s ease, background .15s ease, color .15s ease",
     });
     const pick = (i) => () => this.setState({ sub: i });
-    const target = new Date("2027-03-20T09:00:00").getTime();
+    const target = new Date("2026-10-17T09:00:00").getTime();
     const left = Math.max(0, target - (this.state.now || Date.now()));
     const pad2 = (n) => String(n).padStart(2, "0");
     const daysLeft = String(Math.floor(left / 86400000));
@@ -616,21 +798,21 @@ class Component extends DCLogic {
       fontSize: "16px", whiteSpace: "nowrap", transition: "border-color .18s ease, background .2s ease, color .2s ease",
     });
 
-    const amount = this.state.amount === undefined ? 500 : this.state.amount;
+    const amount = this.state.amount === undefined ? 250 : this.state.amount;
     const money = (n) => "$" + Math.round(n).toLocaleString();
     const bar = (frac) => ({ display: "block", height: "100%", width: (frac * 100) + "%", background: accent, transition: "width .3s ease" });
+    const annual = amount;
     const tiers = [
-      { min: 2500, name: "title partner", perks: "naming rights · logo everywhere · featured at every event" },
-      { min: 1000, name: "gold partner", perks: "logo on team shirts · robot · site · event shout-outs" },
-      { min: 500, name: "silver partner", perks: "logo on the robot · pit banner · site" },
-      { min: 250, name: "bronze partner", perks: "logo on the site · thank-you on social" },
-      { min: 0, name: "supporter", perks: "named on our thank-you wall · our genuine gratitude" },
+      { min: 2500, name: "title partner", perks: "everything in gold · included in official team name · logo everywhere · featured at every event" },
+      { min: 1000, name: "gold partner", perks: "everything in silver · full sized logo on the robot · dedicated page on the site" },
+      { min: 500, name: "silver partner", perks: "everything in bronze · small logo on the robot · pit banner" },
+      { min: 250, name: "bronze partner", perks: "logo on team hoodies · logo on the site · thank-you on social" },
     ];
     const tier = tiers.filter((x) => amount >= x.min)[0];
 
     const stages = [
       { name: "the team", value: "the janitors", unit: "first tech challenge · rookie", note: "Six students, one shop, and a robot built from raw stock." },
-      { name: "team number", value: "36721", unit: "san francisco · 2026", note: "Our rookie number. You'll see it on the pit banner this season." },
+      { name: "team number", value: "36721", unit: "dublin, ca · 2026", note: "Our rookie number. You'll see it on the pit banner this season." },
       { name: "the robot", value: "mop-9000", unit: "mecanum · vision · lift", note: "Four-motor base, compliant intake, dual-stage lift, Java on the Control Hub." },
       { name: "the record", value: "0 – 0", unit: "matches played so far", note: "Nothing on the board yet. Every number here is about to change." },
     ];
@@ -681,7 +863,7 @@ class Component extends DCLogic {
       stageDot0: stageDot(0), stageDot1: stageDot(1), stageDot2: stageDot(2), stageDot3: stageDot(3),
       stageFade: { animation: "rise .55s cubic-bezier(.16,.84,.24,1) both", minHeight: "clamp(170px,20vw,240px)" },
       printPage: () => { if (typeof window !== "undefined") window.print(); },
-      resetBot: () => { this.bot = { x: 0, y: 0, h: 0 }; this.drawBot(); },
+      resetBot: () => { this.bot = { x: 0, y: 0, h: 0, vx: 0, vy: 0, vh: 0 }; this.heldKeys = {}; this.drawBot(); },
       autoPos: this.state.autoPos || 0,
       setAutoPos: (e) => { this.setState({ autoPos: parseFloat(e.target.value) }); setTimeout(() => this.drawRoute(), 0); },
       toggleAuto: () => this.toggleRoutePlayback(),
@@ -705,18 +887,20 @@ class Component extends DCLogic {
       fieldLabel: (3.66 / Math.max(speed, 0.01)).toFixed(1) + " s across the field",
       amount: amount, amountLabel: "$" + amount.toLocaleString(),
       setAmount: (e) => this.setState({ amount: parseFloat(e.target.value) }),
-      amtParts: money(amount * 0.38), amtTravel: money(amount * 0.27),
-      amtTools: money(amount * 0.2), amtOut: money(amount * 0.15),
-      barParts: bar(0.38), barTravel: bar(0.27), barTools: bar(0.2), barOut: bar(0.15),
+      amtRobot: money(annual * 0.22), amtFab: money(annual * 0.15),
+      amtComp: money(annual * 0.15), amtTravel: money(annual * 0.18),
+      amtOut: money(annual * 0.18), amtOps: money(annual * 0.12),
+      barRobot: bar(0.22), barFab: bar(0.15), barComp: bar(0.15),
+      barTravel: bar(0.18), barOut: bar(0.18), barOps: bar(0.12),
       tierName: tier.name, tierPerks: tier.perks,
       menuOpen: !!this.state.menuOpen,
       toggleMenu: () => this.setState({ menuOpen: !this.state.menuOpen }),
-      toggleSound: () => this.setState({ sound: this.state.sound === false }),
+      toggleSound: () => this.setState({ sound: !this.state.sound }),
       toggleFinish: () => this.setState({ noir: !this.state.noir }),
       replayBoot: () => { this.setState({ menuOpen: false }); this.startBootSequence(); },
       bootStep0: bp(0, "ok"), bletter1: bp(1, "ok"), bletter2: bp(2, "ok"), bletter3: bp(3, "ok"), bletter4: bp(4, "5 / 5"),
       gearStyle: { width: "15px", height: "15px", display: "block", transition: "transform .45s cubic-bezier(.2,.8,.3,1)", transform: this.state.menuOpen ? "rotate(90deg)" : "none" },
-      soundToggle: toggleTrack(this.state.sound !== false), soundToggleKnob: knob(this.state.sound !== false),
+      soundToggle: toggleTrack(!!this.state.sound), soundToggleKnob: knob(!!this.state.sound),
       finishToggle: toggleTrack(!!this.state.noir), finishToggleKnob: knob(!!this.state.noir),
       menuButtonStyle: {
         display: "inline-flex", alignItems: "center", justifyContent: "center", marginRight: "4px",
@@ -734,6 +918,7 @@ class Component extends DCLogic {
       clockBarStyle: { height: "100%", width: ((150 - secs) / 150 * 100).toFixed(1) + "%", background: "var(--accent)", transition: "width 1s linear" },
       rootStyle,
       booting: !!this.state.booting,
+      bootLockStyle: { position: "absolute", left: 0, right: 0, top: (this.state.lockY || 0) + "px", transform: "translateY(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: "18px", textAlign: "center", padding: "0 6vw", visibility: this.state.lockY ? "visible" : "hidden" },
 
 
       scrollTopFn: () => this.scrollToTop(),
