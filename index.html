@@ -730,6 +730,9 @@
       .jl-sponsor-calc{
         grid-template-columns:1fr !important;
       }
+      .jl-sponsor-tiers{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+      }
     }
     @media (max-width:720px){
       .jl-team-captains > div:last-child,
@@ -933,7 +936,15 @@
   </div>
   </sc-if>
 
-  <nav aria-label="Main" style="position:sticky; top:0; z-index:60; background:var(--bg); border-bottom:1px solid var(--rule);">
+  <div style="position:sticky; top:0; z-index:60;">
+  <div style="background:var(--accent); color:var(--ink); border-bottom:1px solid var(--rule); padding:9px var(--pad); display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;">
+    <span style="font-weight:700;">Welcome to our launch</span>
+    <span style="opacity:.55;">·</span>
+    <span>rookie season 2026/27</span>
+    <span style="opacity:.55;">·</span>
+    <span>see what makes us different</span>
+  </div>
+  <nav aria-label="Main" style="background:var(--bg); border-bottom:1px solid var(--rule);">
     <div style="display:flex; align-items:center; justify-content:space-between; gap:clamp(10px,2vw,26px); padding:10px var(--pad); min-width:0;">
       <a sc-camel-on-click="{{ navHome }}" role="link" sc-camel-tab-index="0" aria-label="The Janitors, team 36721 — home" style="display:flex; align-items:center; gap:10px; flex:0 1 auto; min-width:0;">
         <img class="jl-brand-mark" src="/logo-transparent.png" width="28" height="28" alt="" decoding="async">
@@ -962,10 +973,10 @@
           </div>
           </sc-if>
         </div>
-        <a sc-camel-on-click="{{ navJoin }}" data-magnet="" style="display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:var(--ink); padding:12px clamp(14px,1.8vw,20px); font-size:clamp(14px,1.4vw,16px); font-weight:600; flex:none; white-space:nowrap; will-change:transform;"><span style="width:6px; height:6px; background:var(--ink); animation:blink 1.4s steps(1,end) infinite;"></span>Join us</a>
       </div>
     </div>
   </nav>
+  </div>
 
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
@@ -1006,8 +1017,8 @@
         <div style="display:flex; flex-direction:column; gap:clamp(16px,2.4vh,24px); min-width:0;">
           <p style="font-size:clamp(18px,1.9vw,26px); font-weight:600; line-height:1.35; letter-spacing:-.018em; color:var(--text); text-wrap:pretty; max-width:40ch;">Six of us, one shop, and a robot we’re still arguing about. We clean up the competition.</p>
           <div style="display:flex; flex-wrap:wrap; gap:10px;">
-            <a sc-camel-on-click="{{ navJoin }}" data-magnet="" style="display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:var(--ink); padding:14px 22px; font-size:16px; font-weight:700; will-change:transform;">join the team</a>
-            <a sc-camel-on-click="{{ navRobot }}" data-magnet="" style="display:inline-flex; align-items:center; gap:10px; background:var(--key); color:var(--text); border:1px solid var(--rule); padding:14px 22px; font-size:16px; will-change:transform;" style-hover="background:var(--keytop); color:var(--accent);">open robot file</a>
+            <a sc-camel-on-click="{{ navRobot }}" data-magnet="" style="display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:var(--ink); padding:14px 22px; font-size:16px; font-weight:700; will-change:transform;">open robot file</a>
+            <a sc-camel-on-click="{{ navOutreach }}" data-magnet="" style="display:inline-flex; align-items:center; gap:10px; background:var(--key); color:var(--text); border:1px solid var(--rule); padding:14px 22px; font-size:16px; will-change:transform;" style-hover="background:var(--keytop); color:var(--accent);">our outreach</a>
           </div>
           <div class="jl-hero-meta-line">rookie 2026 · dublin, ca · tue &amp; thu · room 114 · scroll to sweep ↓</div>
         </div>
@@ -1021,43 +1032,11 @@
     </div>
   </header>
 
-  <section style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr); gap:14px; padding:clamp(52px,6vw,88px) var(--pad) clamp(52px,6vw,88px);">
-    <div style="position:relative; background:var(--panel); border:1px solid var(--rule); display:flex; flex-direction:column;">
-      <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 20px; border-bottom:1px solid var(--rule); font-size:15px; color:var(--muted);">
-        <span>shift log</span><span style="display:flex; align-items:center; gap:7px; color:var(--accent);"><span style="width:6px; height:6px; background:var(--signal); animation:blink 1.3s steps(1,end) infinite;"></span>open</span>
-      </div>
-      <div style="padding:22px 20px; display:flex; flex-direction:column; gap:11px; font-family:var(--mono); font-size:13px; line-height:1.5; color:var(--muted);">
-        <sc-for list="{{ log }}" as="e" hint-placeholder-count="4">
-          <div><span style="color:var(--signal);">{{ e.d }}</span> &nbsp; {{ e.t }}</div>
-        </sc-for>
-        <div style="color:var(--text);">$ <span style="display:inline-block; width:9px; height:15px; background:var(--accent); vertical-align:-2px; animation:caret 1s steps(1,end) infinite;"></span></div>
-      </div>
-      <div style="margin-top:auto; border-top:1px solid var(--rule); padding:16px 20px; display:flex; flex-wrap:wrap; gap:10px 18px; justify-content:space-between; font-size:16px; color:var(--muted);"><span>Next meeting — Tuesday, 4:00 PM, Room 114</span><span style="font-family:var(--mono); color:var(--signal); white-space:nowrap;">in {{ nextMeeting }}</span></div>
-    </div>
-
-    <div style="background:transparent; border-top:1px solid var(--rule); padding:24px 22px; display:flex; flex-direction:column; gap:18px;">
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:15px; color:var(--muted);"><span style="flex:none;">match timer</span><span style="flex:none; color:var(--accent);">{{ clockPhase }}</span></div>
-      <div style="font-size:clamp(36px,4.4vw,58px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:.9; font-variant-numeric:tabular-nums;">{{ clockTime }}</div>
-      <div style="height:4px; background:var(--rule);"><div style="{{ clockBarStyle }}"></div></div>
-      <a sc-camel-on-click="{{ toggleClock }}" style="display:flex; align-items:center; justify-content:center; padding:12px; background-color:var(--keytop); border:1px solid var(--rule); font-size:15px; cursor:pointer; transition:border-color .18s ease, color .18s ease;" style-hover="border-color:var(--accent); color:var(--accent);">{{ clockLabel }}</a>
-      <div style="display:flex; height:16px; gap:2px;">
-        <span data-fill="20" style="width:20%; background:var(--accent); transition:width .9s cubic-bezier(.4,0,.2,1);"></span>
-        <span data-fill="60" style="width:60%; background:var(--muted); transition:width .9s .1s cubic-bezier(.4,0,.2,1);"></span>
-        <span data-fill="20" style="width:20%; background:var(--accent); transition:width .9s .2s cubic-bezier(.4,0,.2,1);"></span>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:10px; font-size:15px; color:var(--muted);">
-        <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--rule); padding-bottom:8px;"><span style="color:var(--accent);">autonomous</span><span>0:30</span></div>
-        <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--rule); padding-bottom:8px;"><span>driver control</span><span>1:30</span></div>
-        <div style="display:flex; justify-content:space-between;"><span style="color:var(--accent);">endgame</span><span>0:30</span></div>
-      </div>
-    </div>
-  </section>
-
   <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
     <div style="display:flex; flex-direction:column; border-top:1px solid var(--rule);">
       <a sc-camel-on-click="{{ navRobot }}" style="position:relative; overflow:hidden; display:grid; grid-template-columns:1fr auto; gap:20px; align-items:center; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .35s cubic-bezier(.2,.8,.3,1), color .28s ease, background-color .28s ease;" style-hover="padding-left:26px; color:var(--accent); background-color:var(--panel);" data-click="">
         <span style="font-size:clamp(28px,5vw,68px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:.95;">the robot</span>
-        <span style="font-size:17px; color:var(--muted); white-space:nowrap;">MOP-9000 →</span>
+        <span style="font-size:17px; color:var(--muted); white-space:nowrap;">Swerve build →</span>
       </a>
       <a sc-camel-on-click="{{ navSeason }}" style="position:relative; overflow:hidden; display:grid; grid-template-columns:1fr auto; gap:20px; align-items:center; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .35s cubic-bezier(.2,.8,.3,1), color .28s ease, background-color .28s ease;" style-hover="padding-left:26px; color:var(--accent); background-color:var(--panel);" data-click="">
         <span style="font-size:clamp(28px,5vw,68px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:.95;">the season</span>
@@ -1107,7 +1086,7 @@
       </div>
       <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr); gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);">
         <div style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">outreach</div>
-        <p style="font-size:15.5px; line-height:1.6; color:var(--muted);">Teach younger kids and help new teams through the parts of a first season nobody warns you about.</p>
+        <p style="font-size:15.5px; line-height:1.6; color:var(--muted);">We bring the robot around the Bay Area to showcase robotics to kids — especially those with less access to STEM — and spread hands-on learning wherever we can. Planned event with FTC team Olympians.</p>
       </div>
     </div>
   </section>
@@ -1117,202 +1096,21 @@
   <sc-if value="{{ isRobot }}" hint-placeholder-val="{{ false }}">
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
-  <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,1fr); border-bottom:1px solid var(--rule);">
-    <div style="padding:clamp(52px,6vw,88px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12 L25 12 L25 26 L7 26 Z"></path><path d="M16 12 L16 7"></path><circle cx="16" cy="5.5" r="1.8"></circle><path d="M12 18 L12 20 M20 18 L20 20"></path></svg><span style="white-space:nowrap;">build file · mop-9000</span></div>
-      <h1 data-scramble="" style="font-size:clamp(48px,8vw,124px); font-family:var(--disp); font-weight:700; line-height:.8; letter-spacing:-.042em;">mop‑9000</h1>
-      <p style="margin-top:24px; max-width:42ch; font-size:17px; line-height:1.55; color:var(--muted);">Mecanum wheels, a soft-wheel intake, a two-stage lift, and camera-guided scoring. Built to keep cycling all match.</p>
-      <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:32px; font-size:15px; color:var(--muted);">
-        <span style="border:1px solid var(--rule); padding:8px 12px;">18 kg</span>
-        <span style="border:1px solid var(--rule); padding:8px 12px;">1.6 m/s</span>
-        <span style="border:1px solid var(--rule); padding:8px 12px;">4.2 s cycle</span>
-        <span style="border:1px solid var(--rule); padding:8px 12px;">team 36721</span>
-      </div>
-    </div>
-    <div style="position:relative; border-left:1px solid var(--rule); background:var(--panel);">
-      <image-slot id="robot-photo" style="width:100%; height:100%; min-height:360px;" shape="rect" placeholder="Drop a photo of MOP-9000"></image-slot>
-      
-    </div>
+  <header style="position:relative; z-index:1; border-bottom:1px solid var(--rule); padding:clamp(52px,6vw,88px) var(--pad);">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12 L25 12 L25 26 L7 26 Z"></path><path d="M16 12 L16 7"></path><circle cx="16" cy="5.5" r="1.8"></circle><path d="M12 18 L12 20 M20 18 L20 20"></path></svg><span style="white-space:nowrap;">build file · work in progress</span></div>
+    <h1 data-scramble="" style="font-size:clamp(48px,8vw,124px); font-family:var(--disp); font-weight:700; line-height:.8; letter-spacing:-.042em;">the robot</h1>
   </header>
 
-  <section style="position:relative; z-index:1; border-bottom:1px solid var(--rule); background:var(--panel); display:grid; grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);">
-    <div style="position:relative; perspective:1200px; min-height:clamp(340px,48vh,520px); display:flex; align-items:center; justify-content:center; cursor:grab; touch-action:none; overflow:hidden;" sc-camel-on-mouse-down="{{ onRobotDown }}" sc-camel-on-touch-start="{{ onRobotDown }}">
-      <div style="position:absolute; inset:0; background-image:linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px); background-size:44px 44px; opacity:.5; animation:dash 6s linear infinite;"></div>
-      <div id="viewer-model" style="position:relative; width:0; height:0; transform-style:preserve-3d; transform:rotateX(-16deg) rotateY(-28deg);">
-        <div style="position:absolute; left:-110px; top:-35px; width:220px; height:70px; border:1px solid var(--accent); transform:translateZ(80px);"></div>
-        <div style="position:absolute; left:-110px; top:-35px; width:220px; height:70px; border:1px solid var(--accent); transform:rotateY(180deg) translateZ(80px);"></div>
-        <div style="position:absolute; left:-80px; top:-35px; width:160px; height:70px; border:1px solid var(--accent); transform:rotateY(90deg) translateZ(110px);"></div>
-        <div style="position:absolute; left:-80px; top:-35px; width:160px; height:70px; border:1px solid var(--accent); transform:rotateY(-90deg) translateZ(110px);"></div>
-        <div style="position:absolute; left:-110px; top:-80px; width:220px; height:160px; border:1px solid var(--accent); transform:rotateX(90deg) translateZ(35px);"></div>
-        <div style="position:absolute; left:-110px; top:-80px; width:220px; height:160px; border:1px dashed var(--rule); transform:rotateX(90deg) translateZ(-35px);"></div>
-        <div data-ex="0px,-90px,0px" style="position:absolute; left:-18px; top:-175px; width:36px; height:140px; border:1px solid var(--accent); transform:translateZ(0px);"></div>
-        <div data-ex="0px,-90px,0px" style="position:absolute; left:-18px; top:-175px; width:36px; height:140px; border:1px solid var(--accent); transform:rotateY(90deg);"></div>
-        <div data-ex="0px,-150px,0px" style="position:absolute; left:-40px; top:-196px; width:80px; height:22px; border:1px solid var(--accent); transform:rotateX(90deg);"></div>
-        <div data-ex="-70px,0px,40px" style="position:absolute; left:-124px; top:-2px; width:34px; height:34px; border:1px solid var(--muted); border-radius:50%; transform:translate3d(0,0,72px) rotateY(90deg);"></div>
-        <div data-ex="70px,0px,40px" style="position:absolute; left:90px; top:-2px; width:34px; height:34px; border:1px solid var(--muted); border-radius:50%; transform:translate3d(0,0,72px) rotateY(90deg);"></div>
-        <div data-ex="-70px,0px,-40px" style="position:absolute; left:-124px; top:-2px; width:34px; height:34px; border:1px solid var(--muted); border-radius:50%; transform:translate3d(0,0,-72px) rotateY(90deg);"></div>
-        <div data-ex="70px,0px,-40px" style="position:absolute; left:90px; top:-2px; width:34px; height:34px; border:1px solid var(--muted); border-radius:50%; transform:translate3d(0,0,-72px) rotateY(90deg);"></div>
-      </div>
-      <div style="position:absolute; left:18px; bottom:16px; font-size:15px; color:var(--muted);">Drag to spin it</div>
-      <a sc-camel-on-click="{{ toggleExplode }}" data-click="" style="position:absolute; right:16px; bottom:14px; display:inline-flex; align-items:center; gap:8px; background-color:var(--key); border:1px solid var(--rule); padding:9px 13px; font-size:15px; color:var(--muted); cursor:pointer; transition:border-color .18s ease, color .18s ease;" style-hover="border-color:var(--accent); color:var(--accent);">{{ explodeLabel }}</a>
-    </div>
-    <div style="border-left:1px solid var(--rule); display:flex; flex-direction:column;">
-      <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; padding:clamp(24px,2.8vw,34px);">
-        <a sc-camel-on-click="{{ selDrive }}" style="{{ subKey0 }}" style-active="transform:translateY(3px); box-shadow:0 0 0 var(--edge);">drive</a>
-        <a sc-camel-on-click="{{ selIntake }}" style="{{ subKey1 }}" style-active="transform:translateY(3px); box-shadow:0 0 0 var(--edge);">intake</a>
-        <a sc-camel-on-click="{{ selLift }}" style="{{ subKey2 }}" style-active="transform:translateY(3px); box-shadow:0 0 0 var(--edge);">lift</a>
-        <a sc-camel-on-click="{{ selCode }}" style="{{ subKey3 }}" style-active="transform:translateY(3px); box-shadow:0 0 0 var(--edge);">code</a>
-      </div>
-      <div style="border-top:1px solid var(--rule); padding:clamp(24px,2.8vw,34px); flex:1; display:flex; flex-direction:column; gap:14px;">
-        <div style="font-size:clamp(26px,3vw,38px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">{{ subTitle }}</div>
-        <p style="font-size:15.5px; line-height:1.6; color:var(--muted);">{{ subDesc }}</p>
-        <div style="margin-top:auto; display:flex; gap:10px; flex-wrap:wrap; font-size:15px; color:var(--accent);"><span style="border:1px solid var(--rule); padding:7px 11px;">{{ subSpecA }}</span><span style="border:1px solid var(--rule); padding:7px 11px;">{{ subSpecB }}</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
-    <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:20px;">
-      <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,auto) minmax(0,1fr); gap:clamp(16px,3vw,40px);">
-      <div style="font-family:var(--mono); text-transform:uppercase; padding-right:clamp(10px,2vw,24px);"><div style="position:relative; width:44px; height:48px; display:flex; align-items:center; justify-content:center; flex:none;"><svg sc-camel-view-box="0 0 120 120" style="position:absolute; inset:0; width:100%; height:100%; overflow:visible;" fill="none"><g stroke="var(--rule)" stroke-linejoin="round"><path d="M60 6 L106 32 L106 88 L60 114 L14 88 L14 32 Z" stroke-width="6"></path><path d="M60 18 L96 38 L96 82 L60 102 L24 82 L24 38 Z" stroke-width="2" opacity="0.5"></path><circle cx="60" cy="6" r="5" fill="var(--accent)" stroke="none"></circle><circle cx="106" cy="32" r="5" fill="var(--rule)" stroke="none"></circle><circle cx="14" cy="32" r="5" fill="var(--rule)" stroke="none"></circle></g></svg><span style="position:relative; font-size:13px; letter-spacing:.1em; color:var(--text);">Ø1</span></div><div style="font-size:11px; letter-spacing:.2em; color:var(--muted); margin-top:9px; white-space:nowrap;">Calculator</div></div>
-      <div style="border-left:1px solid var(--rule); padding-left:clamp(18px,3vw,40px); min-width:0;">
-      <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">drivetrain math</h2>
-      </div>
-      </div>
-      
-    </div>
-    <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,.62fr); gap:14px; margin-top:clamp(30px,3.4vw,42px);">
-      <div style="border-top:1px solid var(--rule); padding:clamp(24px,2.8vw,34px) 0; display:flex; flex-direction:column; gap:30px;">
-        <div>
-          <div style="display:flex; justify-content:space-between; gap:16px; font-size:15px; color:var(--muted);"><span style="flex:none; white-space:nowrap;">motor speed</span><span style="flex:none; white-space:nowrap; color:var(--accent);">{{ rpmLabel }}</span></div>
-          <div style="display:flex; gap:8px; margin-top:12px;">
-            <a sc-camel-on-click="{{ setRpm312 }}" data-click="" style="{{ rpmKey0 }}" style-hover="border-color:var(--accent);">312 rpm</a>
-            <a sc-camel-on-click="{{ setRpm435 }}" data-click="" style="{{ rpmKey1 }}" style-hover="border-color:var(--accent);">435 rpm</a>
-            <a sc-camel-on-click="{{ setRpm1150 }}" data-click="" style="{{ rpmKey2 }}" style-hover="border-color:var(--accent);">1150 rpm</a>
-          </div>
-        </div>
-        <div>
-          <div style="display:flex; justify-content:space-between; gap:16px; font-size:15px; color:var(--muted);"><span style="flex:none; white-space:nowrap;">gear reduction</span><span style="flex:none; white-space:nowrap; color:var(--accent);">{{ ratioLabel }}</span></div>
-          <input aria-label="Gear reduction" type="range" min="1" max="8" step="0.5" value="{{ ratio }}" sc-camel-on-input="{{ setRatio }}" style="width:100%; margin-top:14px; accent-color:var(--accent); cursor:pointer;">
-        </div>
-        <div>
-          <div style="display:flex; justify-content:space-between; gap:16px; font-size:15px; color:var(--muted);"><span style="flex:none; white-space:nowrap;">wheel diameter</span><span style="flex:none; white-space:nowrap; color:var(--accent);">{{ wheelLabel }}</span></div>
-          <input aria-label="Wheel diameter in millimetres" type="range" min="60" max="120" step="4" value="{{ wheel }}" sc-camel-on-input="{{ setWheel }}" style="width:100%; margin-top:14px; accent-color:var(--accent); cursor:pointer;">
-        </div>
-      </div>
-      <div style="border-top:1px solid var(--rule); padding:clamp(24px,2.8vw,34px) 0; display:flex; flex-direction:column; justify-content:center; gap:12px;">
-        <div style="font-size:16px; color:var(--muted);">Top speed, no load</div>
-        <div style="font-size:clamp(44px,6vw,80px); font-family:var(--disp); font-weight:700; letter-spacing:-.042em; line-height:.9; font-variant-numeric:tabular-nums;">{{ speed }}</div>
-        <div style="font-size:16px; color:var(--muted);">metres per second</div>
-        <div style="margin-top:18px; border-top:1px solid var(--rule); padding-top:14px; font-family:var(--mono); font-size:11.5px; line-height:1.9; color:var(--muted);">{{ fieldLabel }}<br>{{ mphLabel }}</div>
-      </div>
-    </div>
-  </section>
-
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
-    <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,auto) minmax(0,1fr); gap:clamp(16px,3vw,40px);">
-    <div style="font-family:var(--mono); text-transform:uppercase; padding-right:clamp(10px,2vw,24px);"><div style="position:relative; width:44px; height:48px; display:flex; align-items:center; justify-content:center; flex:none;"><svg sc-camel-view-box="0 0 120 120" style="position:absolute; inset:0; width:100%; height:100%; overflow:visible;" fill="none"><g stroke="var(--rule)" stroke-linejoin="round"><path d="M60 6 L106 32 L106 88 L60 114 L14 88 L14 32 Z" stroke-width="6"></path><path d="M60 18 L96 38 L96 82 L60 102 L24 82 L24 38 Z" stroke-width="2" opacity="0.5"></path><circle cx="60" cy="6" r="5" fill="var(--accent)" stroke="none"></circle><circle cx="106" cy="32" r="5" fill="var(--rule)" stroke="none"></circle><circle cx="14" cy="32" r="5" fill="var(--rule)" stroke="none"></circle></g></svg><span style="position:relative; font-size:13px; letter-spacing:.1em; color:var(--text);">Ø2</span></div><div style="font-size:11px; letter-spacing:.2em; color:var(--muted); margin-top:9px; white-space:nowrap;">Simulator</div></div>
-    <div style="border-left:1px solid var(--rule); padding-left:clamp(18px,3vw,40px); min-width:0;">
-    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">drive the robot</h2>
-    </div>
-    </div>
-    <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,.6fr); gap:clamp(24px,4vw,56px); margin-top:clamp(30px,3.4vw,42px); align-items:start;">
-      <div data-field="" sc-camel-tab-index="0" role="application" aria-label="Drive the robot with the arrow keys" style="position:relative; width:100%; max-width:560px; aspect-ratio:1; border:1px solid var(--rule); outline:none; cursor:crosshair; touch-action:none;">
-        <svg sc-camel-view-box="0 0 360 360" style="position:absolute; inset:0; width:100%; height:100%;">
-          <line x1="60" y1="0" x2="60" y2="360" stroke="var(--rule)" stroke-width="1"></line><line x1="0" y1="60" x2="360" y2="60" stroke="var(--rule)" stroke-width="1"></line><line x1="120" y1="0" x2="120" y2="360" stroke="var(--rule)" stroke-width="1"></line><line x1="0" y1="120" x2="360" y2="120" stroke="var(--rule)" stroke-width="1"></line><line x1="180" y1="0" x2="180" y2="360" stroke="var(--rule)" stroke-width="1"></line><line x1="0" y1="180" x2="360" y2="180" stroke="var(--rule)" stroke-width="1"></line><line x1="240" y1="0" x2="240" y2="360" stroke="var(--rule)" stroke-width="1"></line><line x1="0" y1="240" x2="360" y2="240" stroke="var(--rule)" stroke-width="1"></line><line x1="300" y1="0" x2="300" y2="360" stroke="var(--rule)" stroke-width="1"></line><line x1="0" y1="300" x2="360" y2="300" stroke="var(--rule)" stroke-width="1"></line>
-          <rect x="0" y="0" width="360" height="360" fill="none" stroke="var(--rule)" stroke-width="2"></rect>
-          <rect x="18" y="18" width="52" height="52" fill="none" stroke="var(--signal)" stroke-width="1.5" stroke-dasharray="5 5"></rect>
-          <rect x="290" y="290" width="52" height="52" fill="none" stroke="var(--signal)" stroke-width="1.5" stroke-dasharray="5 5"></rect>
-          <g id="sim-robot" style="transform-box:view-box; transform-origin:180px 180px;">
-            <rect x="162" y="158" width="36" height="44" fill="var(--accent)"></rect>
-            <rect x="158" y="164" width="6" height="12" fill="var(--muted)"></rect>
-            <rect x="196" y="164" width="6" height="12" fill="var(--muted)"></rect>
-            <rect x="158" y="184" width="6" height="12" fill="var(--muted)"></rect>
-            <rect x="196" y="184" width="6" height="12" fill="var(--muted)"></rect>
-            <line x1="180" y1="158" x2="180" y2="146" stroke="var(--text)" stroke-width="3"></line>
-          </g>
-        </svg>
-        <div style="position:absolute; left:14px; bottom:12px; font-size:15px; color:var(--muted);">Click, then use the arrow keys</div>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:22px; border-top:1px solid var(--rule); padding-top:clamp(24px,3vw,34px);">
-        <div style="display:flex; flex-direction:column; gap:10px; font-family:var(--mono); font-size:17px; color:var(--muted);">
-          <div style="display:flex; justify-content:space-between; gap:16px;"><span>x</span><span id="sim-x" style="color:var(--text); font-variant-numeric:tabular-nums;">0.00 m</span></div>
-          <div style="display:flex; justify-content:space-between; gap:16px;"><span>y</span><span id="sim-y" style="color:var(--text); font-variant-numeric:tabular-nums;">0.00 m</span></div>
-          <div style="display:flex; justify-content:space-between; gap:16px;"><span>heading</span><span id="sim-heading" style="color:var(--accent); font-variant-numeric:tabular-nums;">0°</span></div>
-        </div>
-        <p style="font-size:16px; line-height:1.6; color:var(--muted);">Left and right slide sideways instead of turning. That’s what mecanum wheels do. Hold shift to spin.</p>
-        <a sc-camel-on-click="{{ resetBot }}" data-click="" style="align-self:flex-start; border:1px solid var(--rule); padding:11px 16px; font-size:16px; color:var(--muted); cursor:pointer;" style-hover="border-color:var(--accent); color:var(--accent);">Reset position</a>
-      </div>
-    </div>
-  </section>
-
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
-    <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,auto) minmax(0,1fr); gap:clamp(16px,3vw,40px);">
-    <div style="font-family:var(--mono); text-transform:uppercase; padding-right:clamp(10px,2vw,24px);"><div style="position:relative; width:44px; height:48px; display:flex; align-items:center; justify-content:center; flex:none;"><svg sc-camel-view-box="0 0 120 120" style="position:absolute; inset:0; width:100%; height:100%; overflow:visible;" fill="none"><g stroke="var(--rule)" stroke-linejoin="round"><path d="M60 6 L106 32 L106 88 L60 114 L14 88 L14 32 Z" stroke-width="6"></path><path d="M60 18 L96 38 L96 82 L60 102 L24 82 L24 38 Z" stroke-width="2" opacity="0.5"></path><circle cx="60" cy="6" r="5" fill="var(--accent)" stroke="none"></circle><circle cx="106" cy="32" r="5" fill="var(--rule)" stroke="none"></circle><circle cx="14" cy="32" r="5" fill="var(--rule)" stroke="none"></circle></g></svg><span style="position:relative; font-size:13px; letter-spacing:.1em; color:var(--text);">Ø3</span></div><div style="font-size:11px; letter-spacing:.2em; color:var(--muted); margin-top:9px; white-space:nowrap;">Autonomous</div></div>
-    <div style="border-left:1px solid var(--rule); padding-left:clamp(18px,3vw,40px); min-width:0;">
-    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">our auto routine</h2>
-    </div>
-    </div>
-    <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,.6fr); gap:clamp(24px,4vw,56px); margin-top:clamp(30px,3.4vw,42px); align-items:start;">
-      <div style="position:relative; width:100%; max-width:560px; aspect-ratio:1; border:1px solid var(--rule);">
-        <svg sc-camel-view-box="0 0 360 360" style="position:absolute; inset:0; width:100%; height:100%;">
-          <line x1="60" y1="0" x2="60" y2="360" stroke="var(--rule)" stroke-width="1"></line><line x1="0" y1="60" x2="360" y2="60" stroke="var(--rule)" stroke-width="1"></line><line x1="120" y1="0" x2="120" y2="360" stroke="var(--rule)" stroke-width="1"></line><line x1="0" y1="120" x2="360" y2="120" stroke="var(--rule)" stroke-width="1"></line><line x1="180" y1="0" x2="180" y2="360" stroke="var(--rule)" stroke-width="1"></line><line x1="0" y1="180" x2="360" y2="180" stroke="var(--rule)" stroke-width="1"></line><line x1="240" y1="0" x2="240" y2="360" stroke="var(--rule)" stroke-width="1"></line><line x1="0" y1="240" x2="360" y2="240" stroke="var(--rule)" stroke-width="1"></line><line x1="300" y1="0" x2="300" y2="360" stroke="var(--rule)" stroke-width="1"></line><line x1="0" y1="300" x2="360" y2="300" stroke="var(--rule)" stroke-width="1"></line>
-          <rect x="0" y="0" width="360" height="360" fill="none" stroke="var(--rule)" stroke-width="2"></rect>
-          <path id="route-path" d="M60 320 L60 220 Q60 180 110 170 L200 150 Q250 140 250 100 L250 54" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="4 6" opacity=".55"></path>
-          <circle cx="60" cy="320" r="7" fill="var(--signal)"></circle>
-          <circle cx="250" cy="54" r="7" fill="none" stroke="var(--signal)" stroke-width="2"></circle>
-          <g id="route-robot">
-            <rect x="-16" y="-19" width="32" height="38" fill="var(--accent)"></rect>
-            <line x1="0" y1="-19" x2="0" y2="-31" stroke="var(--text)" stroke-width="3"></line>
-          </g>
-        </svg>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:20px; border-top:1px solid var(--rule); padding-top:clamp(24px,3vw,34px);">
-        <div style="font-size:clamp(30px,3.6vw,46px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; font-variant-numeric:tabular-nums;">{{ autoClock }}</div>
-        <div style="font-size:19px; color:var(--accent);">{{ autoStep }}</div>
-        <input aria-label="Autonomous routine position" type="range" min="0" max="1000" step="1" value="{{ autoPos }}" sc-camel-on-input="{{ setAutoPos }}" style="width:100%; accent-color:var(--accent); cursor:pointer;">
-        <a sc-camel-on-click="{{ toggleAuto }}" data-click="" style="align-self:flex-start; border:1px solid var(--rule); padding:11px 18px; font-size:16px; color:var(--muted); cursor:pointer;" style-hover="border-color:var(--accent); color:var(--accent);">{{ autoLabel }}</a>
-        <p style="font-size:16px; line-height:1.6; color:var(--muted);">Thirty seconds, no driver. Drag the slider to step through it.</p>
-      </div>
-    </div>
-  </section>
-
-  <section data-lag="0.05" style="position:relative; z-index:1; background:var(--accent); color:var(--ink); border-bottom:1px solid var(--rule); padding:clamp(64px,7vw,104px) var(--pad);">
-    <div style="width:100%; margin-bottom:clamp(26px,3vw,38px); display:grid; grid-template-columns:minmax(0,auto) minmax(0,1fr); gap:clamp(16px,3vw,40px);">
-      <div style="font-family:var(--mono); text-transform:uppercase; padding-right:clamp(10px,2vw,24px);"><div style="position:relative; width:44px; height:48px; display:flex; align-items:center; justify-content:center; flex:none;"><svg sc-camel-view-box="0 0 120 120" style="position:absolute; inset:0; width:100%; height:100%; overflow:visible;" fill="none"><g stroke="rgba(0,0,0,.4)" stroke-linejoin="round"><path d="M60 6 L106 32 L106 88 L60 114 L14 88 L14 32 Z" stroke-width="6"></path><path d="M60 18 L96 38 L96 82 L60 102 L24 82 L24 38 Z" stroke-width="2" opacity="0.5"></path><circle cx="60" cy="6" r="5" fill="rgba(0,0,0,.55)" stroke="none"></circle><circle cx="106" cy="32" r="5" fill="rgba(0,0,0,.35)" stroke="none"></circle><circle cx="14" cy="32" r="5" fill="rgba(0,0,0,.35)" stroke="none"></circle></g></svg><span style="position:relative; font-size:13px; letter-spacing:.1em; color:var(--ink);">Ø4</span></div><div style="font-size:11px; letter-spacing:.2em; color:rgba(0,0,0,.62); margin-top:9px; white-space:nowrap;">Results</div></div>
-      <div style="border-left:1px solid rgba(0,0,0,.32); padding-left:clamp(18px,3vw,40px); min-width:0;"><h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:.92; max-width:14ch; text-transform:lowercase; margin:0;">autonomous</h2></div>
-    </div>
-    <div style="display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:end;">
-      <div style="display:flex; gap:36px;">
-        <div><div data-count="45" style="font-size:clamp(38px,5vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1;">45</div><div style="font-size:16px; margin-top:6px;">Average auto points</div></div>
-        <div><div data-count="6" style="font-size:clamp(38px,5vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1;">6</div><div style="font-size:16px; margin-top:6px;">Routines</div></div>
-        <div><div data-count="94" data-suffix="%" style="font-size:clamp(38px,5vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1;">94%</div><div style="font-size:16px; margin-top:6px;">Reliability</div></div>
-      </div>
-    </div>
-  </section>
-
   <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
-    <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,auto) minmax(0,1fr); gap:clamp(16px,3vw,40px);">
-    <div style="font-family:var(--mono); text-transform:uppercase; padding-right:clamp(10px,2vw,24px);"><div style="position:relative; width:44px; height:48px; display:flex; align-items:center; justify-content:center; flex:none;"><svg sc-camel-view-box="0 0 120 120" style="position:absolute; inset:0; width:100%; height:100%; overflow:visible;" fill="none"><g stroke="var(--rule)" stroke-linejoin="round"><path d="M60 6 L106 32 L106 88 L60 114 L14 88 L14 32 Z" stroke-width="6"></path><path d="M60 18 L96 38 L96 82 L60 102 L24 82 L24 38 Z" stroke-width="2" opacity="0.5"></path><circle cx="60" cy="6" r="5" fill="var(--accent)" stroke="none"></circle><circle cx="106" cy="32" r="5" fill="var(--rule)" stroke="none"></circle><circle cx="14" cy="32" r="5" fill="var(--rule)" stroke="none"></circle></g></svg><span style="position:relative; font-size:13px; letter-spacing:.1em; color:var(--text);">Ø5</span></div><div style="font-size:11px; letter-spacing:.2em; color:var(--muted); margin-top:9px; white-space:nowrap;">Gallery</div></div>
-    <div style="border-left:1px solid var(--rule); padding-left:clamp(18px,3vw,40px); min-width:0;">
-    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">build photos</h2>
-    </div>
-    </div>
-    <div data-compare="" style="position:relative; margin-top:clamp(30px,3.4vw,42px); aspect-ratio:21/9; border:1px solid var(--rule); overflow:hidden; cursor:ew-resize; user-select:none; background:var(--panel);">
-      <image-slot id="cmp-built" style="position:absolute; inset:0; width:100%; height:100%;" shape="rect" placeholder="Finished robot photo"></image-slot>
-      <div data-compare-top="" style="position:absolute; inset:0; clip-path:inset(0 50% 0 0);">
-        <image-slot id="cmp-cad" style="width:100%; height:100%;" shape="rect" placeholder="CAD render"></image-slot>
+    <div style="max-width:62ch; display:flex; flex-direction:column; gap:clamp(28px,4vw,40px);">
+      <div>
+        <div style="font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); margin-bottom:14px;">biobuzz · 2026/27</div>
+        <p style="font-size:17px; line-height:1.65; color:var(--muted);">This season's game is <strong style="color:var(--text); font-weight:600;">BIOBUZZ</strong>, presented by RTX — part of the FIRST CANOPY season and built around the energy of the natural world. Scoring elements are <strong style="color:var(--text); font-weight:600;">Pollen</strong>, 3-inch plastic balls teams intake off the field, from walls and corners, and in autonomous. Full rules release at kickoff on September 12, 2026; we're practicing with Pollen, running Skill Builders, and prototyping intake and drive before the manual drops.</p>
       </div>
-      <div data-compare-handle="" style="position:absolute; top:0; bottom:0; left:50%; width:2px; background:var(--accent); pointer-events:none;">
-        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:38px; height:38px; background:var(--accent); color:var(--ink); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:13px; font-weight:700;">↔</div>
+      <div style="border-top:1px solid var(--rule); padding-top:clamp(28px,4vw,40px);">
+        <div style="font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); margin-bottom:14px;">swerve drivetrain</div>
+        <p style="font-size:17px; line-height:1.65; color:var(--muted);">Janitors FTC is taking the initiative to build a swerve drivetrain from the ground up — four independent steerable modules that let us translate in any direction without turning, lock into position for pushing matches, and line up on scoring targets with surgical precision. Most rookie teams play it safe with tank or mecanum; we're betting that the mobility payoff is worth the engineering lift. Custom module plates, coordinated odometry, and driver-side controls are all on the board. This page is a work in progress while we design, machine, and test.</p>
       </div>
-      <div style="position:absolute; left:12px; top:12px; font-family:var(--mono); font-size:15px; color:var(--ink); background:var(--accent); padding:6px 11px; pointer-events:none;">CAD</div>
-      <div style="position:absolute; right:12px; top:12px; font-family:var(--mono); font-size:15px; color:var(--text); border:1px solid var(--rule); background:var(--bg); padding:6px 11px; pointer-events:none;">Built</div>
-    </div>
-    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:clamp(30px,3.4vw,42px);" data-stagger="zoom">
-      <image-slot data-lag="0.09" id="robot-build-1" style="width:100%; aspect-ratio:4/3; border:1px solid var(--rule);" shape="rect" placeholder="Build photo"></image-slot>
-      <image-slot data-lag="0.09" id="robot-build-2" style="width:100%; aspect-ratio:4/3; border:1px solid var(--rule);" shape="rect" placeholder="Build photo"></image-slot>
-      <image-slot data-lag="0.09" id="robot-build-3" style="width:100%; aspect-ratio:4/3; border:1px solid var(--rule);" shape="rect" placeholder="Build photo"></image-slot>
     </div>
   </section>
   </div>
@@ -1325,7 +1123,7 @@
     <div style="padding:clamp(52px,6vw,88px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
       <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 14 L24 14 L21.5 26.5 Q14 28.8 8 26.5 Z"></path><path d="M24 14 L28.5 8.5"></path></svg><span style="white-space:nowrap;">match log · 2026/27</span></div>
       <h1 data-scramble="" style="font-size:clamp(46px,7.5vw,112px); font-family:var(--disp); font-weight:700; line-height:.82; letter-spacing:-.042em;">the game</h1>
-      <p style="margin-top:24px; max-width:44ch; font-size:16.5px; line-height:1.6; color:var(--muted);">Every season has a new field and new ways to score. Details go here once it's announced.</p>
+      <p style="margin-top:24px; max-width:44ch; font-size:16.5px; line-height:1.6; color:var(--muted);"><strong style="color:var(--text); font-weight:600;">BIOBUZZ</strong>, presented by RTX — part of the FIRST CANOPY season. Scoring uses Pollen; full rules release at kickoff on September 12, 2026.</p>
     </div>
     <div style="border-left:1px solid var(--rule); background:var(--panel);">
       <image-slot id="game-field" style="width:100%; height:100%; min-height:320px;" shape="rect" placeholder="Field / game art"></image-slot>
@@ -1421,31 +1219,18 @@
       <svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="position:absolute; left:-4%; top:50%; transform:translateY(-50%) rotate(-12deg); width:clamp(220px,26vw,380px); height:auto; color:var(--text); opacity:.045; pointer-events:none;" fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4 L14.5 18.5"></path><path d="M10.5 17 L16.5 14 L21 26.5 Q15 29.5 9 26.5 Z"></path><path d="M12.6 18.4 L11.4 26.6 M15.2 17.2 L15.2 27.6 M17.8 16.2 L19 26.6"></path></svg>
       <div style="position:relative; display:flex; align-items:center; gap:12px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:20px; height:20px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 14 L24 14 L21.5 26.5 Q14 28.8 8 26.5 Z"></path><path d="M24 14 L28.5 8.5"></path></svg><span style="white-space:nowrap;">service log · 2026</span></div>
       <h1 data-scramble="" style="position:relative; margin-top:22px; font-size:clamp(44px,7vw,104px); font-family:var(--disp); font-weight:700; line-height:.82; letter-spacing:-.042em;">outreach</h1>
-      <p style="position:relative; margin-top:26px; max-width:46ch; font-size:16.5px; line-height:1.6; color:var(--muted);">We bring the robot to schools and libraries around Dublin, CA, and we sit with rookie teams through the parts of a first season nobody warns you about. Everything below is a record of what we actually did.</p>
+      <p style="position:relative; margin-top:26px; max-width:46ch; font-size:16.5px; line-height:1.6; color:var(--muted);">We bring the robot around the Bay Area to showcase robotics to kids — especially those with less access to STEM — and spread hands-on learning wherever we can. Planned event with FTC team Olympians.</p>
     </div>
     <div style="border-left:1px solid var(--rule); background:var(--panel);">
       <image-slot id="outreach-photo" style="width:100%; height:100%; min-height:340px;" shape="rect" placeholder="Drop an outreach photo"></image-slot>
     </div>
   </header>
 
-  <section style="position:relative; z-index:1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:var(--rule); border-bottom:1px solid var(--rule);" data-stagger="left">
-    <div style="background:var(--bg); padding:clamp(24px,2.8vw,34px); display:flex; flex-direction:column; gap:14px;">
-      <div style="display:flex; align-items:center; gap:11px; font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4 L14.5 18.5"></path><path d="M10.5 17 L16.5 14 L21 26.5 Q15 29.5 9 26.5 Z"></path><path d="M12.6 18.4 L11.4 26.6 M15.2 17.2 L15.2 27.6 M17.8 16.2 L19 26.6"></path></svg>students reached</div>
-      <div data-count="1200" data-suffix="+" style="font-size:clamp(46px,7vw,104px); font-family:var(--disp); font-weight:700; letter-spacing:-.042em; line-height:.86; font-variant-numeric:tabular-nums;">1,200+</div>
-      <div style="height:1px; background:var(--rule);"></div>
-      <p style="font-size:15.5px; line-height:1.6; color:var(--muted);">Every kid who has driven the robot, wired a motor, or asked us why it keeps stalling.</p>
-    </div>
-    <div style="background:var(--bg); padding:clamp(24px,2.8vw,34px); display:flex; flex-direction:column; gap:14px;">
-      <div style="display:flex; align-items:center; gap:11px; font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3 L16 12"></path><path d="M9 12 L23 12"></path><path d="M10.5 12 Q9.4 21 12 29 M13.6 12 Q13.2 21 14.2 29 M18.4 12 Q18.8 21 17.8 29 M21.5 12 Q22.6 21 20 29"></path></svg>sessions run</div>
-      <div data-count="18" style="font-size:clamp(46px,7vw,104px); font-family:var(--disp); font-weight:700; letter-spacing:-.042em; line-height:.86; font-variant-numeric:tabular-nums;">18</div>
-      <div style="height:1px; background:var(--rule);"></div>
-      <p style="font-size:15.5px; line-height:1.6; color:var(--muted);">Workshops, assemblies, and after-school blocks across nine campuses since September.</p>
-    </div>
-    <div style="background:var(--bg); padding:clamp(24px,2.8vw,34px); display:flex; flex-direction:column; gap:14px;">
-      <div style="display:flex; align-items:center; gap:11px; font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 29 L12 17 Q9.5 17 9.5 14.5 Q9.5 12 12 12 L13 12 L13 6.5 Q13 4 15.5 4 Q18 4 18 6.5 L18 12 L20.5 12 Q23 12 23 15 L23 29 Z"></path></svg>rookie teams</div>
-      <div data-count="4" style="font-size:clamp(46px,7vw,104px); font-family:var(--disp); font-weight:700; letter-spacing:-.042em; line-height:.86; font-variant-numeric:tabular-nums;">4</div>
-      <div style="height:1px; background:var(--rule);"></div>
-      <p style="font-size:15.5px; line-height:1.6; color:var(--muted);">Teams we sit with week to week, from first build to their first qualifier.</p>
+  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
+    <div style="max-width:62ch; display:flex; flex-direction:column; gap:clamp(24px,3vw,32px);">
+      <div style="font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--accent);">planned for 2026/27</div>
+      <p style="font-size:17px; line-height:1.65; color:var(--muted);">Outreach is how we pay forward what robotics gave us. This season we're building a team within the team — recruiting dedicated outreach members to run demos, coordinate school visits, and keep our community calendar full. Yajat and Niraj lead the effort, and we're actively looking for students who want to own events, talk to teachers, and represent the Janitors off the field.</p>
+      <p style="font-size:17px; line-height:1.65; color:var(--muted);">On the calendar: drive-the-robot nights at local libraries, STEM assemblies at middle schools across the Bay Area, hands-on workshops where kids wire a motor and write their first line of code, and a joint showcase with FTC team Olympians. We're also planning mentorship sessions for rookie teams starting their first build season — the stuff nobody warns you about until you're already behind.</p>
     </div>
   </section>
 
@@ -1547,26 +1332,20 @@
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
   <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr); align-items:end; gap:40px; border-bottom:1px solid var(--rule); padding:clamp(52px,6vw,88px) var(--pad);">
-    <div><div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 12 L24.5 12 L21.8 28.5 L10.2 28.5 Z"></path><path d="M10 12 Q16 3.5 22 12"></path><path d="M9.2 18 L22.8 18"></path></svg><span style="white-space:nowrap;">supply list</span></div><h1 data-scramble="" style="font-size:clamp(44px,7vw,104px); font-family:var(--disp); font-weight:700; line-height:.82; letter-spacing:-.042em;">sponsors</h1><a sc-camel-on-click="{{ printPage }}" data-click="" data-noprint="" style="display:inline-flex; align-items:center; gap:9px; margin-top:26px; border:1px solid var(--rule); padding:12px 18px; font-size:16px; color:var(--muted); cursor:pointer;" style-hover="border-color:var(--accent); color:var(--accent);">Print the sponsor one-pager →</a></div>
-    <p style="max-width:44ch; font-size:16.5px; line-height:1.6; color:var(--muted);">Sponsors pay for our parts, our tools, and the bus. Your logo goes on the robot, the shirts, and right here.</p>
+    <div><div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 12 L24.5 12 L21.8 28.5 L10.2 28.5 Z"></path><path d="M10 12 Q16 3.5 22 12"></path><path d="M9.2 18 L22.8 18"></path></svg><span style="white-space:nowrap;">supply list</span></div><h1 data-scramble="" style="font-size:clamp(44px,7vw,104px); font-family:var(--disp); font-weight:700; line-height:.82; letter-spacing:-.042em;">sponsors</h1><div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;"><a href="/Team_Janitors_36721_Sponsorship_Packet.pdf" target="_blank" rel="noopener noreferrer" data-click="" data-noprint="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); padding:12px 18px; font-size:16px; color:var(--muted); cursor:pointer;" style-hover="border-color:var(--accent); color:var(--accent);">Print the sponsor one-pager →</a><a href="https://hcb.hackclub.com/donations/start/janitorsftcteam" target="_blank" rel="noopener noreferrer" data-click="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); padding:12px 18px; font-size:16px; color:var(--muted); cursor:pointer;" style-hover="border-color:var(--accent); color:var(--accent);">Donate via Hack Club →</a></div></div>
+    <p style="max-width:44ch; font-size:16.5px; line-height:1.6; color:var(--muted);">We're a student-led FTC team — our students lead engineering, outreach, fundraising, and competition. Your support fuels competitive robotics and hands-on STEM education in our community.</p>
   </header>
 
-  <section style="position:relative; z-index:1; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:var(--rule); border-bottom:1px solid var(--rule);">
-    <image-slot id="sponsor-1" style="width:100%; aspect-ratio:3/2; background:var(--bg);" shape="rect" fit="contain" placeholder="Sponsor logo"></image-slot>
-    <image-slot id="sponsor-2" style="width:100%; aspect-ratio:3/2; background:var(--bg);" shape="rect" fit="contain" placeholder="Sponsor logo"></image-slot>
-    <image-slot id="sponsor-3" style="width:100%; aspect-ratio:3/2; background:var(--bg);" shape="rect" fit="contain" placeholder="Sponsor logo"></image-slot>
-    <image-slot id="sponsor-4" style="width:100%; aspect-ratio:3/2; background:var(--bg);" shape="rect" fit="contain" placeholder="Sponsor logo"></image-slot>
-    <image-slot id="sponsor-5" style="width:100%; aspect-ratio:3/2; background:var(--bg);" shape="rect" fit="contain" placeholder="Sponsor logo"></image-slot>
-    <image-slot id="sponsor-6" style="width:100%; aspect-ratio:3/2; background:var(--bg);" shape="rect" fit="contain" placeholder="Sponsor logo"></image-slot>
-    <image-slot id="sponsor-7" style="width:100%; aspect-ratio:3/2; background:var(--bg);" shape="rect" fit="contain" placeholder="Sponsor logo"></image-slot>
-    <a sc-camel-on-click="{{ navJoin }}" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; aspect-ratio:3/2; background:var(--text); color:var(--bg); text-align:center; transition:background .2s, color .2s;" style-hover="background:var(--accent); color:var(--ink);"><span style="font-size:19px; font-family:var(--disp); font-weight:700; letter-spacing:-.028em;">become a sponsor</span><span style="font-size:16px;">Get in touch →</span></a>
+  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule); display:flex; justify-content:center;">
+    <a href="mailto:mayukhm.janitorsftc@gmail.com" data-magnet="" data-click="" style="display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:var(--ink); padding:18px 32px; font-size:18px; font-weight:700; white-space:nowrap; will-change:transform;">Contact us</a>
   </section>
 
   <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
     <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,auto) minmax(0,1fr); gap:clamp(16px,3vw,40px);">
     <div style="font-family:var(--mono); text-transform:uppercase; padding-right:clamp(10px,2vw,24px);"><div style="position:relative; width:44px; height:48px; display:flex; align-items:center; justify-content:center; flex:none;"><svg sc-camel-view-box="0 0 120 120" style="position:absolute; inset:0; width:100%; height:100%; overflow:visible;" fill="none"><g stroke="var(--rule)" stroke-linejoin="round"><path d="M60 6 L106 32 L106 88 L60 114 L14 88 L14 32 Z" stroke-width="6"></path><path d="M60 18 L96 38 L96 82 L60 102 L24 82 L24 38 Z" stroke-width="2" opacity="0.5"></path><circle cx="60" cy="6" r="5" fill="var(--accent)" stroke="none"></circle><circle cx="106" cy="32" r="5" fill="var(--rule)" stroke="none"></circle><circle cx="14" cy="32" r="5" fill="var(--rule)" stroke="none"></circle></g></svg><span style="position:relative; font-size:13px; letter-spacing:.1em; color:var(--text);">Ø1</span></div><div style="font-size:11px; letter-spacing:.2em; color:var(--muted); margin-top:9px; white-space:nowrap;">Budget</div></div>
     <div style="border-left:1px solid var(--rule); padding-left:clamp(18px,3vw,40px); min-width:0;">
-    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">what we spend it on</h2>
+    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">2026–27 budget</h2>
+    <p style="margin-top:16px; max-width:58ch; font-size:16px; line-height:1.6; color:var(--muted);">Our projected season budget is <strong style="color:var(--text); font-weight:600;">$15,000–$26,000</strong>, supporting competition, robot development, fabrication, outreach, travel, and team operations.</p>
     </div>
     </div>
     <div class="jl-sponsor-calc">
@@ -1575,26 +1354,27 @@
           <span style="flex:none; font-size:17px; color:var(--muted);">If you gave</span>
           <span style="flex:none; font-size:clamp(28px,3.4vw,44px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; font-variant-numeric:tabular-nums;">{{ amountLabel }}</span>
         </div>
-        <input aria-label="Contribution amount in dollars" type="range" min="100" max="5000" step="50" value="{{ amount }}" sc-camel-on-input="{{ setAmount }}" style="width:100%; margin-top:18px; accent-color:var(--accent); cursor:pointer;">
+        <input aria-label="Monthly contribution in dollars" type="range" min="9" max="250" step="1" value="{{ amount }}" sc-camel-on-input="{{ setAmount }}" style="width:100%; margin-top:18px; accent-color:var(--accent); cursor:pointer;">
         <div style="display:flex; flex-direction:column; gap:12px; margin-top:24px;">
-          <div class="jl-sponsor-calc-bars"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">parts</span><span style="height:10px; background:var(--rule); min-width:0;"><span style="{{ barParts }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtParts }}</span></div>
+          <div class="jl-sponsor-calc-bars"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">robot dev</span><span style="height:10px; background:var(--rule); min-width:0;"><span style="{{ barRobot }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtRobot }}</span></div>
+          <div class="jl-sponsor-calc-bars"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">fabrication</span><span style="height:10px; background:var(--rule); min-width:0;"><span style="{{ barFab }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtFab }}</span></div>
+          <div class="jl-sponsor-calc-bars"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">competition</span><span style="height:10px; background:var(--rule); min-width:0;"><span style="{{ barComp }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtComp }}</span></div>
           <div class="jl-sponsor-calc-bars"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">travel</span><span style="height:10px; background:var(--rule); min-width:0;"><span style="{{ barTravel }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtTravel }}</span></div>
-          <div class="jl-sponsor-calc-bars"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">tools &amp; shop</span><span style="height:10px; background:var(--rule); min-width:0;"><span style="{{ barTools }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtTools }}</span></div>
           <div class="jl-sponsor-calc-bars"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">outreach</span><span style="height:10px; background:var(--rule); min-width:0;"><span style="{{ barOut }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtOut }}</span></div>
+          <div class="jl-sponsor-calc-bars"><span style="font-size:15px; font-weight:700; letter-spacing:-.02em;">operations</span><span style="height:10px; background:var(--rule); min-width:0;"><span style="{{ barOps }}"></span></span><span style="font-family:var(--mono); font-size:12.5px; text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">{{ amtOps }}</span></div>
         </div>
       </div>
       <div class="jl-sponsor-tier-card" style="border-top:1px solid var(--rule); display:flex; flex-direction:column; justify-content:center; gap:12px;">
         <div style="font-size:17px; color:var(--muted);">That makes you a</div>
         <div style="font-size:clamp(30px,4vw,52px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:.92;">{{ tierName }}</div>
         <div style="font-family:var(--mono); font-size:12px; line-height:1.9; color:var(--muted); border-top:1px solid var(--rule); padding-top:14px; margin-top:8px;">{{ tierPerks }}</div>
-        <a href="mailto:janitorsftcteam@googlegroups.com" data-click="" style="margin-top:12px; display:inline-flex; align-items:center; justify-content:center; gap:9px; background:var(--accent); color:var(--ink); padding:13px 18px; font-size:17px; font-weight:600; white-space:nowrap; align-self:flex-start;">Talk to us</a>
+        <a href="mailto:mayukhm.janitorsftc@gmail.com" data-click="" style="margin-top:12px; display:inline-flex; align-items:center; justify-content:center; gap:9px; background:var(--accent); color:var(--ink); padding:13px 18px; font-size:17px; font-weight:600; white-space:nowrap; align-self:flex-start;">Talk to us</a>
       </div>
     </div>
-    <div style="display:flex; flex-direction:column; gap:18px; margin-top:clamp(30px,3.4vw,42px);">
-      <div style="display:grid; grid-template-columns:210px 1fr 62px; gap:20px; align-items:center;"><span style="font-size:19px; font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">parts &amp; materials</span><span style="height:14px; background:var(--rule); position:relative; overflow:hidden;"><span data-fill="38" style="position:absolute; left:0; top:0; bottom:0; width:38%; background:var(--accent); transition:width 1s cubic-bezier(.4,0,.2,1);"></span></span><span style="font-family:var(--mono); font-size:13px; color:var(--accent); text-align:right;">38%</span></div>
-      <div style="display:grid; grid-template-columns:210px 1fr 62px; gap:20px; align-items:center;"><span style="font-size:19px; font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">travel</span><span style="height:14px; background:var(--rule); position:relative; overflow:hidden;"><span data-fill="27" style="position:absolute; left:0; top:0; bottom:0; width:27%; background:var(--accent); transition:width 1s cubic-bezier(.4,0,.2,1);"></span></span><span style="font-family:var(--mono); font-size:13px; color:var(--accent); text-align:right;">27%</span></div>
-      <div style="display:grid; grid-template-columns:210px 1fr 62px; gap:20px; align-items:center;"><span style="font-size:19px; font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">tools &amp; shop</span><span style="height:14px; background:var(--rule); position:relative; overflow:hidden;"><span data-fill="20" style="position:absolute; left:0; top:0; bottom:0; width:20%; background:var(--accent); transition:width 1s cubic-bezier(.4,0,.2,1);"></span></span><span style="font-family:var(--mono); font-size:13px; color:var(--accent); text-align:right;">20%</span></div>
-      <div style="display:grid; grid-template-columns:210px 1fr 62px; gap:20px; align-items:center;"><span style="font-size:19px; font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">outreach</span><span style="height:14px; background:var(--rule); position:relative; overflow:hidden;"><span data-fill="15" style="position:absolute; left:0; top:0; bottom:0; width:15%; background:var(--accent); transition:width 1s cubic-bezier(.4,0,.2,1);"></span></span><span style="font-family:var(--mono); font-size:13px; color:var(--accent); text-align:right;">15%</span></div>
+    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(16px,2.4vw,28px); margin-top:clamp(30px,3.4vw,42px); border-top:1px solid var(--rule); padding-top:clamp(24px,2.8vw,34px);">
+      <div><div style="font-size:clamp(28px,3vw,40px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; color:var(--accent);">20+</div><div style="margin-top:6px; font-size:15px; color:var(--muted);">outreach events</div></div>
+      <div><div style="font-size:clamp(28px,3vw,40px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; color:var(--accent);">5,000+</div><div style="margin-top:6px; font-size:15px; color:var(--muted);">people reached</div></div>
+      <div><div style="font-size:clamp(28px,3vw,40px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; color:var(--accent);">200+</div><div style="margin-top:6px; font-size:15px; color:var(--muted);">students taught</div></div>
     </div>
   </section>
 
@@ -1605,11 +1385,19 @@
     <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">sponsor tiers</h2>
     </div>
     </div>
-    <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-top:clamp(30px,3.4vw,42px);" data-stagger="zoom">
-      <div style="background:transparent; border-top:1px solid var(--rule); padding:28px 24px; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="transform:translateY(-2px); border-color:var(--accent);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$250</div><div style="margin-top:6px; font-size:17px; color:var(--muted);">Bronze</div><div style="margin-top:18px; border-top:1px solid var(--rule); padding-top:14px; font-size:14.5px; line-height:1.9; color:var(--muted);">Logo on website<br>Thank-you on social</div></div>
-      <div style="background:transparent; border-top:1px solid var(--rule); padding:28px 24px; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="transform:translateY(-2px); border-color:var(--accent);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$500</div><div style="margin-top:6px; font-size:17px; color:var(--muted);">Silver</div><div style="margin-top:18px; border-top:1px solid var(--rule); padding-top:14px; font-size:14.5px; line-height:1.9; color:var(--muted);">Everything in Bronze<br>Logo on the robot<br>Pit banner mention</div></div>
-      <div style="background:transparent; border-top:1px solid var(--rule); padding:28px 24px; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="transform:translateY(-2px); border-color:var(--accent);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$1,000</div><div style="margin-top:6px; font-size:17px; color:var(--muted);">Gold</div><div style="margin-top:18px; border-top:1px solid var(--rule); padding-top:14px; font-size:14.5px; line-height:1.9; color:var(--muted);">Everything in Silver<br>Logo on team shirts<br>Event shout-outs</div></div>
-      <div style="position:relative; background:transparent; border-top:1px solid var(--rule); padding:28px 24px; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="transform:translateY(-2px); border-color:var(--accent);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$2,500+</div><div style="margin-top:6px; font-size:17px; color:var(--signal);">Title partner</div><div style="margin-top:18px; border-top:1px solid var(--rule); padding-top:14px; font-size:14.5px; line-height:1.9; color:var(--muted);">Everything in Gold<br>Naming rights<br>Featured everywhere</div></div>
+    <p style="margin-top:clamp(20px,2.4vw,28px); max-width:62ch; font-size:15.5px; line-height:1.65; color:var(--muted);">Monthly tiers match our <a href="https://hcb.hackclub.com/donations/start/janitorsftcteam" target="_blank" rel="noopener noreferrer" data-click="" style="color:var(--accent);">Hack Club donation page</a>. Custom one-time gifts welcome — contact Mayukh Mondal, Finance Director, at <a href="mailto:mayukhm.janitorsftc@gmail.com" data-click="" style="color:var(--accent);">mayukhm.janitorsftc@gmail.com</a> or +1 (925) 315-6433.</p>
+    <div class="jl-sponsor-tiers" style="display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:14px; margin-top:clamp(30px,3.4vw,42px);" data-stagger="zoom">
+      <div style="background:transparent; border-top:1px solid var(--rule); padding:28px 24px; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="transform:translateY(-2px); border-color:var(--accent);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">Custom</div><div style="margin-top:6px; font-size:17px; color:var(--muted);">Supporter</div><div style="margin-top:18px; border-top:1px solid var(--rule); padding-top:14px; font-size:14.5px; line-height:1.9; color:var(--muted);">Logo on team hoodies<br>Named on thank-you wall<br>Our genuine gratitude</div></div>
+      <div style="background:transparent; border-top:1px solid var(--rule); padding:28px 24px; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="transform:translateY(-2px); border-color:var(--accent);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$21<span style="font-size:16px; color:var(--muted);">/mo</span></div><div style="margin-top:6px; font-size:17px; color:var(--muted);">Bronze partner</div><div style="margin-top:18px; border-top:1px solid var(--rule); padding-top:14px; font-size:14.5px; line-height:1.9; color:var(--muted);">Everything in Supporter<br>Logo on the site<br>Thank-you on social</div></div>
+      <div style="background:transparent; border-top:1px solid var(--rule); padding:28px 24px; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="transform:translateY(-2px); border-color:var(--accent);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$42<span style="font-size:16px; color:var(--muted);">/mo</span></div><div style="margin-top:6px; font-size:17px; color:var(--muted);">Silver partner</div><div style="margin-top:18px; border-top:1px solid var(--rule); padding-top:14px; font-size:14.5px; line-height:1.9; color:var(--muted);">Everything in Bronze<br>Small logo on the robot<br>Pit banner</div></div>
+      <div style="background:transparent; border-top:1px solid var(--rule); padding:28px 24px; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="transform:translateY(-2px); border-color:var(--accent);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$84<span style="font-size:16px; color:var(--muted);">/mo</span></div><div style="margin-top:6px; font-size:17px; color:var(--muted);">Gold partner</div><div style="margin-top:18px; border-top:1px solid var(--rule); padding-top:14px; font-size:14.5px; line-height:1.9; color:var(--muted);">Everything in Silver<br>Full logo on the robot<br>Dedicated page on the site</div></div>
+      <div style="position:relative; background:transparent; border-top:1px solid var(--rule); padding:28px 24px; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="transform:translateY(-2px); border-color:var(--accent);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$209<span style="font-size:16px; color:var(--muted);">/mo</span></div><div style="margin-top:6px; font-size:17px; color:var(--signal);">Title partner</div><div style="margin-top:18px; border-top:1px solid var(--rule); padding-top:14px; font-size:14.5px; line-height:1.9; color:var(--muted);">Everything in Gold<br>Included in official team name<br>Logo everywhere · featured at events</div></div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-top:clamp(40px,4.5vw,56px); border-top:1px solid var(--rule); padding-top:clamp(30px,3.4vw,42px);">
+      <div style="padding:0 4px;"><div style="font-size:17px; font-family:var(--disp); font-weight:700; letter-spacing:-.02em;">Student-led</div><div style="margin-top:10px; font-size:14.5px; line-height:1.7; color:var(--muted);">Our students lead engineering, outreach, fundraising, and competition.</div></div>
+      <div style="padding:0 4px;"><div style="font-size:17px; font-family:var(--disp); font-weight:700; letter-spacing:-.02em;">Proven</div><div style="margin-top:10px; font-size:14.5px; line-height:1.7; color:var(--muted);">Five FIRST awards, NorCal Regional Championship experience, and 5,000+ people reached.</div></div>
+      <div style="padding:0 4px;"><div style="font-size:17px; font-family:var(--disp); font-weight:700; letter-spacing:-.02em;">Community-focused</div><div style="margin-top:10px; font-size:14.5px; line-height:1.7; color:var(--muted);">Competitive robotics paired with STEM education and mentorship.</div></div>
+      <div style="padding:0 4px;"><div style="font-size:17px; font-family:var(--disp); font-weight:700; letter-spacing:-.02em;">More than a logo</div><div style="margin-top:10px; font-size:14.5px; line-height:1.7; color:var(--muted);">Meaningful partnerships through visibility, community engagement, and STEM impact.</div></div>
     </div>
   </section>
   </div>
@@ -1691,8 +1479,8 @@
     </div>
     </div>
     <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:var(--rule); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); margin-top:clamp(30px,3.4vw,42px);" data-stagger="zoom">
-      <div style="background:var(--bg); display:grid; grid-template-columns:auto minmax(0,1fr); gap:clamp(20px,2.6vw,34px); align-items:center; padding:clamp(24px,2.8vw,34px);"><image-slot id="coach-1" style="width:clamp(120px,12vw,168px); aspect-ratio:1;" shape="rect" placeholder="Photo"></image-slot><div><div style="font-size:clamp(22px,2vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Coach Daniels</div><div style="margin-top:5px; font-size:15px; color:var(--accent);">lead coach — build</div><p style="margin-top:14px; font-size:15.5px; line-height:1.6; color:var(--muted);">Runs the shop, signs off on every cut, and teaches the machining we did not know how to do in September.</p></div></div>
-      <div style="background:var(--bg); display:grid; grid-template-columns:auto minmax(0,1fr); gap:clamp(20px,2.6vw,34px); align-items:center; padding:clamp(24px,2.8vw,34px);"><image-slot id="coach-2" style="width:clamp(120px,12vw,168px); aspect-ratio:1;" shape="rect" placeholder="Photo"></image-slot><div><div style="font-size:clamp(22px,2vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Ms. Okafor</div><div style="margin-top:5px; font-size:15px; color:var(--accent);">lead coach — code &amp; outreach</div><p style="margin-top:14px; font-size:15.5px; line-height:1.6; color:var(--muted);">Reviews our code, keeps the meeting calendar, and connects us with the schools and sponsors we work with.</p></div></div>
+      <div style="background:var(--bg); display:grid; grid-template-columns:auto minmax(0,1fr); gap:clamp(20px,2.6vw,34px); align-items:center; padding:clamp(24px,2.8vw,34px);"><image-slot id="coach-1" style="width:clamp(120px,12vw,168px); aspect-ratio:1;" shape="rect" placeholder="Photo"></image-slot><div><div style="font-size:clamp(22px,2vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Anish Mandal</div><div style="margin-top:5px; font-size:15px; color:var(--accent);">lead coach</div><p style="margin-top:14px; font-size:15.5px; line-height:1.6; color:var(--muted);">Bio coming soon.</p></div></div>
+      <div style="background:var(--bg); display:grid; grid-template-columns:auto minmax(0,1fr); gap:clamp(20px,2.6vw,34px); align-items:center; padding:clamp(24px,2.8vw,34px);"><image-slot id="coach-2" style="width:clamp(120px,12vw,168px); aspect-ratio:1;" shape="rect" placeholder="Photo"></image-slot><div><div style="font-size:clamp(22px,2vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Neeraj Juneja</div><div style="margin-top:5px; font-size:15px; color:var(--accent);">lead coach</div><p style="margin-top:14px; font-size:15.5px; line-height:1.6; color:var(--muted);">I am a builder and a passionate DIYer. Over the years, I have worked extensively with CNC, 3D printing, woodworking, and design, and I love using my hands (and brains) to design, create, fix, and improve things. I enjoy mentoring and coaching kids' robotics teams, where I can share my expertise and passion with aspiring young minds. It's really fulfilling to guide them through the process of designing and building robots. You can find some of my projects here: <a href="https://www.neerajjuneja.com/" target="_blank" rel="noopener noreferrer" style="color:var(--accent);" style-hover="opacity:.8;">neerajjuneja.com</a></p></div></div>
     </div>
   </section>
   </div>
@@ -1701,139 +1489,13 @@
   <sc-if value="{{ isPortfolio }}" hint-placeholder-val="{{ false }}">
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
-  <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr); align-items:end; gap:40px; border-bottom:1px solid var(--rule); padding:clamp(52px,6vw,88px) var(--pad);">
-    <div><div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3 L16 12"></path><path d="M9 12 L23 12"></path><path d="M10.5 12 Q9.4 21 12 29 M13.6 12 Q13.2 21 14.2 29 M18.4 12 Q18.8 21 17.8 29 M21.5 12 Q22.6 21 20 29"></path></svg><span style="white-space:nowrap;">engineering notebook</span></div><h1 data-scramble="" style="font-size:clamp(44px,7vw,104px); font-family:var(--disp); font-weight:700; line-height:.86; letter-spacing:-.042em;">engineering<br>portfolio</h1></div>
-    <p style="max-width:44ch; font-size:17px; line-height:1.6; color:var(--muted);">How we got from a whiteboard sketch to a robot that mostly works, including the parts we got wrong twice. This is the short version of our notebook.</p>
+  <header style="position:relative; z-index:1; border-bottom:1px solid var(--rule); padding:clamp(52px,6vw,88px) var(--pad);">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3 L16 12"></path><path d="M9 12 L23 12"></path><path d="M10.5 12 Q9.4 21 12 29 M13.6 12 Q13.2 21 14.2 29 M18.4 12 Q18.8 21 17.8 29 M21.5 12 Q22.6 21 20 29"></path></svg><span style="white-space:nowrap;">engineering notebook</span></div>
+    <h1 data-scramble="" style="font-size:clamp(44px,7vw,104px); font-family:var(--disp); font-weight:700; line-height:.86; letter-spacing:-.042em;">engineering<br>portfolio</h1>
   </header>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
-    <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,auto) minmax(0,1fr); gap:clamp(16px,3vw,40px);">
-    <div style="font-family:var(--mono); text-transform:uppercase; padding-right:clamp(10px,2vw,24px);"><div style="position:relative; width:44px; height:48px; display:flex; align-items:center; justify-content:center; flex:none;"><svg sc-camel-view-box="0 0 120 120" style="position:absolute; inset:0; width:100%; height:100%; overflow:visible;" fill="none"><g stroke="var(--rule)" stroke-linejoin="round"><path d="M60 6 L106 32 L106 88 L60 114 L14 88 L14 32 Z" stroke-width="6"></path><path d="M60 18 L96 38 L96 82 L60 102 L24 82 L24 38 Z" stroke-width="2" opacity="0.5"></path><circle cx="60" cy="6" r="5" fill="var(--accent)" stroke="none"></circle><circle cx="106" cy="32" r="5" fill="var(--rule)" stroke="none"></circle><circle cx="14" cy="32" r="5" fill="var(--rule)" stroke="none"></circle></g></svg><span style="position:relative; font-size:13px; letter-spacing:.1em; color:var(--text);">Ø1</span></div><div style="font-size:11px; letter-spacing:.2em; color:var(--muted); margin-top:9px; white-space:nowrap;">Iteration</div></div>
-    <div style="border-left:1px solid var(--rule); padding-left:clamp(18px,3vw,40px); min-width:0;">
-    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">what we changed</h2>
-    </div>
-    </div>
-    <div style="display:flex; flex-direction:column; border-top:1px solid var(--rule); margin-top:clamp(30px,3.4vw,42px);" data-stagger="left">
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) auto; gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px;">
-        <span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">drivetrain</span>
-        <div style="display:flex; flex-direction:column; gap:12px;">
-          <p style="font-size:15.5px; line-height:1.6; color:var(--muted);"><span style="color:var(--signal);">Problem —</span> Started with a six-wheel tank drive. It was simple but we lost every pushing match in practice and could not line up on the scoring position.</p>
-          <p style="font-size:15.5px; line-height:1.6; color:var(--text);"><span style="color:var(--accent);">Change —</span> Switched to four-motor mecanum. We gave up some pushing power for the ability to strafe into place.</p>
-        </div>
-        <span style="font-family:var(--mono); font-size:14px; color:var(--muted); white-space:nowrap;">v1.0</span>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) auto; gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px;">
-        <span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">intake</span>
-        <div style="display:flex; flex-direction:column; gap:12px;">
-          <p style="font-size:15.5px; line-height:1.6; color:var(--muted);"><span style="color:var(--signal);">Problem —</span> First intake used rigid 3D-printed rollers. They either missed the game piece or jammed it against the frame.</p>
-          <p style="font-size:15.5px; line-height:1.6; color:var(--text);"><span style="color:var(--accent);">Change —</span> Moved to compliant wheels at 45A durometer. They deform around the piece, so approach angle stopped mattering.</p>
-        </div>
-        <span style="font-family:var(--mono); font-size:14px; color:var(--muted); white-space:nowrap;">v2.0</span>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) auto; gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px;">
-        <span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">lift</span>
-        <div style="display:flex; flex-direction:column; gap:12px;">
-          <p style="font-size:15.5px; line-height:1.6; color:var(--muted);"><span style="color:var(--signal);">Problem —</span> A single-stage slide could not reach the top scoring level without making the robot too tall to start.</p>
-          <p style="font-size:15.5px; line-height:1.6; color:var(--text);"><span style="color:var(--accent);">Change —</span> Went to a two-stage cascade slide. Same start height, twice the reach, about 80 g heavier.</p>
-        </div>
-        <span style="font-family:var(--mono); font-size:14px; color:var(--muted); white-space:nowrap;">v3.0</span>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) auto; gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px;">
-        <span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">auto</span>
-        <div style="display:flex; flex-direction:column; gap:12px;">
-          <p style="font-size:15.5px; line-height:1.6; color:var(--muted);"><span style="color:var(--signal);">Problem —</span> Dead-reckoning autos drifted a few centimetres per run and missed by the fourth cycle.</p>
-          <p style="font-size:15.5px; line-height:1.6; color:var(--text);"><span style="color:var(--accent);">Change —</span> Added AprilTag localisation to correct position at the start of each path. Reliability went from about 60% to 94%.</p>
-        </div>
-        <span style="font-family:var(--mono); font-size:14px; color:var(--muted); white-space:nowrap;">v4.0</span>
-      </div>
-    </div>
-  </section>
-
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
-    <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,auto) minmax(0,1fr); gap:clamp(16px,3vw,40px);">
-    <div style="font-family:var(--mono); text-transform:uppercase; padding-right:clamp(10px,2vw,24px);"><div style="position:relative; width:44px; height:48px; display:flex; align-items:center; justify-content:center; flex:none;"><svg sc-camel-view-box="0 0 120 120" style="position:absolute; inset:0; width:100%; height:100%; overflow:visible;" fill="none"><g stroke="var(--rule)" stroke-linejoin="round"><path d="M60 6 L106 32 L106 88 L60 114 L14 88 L14 32 Z" stroke-width="6"></path><path d="M60 18 L96 38 L96 82 L60 102 L24 82 L24 38 Z" stroke-width="2" opacity="0.5"></path><circle cx="60" cy="6" r="5" fill="var(--accent)" stroke="none"></circle><circle cx="106" cy="32" r="5" fill="var(--rule)" stroke="none"></circle><circle cx="14" cy="32" r="5" fill="var(--rule)" stroke="none"></circle></g></svg><span style="position:relative; font-size:13px; letter-spacing:.1em; color:var(--text);">Ø2</span></div><div style="font-size:11px; letter-spacing:.2em; color:var(--muted); margin-top:9px; white-space:nowrap;">Inspection</div></div>
-    <div style="border-left:1px solid var(--rule); padding-left:clamp(18px,3vw,40px); min-width:0;">
-    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">inspection</h2>
-    </div>
-    </div>
-    <div style="display:flex; flex-direction:column; border-top:1px solid var(--rule); margin-top:clamp(30px,3.4vw,42px);" data-stagger="left">
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) auto; gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);">
-        <span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">eye protection</span>
-        <p style="font-size:15.5px; line-height:1.6; color:var(--muted);">Safety glasses are worn by everyone in the shop, no exceptions, including visitors.</p>
-        <span></span>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) auto; gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);">
-        <span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">power tools</span>
-        <p style="font-size:15.5px; line-height:1.6; color:var(--muted);">Only members who have been checked out on a tool may use it, and never alone in the shop.</p>
-        <span></span>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) auto; gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);">
-        <span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">battery handling</span>
-        <p style="font-size:15.5px; line-height:1.6; color:var(--muted);">Batteries are charged on a fireproof mat, never left overnight, and inspected before every match.</p>
-        <span></span>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) auto; gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);">
-        <span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">pit conduct</span>
-        <p style="font-size:15.5px; line-height:1.6; color:var(--muted);">Robot is powered down and the battery is disconnected before anyone reaches inside it.</p>
-        <span></span>
-      </div>
-    </div>
-  </section>
-
   <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
-    <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,auto) minmax(0,1fr); gap:clamp(16px,3vw,40px);">
-    <div style="font-family:var(--mono); text-transform:uppercase; padding-right:clamp(10px,2vw,24px);"><div style="position:relative; width:44px; height:48px; display:flex; align-items:center; justify-content:center; flex:none;"><svg sc-camel-view-box="0 0 120 120" style="position:absolute; inset:0; width:100%; height:100%; overflow:visible;" fill="none"><g stroke="var(--rule)" stroke-linejoin="round"><path d="M60 6 L106 32 L106 88 L60 114 L14 88 L14 32 Z" stroke-width="6"></path><path d="M60 18 L96 38 L96 82 L60 102 L24 82 L24 38 Z" stroke-width="2" opacity="0.5"></path><circle cx="60" cy="6" r="5" fill="var(--accent)" stroke="none"></circle><circle cx="106" cy="32" r="5" fill="var(--rule)" stroke="none"></circle><circle cx="14" cy="32" r="5" fill="var(--rule)" stroke="none"></circle></g></svg><span style="position:relative; font-size:13px; letter-spacing:.1em; color:var(--text);">Ø3</span></div><div style="font-size:11px; letter-spacing:.2em; color:var(--muted); margin-top:9px; white-space:nowrap;">Budget</div></div>
-    <div style="border-left:1px solid var(--rule); padding-left:clamp(18px,3vw,40px); min-width:0;">
-    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">what it cost</h2>
-    </div>
-    </div>
-    <div style="margin-top:clamp(30px,3.4vw,42px); border-top:1px solid var(--rule);">
-      <div style="display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr) 110px; gap:20px; align-items:baseline; padding:18px 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:16px;">
-        <span style="font-size:18px;">Control Hub &amp; Expansion Hub</span>
-        <span style="font-size:15px; color:var(--muted);">Electronics</span>
-        <span style="font-family:var(--mono); font-size:17px; text-align:right; font-variant-numeric:tabular-nums;">$570</span>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr) 110px; gap:20px; align-items:baseline; padding:18px 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:16px;">
-        <span style="font-size:18px;">Drive motors and encoders (×4)</span>
-        <span style="font-size:15px; color:var(--muted);">Drivetrain</span>
-        <span style="font-family:var(--mono); font-size:17px; text-align:right; font-variant-numeric:tabular-nums;">$260</span>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr) 110px; gap:20px; align-items:baseline; padding:18px 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:16px;">
-        <span style="font-size:18px;">Mecanum wheel set</span>
-        <span style="font-size:15px; color:var(--muted);">Drivetrain</span>
-        <span style="font-family:var(--mono); font-size:17px; text-align:right; font-variant-numeric:tabular-nums;">$180</span>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr) 110px; gap:20px; align-items:baseline; padding:18px 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:16px;">
-        <span style="font-size:18px;">Extrusion, plate and hardware</span>
-        <span style="font-size:15px; color:var(--muted);">Structure</span>
-        <span style="font-family:var(--mono); font-size:17px; text-align:right; font-variant-numeric:tabular-nums;">$310</span>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr) 110px; gap:20px; align-items:baseline; padding:18px 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:16px;">
-        <span style="font-size:18px;">Linear slide kit</span>
-        <span style="font-size:15px; color:var(--muted);">Lift</span>
-        <span style="font-family:var(--mono); font-size:17px; text-align:right; font-variant-numeric:tabular-nums;">$140</span>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr) 110px; gap:20px; align-items:baseline; padding:18px 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:16px;">
-        <span style="font-size:18px;">Servos and intake wheels</span>
-        <span style="font-size:15px; color:var(--muted);">Intake</span>
-        <span style="font-family:var(--mono); font-size:17px; text-align:right; font-variant-numeric:tabular-nums;">$95</span>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr) 110px; gap:20px; align-items:baseline; padding:18px 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:16px;">
-        <span style="font-size:18px;">Batteries and charger</span>
-        <span style="font-size:15px; color:var(--muted);">Electronics</span>
-        <span style="font-family:var(--mono); font-size:17px; text-align:right; font-variant-numeric:tabular-nums;">$210</span>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr) 110px; gap:20px; align-items:baseline; padding:18px 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:16px;">
-        <span style="font-size:18px;">Field elements for practice</span>
-        <span style="font-size:15px; color:var(--muted);">Practice</span>
-        <span style="font-family:var(--mono); font-size:17px; text-align:right; font-variant-numeric:tabular-nums;">$420</span>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr) 110px; gap:20px; align-items:baseline; padding:24px 0;">
-        <span style="font-size:clamp(22px,2.4vw,30px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em;">Total so far</span>
-        <span style="font-size:15px; color:var(--muted);">Funded by sponsors</span>
-        <span style="font-family:var(--disp); font-weight:700; font-size:clamp(22px,2.4vw,30px); text-align:right; color:var(--accent); font-variant-numeric:tabular-nums;">$2,185</span>
-      </div>
-    </div>
+    <p style="max-width:62ch; font-size:17px; line-height:1.65; color:var(--muted);">Every week we run the same pipeline: capture what we built in photos and CAD, write a dated entry in our shared notebook with the problem, the options we considered, and what we actually cut or coded, then tag each decision to a subsystem so judges can trace it. Before any competition we compile the season into a single PDF — executive summary up front, iteration log in the middle, outreach and budget in the back — and have two teammates who weren't on that subsystem read it cold to catch gaps. If they can't follow the story, we rewrite until they can.</p>
   </section>
   </div>
   </sc-if>
@@ -2002,7 +1664,6 @@
         <div style="display:flex; flex-direction:column; gap:11px; margin-top:16px; font-size:14.5px; color:var(--muted);">
           <a sc-camel-on-click="{{ navTeam }}" style="background-image:linear-gradient(var(--accent),var(--accent)); background-repeat:no-repeat; background-position:0 100%; background-size:0% 1px; transition:color .2s ease, background-size .3s cubic-bezier(.2,.8,.3,1);" style-hover="color:var(--accent); background-size:100% 1px;">Meet the team</a>
           <a sc-camel-on-click="{{ navSponsors }}" style="background-image:linear-gradient(var(--accent),var(--accent)); background-repeat:no-repeat; background-position:0 100%; background-size:0% 1px; transition:color .2s ease, background-size .3s cubic-bezier(.2,.8,.3,1);" style-hover="color:var(--accent); background-size:100% 1px;">Sponsors</a>
-          <a sc-camel-on-click="{{ navJoin }}" style="background-image:linear-gradient(var(--accent),var(--accent)); background-repeat:no-repeat; background-position:0 100%; background-size:0% 1px; transition:color .2s ease, background-size .3s cubic-bezier(.2,.8,.3,1);" style-hover="color:var(--accent); background-size:100% 1px;">Join us</a>
         </div>
       </div>
       <div>
@@ -2013,7 +1674,6 @@
           <a href="https://www.instagram.com/janitorsftcteam" target="_blank" rel="noopener noreferrer" style="color:var(--muted);" style-hover="color:var(--accent);">Instagram</a>
           <a href="https://www.tiktok.com/@janitorsftcteam" target="_blank" rel="noopener noreferrer" style="color:var(--muted);" style-hover="color:var(--accent);">TikTok</a>
           <div>Dublin, CA</div>
-          <div style="display:inline-flex; align-items:center; gap:10px; align-self:flex-start; margin-top:4px; border:1px solid var(--rule); background:var(--bg); padding:9px 13px;"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:20px; height:20px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 12 L24.5 12 L21.8 28.5 L10.2 28.5 Z"></path><path d="M10 12 Q16 3.5 22 12"></path><path d="M9.2 18 L22.8 18"></path></svg><span style="font-family:var(--mono); font-size:12px; letter-spacing:.1em; white-space:nowrap;">TUE &amp; THU · 4—7 PM</span></div>
         </div>
       </div>
     </div>
@@ -2025,8 +1685,6 @@
   </footer>
 
   <div aria-hidden="true" style="position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.75; background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px); background-size:64px 64px;"></div>
-  <div style="position:fixed; left:0; right:0; top:0; height:2px; z-index:70; pointer-events:none; background:rgba(255,255,255,.06);"><div id="scroll-bar" style="height:100%; width:0%; background:var(--accent);"></div></div>
-  <a data-noprint="" role="button" sc-camel-tab-index="0" aria-label="Back to top" sc-camel-on-click="{{ scrollTopFn }}" style="position:fixed; right:16px; bottom:18px; z-index:71; display:flex; align-items:center; gap:9px; background:var(--key); border:1px solid var(--rule); box-shadow:0 3px 0 var(--edge); padding:9px 13px; font-size:15px; color:var(--muted); transition:transform .1s ease, box-shadow .1s ease, color .2s;" style-hover="color:var(--accent);" style-active="transform:translateY(3px); box-shadow:0 0 0 var(--edge);"><span id="scroll-percent" style="color:var(--accent);">000%</span><span>↑</span></a>
 
 </div>
 </x-dc>
@@ -2814,15 +2472,16 @@ class Component extends DCLogic {
       fontSize: "16px", whiteSpace: "nowrap", transition: "border-color .18s ease, background .2s ease, color .2s ease",
     });
 
-    const amount = this.state.amount === undefined ? 500 : this.state.amount;
+    const amount = this.state.amount === undefined ? 21 : this.state.amount;
     const money = (n) => "$" + Math.round(n).toLocaleString();
     const bar = (frac) => ({ display: "block", height: "100%", width: (frac * 100) + "%", background: accent, transition: "width .3s ease" });
+    const annual = amount * 12;
     const tiers = [
-      { min: 2500, name: "title partner", perks: "naming rights · logo everywhere · featured at every event" },
-      { min: 1000, name: "gold partner", perks: "logo on team shirts · robot · site · event shout-outs" },
-      { min: 500, name: "silver partner", perks: "logo on the robot · pit banner · site" },
-      { min: 250, name: "bronze partner", perks: "logo on the site · thank-you on social" },
-      { min: 0, name: "supporter", perks: "named on our thank-you wall · our genuine gratitude" },
+      { min: 209, name: "title partner", perks: "included in official team name · logo everywhere · featured at every event" },
+      { min: 84, name: "gold partner", perks: "full logo on the robot · dedicated page on the site" },
+      { min: 42, name: "silver partner", perks: "small logo on the robot · pit banner" },
+      { min: 21, name: "bronze partner", perks: "logo on the site · thank-you on social" },
+      { min: 0, name: "supporter", perks: "logo on team hoodies · named on our thank-you wall · our genuine gratitude" },
     ];
     const tier = tiers.filter((x) => amount >= x.min)[0];
 
@@ -2901,11 +2560,13 @@ class Component extends DCLogic {
       speed: speed.toFixed(2),
       mphLabel: (speed * 2.23694).toFixed(1) + " mph",
       fieldLabel: (3.66 / Math.max(speed, 0.01)).toFixed(1) + " s across the field",
-      amount: amount, amountLabel: "$" + amount.toLocaleString(),
+      amount: amount, amountLabel: "$" + amount.toLocaleString() + "/mo",
       setAmount: (e) => this.setState({ amount: parseFloat(e.target.value) }),
-      amtParts: money(amount * 0.38), amtTravel: money(amount * 0.27),
-      amtTools: money(amount * 0.2), amtOut: money(amount * 0.15),
-      barParts: bar(0.38), barTravel: bar(0.27), barTools: bar(0.2), barOut: bar(0.15),
+      amtRobot: money(annual * 0.22), amtFab: money(annual * 0.15),
+      amtComp: money(annual * 0.15), amtTravel: money(annual * 0.18),
+      amtOut: money(annual * 0.18), amtOps: money(annual * 0.12),
+      barRobot: bar(0.22), barFab: bar(0.15), barComp: bar(0.15),
+      barTravel: bar(0.18), barOut: bar(0.18), barOps: bar(0.12),
       tierName: tier.name, tierPerks: tier.perks,
       menuOpen: !!this.state.menuOpen,
       toggleMenu: () => this.setState({ menuOpen: !this.state.menuOpen }),
