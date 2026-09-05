@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html><head>
+<html>
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="/assets/7b48d978-7fa7-4309-ae46-88c96b98ca7b.js"></script>
@@ -7,7 +8,6 @@
 <script src="/assets/3e723ad3-0496-4de4-be5a-80e3f216576c.js"></script>
 </head>
 <body>
-
 
 <x-dc>
 <helmet>
@@ -456,7 +456,7 @@
       border-radius:0;
       padding:14px 16px;
       font-family:var(--disp);
-      font-size:16px;
+      font-size:16.5px;
       line-height:1.4;
       outline:none;
       transition:border-color .18s ease, box-shadow .18s ease;
@@ -495,7 +495,7 @@
       letter-spacing:.04em;
       text-transform:none;
       font-family:var(--disp);
-      font-size:17px;
+      font-size:16.5px;
       font-weight:600;
     }
     .jl-apply .jl-interests{
@@ -675,7 +675,15 @@
       width:30px;
       height:30px;
     }
-    .jl-hero-meta-line{font-size:14px; color:var(--muted);}
+    .jl-hero-meta-line{font-size:15px; color:var(--muted);}
+    @media (max-width:1100px){
+      .jl-cad-row{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+      }
+      .jl-cad-row > div:first-child{
+        grid-column:1 / -1;
+      }
+    }
     @media (max-width:900px){
       .jl-hero-bottom{
         grid-template-columns:1fr !important;
@@ -690,8 +698,41 @@
       .jl-hero-cell{
         padding-right:0 !important;
       }
+      .jl-swerve-row{
+        grid-template-columns:1fr !important;
+      }
+      .jl-sponsor-wall{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+      }
+      .jl-log-row,
+      .jl-log-empty{
+        grid-template-columns:minmax(0,1fr) auto !important;
+        row-gap:10px !important;
+      }
+      .jl-log-head{
+        display:none !important;
+      }
+      .jl-sponsor-cta{
+        grid-template-columns:1fr !important;
+        row-gap:18px !important;
+      }
+      .jl-why-top,
+      .jl-why-close{
+        grid-template-columns:1fr !important;
+        row-gap:18px !important;
+      }
+      .jl-spec-row{
+        grid-template-columns:minmax(0,1fr) repeat(3,minmax(0,auto)) !important;
+        gap:10px !important;
+      }
+      .jl-timeline{
+        row-gap:26px !important;
+      }
     }
     @media (max-width:720px){
+      .jl-cad-row{
+        grid-template-columns:1fr !important;
+      }
       .jl-hero-track{
         height:auto !important;
       }
@@ -733,9 +774,6 @@
       }
     }
     @media (max-width:980px){
-      .jl-team-members > div:last-child{
-        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-      }
       .jl-sponsor-calc{
         grid-template-columns:1fr !important;
       }
@@ -744,8 +782,12 @@
       }
     }
     @media (max-width:720px){
-      .jl-team-captains > div:last-child,
-      .jl-team-members > div:last-child{
+      .jl-team-members > div{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+      }
+    }
+    @media (max-width:520px){
+      .jl-team-members > div{
         grid-template-columns:1fr !important;
       }
     }
@@ -780,7 +822,7 @@
       min-width:0;
       background:var(--bg);
       border:1px solid var(--rule);
-      padding:clamp(22px,2.6vw,30px);
+      padding:clamp(20px,2.2vw,28px);
     }
     @media (max-width:640px){
       .jl-social-list a{
@@ -946,7 +988,7 @@
   </sc-if>
 
   <div style="position:sticky; top:0; z-index:60;">
-  <div style="background:var(--accent); color:var(--ink); border-bottom:1px solid var(--rule); padding:9px var(--pad); display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;">
+  <div style="background:var(--accent); color:var(--ink); border-bottom:1px solid var(--rule); padding:9px var(--pad); display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase;">
     <span style="font-weight:700;">Welcome to our launch</span>
     <span style="opacity:.55;">·</span>
     <span>rookie season 2026/27</span>
@@ -1035,69 +1077,69 @@
         </div>
 
         <div class="jl-hero-cell jl-hero-divide" style="display:flex; flex-direction:column; justify-content:flex-end; gap:8px; border-left:1px solid var(--rule); padding:0 clamp(20px,2.6vw,36px); min-width:0;">
-          <a sc-camel-on-click="{{ navRobot }}" data-magnet="" style="display:flex; align-items:center; justify-content:space-between; gap:16px; background:var(--accent); color:var(--ink); padding:15px 18px; font-size:15.5px; font-weight:700; white-space:nowrap; will-change:transform;">open robot file<span aria-hidden="true">→</span></a>
-          <a sc-camel-on-click="{{ navOutreach }}" data-magnet="" style="display:flex; align-items:center; justify-content:space-between; gap:16px; background:var(--key); color:var(--text); border:1px solid var(--rule); padding:15px 18px; font-size:15.5px; white-space:nowrap; will-change:transform;" style-hover="background:var(--keytop); color:var(--accent);">our outreach<span aria-hidden="true">→</span></a>
+          <a sc-camel-on-click="{{ navRobot }}" data-magnet="" style="display:flex; align-items:center; justify-content:space-between; gap:16px; background:var(--accent); color:var(--ink); padding:16px 26px; font-size:15px; font-weight:700; white-space:nowrap; will-change:transform;">open robot file<span aria-hidden="true">→</span></a>
+          <a sc-camel-on-click="{{ navOutreach }}" data-magnet="" style="display:flex; align-items:center; justify-content:space-between; gap:16px; background:var(--key); color:var(--text); border:1px solid var(--rule); padding:16px 26px; font-size:15px; white-space:nowrap; will-change:transform;" style-hover="background:var(--keytop); color:var(--accent);">our outreach<span aria-hidden="true">→</span></a>
         </div>
 
         <div class="jl-hero-socials jl-hero-divide" data-magnet="" style="display:flex; flex-direction:column; justify-content:flex-end; border-left:1px solid var(--rule); padding-left:clamp(20px,2.6vw,36px); min-width:0;">
           <div class="jl-find-us">find us</div>
-        <a href="https://discord.gg/HDxthJTbzb" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; gap:11px; padding:10px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); transition:color .18s ease, padding-left .18s ease;" style-hover="color:var(--accent); padding-left:8px;"><svg sc-camel-view-box="0 0 24 24" aria-hidden="true" fill="currentColor" style="width:14px; height:14px; flex:none; display:block;"><path d="M20.317 4.37a19.8 19.8 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.3 18.3 0 0 0-5.487 0 12.6 12.6 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.7 19.7 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.08.08 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14 14 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.8 19.8 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path></svg><span>discord</span><span aria-hidden="true" style="margin-left:auto; opacity:.45;">↗</span></a>
-        <a href="https://www.instagram.com/janitorsftcteam" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; gap:11px; padding:10px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); transition:color .18s ease, padding-left .18s ease;" style-hover="color:var(--accent); padding-left:8px;"><svg sc-camel-view-box="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" style="width:14px; height:14px; flex:none; display:block;"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle></svg><span>instagram</span><span aria-hidden="true" style="margin-left:auto; opacity:.45;">↗</span></a>
-        <a href="https://www.tiktok.com/@janitorsftcteam" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; gap:11px; padding:10px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); transition:color .18s ease, padding-left .18s ease;" style-hover="color:var(--accent); padding-left:8px;"><svg sc-camel-view-box="0 0 24 24" aria-hidden="true" fill="currentColor" style="width:14px; height:14px; flex:none; display:block;"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.57 6.34 6.34 0 0 0 13.86 20v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.14z"></path></svg><span>tiktok</span><span aria-hidden="true" style="margin-left:auto; opacity:.45;">↗</span></a>
+        <a href="https://discord.gg/HDxthJTbzb" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; gap:11px; padding:10px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); transition:color .18s ease, padding-left .18s ease;" style-hover="color:var(--accent); padding-left:8px;"><svg sc-camel-view-box="0 0 24 24" aria-hidden="true" fill="currentColor" style="width:14px; height:14px; flex:none; display:block;"><path d="M20.317 4.37a19.8 19.8 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.3 18.3 0 0 0-5.487 0 12.6 12.6 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.7 19.7 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.08.08 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14 14 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.8 19.8 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path></svg><span>discord</span><span aria-hidden="true" style="margin-left:auto; opacity:.45;">↗</span></a>
+        <a href="https://www.instagram.com/janitorsftcteam" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; gap:11px; padding:10px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); transition:color .18s ease, padding-left .18s ease;" style-hover="color:var(--accent); padding-left:8px;"><svg sc-camel-view-box="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" style="width:14px; height:14px; flex:none; display:block;"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle></svg><span>instagram</span><span aria-hidden="true" style="margin-left:auto; opacity:.45;">↗</span></a>
+        <a href="https://www.tiktok.com/@janitorsftcteam" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; gap:11px; padding:10px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); transition:color .18s ease, padding-left .18s ease;" style-hover="color:var(--accent); padding-left:8px;"><svg sc-camel-view-box="0 0 24 24" aria-hidden="true" fill="currentColor" style="width:14px; height:14px; flex:none; display:block;"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.57 6.34 6.34 0 0 0 13.86 20v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.14z"></path></svg><span>tiktok</span><span aria-hidden="true" style="margin-left:auto; opacity:.45;">↗</span></a>
         </div>
 
       </div>
   </header>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
+  <section style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad) clamp(64px,6.6vw,96px);">
     <div style="display:flex; flex-direction:column; border-top:1px solid var(--rule);">
       <a sc-camel-on-click="{{ navRobot }}" style="position:relative; overflow:hidden; display:grid; grid-template-columns:1fr auto; gap:20px; align-items:center; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .35s cubic-bezier(.2,.8,.3,1), color .28s ease, background-color .28s ease;" style-hover="padding-left:26px; color:var(--accent); background-color:var(--panel);" data-click="">
         <span style="font-size:clamp(28px,5vw,68px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:.95;">the robot</span>
-        <span style="font-size:17px; color:var(--muted); white-space:nowrap;">Swerve build →</span>
+        <span style="font-size:16.5px; color:var(--muted); white-space:nowrap;">Swerve build →</span>
       </a>
       <a sc-camel-on-click="{{ navSeason }}" style="position:relative; overflow:hidden; display:grid; grid-template-columns:1fr auto; gap:20px; align-items:center; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .35s cubic-bezier(.2,.8,.3,1), color .28s ease, background-color .28s ease;" style-hover="padding-left:26px; color:var(--accent); background-color:var(--panel);" data-click="">
         <span style="font-size:clamp(28px,5vw,68px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:.95;">the season</span>
-        <span style="font-size:17px; color:var(--muted); white-space:nowrap;">2026/27 →</span>
+        <span style="font-size:16.5px; color:var(--muted); white-space:nowrap;">2026/27 →</span>
       </a>
       <a sc-camel-on-click="{{ navOutreach }}" style="position:relative; overflow:hidden; display:grid; grid-template-columns:1fr auto; gap:20px; align-items:center; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .35s cubic-bezier(.2,.8,.3,1), color .28s ease, background-color .28s ease;" style-hover="padding-left:26px; color:var(--accent); background-color:var(--panel);" data-click="">
         <span style="font-size:clamp(28px,5vw,68px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:.95;">outreach</span>
-        <span style="font-size:17px; color:var(--muted); white-space:nowrap;">In the district →</span>
+        <span style="font-size:16.5px; color:var(--muted); white-space:nowrap;">In the district →</span>
       </a>
       <a sc-camel-on-click="{{ navTeam }}" style="position:relative; overflow:hidden; display:grid; grid-template-columns:1fr auto; gap:20px; align-items:center; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .35s cubic-bezier(.2,.8,.3,1), color .28s ease, background-color .28s ease;" style-hover="padding-left:26px; color:var(--accent); background-color:var(--panel);" data-click="">
         <span style="font-size:clamp(28px,5vw,68px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:.95;">the team</span>
-        <span style="font-size:17px; color:var(--muted); white-space:nowrap;">Six students →</span>
+        <span style="font-size:16.5px; color:var(--muted); white-space:nowrap;">Six students →</span>
       </a>
       <a sc-camel-on-click="{{ navSponsors }}" style="position:relative; overflow:hidden; display:grid; grid-template-columns:1fr auto; gap:20px; align-items:center; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .35s cubic-bezier(.2,.8,.3,1), color .28s ease, background-color .28s ease;" style-hover="padding-left:26px; color:var(--accent); background-color:var(--panel);" data-click="">
         <span style="font-size:clamp(28px,5vw,68px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:.95;">sponsors</span>
-        <span style="font-size:17px; color:var(--muted); white-space:nowrap;">Partner with us →</span>
+        <span style="font-size:16.5px; color:var(--muted); white-space:nowrap;">Partner with us →</span>
       </a>
     </div>
   </section>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-top:1px solid var(--rule);">
+  <section style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad); border-top:1px solid var(--rule);">
     <div style="flex:1 1 100%; width:100%; display:grid; grid-template-columns:minmax(0,1fr);">
       
       <div style="min-width:0;">
-        <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">goals</h2>
-        <p style="margin-top:16px; max-width:46ch; font-size:16.5px; line-height:1.6; color:var(--muted);">What we’re aiming at this rookie year — not a wish list, a work order.</p>
+        <h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">goals</h2>
+        <p style="margin-top:16px; max-width:52ch; font-size:16.5px; line-height:1.6; color:var(--muted);">What we’re aiming at this rookie year — not a wish list, a work order.</p>
       </div>
     </div>
     <div style="display:flex; flex-direction:column; border-top:1px solid var(--rule); margin-top:clamp(30px,3.4vw,42px);" data-stagger="left">
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr); gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);">
+      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr); gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);">
         <div style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">compete</div>
-        <p style="font-size:15.5px; line-height:1.6; color:var(--muted);">Show up ready. Put a reliable robot on the field and keep cycling all match.</p>
+        <p style="font-size:15px; line-height:1.6; color:var(--muted);">Show up ready. Put a reliable robot on the field and keep cycling all match.</p>
       </div>
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr); gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);">
+      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr); gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);">
         <div style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">build</div>
-        <p style="font-size:15.5px; line-height:1.6; color:var(--muted);">Design, cut, wire, and code it ourselves — then fix what breaks until it doesn’t.</p>
+        <p style="font-size:15px; line-height:1.6; color:var(--muted);">Design, cut, wire, and code it ourselves — then fix what breaks until it doesn’t.</p>
       </div>
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr); gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);">
+      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr); gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);">
         <div style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">grow</div>
-        <p style="font-size:15.5px; line-height:1.6; color:var(--muted);">Bring in more builders and mentors, and leave the next season better than we found it.</p>
+        <p style="font-size:15px; line-height:1.6; color:var(--muted);">Bring in more builders and mentors, and leave the next season better than we found it.</p>
       </div>
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr); gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);">
+      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr); gap:clamp(14px,3vw,44px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);">
         <div style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">outreach</div>
-        <p style="font-size:15.5px; line-height:1.6; color:var(--muted);">We bring the robot around the Bay Area to showcase robotics to kids — especially those with less access to STEM — and spread hands-on learning wherever we can. Planned event with FTC team Olympians.</p>
+        <p style="font-size:15px; line-height:1.6; color:var(--muted);">We’re taking the robot around the Bay Area to show robotics to kids — especially those with less access to STEM — and spread hands-on learning wherever we can. Planned event with FTC team Olympians.</p>
       </div>
     </div>
   </section>
@@ -1108,72 +1150,100 @@
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
   <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,1fr); border-bottom:1px solid var(--rule);">
-    <div style="padding:clamp(52px,6vw,88px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
-    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12 L25 12 L25 26 L7 26 Z"></path><path d="M16 12 L16 7"></path><circle cx="16" cy="5.5" r="1.8"></circle><path d="M12 18 L12 20 M20 18 L20 20"></path></svg><span style="white-space:nowrap;">build file · work in progress</span></div>
-    <h1 data-scramble="" style="font-size:clamp(48px,8vw,124px); font-family:var(--disp); font-weight:700; line-height:.8; letter-spacing:-.042em;">the robot</h1>
+    <div style="padding:clamp(52px,5.6vw,84px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
+    <h1 data-scramble="" style="font-size:clamp(56px,10vw,168px); font-family:var(--disp); font-weight:700; line-height:.8; letter-spacing:-.042em;">the robot</h1>
     </div>
     <div style="border-left:1px solid var(--rule); background:var(--panel);">
-      <image-slot id="robot-hero" style="width:100%; height:100%; min-height:320px;" shape="rect" placeholder="Robot photo / CAD"></image-slot>
+      <image-slot id="robot-hero" style="width:100%; height:100%; min-height:320px; color:var(--muted);" shape="rect" placeholder="Robot photo / CAD"></image-slot>
     </div>
   </header>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
-    <div style="max-width:62ch; display:flex; flex-direction:column; gap:clamp(28px,4vw,40px);">
+  <section style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad) clamp(64px,6.6vw,96px);">
+    <div style="display:flex; flex-direction:column; gap:clamp(28px,3.4vw,44px);">
       <div>
-        <div style="font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); margin-bottom:14px;">biobuzz · 2026/27</div>
-        <p style="font-size:17px; line-height:1.65; color:var(--muted);">This season's game is <strong style="color:var(--text); font-weight:600;">BIOBUZZ</strong>, presented by RTX — part of the FIRST CANOPY season and built around the energy of the natural world. Scoring elements are <strong style="color:var(--text); font-weight:600;">Pollen</strong>, 3-inch plastic balls teams intake off the field, from walls and corners, and in autonomous. Full rules release at kickoff on September 12, 2026; we're practicing with Pollen, running Skill Builders, and prototyping intake and drive before the manual drops.</p>
+        <div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-bottom:18px;">biobuzz · 2026/27</div>
+        <p style="max-width:none; font-size:clamp(19px,2.1vw,27px); line-height:1.45; letter-spacing:-.016em; color:var(--text); text-wrap:pretty;">This season's game is <strong style="color:var(--text); font-weight:600;">BIOBUZZ</strong>, presented by RTX — part of the FIRST CANOPY season and built around the energy of the natural world. Scoring elements are <strong style="color:var(--text); font-weight:600;">Pollen</strong>, 3-inch plastic balls teams intake off the field, from walls and corners, and in autonomous. Full rules release at kickoff on September 12, 2026; we're practicing with Pollen, running Skill Builders, and prototyping intake and drive before the manual drops.</p>
       </div>
-      <div style="border-top:1px solid var(--rule); padding-top:clamp(28px,4vw,40px);">
-        <div style="font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); margin-bottom:14px;">swerve drivetrain</div>
-        <p style="font-size:17px; line-height:1.65; color:var(--muted);">Janitors FTC is taking the initiative to build a swerve drivetrain from the ground up — four independent steerable modules that let us translate in any direction without turning, lock into position for pushing matches, and line up on scoring targets with surgical precision. Most rookie teams play it safe with tank or mecanum; we're betting that the mobility payoff is worth the engineering lift. Custom module plates, coordinated odometry, and driver-side controls are all on the board. This page is a work in progress while we design, machine, and test.</p>
+      <div style="border-top:1px solid var(--rule); padding-top:clamp(24px,3vw,32px); display:grid; grid-template-columns:minmax(300px,1fr) minmax(0,.92fr) minmax(0,.92fr); gap:clamp(20px,2.4vw,32px); align-items:start;" class="jl-cad-row">
+        <div style="min-width:0;">
+        <div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-bottom:14px;">swerve drivetrain</div>
+        <p style="max-width:52ch; font-size:16.5px; line-height:1.65; color:var(--muted);">Janitors FTC is taking the initiative to build a swerve drivetrain from the ground up — four independent steerable modules that let us translate in any direction without turning, lock into position for pushing matches, and line up on scoring targets with surgical precision. Most rookie teams play it safe with tank or mecanum; we're betting that the mobility payoff is worth the engineering lift. Custom module plates, coordinated odometry, and driver-side controls are all on the board. This page is a work in progress while we design, machine, and test.</p>
+        </div>
+        <figure style="margin:0; min-width:0; border:1px solid var(--rule);">
+          <div style="background:#ffffff; padding:clamp(8px,1vw,14px);">
+            <img src="/assets/photos/swerve-module-cad.jpg" alt="CAD render of one swerve module" loading="lazy" decoding="async" style="width:100%; height:auto; aspect-ratio:5/4; object-fit:contain; display:block;">
+          </div>
+          <figcaption style="border-top:1px solid var(--rule); padding:11px 13px; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);">module 1/4 · cad</figcaption>
+        </figure>
+        <figure style="margin:0; min-width:0; border:1px solid var(--rule);">
+          <div style="background:#ffffff; padding:clamp(8px,1vw,14px);">
+            <img src="/assets/photos/swerve-module-cad-2.jpg" alt="CAD render of the swerve module on its mount" loading="lazy" decoding="async" style="width:100%; height:auto; aspect-ratio:5/4; object-fit:contain; display:block;">
+          </div>
+          <figcaption style="border-top:1px solid var(--rule); padding:11px 13px; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);">module 1/4 · mounted</figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
-    <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:24px;">
-      <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,1fr);">
-      
-      <div style="min-width:0;">
-        <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">subsystems</h2>
+  <section style="background:var(--panel); position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad);">
+    <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(20px,4vw,64px); align-items:end;" class="jl-why-top">
+      <h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">why swerve</h2>
+      <p style="margin:0; max-width:52ch; font-size:15px; line-height:1.7; color:var(--muted);">Three ways to move a robot around a field. We looked at all three and picked the hardest one on purpose.</p>
+    </div>
+
+    <div style="margin-top:clamp(30px,3.6vw,48px);">
+      <div style="display:grid; grid-template-columns:minmax(120px,1.15fr) repeat(3,minmax(0,1fr)); gap:clamp(12px,2.4vw,36px); align-items:end; padding-bottom:12px; border-bottom:1px solid var(--text);" class="jl-spec-row">
+        <span style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);">option</span>
+        <span style="font-size:clamp(17px,1.9vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.028em; color:var(--muted);">tank</span>
+        <span style="font-size:clamp(17px,1.9vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.028em; color:var(--muted);">mecanum</span>
+        <span style="font-size:clamp(17px,1.9vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.028em; color:var(--accent);">swerve</span>
       </div>
+      <div style="display:grid; grid-template-columns:minmax(120px,1.15fr) repeat(3,minmax(0,1fr)); gap:clamp(12px,2.4vw,36px); align-items:baseline; padding:15px 0; border-bottom:1px solid var(--rule);" class="jl-spec-row"><span style="font-size:15px; letter-spacing:-.01em; color:var(--text);">moves sideways</span><span style="font-family:var(--mono); font-size:13px; color:var(--muted);">no</span><span style="font-family:var(--mono); font-size:13px; color:var(--muted);">yes</span><span style="font-family:var(--mono); font-size:13px; color:var(--text);">yes</span></div>
+      <div style="display:grid; grid-template-columns:minmax(120px,1.15fr) repeat(3,minmax(0,1fr)); gap:clamp(12px,2.4vw,36px); align-items:baseline; padding:15px 0; border-bottom:1px solid var(--rule);" class="jl-spec-row"><span style="font-size:15px; letter-spacing:-.01em; color:var(--text);">traction while pushed</span><span style="font-family:var(--mono); font-size:13px; color:var(--muted);">full</span><span style="font-family:var(--mono); font-size:13px; color:var(--muted);">slips</span><span style="font-family:var(--mono); font-size:13px; color:var(--text);">full</span></div>
+      <div style="display:grid; grid-template-columns:minmax(120px,1.15fr) repeat(3,minmax(0,1fr)); gap:clamp(12px,2.4vw,36px); align-items:baseline; padding:15px 0; border-bottom:1px solid var(--rule);" class="jl-spec-row"><span style="font-size:15px; letter-spacing:-.01em; color:var(--text);">aims without turning</span><span style="font-family:var(--mono); font-size:13px; color:var(--muted);">no</span><span style="font-family:var(--mono); font-size:13px; color:var(--muted);">partly</span><span style="font-family:var(--mono); font-size:13px; color:var(--text);">yes</span></div>
+      <div style="display:grid; grid-template-columns:minmax(120px,1.15fr) repeat(3,minmax(0,1fr)); gap:clamp(12px,2.4vw,36px); align-items:baseline; padding:15px 0; border-bottom:1px solid var(--rule);" class="jl-spec-row"><span style="font-size:15px; letter-spacing:-.01em; color:var(--text);">parts we design</span><span style="font-family:var(--mono); font-size:13px; color:var(--muted);">none</span><span style="font-family:var(--mono); font-size:13px; color:var(--muted);">none</span><span style="font-family:var(--mono); font-size:13px; color:var(--text);">four modules</span></div>
+      <div style="display:grid; grid-template-columns:minmax(120px,1.15fr) repeat(3,minmax(0,1fr)); gap:clamp(12px,2.4vw,36px); align-items:baseline; padding:15px 0; border-bottom:1px solid var(--rule);" class="jl-spec-row"><span style="font-size:15px; letter-spacing:-.01em; color:var(--text);">time to first drive</span><span style="font-family:var(--mono); font-size:13px; color:var(--muted);">a weekend</span><span style="font-family:var(--mono); font-size:13px; color:var(--muted);">a weekend</span><span style="font-family:var(--mono); font-size:13px; color:var(--text);">weeks</span></div>
+      <div style="display:grid; grid-template-columns:minmax(120px,1.15fr) repeat(3,minmax(0,1fr)); gap:clamp(12px,2.4vw,36px); align-items:center; padding:18px 0;" class="jl-spec-row">
+        <span style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);">verdict</span>
+        <span><span style="display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;"><span style="display:inline-flex; align-items:flex-end; gap:2px; height:10px;"><span style="width:3px; height:10px; background:var(--rule); flex:none;"></span><span style="width:3px; height:8px; background:var(--rule); flex:none;"></span><span style="width:3px; height:6px; background:var(--rule); flex:none;"></span></span>passed</span></span>
+        <span><span style="display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;"><span style="display:inline-flex; align-items:flex-end; gap:2px; height:10px;"><span style="width:3px; height:10px; background:var(--rule); flex:none;"></span><span style="width:3px; height:8px; background:var(--rule); flex:none;"></span><span style="width:3px; height:6px; background:var(--rule); flex:none;"></span></span>passed</span></span>
+        <span><span style="display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); white-space:nowrap;"><span style="display:inline-flex; align-items:flex-end; gap:2px; height:10px;"><span style="width:3px; height:10px; background:var(--accent); flex:none;"></span><span style="width:3px; height:8px; background:var(--accent); flex:none;"></span><span style="width:3px; height:6px; background:var(--accent); flex:none;"></span></span>chosen</span></span>
       </div>
     </div>
-    <div style="margin-top:clamp(30px,3.4vw,42px); border-top:1px solid var(--rule);">
-      <div style="display:grid; grid-template-columns:90px 1.4fr 1fr 88px; gap:14px; padding:14px 0; border-bottom:1px solid var(--rule); font-size:15px; color:var(--muted);">
-        <span style="white-space:nowrap;">no.</span>
-        <span style="white-space:nowrap;">subsystem</span>
-        <span style="white-space:nowrap;">approach</span>
-        <span style="white-space:nowrap; text-align:right;">status</span>
+
+    <div style="margin-top:clamp(34px,4vw,56px); display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1fr); gap:clamp(24px,5vw,80px); align-items:start;" class="jl-why-close">
+      <p style="margin:0; font-size:clamp(28px,4.4vw,60px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:.94;">Mobility<br>wins matches.</p>
+      <div style="min-width:0;">
+      <div style="padding:0 0 18px;"><p style="margin:0; font-size:15px; line-height:1.7; color:var(--muted); text-wrap:pretty;">Four modules is four times the chance of a part being wrong. If the drivetrain isn’t reliable by our first meet, nothing else on the robot matters — so the plan is one module fully working before we cut parts for the other three.</p></div>
+      <div style="border-top:1px solid var(--rule); padding:18px 0;"><p style="margin:0; font-size:15px; line-height:1.7; color:var(--muted); text-wrap:pretty;">The code is genuinely harder: swerve kinematics, four steering encoders, and module offsets that all have to agree. We’d rather write it ourselves than pull in a library, though that call isn’t final.</p></div>
+      <div style="border-top:1px solid var(--rule); padding:18px 0;"><p style="margin:0; font-size:15px; line-height:1.7; color:var(--muted); text-wrap:pretty;">Custom plates mean no replacement in a bag at competition. Spares for the parts most likely to fail are on the list before our first meet, and mecanum stays on the shelf as the fallback.</p></div>
       </div>
-      <div style="display:grid; grid-template-columns:90px 1.4fr 1fr 88px; gap:14px; padding:17px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:14px; color:var(--muted); align-items:center; transition:padding-left .2s ease;" style-hover="padding-left:10px;"><span style="color:var(--text);">01</span><span>drivetrain</span><span>swerve · four steerable modules</span><span style="text-align:right;">building</span></div>
-      <div style="display:grid; grid-template-columns:90px 1.4fr 1fr 88px; gap:14px; padding:17px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:14px; color:var(--muted); align-items:center; transition:padding-left .2s ease;" style-hover="padding-left:10px;"><span style="color:var(--text);">02</span><span>—</span><span>—</span><span style="text-align:right;">—</span></div>
-      <div style="display:grid; grid-template-columns:90px 1.4fr 1fr 88px; gap:14px; padding:17px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:14px; color:var(--muted); align-items:center; transition:padding-left .2s ease;" style-hover="padding-left:10px;"><span style="color:var(--text);">03</span><span>—</span><span>—</span><span style="text-align:right;">—</span></div>
-      <div style="display:grid; grid-template-columns:90px 1.4fr 1fr 88px; gap:14px; padding:17px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:14px; color:var(--muted); align-items:center; transition:padding-left .2s ease;" style-hover="padding-left:10px;"><span style="color:var(--text);">04</span><span>—</span><span>—</span><span style="text-align:right;">—</span></div>
-      <div style="display:grid; grid-template-columns:90px 1.4fr 1fr 88px; gap:14px; padding:17px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:14px; color:var(--muted); align-items:center; transition:padding-left .2s ease;" style-hover="padding-left:10px;"><span style="color:var(--text);">05</span><span>—</span><span>—</span><span style="text-align:right;">—</span></div>
-      <div style="display:grid; grid-template-columns:90px 1.4fr 1fr 88px; gap:14px; padding:17px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:14px; color:var(--muted); align-items:center; transition:padding-left .2s ease;" style-hover="padding-left:10px;"><span style="color:var(--text);">06</span><span>—</span><span>—</span><span style="text-align:right;">—</span></div>
-      <div style="padding:16px 0; font-size:15px; color:var(--muted);">We’ll fill these in as we design and build them.</div>
     </div>
   </section>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
-    <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:24px;">
-      <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,1fr);">
-      
-      <div style="min-width:0;">
-        <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">in the shop</h2>
-      </div>
-      </div>
+  <section style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad);">
+    <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(20px,4vw,64px); align-items:end;" class="jl-why-top">
+      <h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">shift log</h2>
+      <p style="margin:0; max-width:52ch; font-size:15px; line-height:1.7; color:var(--muted);">What we did, what broke, and what we changed because of it. The failures are the useful part, so they stay in.</p>
     </div>
-    <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:clamp(30px,3.4vw,42px);">
-      <image-slot id="robot-1" style="width:100%; aspect-ratio:1; grid-column:span 2; grid-row:span 2;" shape="rect" placeholder="Build photo"></image-slot>
-      <image-slot id="robot-2" style="width:100%; aspect-ratio:1;" shape="rect" placeholder="Photo"></image-slot>
-      <image-slot id="robot-3" style="width:100%; aspect-ratio:1;" shape="rect" placeholder="Photo"></image-slot>
-      <image-slot id="robot-4" style="width:100%; aspect-ratio:1;" shape="rect" placeholder="Photo"></image-slot>
-      <image-slot id="robot-5" style="width:100%; aspect-ratio:1;" shape="rect" placeholder="Photo"></image-slot>
-      <image-slot id="robot-6" style="width:100%; aspect-ratio:2/1; grid-column:span 2;" shape="rect" placeholder="Photo"></image-slot>
-      <image-slot id="robot-7" style="width:100%; aspect-ratio:2/1; grid-column:span 2;" shape="rect" placeholder="Photo"></image-slot>
+    <div style="margin-top:clamp(22px,2.4vw,30px); border-top:1px solid var(--rule);">
+      <div style="display:grid; grid-template-columns:104px minmax(0,1fr) auto; gap:clamp(14px,2.4vw,32px); align-items:start; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule);" class="jl-log-row"><span style="font-family:var(--mono); font-size:13px; color:var(--muted); white-space:nowrap;">offseason</span><div style="min-width:0;"><div style="font-size:clamp(18px,1.9vw,23px); font-family:var(--disp); font-weight:700; letter-spacing:-.026em;">swerve module, first revision</div><p style="margin-top:7px; max-width:62ch; font-size:15px; line-height:1.65; color:var(--muted);">Four independent steerable modules, designed from scratch rather than bought. The first module is drawn and being assembled — the CAD above is where it stands right now. Everything after this depends on it working.</p></div><span style="text-align:right;"><span style="display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); white-space:nowrap;"><span style="display:inline-flex; align-items:flex-end; gap:2px; height:10px;"><span style="width:3px; height:10px; background:var(--accent); flex:none;"></span><span style="width:3px; height:8px; background:var(--accent); flex:none;"></span><span style="width:3px; height:6px; background:var(--rule); flex:none;"></span></span>in progress</span></span></div>
+      <div style="padding:18px 0; font-size:15px; line-height:1.65; color:var(--muted);">Season entries start once we’re in the build. Expect them roughly weekly — dated, photographed, and honest about what went wrong.</div>
     </div>
+  </section>
+  <section style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad) clamp(64px,6.6vw,96px); background:var(--panel);">
+    <div>
+      <h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">in the shop</h2>
+    </div>
+    <div class="jl-shop-strip" style="display:flex; gap:14px; margin-top:clamp(22px,2.4vw,30px); overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:14px; scrollbar-width:thin;">
+      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(360px,44vw,560px); max-width:82vw;"><img src="/assets/photos/shop-garage.jpg" alt="The garage shop where we build" loading="lazy" decoding="async" style="width:100%; height:clamp(260px,32vw,420px); object-fit:cover; display:block; background:var(--panel); border:1px solid var(--rule); filter:saturate(.92) contrast(1.02); transition:filter .25s ease;" style-hover="filter:saturate(1) contrast(1.04);"><figcaption style="margin-top:10px; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);">the shop</figcaption></figure>
+      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(240px,24vw,320px); max-width:82vw;"><img src="/assets/photos/shop-drivetrain.jpg" alt="Drivetrain plate with motors mounted" loading="lazy" decoding="async" style="width:100%; height:clamp(260px,32vw,420px); object-fit:cover; display:block; background:var(--panel); border:1px solid var(--rule); filter:saturate(.92) contrast(1.02); transition:filter .25s ease;" style-hover="filter:saturate(1) contrast(1.04);"><figcaption style="margin-top:10px; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);">drivetrain plate</figcaption></figure>
+      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(240px,24vw,320px); max-width:82vw;"><img src="/assets/photos/shop-rails.jpg" alt="Bolting a rail into the chassis" loading="lazy" decoding="async" style="width:100%; height:clamp(260px,32vw,420px); object-fit:cover; display:block; background:var(--panel); border:1px solid var(--rule); filter:saturate(.92) contrast(1.02); transition:filter .25s ease;" style-hover="filter:saturate(1) contrast(1.04);"><figcaption style="margin-top:10px; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);">rail assembly</figcaption></figure>
+      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(240px,24vw,320px); max-width:82vw;"><img src="/assets/photos/shop-assembly.jpg" alt="Assembling the frame on the patio table" loading="lazy" decoding="async" style="width:100%; height:clamp(260px,32vw,420px); object-fit:cover; display:block; background:var(--panel); border:1px solid var(--rule); filter:saturate(.92) contrast(1.02); transition:filter .25s ease;" style-hover="filter:saturate(1) contrast(1.04);"><figcaption style="margin-top:10px; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);">frame build</figcaption></figure>
+      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(240px,24vw,320px); max-width:82vw;"><img src="/assets/photos/shop-drill.jpg" alt="Driving screws into a channel" loading="lazy" decoding="async" style="width:100%; height:clamp(260px,32vw,420px); object-fit:cover; display:block; background:var(--panel); border:1px solid var(--rule); filter:saturate(.92) contrast(1.02); transition:filter .25s ease;" style-hover="filter:saturate(1) contrast(1.04);"><figcaption style="margin-top:10px; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);">channel work</figcaption></figure>
+      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(240px,24vw,320px); max-width:82vw;"><img src="/assets/photos/shop-sorting.jpg" alt="Sorting hardware and wheels" loading="lazy" decoding="async" style="width:100%; height:clamp(260px,32vw,420px); object-fit:cover; display:block; background:var(--panel); border:1px solid var(--rule); filter:saturate(.92) contrast(1.02); transition:filter .25s ease;" style-hover="filter:saturate(1) contrast(1.04);"><figcaption style="margin-top:10px; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);">hardware sort</figcaption></figure>
+    </div>
+    <div style="margin-top:8px; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); opacity:.6;">scroll →</div>
   </section>
   </div>
   </sc-if>
@@ -1182,22 +1252,23 @@
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
   <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,1fr); border-bottom:1px solid var(--rule);">
-    <div style="padding:clamp(52px,6vw,88px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 14 L24 14 L21.5 26.5 Q14 28.8 8 26.5 Z"></path><path d="M24 14 L28.5 8.5"></path></svg><span style="white-space:nowrap;">match log · 2026/27</span></div>
-      <h1 data-scramble="" style="font-size:clamp(46px,7.5vw,112px); font-family:var(--disp); font-weight:700; line-height:.82; letter-spacing:-.042em;">the game</h1>
-      <p style="margin-top:24px; max-width:44ch; font-size:16.5px; line-height:1.6; color:var(--muted);"><strong style="color:var(--text); font-weight:600;">BIOBUZZ</strong>, presented by RTX — part of the FIRST CANOPY season. Scoring uses Pollen; full rules release at kickoff on September 12, 2026.</p>
+    <div style="padding:clamp(52px,5.6vw,84px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
+      <h1 data-scramble="" style="font-size:clamp(54px,9.5vw,156px); font-family:var(--disp); font-weight:700; line-height:.82; letter-spacing:-.042em;">the game</h1>
+      <p style="margin-top:24px; max-width:52ch; font-size:16.5px; line-height:1.6; color:var(--muted);"><strong style="color:var(--text); font-weight:600;">BIOBUZZ</strong>, presented by RTX — part of the FIRST CANOPY season. Scoring uses Pollen; full rules release at kickoff on September 12, 2026.</p>
     </div>
     <div style="border-left:1px solid var(--rule); background:var(--panel);">
-      <image-slot id="game-field" style="width:100%; height:100%; min-height:320px;" shape="rect" placeholder="Field / game art"></image-slot>
+      <div style="height:100%; min-height:340px; display:flex; align-items:center; justify-content:center; background:#ffffff; padding:clamp(20px,2.2vw,28px);">
+        <img src="/assets/photos/biobuzz-first.jpg" alt="BIOBUZZ presented by RTX — FIRST Tech Challenge" loading="lazy" decoding="async" style="width:100%; max-width:none; height:auto; object-fit:contain; display:block;">
+      </div>
     </div>
   </header>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
+  <section style="background:var(--panel); position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad);">
     <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:24px;">
       <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,1fr);">
       
       <div style="min-width:0;">
-      <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">the schedule</h2>
+      <h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">the schedule</h2>
       </div>
       </div>
       <div style="display:flex; gap:8px;">
@@ -1207,37 +1278,40 @@
         <div style="min-width:78px; border-top:1px solid var(--rule); padding:12px 0 0;"><div style="font-family:var(--mono); font-size:clamp(20px,2.4vw,30px); font-weight:700; letter-spacing:-.03em; color:var(--accent); font-variant-numeric:tabular-nums;">{{ secondsLeft }}</div><div style="margin-top:4px; font-size:15px; color:var(--muted);">sec</div></div>
       </div>
     </div>
-    <div style="display:flex; flex-direction:column; margin-top:clamp(30px,3.4vw,42px); border-top:1px solid var(--rule);">
-      <div style="display:grid; grid-template-columns:132px 1fr 1.1fr auto; gap:20px; align-items:center; padding:24px 0; border-bottom:1px solid var(--rule); transition:padding-left .2s ease;" style-hover="padding-left:16px;"><span style="font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.14em;">OCT 2026</span><span style="font-size:clamp(20px,2.6vw,32px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em;">league meet 1</span><span style="font-size:14.5px; color:var(--muted);">First time out. Mostly testing the drive.</span><span style="font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--muted);">SCHEDULED</span></div>
-      <div style="display:grid; grid-template-columns:132px 1fr 1.1fr auto; gap:20px; align-items:center; padding:24px 0; border-bottom:1px solid var(--rule); transition:padding-left .2s ease;" style-hover="padding-left:16px;"><span style="font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.14em;">NOV 2026</span><span style="font-size:clamp(20px,2.6vw,32px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em;">league meet 2</span><span style="font-size:14.5px; color:var(--muted);">Second outing. Auto reliability and cycle time.</span><span style="font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--muted);">SCHEDULED</span></div>
-      <div style="display:grid; grid-template-columns:132px 1fr 1.1fr auto; gap:20px; align-items:center; padding:24px 0; border-bottom:1px solid var(--rule); transition:padding-left .2s ease;" style-hover="padding-left:16px;"><span style="font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.14em;">DEC 2026</span><span style="font-size:clamp(20px,2.6vw,32px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em;">league meet 3</span><span style="font-size:14.5px; color:var(--muted);">Last tune-up before the tournament.</span><span style="font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--muted);">SCHEDULED</span></div>
-      <div style="display:grid; grid-template-columns:132px 1fr 1.1fr auto; gap:20px; align-items:center; padding:24px 0; border-bottom:1px solid var(--rule); transition:padding-left .2s ease;" style-hover="padding-left:16px;"><span style="font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.14em;">JAN 2027</span><span style="font-size:clamp(20px,2.6vw,32px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em;">league tournament</span><span style="font-size:14.5px; color:var(--muted);">Full robot, tuned auto, clean endgame.</span><span style="font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--muted);">SCHEDULED</span></div>
-      <div style="display:grid; grid-template-columns:132px 1fr 1.1fr auto; gap:20px; align-items:center; padding:24px 0; border-bottom:1px solid var(--rule); transition:padding-left .2s ease;" style-hover="padding-left:16px;"><span style="font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.14em;">FEB 2027</span><span style="font-size:clamp(20px,2.6vw,32px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em;">regional qualifier</span><span style="font-size:14.5px; color:var(--muted);">States. Portfolio and judged awards.</span><span style="font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--muted);">SCHEDULED</span></div>
-      <div style="display:grid; grid-template-columns:132px 1fr 1.1fr auto; gap:20px; align-items:center; padding:24px 0; border-bottom:1px solid var(--rule); background:var(--panel); transition:padding-left .2s ease;" style-hover="padding-left:16px;"><span style="font-family:var(--mono); font-size:11.5px; color:var(--signal); letter-spacing:.14em;">APR 2027</span><span style="font-size:clamp(20px,2.6vw,32px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em;">worlds</span><span style="font-size:14.5px; color:var(--muted);">What we’re aiming for.</span><span style="font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--muted);">TARGET</span></div>
+    <div style="position:relative; margin-top:clamp(30px,3.4vw,44px);">
+      <span aria-hidden="true" style="position:absolute; left:4px; right:0; top:40px; height:1px; background:var(--rule);"></span>
+      <div style="position:relative; display:grid; grid-template-columns:repeat(auto-fit,minmax(178px,1fr)); gap:clamp(26px,3vw,40px) clamp(12px,1.6vw,24px);" class="jl-timeline">
+      <div style="position:relative; padding:0 clamp(14px,1.6vw,22px) 0 0; min-width:0;"><div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:18px;">oct 2026</div><span style="position:absolute; left:0; top:36px; width:9px; height:9px; border-radius:50%; background:var(--bg); border:1px solid var(--muted); box-sizing:border-box; z-index:1;"></span><div style="margin-top:36px; font-size:clamp(17px,1.8vw,23px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1.1;">league meet 1</div><div style="margin-top:9px; font-size:15px; line-height:1.55; color:var(--muted);">First time out. Mostly testing the drive.</div></div>
+      <div style="position:relative; padding:0 clamp(14px,1.6vw,22px) 0 0; min-width:0;"><div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:18px;">nov 2026</div><span style="position:absolute; left:0; top:36px; width:9px; height:9px; border-radius:50%; background:var(--bg); border:1px solid var(--muted); box-sizing:border-box; z-index:1;"></span><div style="margin-top:36px; font-size:clamp(17px,1.8vw,23px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1.1;">league meet 2</div><div style="margin-top:9px; font-size:15px; line-height:1.55; color:var(--muted);">Auto reliability and cycle time.</div></div>
+      <div style="position:relative; padding:0 clamp(14px,1.6vw,22px) 0 0; min-width:0;"><div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:18px;">dec 2026</div><span style="position:absolute; left:0; top:36px; width:9px; height:9px; border-radius:50%; background:var(--bg); border:1px solid var(--muted); box-sizing:border-box; z-index:1;"></span><div style="margin-top:36px; font-size:clamp(17px,1.8vw,23px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1.1;">league meet 3</div><div style="margin-top:9px; font-size:15px; line-height:1.55; color:var(--muted);">Last tune-up before the tournament.</div></div>
+      <div style="position:relative; padding:0 clamp(14px,1.6vw,22px) 0 0; min-width:0;"><div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:18px;">jan 2027</div><span style="position:absolute; left:0; top:36px; width:9px; height:9px; border-radius:50%; background:var(--bg); border:1px solid var(--muted); box-sizing:border-box; z-index:1;"></span><div style="margin-top:36px; font-size:clamp(17px,1.8vw,23px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1.1;">league tournament</div><div style="margin-top:9px; font-size:15px; line-height:1.55; color:var(--muted);">Full robot, tuned auto, clean endgame.</div></div>
+      <div style="position:relative; padding:0 clamp(14px,1.6vw,22px) 0 0; min-width:0;"><div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:18px;">feb 2027</div><span style="position:absolute; left:0; top:36px; width:9px; height:9px; border-radius:50%; background:var(--bg); border:1px solid var(--muted); box-sizing:border-box; z-index:1;"></span><div style="margin-top:36px; font-size:clamp(17px,1.8vw,23px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1.1;">regional qualifier</div><div style="margin-top:9px; font-size:15px; line-height:1.55; color:var(--muted);">States. Portfolio and judged awards.</div></div>
+      <div style="position:relative; padding:0 clamp(14px,1.6vw,22px) 0 0; min-width:0;"><div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-bottom:18px;">apr 2027</div><span style="position:absolute; left:0; top:36px; width:13px; height:13px; border-radius:50%; background:var(--accent); border:none; box-sizing:border-box; z-index:1;"></span><div style="margin-top:34px; font-size:clamp(17px,1.8vw,23px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1.1;">worlds</div><div style="margin-top:9px; font-size:15px; line-height:1.55; color:var(--muted);">What we’re aiming for.</div></div>
+      </div>
     </div>
   </section>
 
-  <section data-lag="0.05" style="position:relative; z-index:1; background:var(--accent); color:var(--ink); padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
+  <section data-lag="0.05" style="position:relative; z-index:1; background:var(--accent); color:var(--ink); padding:clamp(52px,5.6vw,84px) var(--pad);">
     <div style="display:flex; flex-wrap:wrap; gap:clamp(30px,6vw,80px); align-items:flex-end;">
-      <div><div data-count="0" style="font-size:clamp(44px,7vw,96px); font-family:var(--disp); font-weight:700; letter-spacing:-.042em; line-height:.9;">0</div><div style="font-size:16px; margin-top:10px;">Awards won</div></div>
-      <div><div data-count="0" style="font-size:clamp(44px,7vw,96px); font-family:var(--disp); font-weight:700; letter-spacing:-.042em; line-height:.9;">0</div><div style="font-size:16px; margin-top:10px;">Seasons played</div></div>
-      <div><div style="font-size:clamp(44px,7vw,96px); font-family:var(--disp); font-weight:700; letter-spacing:-.042em; line-height:.9;">36721</div><div style="font-size:16px; margin-top:10px;">Team number</div></div>
-      <p style="max-width:30ch; font-size:17px; line-height:1.5; font-weight:600; letter-spacing:-.02em; margin-left:auto;">Everything on this page is a first. That's the whole point of a rookie season.</p>
+      <div><div data-count="0" style="font-size:clamp(44px,7vw,96px); font-family:var(--disp); font-weight:700; letter-spacing:-.042em; line-height:.9;">0</div><div style="font-size:16.5px; margin-top:10px;">Awards won</div></div>
+      <div><div data-count="0" style="font-size:clamp(44px,7vw,96px); font-family:var(--disp); font-weight:700; letter-spacing:-.042em; line-height:.9;">0</div><div style="font-size:16.5px; margin-top:10px;">Seasons played</div></div>
+      <div><div style="font-size:clamp(44px,7vw,96px); font-family:var(--disp); font-weight:700; letter-spacing:-.042em; line-height:.9;">36721</div><div style="font-size:16.5px; margin-top:10px;">Team number</div></div>
+      <p style="max-width:30ch; font-size:16.5px; line-height:1.5; font-weight:600; letter-spacing:-.02em; margin-left:auto;">Everything on this page is a first. That's the whole point of a rookie season.</p>
     </div>
   </section>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
+  <section style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad) clamp(64px,6.6vw,96px);">
     <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:20px;">
       <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,1fr);">
       
       <div style="min-width:0;">
-      <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">match record</h2>
+      <h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">match record</h2>
       </div>
       </div>
       
     </div>
     <div style="margin-top:clamp(30px,3.4vw,42px); border-top:1px solid var(--rule);">
-      <div style="display:grid; grid-template-columns:90px 1.4fr 1fr 90px 90px 88px; gap:14px; padding:14px 0; border-bottom:1px solid var(--rule); font-size:15px; color:var(--muted);">
+      <div style="display:grid; grid-template-columns:90px minmax(0,1.4fr) minmax(0,1fr) 90px 90px minmax(120px,auto); gap:14px; padding:14px 0; border-bottom:1px solid var(--rule); font-size:15px; color:var(--muted);">
         <a sc-camel-on-click="{{ sortMatch }}" style="cursor:pointer; white-space:nowrap;" style-hover="color:var(--accent);">match</a>
         <a sc-camel-on-click="{{ sortPartner }}" style="cursor:pointer; white-space:nowrap;" style-hover="color:var(--accent);">alliance</a>
         <a sc-camel-on-click="{{ sortOpp }}" style="cursor:pointer; white-space:nowrap;" style-hover="color:var(--accent);">opponents</a>
@@ -1246,7 +1320,7 @@
         <a sc-camel-on-click="{{ sortResult }}" style="cursor:pointer; white-space:nowrap; text-align:right;" style-hover="color:var(--accent);">result</a>
       </div>
       <sc-for list="{{ matches }}" as="m" hint-placeholder-count="6">
-        <div style="display:grid; grid-template-columns:90px 1.4fr 1fr 90px 90px 88px; gap:14px; padding:17px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:14px; color:var(--muted); align-items:center; transition:background-color .18s ease;" style-hover="background-color:var(--panel);">
+        <div style="display:grid; grid-template-columns:90px minmax(0,1.4fr) minmax(0,1fr) 90px 90px minmax(120px,auto); gap:14px; padding:17px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:15px; color:var(--muted); align-items:center; transition:background-color .18s ease;" style-hover="background-color:var(--panel);">
           <span style="color:var(--text);">{{ m.id }}</span>
           <span>{{ m.partner }}</span>
           <span>{{ m.opp }}</span>
@@ -1262,14 +1336,14 @@
 
       
 
-      <div style="min-width:0;"><h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">the trophy case</h2></div>
+      <div style="min-width:0;"><h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">the trophy case</h2></div>
 
     </div>
     <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-top:clamp(30px,3.4vw,42px);" data-stagger="zoom">
-      <div style="border-top:1px solid var(--rule); min-height:150px; display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--muted);">Empty</div>
-      <div style="border-top:1px solid var(--rule); min-height:150px; display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--muted);">Empty</div>
-      <div style="border-top:1px solid var(--rule); min-height:150px; display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--muted);">Empty</div>
-      <div style="border-top:1px solid var(--rule); min-height:150px; padding:24px 0; display:flex; flex-direction:column; justify-content:space-between; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="transform:translateY(-2px); border-color:var(--accent);"><span style="font-size:24px; font-family:var(--disp); font-weight:700; letter-spacing:-.028em;">rookie all-star</span><span style="font-size:15px; color:var(--muted);">Our first target</span></div>
+      <div style="border-top:1px solid var(--rule); min-height:150px; display:flex; align-items:center; justify-content:center;"><span style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">not yet</span></div>
+      <div style="border-top:1px solid var(--rule); min-height:150px; display:flex; align-items:center; justify-content:center;"><span style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">not yet</span></div>
+      <div style="border-top:1px solid var(--rule); min-height:150px; display:flex; align-items:center; justify-content:center;"><span style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">not yet</span></div>
+      <div style="border-top:1px solid var(--rule); min-height:150px; padding:24px 0; display:flex; flex-direction:column; justify-content:space-between; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="background:var(--panel);"><span style="font-size:24px; font-family:var(--disp); font-weight:700; letter-spacing:-.028em;">rookie all-star</span><span style="display:flex; flex-direction:column; gap:12px; align-items:flex-start;"><span style="font-size:15px; color:var(--muted);">Our first target</span><span style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">goal</span></span></div>
     </div>
   </section>
   </div>
@@ -1279,115 +1353,104 @@
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
   <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr); border-bottom:1px solid var(--rule); overflow:hidden;">
-    <div style="position:relative; padding:clamp(52px,6vw,88px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
+    <div style="position:relative; padding:clamp(52px,5.6vw,84px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
       <svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="position:absolute; left:-4%; top:50%; transform:translateY(-50%) rotate(-12deg); width:clamp(220px,26vw,380px); height:auto; color:var(--text); opacity:.045; pointer-events:none;" fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4 L14.5 18.5"></path><path d="M10.5 17 L16.5 14 L21 26.5 Q15 29.5 9 26.5 Z"></path><path d="M12.6 18.4 L11.4 26.6 M15.2 17.2 L15.2 27.6 M17.8 16.2 L19 26.6"></path></svg>
-      <div style="position:relative; display:flex; align-items:center; gap:12px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:20px; height:20px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 14 L24 14 L21.5 26.5 Q14 28.8 8 26.5 Z"></path><path d="M24 14 L28.5 8.5"></path></svg><span style="white-space:nowrap;">service log · 2026</span></div>
-      <h1 data-scramble="" style="position:relative; margin-top:22px; font-size:clamp(44px,7vw,104px); font-family:var(--disp); font-weight:700; line-height:.82; letter-spacing:-.042em;">outreach</h1>
-      <p style="position:relative; margin-top:26px; max-width:46ch; font-size:16.5px; line-height:1.6; color:var(--muted);">We bring the robot around the Bay Area to showcase robotics to kids — especially those with less access to STEM — and spread hands-on learning wherever we can. Planned event with FTC team Olympians.</p>
+      <h1 data-scramble="" style="position:relative; font-size:clamp(52px,9vw,148px); font-family:var(--disp); font-weight:700; line-height:.82; letter-spacing:-.042em;">outreach</h1>
+      <p style="position:relative; margin-top:26px; max-width:52ch; font-size:16.5px; line-height:1.6; color:var(--muted);">We’re taking the robot around the Bay Area to show robotics to kids — especially those with less access to STEM — and spread hands-on learning wherever we can. Planned event with FTC team Olympians.</p>
     </div>
     <div style="border-left:1px solid var(--rule); background:var(--panel);">
-      <image-slot id="outreach-photo" style="width:100%; height:100%; min-height:340px;" shape="rect" placeholder="Drop an outreach photo"></image-slot>
+      <div style="position:relative; height:100%; min-height:340px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; overflow:hidden; padding:clamp(20px,2.2vw,28px);">
+        <svg sc-camel-view-box="0 0 32 32" aria-hidden="true" fill="none" stroke="var(--text)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; left:-14%; bottom:-18%; width:clamp(200px,26vw,330px); height:auto; opacity:.05; transform:rotate(14deg); pointer-events:none;"><path d="M5.5 14 L24 14 L21.5 26.5 Q14 28.8 8 26.5 Z"></path><path d="M24 14 L28.5 8.5"></path></svg>
+        <svg sc-camel-view-box="0 0 32 32" aria-hidden="true" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="position:relative; width:clamp(56px,7vw,84px); height:auto; opacity:.85;"><path d="M5.5 14 L24 14 L21.5 26.5 Q14 28.8 8 26.5 Z"></path><path d="M24 14 L28.5 8.5"></path></svg>
+        <div style="position:relative; text-align:center; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); line-height:2;">demos · assemblies<br>workshops · libraries</div>
+      </div>
     </div>
   </header>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
+  <section style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad);">
     <div style="max-width:62ch; display:flex; flex-direction:column; gap:clamp(24px,3vw,32px);">
-      <div style="font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--accent);">planned for 2026/27</div>
-      <p style="font-size:17px; line-height:1.65; color:var(--muted);">Outreach is how we pay forward what robotics gave us. This season we're building a team within the team — recruiting dedicated outreach members to run demos, coordinate school visits, and keep our community calendar full. Yajat and Niraj lead the effort, and we're actively looking for students who want to own events, talk to teachers, and represent the Janitors off the field.</p>
-      <p style="font-size:17px; line-height:1.65; color:var(--muted);">On the calendar: drive-the-robot nights at local libraries, STEM assemblies at middle schools across the Bay Area, hands-on workshops where kids wire a motor and write their first line of code, and a joint showcase with FTC team Olympians. We're also planning mentorship sessions for rookie teams starting their first build season — the stuff nobody warns you about until you're already behind.</p>
+      <div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent);">planned for 2026/27</div>
+      <p style="font-size:16.5px; line-height:1.65; color:var(--muted);">Outreach is how we pay forward what robotics gave us. This season we're building a team within the team — recruiting dedicated outreach members to run demos, coordinate school visits, and keep our community calendar full. Yajat and Niraj lead the effort, and we're actively looking for students who want to own events, talk to teachers, and represent the Janitors off the field.</p>
+      <p style="font-size:16.5px; line-height:1.65; color:var(--muted);">On the calendar: drive-the-robot nights at local libraries, STEM assemblies at middle schools across the Bay Area, hands-on workshops where kids wire a motor and write their first line of code, and a joint showcase with FTC team Olympians. We're also planning mentorship sessions for rookie teams starting their first build season — the stuff nobody warns you about until you're already behind.</p>
     </div>
   </section>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
+  <section style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad);">
     <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,1fr);">
     
     <div style="min-width:0;">
-    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">where we have been</h2>
+    <h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">on the calendar</h2>
+    </div>
+    </div>
+    <div style="border-top:1px solid var(--rule); margin-top:clamp(30px,3.4vw,42px);">
+      <div style="display:grid; grid-template-columns:104px minmax(0,1fr) minmax(120px,auto); gap:clamp(12px,2.2vw,32px); align-items:baseline; padding:14px 0; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);" class="jl-log-head">
+        <span>date</span><span>where · what we ran</span><span style="text-align:right;">status</span>
+      </div>
+      <div style="display:grid; grid-template-columns:104px minmax(0,1fr) minmax(120px,auto); gap:clamp(12px,2.2vw,32px); align-items:center; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule);" class="jl-log-empty">
+        <span style="font-family:var(--mono); font-size:13px; color:var(--muted);">——.——</span>
+        <span style="font-size:16.5px; line-height:1.6; color:var(--muted);">Nothing has happened yet. We’re booking the first two now — a drive-the-robot night and a joint demo with FTC team Olympians.</span>
+        <span style="text-align:right;"><span style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">booking</span></span>
+      </div>
+      <div style="padding:16px 0; font-size:15px; line-height:1.65; color:var(--muted);">Every event gets logged here — date, place, what we brought, how many kids turned up. By the end of the season this table is the record.</div>
+    </div>
+  </section>
+
+
+  <section style="background:var(--panel); position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad);">
+    <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,1fr);">
+    
+    <div style="min-width:0;">
+    <h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">what we run</h2>
     </div>
     </div>
     <div style="display:flex; flex-direction:column; border-top:1px solid var(--rule); margin-top:clamp(30px,3.4vw,42px);" data-stagger="left">
-      <div style="display:grid; grid-template-columns:104px minmax(0,1.1fr) minmax(0,1.6fr) auto; gap:clamp(12px,2.2vw,32px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:18px; color:var(--accent);"><span style="font-family:var(--mono); font-size:13px; color:var(--text); white-space:nowrap;">09.14</span><span style="font-size:17px; font-weight:600; letter-spacing:-.02em;">Mission Library</span><span style="font-size:15.5px; line-height:1.6; color:var(--muted);">Drive-the-robot night. Four controllers, one long queue.</span><span style="font-family:var(--mono); font-size:14px; color:var(--muted); white-space:nowrap; text-align:right;">60 kids</span></div>
-      <div style="display:grid; grid-template-columns:104px minmax(0,1.1fr) minmax(0,1.6fr) auto; gap:clamp(12px,2.2vw,32px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:18px; color:var(--accent);"><span style="font-family:var(--mono); font-size:13px; color:var(--text); white-space:nowrap;">10.02</span><span style="font-size:17px; font-weight:600; letter-spacing:-.02em;">Lowell Elementary</span><span style="font-size:15.5px; line-height:1.6; color:var(--muted);">Assembly demo, then twenty minutes of questions about batteries.</span><span style="font-family:var(--mono); font-size:14px; color:var(--muted); white-space:nowrap; text-align:right;">210 kids</span></div>
-      <div style="display:grid; grid-template-columns:104px minmax(0,1.1fr) minmax(0,1.6fr) auto; gap:clamp(12px,2.2vw,32px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:18px; color:var(--accent);"><span style="font-family:var(--mono); font-size:13px; color:var(--text); white-space:nowrap;">10.19</span><span style="font-size:17px; font-weight:600; letter-spacing:-.02em;">Team 41220</span><span style="font-size:15.5px; line-height:1.6; color:var(--muted);">Sat with a rookie team through their first drivetrain build.</span><span style="font-family:var(--mono); font-size:14px; color:var(--muted); white-space:nowrap; text-align:right;">1 team</span></div>
-      <div style="display:grid; grid-template-columns:104px minmax(0,1.1fr) minmax(0,1.6fr) auto; gap:clamp(12px,2.2vw,32px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:18px; color:var(--accent);"><span style="font-family:var(--mono); font-size:13px; color:var(--text); white-space:nowrap;">11.08</span><span style="font-size:17px; font-weight:600; letter-spacing:-.02em;">Bayview STEM Night</span><span style="font-size:15.5px; line-height:1.6; color:var(--muted);">Booth with the practice field. Ran until the custodian kicked us out.</span><span style="font-family:var(--mono); font-size:14px; color:var(--muted); white-space:nowrap; text-align:right;">180 kids</span></div>
-      <div style="display:grid; grid-template-columns:104px minmax(0,1.1fr) minmax(0,1.6fr) auto; gap:clamp(12px,2.2vw,32px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:18px; color:var(--accent);"><span style="font-family:var(--mono); font-size:13px; color:var(--text); white-space:nowrap;">12.06</span><span style="font-size:17px; font-weight:600; letter-spacing:-.02em;">Jefferson Middle</span><span style="font-size:15.5px; line-height:1.6; color:var(--muted);">Six-week after-school block started. Wiring, code, then driving.</span><span style="font-family:var(--mono); font-size:14px; color:var(--muted); white-space:nowrap; text-align:right;">45 kids</span></div>
-      <div style="display:grid; grid-template-columns:104px minmax(0,1.1fr) minmax(0,1.6fr) auto; gap:clamp(12px,2.2vw,32px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:18px; color:var(--accent);"><span style="font-family:var(--mono); font-size:13px; color:var(--text); white-space:nowrap;">01.17</span><span style="font-size:17px; font-weight:600; letter-spacing:-.02em;">Rookie clinic</span><span style="font-size:15.5px; line-height:1.6; color:var(--muted);">Half a day on notebooks and judging, hosted in our shop.</span><span style="font-family:var(--mono); font-size:14px; color:var(--muted); white-space:nowrap; text-align:right;">3 teams</span></div>
+      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr) minmax(120px,auto); gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">build workshops</span><p style="font-size:15px; line-height:1.6; color:var(--muted);">Kids wire it, code it, and drive it. Usually into a wall first.</p><span style="text-align:right;"><span style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">planned</span></span></div>
+      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr) minmax(120px,auto); gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">mentorship</span><p style="font-size:15px; line-height:1.6; color:var(--muted);">Sitting in on build sessions with new teams and answering the questions we’re asking ourselves right now.</p><span style="text-align:right;"><span style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">planned</span></span></div>
+      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr) minmax(120px,auto); gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">stem demos</span><p style="font-size:15px; line-height:1.6; color:var(--muted);">Assembly demos for younger students, with the robot doing laps behind us.</p><span style="text-align:right;"><span style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">planned</span></span></div>
+      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr) minmax(120px,auto); gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">community</span><p style="font-size:15px; line-height:1.6; color:var(--muted);">Library nights, street fairs, and maker festivals around the area.</p><span style="text-align:right;"><span style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">planned</span></span></div>
     </div>
   </section>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
-    <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,1fr);">
-    
-    <div style="min-width:0;">
-    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">what we bring</h2>
-    </div>
-    </div>
-    <p style="margin-top:20px; max-width:54ch; font-size:16px; line-height:1.6; color:var(--muted);">One van, five people, and the same load-out every time. Nothing here needs a projector.</p>
-    <div style="display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:1px; background:var(--rule); border-top:1px solid var(--rule); margin-top:clamp(30px,3.4vw,42px);" data-stagger="zoom">
-      <div style="background:var(--bg); padding:clamp(24px,2.8vw,34px); display:flex; flex-direction:column; gap:14px; transition:background .2s;" style-hover="background:var(--panel);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:34px; height:34px; flex:none; color:var(--text);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12 L25 12 L25 26 L7 26 Z"></path><path d="M16 12 L16 7"></path><circle cx="16" cy="5.5" r="1.8"></circle><path d="M12 18 L12 20 M20 18 L20 20"></path></svg><div style="font-size:18px; font-weight:600; letter-spacing:-.022em;">the robot</div><p style="font-size:14.5px; line-height:1.6; color:var(--muted);">MOP-9000, with the intake guard on and a spare battery in the crate.</p></div>
-      <div style="background:var(--bg); padding:clamp(24px,2.8vw,34px); display:flex; flex-direction:column; gap:14px; transition:background .2s;" style-hover="background:var(--panel);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:34px; height:34px; flex:none; color:var(--text);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 14 L24 14 L21.5 26.5 Q14 28.8 8 26.5 Z"></path><path d="M24 14 L28.5 8.5"></path></svg><div style="font-size:18px; font-weight:600; letter-spacing:-.022em;">practice field</div><p style="font-size:14.5px; line-height:1.6; color:var(--muted);">Half a field of tiles, taped lines, and a bin of game pieces.</p></div>
-      <div style="background:var(--bg); padding:clamp(24px,2.8vw,34px); display:flex; flex-direction:column; gap:14px; transition:background .2s;" style-hover="background:var(--panel);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:34px; height:34px; flex:none; color:var(--text);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 11 L21 11 Q26 11 27 17 Q28 23 24 23 Q21 23 19.5 20 L12.5 20 Q11 23 8 23 Q4 23 5 17 Q6 11 11 11 Z"></path><path d="M9 15 L9 19 M7 17 L11 17"></path><circle cx="22" cy="16" r="1.1"></circle><circle cx="24.5" cy="18.5" r="1.1"></circle></svg><div style="font-size:18px; font-weight:600; letter-spacing:-.022em;">four controllers</div><p style="font-size:14.5px; line-height:1.6; color:var(--muted);">So nobody waits more than a minute for a turn.</p></div>
-      <div style="background:var(--bg); padding:clamp(24px,2.8vw,34px); display:flex; flex-direction:column; gap:14px; transition:background .2s;" style-hover="background:var(--panel);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:34px; height:34px; flex:none; color:var(--text);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 29 L12 17 Q9.5 17 9.5 14.5 Q9.5 12 12 12 L13 12 L13 6.5 Q13 4 15.5 4 Q18 4 18 6.5 L18 12 L20.5 12 Q23 12 23 15 L23 29 Z"></path></svg><div style="font-size:18px; font-weight:600; letter-spacing:-.022em;">gloves &amp; goggles</div><p style="font-size:14.5px; line-height:1.6; color:var(--muted);">Anyone touching the robot gets a pair. No exceptions.</p></div>
-      <div style="background:var(--bg); padding:clamp(24px,2.8vw,34px); display:flex; flex-direction:column; gap:14px; transition:background .2s;" style-hover="background:var(--panel);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:34px; height:34px; flex:none; color:var(--text);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22 Q12 8 18 16 Q23 23 27 11"></path></svg><div style="font-size:18px; font-weight:600; letter-spacing:-.022em;">extension cord</div><p style="font-size:14.5px; line-height:1.6; color:var(--muted);">Fifty feet of it, because the outlet is never where you want it.</p></div>
-    </div>
-  </section>
-
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
-    <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,1fr);">
-    
-    <div style="min-width:0;">
-    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">what we run</h2>
-    </div>
-    </div>
-    <div style="display:flex; flex-direction:column; border-top:1px solid var(--rule); margin-top:clamp(30px,3.4vw,42px);" data-stagger="left">
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) auto; gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">build workshops</span><p style="font-size:15.5px; line-height:1.6; color:var(--muted);">Kids wire it, code it, and drive it. Usually into a wall first.</p><span style="font-size:15px; color:var(--muted); white-space:nowrap; text-align:right;">12 / year</span></div>
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) auto; gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">mentorship</span><p style="font-size:15.5px; line-height:1.6; color:var(--muted);">We sit in on build sessions with new teams and answer the questions we had last year.</p><span style="font-size:15px; color:var(--muted); white-space:nowrap; text-align:right;">4 teams</span></div>
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) auto; gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">stem demos</span><p style="font-size:15.5px; line-height:1.6; color:var(--muted);">Assembly demos for younger students, with the robot doing laps behind us.</p><span style="font-size:15px; color:var(--muted); white-space:nowrap; text-align:right;">9 schools</span></div>
-      <div style="display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) auto; gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">community</span><p style="font-size:15.5px; line-height:1.6; color:var(--muted);">Library nights, street fairs, and maker festivals around the city.</p><span style="font-size:15px; color:var(--muted); white-space:nowrap; text-align:right;">6 / year</span></div>
-    </div>
-  </section>
-
-  <section style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.45fr) minmax(300px,1fr); border-bottom:1px solid var(--rule);">
+  <section style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.45fr) minmax(300px,1fr);">
     <div style="position:relative; min-height:clamp(360px,46vh,520px);">
       <iframe title="Map of our outreach area in Dublin, CA" src="https://www.openstreetmap.org/export/embed.html?bbox=-121.99%2C37.68%2C-121.88%2C37.75&amp;layer=mapnik&amp;marker=37.7022%2C-121.9358" style="position:absolute; inset:0; width:100%; height:100%; border:0; display:block; filter:grayscale(.62) contrast(1.06) brightness(.86);" loading="lazy"></iframe>
-      <div style="position:absolute; left:0; top:0; display:flex; align-items:center; gap:9px; padding:11px 15px; background:var(--bg); border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:18px; height:18px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4 L14.5 18.5"></path><path d="M10.5 17 L16.5 14 L21 26.5 Q15 29.5 9 26.5 Z"></path><path d="M12.6 18.4 L11.4 26.6 M15.2 17.2 L15.2 27.6 M17.8 16.2 L19 26.6"></path></svg><span>routes worked · 37.77 n / 122.42 w</span></div>
+      <div style="position:absolute; left:0; top:0; display:flex; align-items:center; gap:9px; padding:11px 15px; background:var(--bg); border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:18px; height:18px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4 L14.5 18.5"></path><path d="M10.5 17 L16.5 14 L21 26.5 Q15 29.5 9 26.5 Z"></path><path d="M12.6 18.4 L11.4 26.6 M15.2 17.2 L15.2 27.6 M17.8 16.2 L19 26.6"></path></svg><span style="white-space:nowrap;">service area</span></div>
     </div>
-    <div style="border-left:1px solid var(--rule); padding:clamp(24px,2.8vw,34px);">
-      <div style="font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted);">Where we work</div>
+    <div style="border-left:1px solid var(--rule); padding:clamp(20px,2.2vw,28px);">
+      <div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);">Where we’re starting</div>
       <div style="margin-top:20px; border-top:1px solid var(--rule);">
-        <div style="display:grid; grid-template-columns:auto minmax(0,1fr); gap:16px; align-items:baseline; padding:18px 0; border-bottom:1px solid var(--rule);"><span style="font-family:var(--mono); font-size:12px; color:var(--accent); white-space:nowrap;">37.76 N</span><div><div style="font-size:17px; font-weight:600; letter-spacing:-.02em;">Mission district</div><p style="margin-top:6px; font-size:14.5px; line-height:1.6; color:var(--muted);">Library nights and weekend drive-the-robot sessions.</p></div></div>
-        <div style="display:grid; grid-template-columns:auto minmax(0,1fr); gap:16px; align-items:baseline; padding:18px 0; border-bottom:1px solid var(--rule);"><span style="font-family:var(--mono); font-size:12px; color:var(--accent); white-space:nowrap;">37.73 N</span><div><div style="font-size:17px; font-weight:600; letter-spacing:-.02em;">Bayview</div><p style="margin-top:6px; font-size:14.5px; line-height:1.6; color:var(--muted);">After-school blocks at two campuses, six weeks each.</p></div></div>
-        <div style="display:grid; grid-template-columns:auto minmax(0,1fr); gap:16px; align-items:baseline; padding:18px 0; border-bottom:1px solid var(--rule);"><span style="font-family:var(--mono); font-size:12px; color:var(--accent); white-space:nowrap;">37.78 N</span><div><div style="font-size:17px; font-weight:600; letter-spacing:-.02em;">Downtown</div><p style="margin-top:6px; font-size:14.5px; line-height:1.6; color:var(--muted);">Maker festivals and the district STEM night.</p></div></div>
-        <div style="display:grid; grid-template-columns:auto minmax(0,1fr); gap:16px; align-items:baseline; padding:18px 0; border-bottom:1px solid var(--rule);"><span style="font-family:var(--mono); font-size:12px; color:var(--accent); white-space:nowrap;">37.79 N</span><div><div style="font-size:17px; font-weight:600; letter-spacing:-.02em;">Rookie teams</div><p style="margin-top:6px; font-size:14.5px; line-height:1.6; color:var(--muted);">Four teams across the city that we coach through the season.</p></div></div>
+        <div style="padding:18px 0; border-bottom:1px solid var(--rule);"><div><div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;"><span style="font-size:16.5px; font-weight:600; letter-spacing:-.02em;">Dublin</span><span style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">target</span></div><p style="margin-top:6px; font-size:15px; line-height:1.6; color:var(--muted);">Our own city first — weekend drive-the-robot nights at the library, then the schools we came from.</p></div></div>
+        <div style="padding:18px 0; border-bottom:1px solid var(--rule);"><div><div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;"><span style="font-size:16.5px; font-weight:600; letter-spacing:-.02em;">Pleasanton</span><span style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">target</span></div><p style="margin-top:6px; font-size:15px; line-height:1.6; color:var(--muted);">Elementary and middle school assembly demos, once the robot is reliable enough to travel.</p></div></div>
+        <div style="padding:18px 0; border-bottom:1px solid var(--rule);"><div><div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;"><span style="font-size:16.5px; font-weight:600; letter-spacing:-.02em;">Rookie teams</span><span style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">target</span></div><p style="margin-top:6px; font-size:15px; line-height:1.6; color:var(--muted);">Any new team in the area that wants a second pair of hands on their first drivetrain.</p></div></div>
       </div>
     </div>
   </section>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
+  <section style="background:var(--panel); position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad);">
     <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,1fr);">
     
     <div style="min-width:0;">
-    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">photos</h2>
+    <h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">photos</h2>
     </div>
     </div>
     <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:clamp(30px,3.4vw,42px);">
-      <image-slot id="gal-1" style="width:100%; aspect-ratio:1; grid-column:span 2; grid-row:span 2;" shape="rect" placeholder="Workshop photo"></image-slot>
-      <image-slot id="gal-2" style="width:100%; aspect-ratio:1;" shape="rect" placeholder="Photo"></image-slot>
-      <image-slot id="gal-3" style="width:100%; aspect-ratio:1;" shape="rect" placeholder="Photo"></image-slot>
-      <image-slot id="gal-4" style="width:100%; aspect-ratio:1;" shape="rect" placeholder="Photo"></image-slot>
-      <image-slot id="gal-5" style="width:100%; aspect-ratio:1;" shape="rect" placeholder="Photo"></image-slot>
-      <image-slot id="gal-6" style="width:100%; aspect-ratio:2/1; grid-column:span 2;" shape="rect" placeholder="Photo"></image-slot>
-      <image-slot id="gal-7" style="width:100%; aspect-ratio:2/1; grid-column:span 2;" shape="rect" placeholder="Photo"></image-slot>
+      <div style="position:relative; width:100%; aspect-ratio:1; flex:none; grid-column:span 2; grid-row:span 2;"><image-slot id="gal-1" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Workshop photo"></image-slot></div>
+      <div style="position:relative; width:100%; aspect-ratio:1; flex:none;"><image-slot id="gal-2" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Photo"></image-slot></div>
+      <div style="position:relative; width:100%; aspect-ratio:1; flex:none;"><image-slot id="gal-3" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Photo"></image-slot></div>
+      <div style="position:relative; width:100%; aspect-ratio:1; flex:none;"><image-slot id="gal-4" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Photo"></image-slot></div>
+      <div style="position:relative; width:100%; aspect-ratio:1; flex:none;"><image-slot id="gal-5" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Photo"></image-slot></div>
+      <div style="position:relative; width:100%; aspect-ratio:2/1; flex:none; grid-column:span 2;"><image-slot id="gal-6" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Photo"></image-slot></div>
+      <div style="position:relative; width:100%; aspect-ratio:2/1; flex:none; grid-column:span 2;"><image-slot id="gal-7" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Photo"></image-slot></div>
     </div>
   </section>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px); display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:clamp(20px,3.4vw,48px); align-items:end;">
+  <section style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad) clamp(64px,6.6vw,96px); display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:clamp(20px,3.4vw,48px); align-items:end;">
     <svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:46px; height:46px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 12 L24.5 12 L21.8 28.5 L10.2 28.5 Z"></path><path d="M10 12 Q16 3.5 22 12"></path><path d="M9.2 18 L22.8 18"></path></svg>
     <div>
       <h2 style="font-size:clamp(26px,3.4vw,46px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1; text-transform:lowercase; margin:0;">want us at your school?</h2>
-      <p style="margin-top:16px; max-width:44ch; font-size:16px; line-height:1.6; color:var(--muted);">We bring the robot, the practice field, and enough controllers that nobody waits long. An hour is usually enough.</p>
+      <p style="margin-top:16px; max-width:52ch; font-size:16.5px; line-height:1.6; color:var(--muted);">We bring the robot, the practice field, and enough controllers that nobody waits long. An hour is usually enough.</p>
     </div>
-    <a href="mailto:janitorsftcteam@googlegroups.com" data-magnet="" data-click="" style="display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:var(--ink); padding:15px 24px; font-size:17px; font-weight:700; white-space:nowrap; will-change:transform;">Book a visit</a>
+    <a href="mailto:janitorsftcteam@googlegroups.com" data-magnet="" data-click="" style="display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:var(--ink); padding:16px 26px; font-size:16.5px; font-weight:700; white-space:nowrap; will-change:transform;">Book a visit</a>
   </section>
   </div>
   </sc-if>
@@ -1395,27 +1458,28 @@
   <sc-if value="{{ isSponsors }}" hint-placeholder-val="{{ false }}">
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
-  <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr); align-items:end; gap:40px; border-bottom:1px solid var(--rule); padding:clamp(52px,6vw,88px) var(--pad);">
-    <div><div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 12 L24.5 12 L21.8 28.5 L10.2 28.5 Z"></path><path d="M10 12 Q16 3.5 22 12"></path><path d="M9.2 18 L22.8 18"></path></svg><span style="white-space:nowrap;">supply list</span></div><h1 data-scramble="" style="font-size:clamp(44px,7vw,104px); font-family:var(--disp); font-weight:700; line-height:.82; letter-spacing:-.042em;">sponsors</h1><div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;"><a href="/Team_Janitors_36721_Sponsorship_Packet.pdf" target="_blank" rel="noopener noreferrer" data-click="" data-noprint="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); padding:12px 18px; font-size:16px; color:var(--muted); cursor:pointer;" style-hover="border-color:var(--accent); color:var(--accent);">Sponsorship packet →</a><a href="https://hcb.hackclub.com/donations/start/janitorsftcteam" target="_blank" rel="noopener noreferrer" data-click="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); padding:12px 18px; font-size:16px; color:var(--muted); cursor:pointer;" style-hover="border-color:var(--accent); color:var(--accent);">Donate via Hack Club →</a></div></div>
-    <p style="max-width:44ch; font-size:16.5px; line-height:1.6; color:var(--muted);">We're a student-led FTC team — our students lead engineering, outreach, fundraising, and competition. Your support fuels competitive robotics and hands-on STEM education in our community.</p>
+  <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr); align-items:end; gap:40px; border-bottom:1px solid var(--rule); padding:clamp(52px,5.6vw,84px) var(--pad);">
+    <div><h1 data-scramble="" style="font-size:clamp(52px,9vw,148px); font-family:var(--disp); font-weight:700; line-height:.82; letter-spacing:-.042em;">sponsors</h1><div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;"><a href="/Team_Janitors_36721_Sponsorship_Packet.pdf" target="_blank" rel="noopener noreferrer" data-click="" data-noprint="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); padding:12px 18px; font-size:16.5px; color:var(--muted); cursor:pointer;" style-hover="border-color:var(--accent); color:var(--accent);">Print the sponsor one-pager →</a><a href="https://hcb.hackclub.com/donations/start/janitorsftcteam" target="_blank" rel="noopener noreferrer" data-click="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); padding:12px 18px; font-size:16.5px; color:var(--muted); cursor:pointer;" style-hover="border-color:var(--accent); color:var(--accent);">Donate via Hack Club →</a></div></div>
+    <p style="max-width:52ch; font-size:16.5px; line-height:1.6; color:var(--muted);">We're a student-led FTC team — our students lead engineering, outreach, fundraising, and competition. Your support fuels competitive robotics and hands-on STEM education in our community.</p>
   </header>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule); display:flex; justify-content:center;">
-    <a href="mailto:mayukhm.janitorsftc@gmail.com" data-magnet="" data-click="" style="display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:var(--ink); padding:18px 32px; font-size:18px; font-weight:700; white-space:nowrap; will-change:transform;">Contact us</a>
+  <section style="background:var(--panel); position:relative; z-index:1; padding:clamp(28px,3vw,40px) var(--pad); display:grid; grid-template-columns:minmax(0,1fr) auto; gap:clamp(20px,3vw,44px); align-items:center;" class="jl-sponsor-cta">
+    <div style="min-width:0;">
+      <div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);">talk to us</div>
+      <p style="margin:10px 0 0; max-width:52ch; font-size:16.5px; line-height:1.55; color:var(--text);">Ask what we need, what we’d put your logo on, or where the money goes. We answer every email.</p>
+    </div>
+    <a href="mailto:mayukhm.janitorsftc@gmail.com" data-magnet="" data-click="" style="display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:var(--ink); padding:16px 26px; font-size:16.5px; font-weight:700; white-space:nowrap; will-change:transform;">Contact us<span aria-hidden="true">→</span></a>
   </section>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad); border-bottom:1px solid var(--rule);">
-    <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,1fr);">
-    
-    <div style="min-width:0;">
-    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">2026–27 budget</h2>
-    <p style="margin-top:16px; max-width:58ch; font-size:16px; line-height:1.6; color:var(--muted);">Our projected season budget is <strong style="color:var(--text); font-weight:600;">$15,000–$26,000</strong>, supporting competition, robot development, fabrication, outreach, travel, and team operations.</p>
-    </div>
+  <section style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad);">
+    <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(20px,4vw,64px); align-items:end;" class="jl-why-top">
+      <h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">2026–27 budget</h2>
+      <p style="margin:0; max-width:52ch; font-size:15px; line-height:1.7; color:var(--muted);">Our projected season budget is <strong style="color:var(--text); font-weight:600;">$15,000–$26,000</strong>, supporting competition, robot development, fabrication, outreach, travel, and team operations.</p>
     </div>
     <div class="jl-sponsor-calc">
-      <div style="border-top:1px solid var(--rule); padding:clamp(24px,2.8vw,34px) 0; min-width:0;">
+      <div style="border-top:1px solid var(--rule); padding:clamp(20px,2.4vw,30px) 0; min-width:0;">
         <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap;">
-          <span style="flex:none; font-size:17px; color:var(--muted);">If you gave</span>
+          <span style="flex:none; font-size:16.5px; color:var(--muted);">If you gave</span>
           <span style="flex:none; font-size:clamp(28px,3.4vw,44px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; font-variant-numeric:tabular-nums;">{{ amountLabel }}</span>
         </div>
         <input aria-label="One-time sponsorship in dollars" type="range" min="250" max="2500" step="25" value="{{ amount }}" sc-camel-on-input="{{ setAmount }}" style="width:100%; margin-top:18px; accent-color:var(--accent); cursor:pointer;">
@@ -1429,38 +1493,54 @@
         </div>
       </div>
       <div class="jl-sponsor-tier-card" style="border-top:1px solid var(--rule); display:flex; flex-direction:column; justify-content:center; gap:12px;">
-        <div style="font-size:17px; color:var(--muted);">That makes you a</div>
+        <div style="font-size:16.5px; color:var(--muted);">That makes you a</div>
         <div style="font-size:clamp(30px,4vw,52px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:.92;">{{ tierName }}</div>
         <div style="font-family:var(--mono); font-size:12px; line-height:1.9; color:var(--muted); border-top:1px solid var(--rule); padding-top:14px; margin-top:8px;">{{ tierPerks }}</div>
-        <a href="mailto:mayukhm.janitorsftc@gmail.com" data-click="" style="margin-top:12px; display:inline-flex; align-items:center; justify-content:center; gap:9px; background:var(--accent); color:var(--ink); padding:13px 18px; font-size:17px; font-weight:600; white-space:nowrap; align-self:flex-start;">Talk to us</a>
+        <a href="mailto:mayukhm.janitorsftc@gmail.com" data-click="" style="margin-top:12px; display:inline-flex; align-items:center; justify-content:center; gap:9px; background:var(--accent); color:var(--ink); padding:16px 26px; font-size:16.5px; font-weight:600; white-space:nowrap; align-self:flex-start;">Talk to us</a>
       </div>
     </div>
     <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(16px,2.4vw,28px); margin-top:clamp(30px,3.4vw,42px); border-top:1px solid var(--rule); padding-top:clamp(24px,2.8vw,34px);">
-      <div><div style="font-size:clamp(28px,3vw,40px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; color:var(--accent);">20+</div><div style="margin-top:6px; font-size:15px; color:var(--muted);">outreach events</div></div>
-      <div><div style="font-size:clamp(28px,3vw,40px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; color:var(--accent);">5,000+</div><div style="margin-top:6px; font-size:15px; color:var(--muted);">people reached</div></div>
-      <div><div style="font-size:clamp(28px,3vw,40px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; color:var(--accent);">200+</div><div style="margin-top:6px; font-size:15px; color:var(--muted);">students taught</div></div>
+      <div><div data-count="3000" data-prefix="$" data-suffix="+" style="font-size:clamp(28px,3vw,40px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; color:var(--accent); font-variant-numeric:tabular-nums;">$3000+</div><div style="margin-top:6px; font-size:15px; color:var(--muted);">raised so far</div></div>
+      <div><div data-count="6" style="font-size:clamp(28px,3vw,40px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; color:var(--accent); font-variant-numeric:tabular-nums;">6</div><div style="margin-top:6px; font-size:15px; color:var(--muted);">students on the team</div></div>
+      <div><div data-count="6" style="font-size:clamp(28px,3vw,40px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; color:var(--accent); font-variant-numeric:tabular-nums;">6</div><div style="margin-top:6px; font-size:15px; color:var(--muted);">events this season</div></div>
     </div>
   </section>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
+  <section style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad) clamp(64px,6.6vw,96px);">
     <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,1fr);">
     
-    <div style="min-width:0;">
-    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">sponsor tiers</h2>
+    <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(20px,4vw,64px); align-items:end;" class="jl-why-top">
+      <h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">sponsor tiers</h2>
+      <p style="margin:0; max-width:52ch; font-size:15px; line-height:1.7; color:var(--muted);">One-time tiers, paid through our <a href="https://hcb.hackclub.com/donations/start/janitorsftcteam" target="_blank" rel="noopener noreferrer" data-click="" style="color:var(--accent);">Hack Club donation page</a>. Custom amounts welcome — contact Mayukh Mondal, Finance Director, at <a href="mailto:mayukhm.janitorsftc@gmail.com" data-click="" style="color:var(--accent);">mayukhm.janitorsftc@gmail.com</a> or +1 (925) 315-6433.</p>
     </div>
-    </div>
-    <p style="margin-top:clamp(20px,2.4vw,28px); max-width:62ch; font-size:15.5px; line-height:1.65; color:var(--muted);">One-time tiers, paid through our <a href="https://hcb.hackclub.com/donations/start/janitorsftcteam" target="_blank" rel="noopener noreferrer" data-click="" style="color:var(--accent);">Hack Club donation page</a>. Custom amounts welcome — contact Mayukh Mondal, Finance Director, at <a href="mailto:mayukhm.janitorsftc@gmail.com" data-click="" style="color:var(--accent);">mayukhm.janitorsftc@gmail.com</a> or +1 (925) 315-6433.</p>
-    <div class="jl-sponsor-tiers" style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-top:clamp(30px,3.4vw,42px);" data-stagger="zoom">
-      <div style="background:transparent; border-top:1px solid var(--rule); padding:28px 24px; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="transform:translateY(-2px); border-color:var(--accent);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$250<span style="font-size:16px; color:var(--muted);"> one-time</span></div><div style="margin-top:6px; font-size:17px; color:var(--muted);">bronze partner</div><div style="margin-top:18px; border-top:1px solid var(--rule); padding-top:14px; font-size:14.5px; line-height:1.9; color:var(--muted);">logo on team hoodies<br>logo on the site<br>thank-you on social</div></div>
-      <div style="background:transparent; border-top:1px solid var(--rule); padding:28px 24px; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="transform:translateY(-2px); border-color:var(--accent);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$500<span style="font-size:16px; color:var(--muted);"> one-time</span></div><div style="margin-top:6px; font-size:17px; color:var(--muted);">silver partner</div><div style="margin-top:18px; border-top:1px solid var(--rule); padding-top:14px; font-size:14.5px; line-height:1.9; color:var(--muted);">everything in bronze<br>small logo on the robot<br>pit banner</div></div>
-      <div style="background:transparent; border-top:1px solid var(--rule); padding:28px 24px; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="transform:translateY(-2px); border-color:var(--accent);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$1,000<span style="font-size:16px; color:var(--muted);"> one-time</span></div><div style="margin-top:6px; font-size:17px; color:var(--muted);">gold partner</div><div style="margin-top:18px; border-top:1px solid var(--rule); padding-top:14px; font-size:14.5px; line-height:1.9; color:var(--muted);">everything in silver<br>full sized logo on the robot<br>dedicated page on the site</div></div>
-      <div style="position:relative; background:transparent; border-top:1px solid var(--rule); padding:28px 24px; transition:transform .16s cubic-bezier(.2,.8,.3,1), border-color .18s ease;" style-hover="transform:translateY(-2px); border-color:var(--accent);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$2,500<span style="font-size:16px; color:var(--muted);"> one-time</span></div><div style="margin-top:6px; font-size:17px; color:var(--signal);">title partner</div><div style="margin-top:18px; border-top:1px solid var(--rule); padding-top:14px; font-size:14.5px; line-height:1.9; color:var(--muted);">everything in gold<br>included in official team name<br>logo everywhere · featured at every event</div></div>
+    <div class="jl-sponsor-tiers" style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:clamp(30px,3.4vw,42px);" data-stagger="zoom">
+      <div style="background:var(--bg); padding:clamp(20px,2.2vw,28px); display:flex; flex-direction:column; transition:background .2s ease;" style-hover="background:var(--panel);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$250<span style="font-size:16.5px; color:var(--muted);"> one-time</span></div><div style="margin-top:6px; font-size:16.5px; color:var(--muted);">bronze partner</div><div style="margin-top:18px; padding-top:14px; border-top:1px solid var(--rule);"><div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent);">buys us</div><div style="margin-top:8px; font-size:15px; line-height:1.5; letter-spacing:-.01em; color:var(--text);">Raw material — aluminum, hardware, a set of wheels.</div></div><div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--rule); font-size:15px; line-height:1.9; color:var(--muted);">logo on team hoodies<br>logo on the site<br>thank-you on social</div></div>
+      <div style="background:var(--bg); padding:clamp(20px,2.2vw,28px); display:flex; flex-direction:column; transition:background .2s ease;" style-hover="background:var(--panel);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$500<span style="font-size:16.5px; color:var(--muted);"> one-time</span></div><div style="margin-top:6px; font-size:16.5px; color:var(--muted);">silver partner</div><div style="margin-top:18px; padding-top:14px; border-top:1px solid var(--rule);"><div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent);">buys us</div><div style="margin-top:8px; font-size:15px; line-height:1.5; letter-spacing:-.01em; color:var(--text);">Electronics — motors, encoders, and the wiring around them.</div></div><div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--rule); font-size:15px; line-height:1.9; color:var(--muted);">everything in bronze<br>small logo on the robot<br>pit banner</div></div>
+      <div style="background:var(--bg); padding:clamp(20px,2.2vw,28px); display:flex; flex-direction:column; transition:background .2s ease;" style-hover="background:var(--panel);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$1,000<span style="font-size:16.5px; color:var(--muted);"> one-time</span></div><div style="margin-top:6px; font-size:16.5px; color:var(--muted);">gold partner</div><div style="margin-top:18px; padding-top:14px; border-top:1px solid var(--rule);"><div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent);">buys us</div><div style="margin-top:8px; font-size:15px; line-height:1.5; letter-spacing:-.01em; color:var(--text);">A whole subsystem — one swerve module, or the control system.</div></div><div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--rule); font-size:15px; line-height:1.9; color:var(--muted);">everything in silver<br>full sized logo on the robot<br>dedicated page on the site</div></div>
+      <div style="position:relative; background:var(--bg); padding:clamp(20px,2.2vw,28px); display:flex; flex-direction:column; transition:background .2s ease;" style-hover="background:var(--panel);"><div style="font-size:30px; font-family:var(--disp); font-weight:700; letter-spacing:-.034em;">$2,500<span style="font-size:16.5px; color:var(--muted);"> one-time</span></div><div style="margin-top:6px; font-size:16.5px; color:var(--accent);">title partner</div><div style="margin-top:18px; padding-top:14px; border-top:1px solid var(--rule);"><div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent);">buys us</div><div style="margin-top:8px; font-size:15px; line-height:1.5; letter-spacing:-.01em; color:var(--text);">Most of a season — parts, entry fees, and getting to events.</div></div><div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--rule); font-size:15px; line-height:1.9; color:var(--muted);">everything in gold<br>named our title partner in team materials<br>largest logo on the robot and pit banner</div></div>
     </div>
     <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-top:clamp(40px,4.5vw,56px); border-top:1px solid var(--rule); padding-top:clamp(30px,3.4vw,42px);">
-      <div style="padding:0 4px;"><div style="font-size:17px; font-family:var(--disp); font-weight:700; letter-spacing:-.02em;">Student-led</div><div style="margin-top:10px; font-size:14.5px; line-height:1.7; color:var(--muted);">Our students lead engineering, outreach, fundraising, and competition.</div></div>
-      <div style="padding:0 4px;"><div style="font-size:17px; font-family:var(--disp); font-weight:700; letter-spacing:-.02em;">Proven</div><div style="margin-top:10px; font-size:14.5px; line-height:1.7; color:var(--muted);">Five FIRST awards, NorCal Regional Championship experience, and 5,000+ people reached.</div></div>
-      <div style="padding:0 4px;"><div style="font-size:17px; font-family:var(--disp); font-weight:700; letter-spacing:-.02em;">Community-focused</div><div style="margin-top:10px; font-size:14.5px; line-height:1.7; color:var(--muted);">Competitive robotics paired with STEM education and mentorship.</div></div>
-      <div style="padding:0 4px;"><div style="font-size:17px; font-family:var(--disp); font-weight:700; letter-spacing:-.02em;">More than a logo</div><div style="margin-top:10px; font-size:14.5px; line-height:1.7; color:var(--muted);">Meaningful partnerships through visibility, community engagement, and STEM impact.</div></div>
+      <div style="padding:0 4px;"><div style="font-size:16.5px; font-family:var(--disp); font-weight:700; letter-spacing:-.02em;">Student-led</div><div style="margin-top:10px; font-size:15px; line-height:1.7; color:var(--muted);">Our students lead engineering, outreach, fundraising, and competition.</div></div>
+      <div style="padding:0 4px;"><div style="font-size:16.5px; font-family:var(--disp); font-weight:700; letter-spacing:-.02em;">Not our first robot</div><div style="margin-top:10px; font-size:15px; line-height:1.7; color:var(--muted);">It’s the team’s rookie year, not the members’. Between us we bring five FIRST awards and NorCal Regional Championship experience from previous FTC seasons.</div></div>
+      <div style="padding:0 4px;"><div style="font-size:16.5px; font-family:var(--disp); font-weight:700; letter-spacing:-.02em;">Community-focused</div><div style="margin-top:10px; font-size:15px; line-height:1.7; color:var(--muted);">Competitive robotics paired with STEM education and mentorship.</div></div>
+      <div style="padding:0 4px;"><div style="font-size:16.5px; font-family:var(--disp); font-weight:700; letter-spacing:-.02em;">More than a logo</div><div style="margin-top:10px; font-size:15px; line-height:1.7; color:var(--muted);">Meaningful partnerships through visibility, community engagement, and STEM impact.</div></div>
+    </div>
+  </section>
+
+  <section style="background:var(--panel); position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad) clamp(64px,6.6vw,96px); border-top:1px solid var(--rule);">
+    <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(20px,4vw,64px); align-items:end;" class="jl-why-top">
+      <h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">our sponsors</h2>
+      <p style="margin:0; max-width:52ch; font-size:15px; line-height:1.7; color:var(--muted);">We’re a rookie team, so these spots are open. Sponsor us and your logo goes here, on the robot, and on our hoodies — <a href="mailto:mayukhm.janitorsftc@gmail.com">get in touch</a>.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:clamp(22px,2.4vw,30px);" class="jl-sponsor-wall">
+      <a href="https://www.fabworks.com/" target="_blank" rel="noopener noreferrer" style="position:relative; width:100%; aspect-ratio:16/9; background:var(--bg); display:flex; align-items:center; justify-content:center; padding:clamp(20px,2.2vw,28px); transition:background .2s ease;" style-hover="background:var(--panel);"><img src="/assets/photos/sponsor-fabworks.png" alt="Fabworks" loading="lazy" decoding="async" style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block; opacity:.9;"></a>
+      <a href="https://frctees.com/" target="_blank" rel="noopener noreferrer" style="position:relative; width:100%; aspect-ratio:16/9; background:var(--bg); display:flex; align-items:center; justify-content:center; padding:clamp(20px,2.2vw,28px); transition:background .2s ease;" style-hover="background:var(--panel);"><img src="/assets/photos/sponsor-frctees.png" alt="FRCtees" loading="lazy" decoding="async" style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block; opacity:.9;"></a>
+      <div style="position:relative; width:100%; aspect-ratio:16/9; flex:none;"><image-slot id="sponsor-1" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Sponsor logo"></image-slot></div>
+      <div style="position:relative; width:100%; aspect-ratio:16/9; flex:none;"><image-slot id="sponsor-2" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Sponsor logo"></image-slot></div>
+      <div style="position:relative; width:100%; aspect-ratio:16/9; flex:none;"><image-slot id="sponsor-3" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Sponsor logo"></image-slot></div>
+      <div style="position:relative; width:100%; aspect-ratio:16/9; flex:none;"><image-slot id="sponsor-4" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Sponsor logo"></image-slot></div>
+      <div style="position:relative; width:100%; aspect-ratio:16/9; flex:none;"><image-slot id="sponsor-5" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Sponsor logo"></image-slot></div>
+      <div style="position:relative; width:100%; aspect-ratio:16/9; flex:none;"><image-slot id="sponsor-6" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Sponsor logo"></image-slot></div>
     </div>
   </section>
   </div>
@@ -1469,81 +1549,80 @@
   <sc-if value="{{ isTeam }}" hint-placeholder-val="{{ false }}">
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
-  <header style="position:relative; z-index:1; padding:clamp(52px,6vw,88px) var(--pad); border-bottom:1px solid var(--rule); display:flex; align-items:flex-end; justify-content:space-between; gap:30px; flex-wrap:wrap;">
-    <div><div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 29 L12 17 Q9.5 17 9.5 14.5 Q9.5 12 12 12 L13 12 L13 6.5 Q13 4 15.5 4 Q18 4 18 6.5 L18 12 L20.5 12 Q23 12 23 15 L23 29 Z"></path></svg><span style="white-space:nowrap;">roster · 36721</span></div><h1 data-scramble="" style="font-size:clamp(44px,7vw,104px); font-family:var(--disp); font-weight:700; line-height:.82; letter-spacing:-.042em;">the team</h1></div>
-    <p style="max-width:34ch; font-size:16px; line-height:1.6; color:var(--muted);">Two captains, four leads, two coaches. Everyone owns a piece of the robot.</p>
+  <header style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad); border-bottom:1px solid var(--rule); display:flex; align-items:flex-end; justify-content:space-between; gap:30px; flex-wrap:wrap;">
+    <div><h1 data-scramble="" style="font-size:clamp(52px,9vw,148px); font-family:var(--disp); font-weight:700; line-height:.82; letter-spacing:-.042em;">the team</h1></div>
+    <p style="max-width:34ch; font-size:16.5px; line-height:1.6; color:var(--muted);">Two captains, four leads, two coaches. Everyone owns a piece of the robot.</p>
   </header>
 
-  <section class="jl-team-captains" style="position:relative; z-index:1; border-bottom:1px solid var(--rule);">
-    <div style="padding:18px var(--pad); border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted);">lead captains</div>
-    <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:var(--rule);">
+  <section class="jl-team-members" style="position:relative; z-index:1;">
+    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:var(--rule);">
       <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);">
-        <image-slot id="team-1" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot>
-        <div style="padding:clamp(24px,2.8vw,34px);">
-          <div style="font-size:clamp(22px,1.9vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Samar B.</div>
-          <div style="margin-top:8px; font-size:14px; line-height:1.55; color:var(--accent);">team captain · software lead · strategy lead · driver</div>
-          <p style="margin-top:16px; font-size:15px; line-height:1.65; color:var(--muted);">From a young age, I’ve always asked myself, “What problem can I solve?” That question led me to start coding in 3rd grade, where I fell in love with it while making Python Turtle projects with my dad teaching me what a function was. That core memory eventually inspired me to learn 4 more languages while joining FLL in 3rd grade and FTC at Team X in 6th grade, where over four years I developed strong programming foundations, learned good practices in robotics, contributed to outreach, and served as a driver every year, even making it to regionals, followed by one year of FRC on Team 7419. I love robotics because it combines programming, problem-solving, teamwork, and the opportunity to turn ideas into something that can make an impact. I hope to build on my skills and contribute as a programmer, driver, and team member wherever I’m needed to help take this team to great success at worlds in Houston. One line of code, practice scrim, and night alongside my teammates at a time.</p>
+        <div style="position:relative; width:100%; aspect-ratio:4/3; flex:none;"><image-slot id="team-1" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Photo"></image-slot></div>
+        <div style="padding:clamp(20px,2.2vw,28px);">
+          <div style="font-size:clamp(19px,1.6vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Samar B.</div>
+          <div style="margin-top:8px; font-size:15px; line-height:1.55; color:var(--accent);">team captain · software co-lead · strategy lead · driver</div>
+            <div class="jl-tagrow" style="margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;"><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">programming</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">strategy</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">driver</span></div>
+          <p style="margin-top:14px; font-size:15px; line-height:1.65; color:var(--muted);">From a young age, I’ve always asked myself, “What problem can I solve?” That question led me to start coding in 3rd grade, where I fell in love with it while making Python Turtle projects with my dad teaching me what a function was. That core memory eventually inspired me to learn 4 more languages while joining FLL in 3rd grade and FTC at Team X in 6th grade, where over four years I developed strong programming foundations, learned good practices in robotics, contributed to outreach, and served as a driver every year, even making it to regionals, followed by one year of FRC on Team 7419. I love robotics because it combines programming, problem-solving, teamwork, and the opportunity to turn ideas into something that can make an impact. I hope to build on my skills and contribute as a programmer, driver, and team member wherever I’m needed to help take this team to great success at worlds in Houston. One line of code, practice scrim, and night alongside my teammates at a time.</p>
         </div>
       </div>
       <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);">
-        <image-slot id="team-2" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot>
-        <div style="padding:clamp(24px,2.8vw,34px);">
-          <div style="font-size:clamp(22px,1.9vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Mayukh M.</div>
-          <div style="margin-top:8px; font-size:14px; line-height:1.55; color:var(--accent);">team captain · hardware &amp; fabrication lead · finance lead</div>
-          <p style="margin-top:16px; font-size:15px; line-height:1.65; color:var(--muted);">My passion for engineering started with LEGOs, driven by an early desire to bring static builds to life using motors, microcontrollers, and code. Over the past six years, that curiosity has evolved into extensive hands-on experience across FIRST competitions and custom Arduino projects. Through countless cycles of CAD design, rapid prototyping, and precision fabrication, I have developed strong electromechanical intuition alongside practical experience in team budgeting and resource management. As a Team Captain, I combine this technical depth with organized leadership to ensure our build season is both structurally sound and fiscally strategic. I'm focused on streamlining our engineering workflow, pushing our competitive limits, and leading the team to a dominant World Championship run.</p>
+        <div style="position:relative; width:100%; aspect-ratio:4/3; flex:none;"><image-slot id="team-2" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Photo"></image-slot></div>
+        <div style="padding:clamp(20px,2.2vw,28px);">
+          <div style="font-size:clamp(19px,1.6vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Mayukh M.</div>
+          <div style="margin-top:8px; font-size:15px; line-height:1.55; color:var(--accent);">team captain · hardware &amp; fabrication co-lead · finance lead</div>
+            <div class="jl-tagrow" style="margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;"><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">fabrication</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">hardware</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">finance</span></div>
+          <p style="margin-top:14px; font-size:15px; line-height:1.65; color:var(--muted);">My passion for engineering started with LEGOs, driven by an early desire to bring static builds to life using motors, microcontrollers, and code. Over the past six years, that curiosity has evolved into extensive hands-on experience across FIRST competitions and custom Arduino projects. Through countless cycles of CAD design, rapid prototyping, and precision fabrication, I have developed strong electromechanical intuition alongside practical experience in team budgeting and resource management. As a Team Captain, I combine this technical depth with organized leadership to ensure our build season is both structurally sound and fiscally strategic. I'm focused on streamlining our engineering workflow, pushing our competitive limits, and leading the team to a dominant World Championship run.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="jl-team-members" style="position:relative; z-index:1; border-bottom:1px solid var(--rule);">
-    <div style="padding:18px var(--pad); border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted);">team leads</div>
-    <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:var(--rule);">
       <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);">
-        <image-slot id="team-3" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot>
-        <div style="padding:clamp(20px,2.4vw,28px);">
-          <div style="font-size:clamp(20px,1.7vw,26px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Arnav J.</div>
+        <div style="position:relative; width:100%; aspect-ratio:4/3; flex:none;"><image-slot id="team-3" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Photo"></image-slot></div>
+        <div style="padding:clamp(20px,2.2vw,28px);">
+          <div style="font-size:clamp(19px,1.6vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Arnav J.</div>
           <div style="margin-top:8px; font-size:13.5px; line-height:1.5; color:var(--accent);">software co-lead · hardware &amp; fabrication co-lead</div>
-          <p style="margin-top:14px; font-size:14.5px; line-height:1.65; color:var(--muted);">I first got into robotics through FLL in 4th grade, after already starting to learn coding with my dad. Since then, I’ve spent years building my skills through FLL and four years of FTC. I’ve programmed robots, driven every FTC season, worked on CAD and electronics, helped with outreach, and competed at qualifiers and regionals. Outside of robotics, I’ve also built my own projects with Arduino and worked on larger engineering and research projects, which have helped me learn how to take an idea and actually build it. A lot of my experience has come from trying things, seeing them fail, and figuring out how to make them better. I want to bring that experience to the team and be someone who can help wherever we need it, whether that’s programming, driving, building, or solving a problem at 2 AM. I’m here to keep learning, help my teammates, and do everything I can to make this our best season yet.</p>
+            <div class="jl-tagrow" style="margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;"><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">programming</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">fabrication</span></div>
+          <p style="margin-top:14px; font-size:15px; line-height:1.65; color:var(--muted);">I first got into robotics through FLL in 4th grade, after already starting to learn coding with my dad. Since then, I’ve spent years building my skills through FLL and four years of FTC. I’ve programmed robots, driven every FTC season, worked on CAD and electronics, helped with outreach, and competed at qualifiers and regionals. Outside of robotics, I’ve also built my own projects with Arduino and worked on larger engineering and research projects, which have helped me learn how to take an idea and actually build it. A lot of my experience has come from trying things, seeing them fail, and figuring out how to make them better. I want to bring that experience to the team and be someone who can help wherever we need it, whether that’s programming, driving, building, or solving a problem at 2 AM. I’m here to keep learning, help my teammates, and do everything I can to make this our best season yet.</p>
         </div>
       </div>
       <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);">
-        <image-slot id="team-4" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot>
-        <div style="padding:clamp(20px,2.4vw,28px);">
-          <div style="font-size:clamp(20px,1.7vw,26px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Adarsh U.</div>
-          <div style="margin-top:8px; font-size:13.5px; line-height:1.5; color:var(--accent);">design lead · strategy co-lead</div>
-          <p style="margin-top:14px; font-size:14.5px; line-height:1.6; color:var(--muted);">Bio coming soon.</p>
+        <div style="position:relative; width:100%; aspect-ratio:4/3; flex:none;"><image-slot id="team-4" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Photo"></image-slot></div>
+        <div style="padding:clamp(20px,2.2vw,28px);">
+          <div style="font-size:clamp(19px,1.6vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Adarsh U.</div>
+          <div style="margin-top:8px; font-size:13.5px; line-height:1.5; color:var(--accent);">design co-lead · strategy co-lead</div>
+            <div class="jl-tagrow" style="margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;"><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">cad</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">design</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">strategy</span></div>
+          <p style="margin-top:14px; font-size:15px; line-height:1.65; color:var(--muted);">Bio coming soon.</p>
         </div>
       </div>
       <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);">
-        <image-slot id="team-5" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot>
-        <div style="padding:clamp(20px,2.4vw,28px);">
-          <div style="font-size:clamp(20px,1.7vw,26px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Yajat</div>
-          <div style="margin-top:8px; font-size:13.5px; line-height:1.5; color:var(--accent);">outreach lead</div>
-          <p style="margin-top:14px; font-size:14.5px; line-height:1.6; color:var(--muted);">Bio coming soon.</p>
+        <div style="position:relative; width:100%; aspect-ratio:4/3; flex:none;"><image-slot id="team-5" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Photo"></image-slot></div>
+        <div style="padding:clamp(20px,2.2vw,28px);">
+          <div style="font-size:clamp(19px,1.6vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Kanav</div>
+          <div style="margin-top:8px; font-size:13.5px; line-height:1.5; color:var(--accent);">design co-lead · outreach co-lead</div>
+            <div class="jl-tagrow" style="margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;"><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">design</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">outreach</span></div>
+          <p style="margin-top:14px; font-size:15px; line-height:1.65; color:var(--muted);">Bio coming soon.</p>
         </div>
       </div>
       <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);">
-        <image-slot id="team-6" style="width:100%; aspect-ratio:4/5;" shape="rect" placeholder="Photo"></image-slot>
-        <div style="padding:clamp(20px,2.4vw,28px);">
-          <div style="font-size:clamp(20px,1.7vw,26px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Niraj</div>
+        <div style="position:relative; width:100%; aspect-ratio:4/3; flex:none;"><image-slot id="team-6" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Photo"></image-slot></div>
+        <div style="padding:clamp(20px,2.2vw,28px);">
+          <div style="font-size:clamp(19px,1.6vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Niraj</div>
           <div style="margin-top:8px; font-size:13.5px; line-height:1.5; color:var(--accent);">outreach co-lead</div>
-          <p style="margin-top:14px; font-size:14.5px; line-height:1.6; color:var(--muted);">Bio coming soon.</p>
+            <div class="jl-tagrow" style="margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;"><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">outreach</span></div>
+          <p style="margin-top:14px; font-size:15px; line-height:1.65; color:var(--muted);">Bio coming soon.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
+  <section style="background:var(--panel); position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad) clamp(64px,6.6vw,96px);">
     <div style="flex:1 1 100%; grid-column:1 / -1; width:100%; display:grid; grid-template-columns:minmax(0,1fr);">
     
     <div style="min-width:0;">
-    <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">our coaches</h2>
+    <h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">our coaches</h2>
     </div>
     </div>
     <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:var(--rule); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); margin-top:clamp(30px,3.4vw,42px);" data-stagger="zoom">
-      <div style="background:var(--bg); display:grid; grid-template-columns:auto minmax(0,1fr); gap:clamp(20px,2.6vw,34px); align-items:center; padding:clamp(24px,2.8vw,34px);"><image-slot id="coach-1" style="width:clamp(120px,12vw,168px); aspect-ratio:1;" shape="rect" placeholder="Photo"></image-slot><div><div style="font-size:clamp(22px,2vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Anish Mandal</div><div style="margin-top:5px; font-size:15px; color:var(--accent);">operations manager</div><p style="margin-top:14px; font-size:15.5px; line-height:1.6; color:var(--muted);">Bio coming soon.</p></div></div>
-      <div style="background:var(--bg); display:grid; grid-template-columns:auto minmax(0,1fr); gap:clamp(20px,2.6vw,34px); align-items:center; padding:clamp(24px,2.8vw,34px);"><image-slot id="coach-2" style="width:clamp(120px,12vw,168px); aspect-ratio:1;" shape="rect" placeholder="Photo"></image-slot><div><div style="font-size:clamp(22px,2vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Neeraj Juneja</div><div style="margin-top:5px; font-size:15px; color:var(--accent);">lead coach</div><p style="margin-top:14px; font-size:15.5px; line-height:1.6; color:var(--muted);">I am a builder and a passionate DIYer. Over the years, I have worked extensively with CNC, 3D printing, woodworking, and design, and I love using my hands (and brains) to design, create, fix, and improve things. I enjoy mentoring and coaching kids' robotics teams, where I can share my expertise and passion with aspiring young minds. It's really fulfilling to guide them through the process of designing and building robots. You can find some of my projects here: <a href="https://www.neerajjuneja.com/" target="_blank" rel="noopener noreferrer" style="color:var(--accent);" style-hover="opacity:.8;">neerajjuneja.com</a></p></div></div>
+      <div style="background:var(--bg); display:grid; grid-template-columns:auto minmax(0,1fr); gap:clamp(20px,2.6vw,34px); align-items:center; padding:clamp(20px,2.2vw,28px);"><div style="position:relative; width:clamp(120px,12vw,168px); aspect-ratio:1; flex:none;"><image-slot id="coach-1" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Photo"></image-slot></div><div><div style="font-size:clamp(22px,2vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Anish Mandal</div><div style="margin-top:5px; font-size:15px; color:var(--accent);">operations manager</div><p style="margin-top:14px; font-size:15px; line-height:1.6; color:var(--muted);">Bio coming soon.</p></div></div>
+      <div style="background:var(--bg); display:grid; grid-template-columns:auto minmax(0,1fr); gap:clamp(20px,2.6vw,34px); align-items:center; padding:clamp(20px,2.2vw,28px);"><div style="position:relative; width:clamp(120px,12vw,168px); aspect-ratio:1; flex:none;"><image-slot id="coach-2" style="position:absolute; inset:0; width:100%; height:100%; color:var(--muted);" shape="rect" placeholder="Photo"></image-slot></div><div><div style="font-size:clamp(22px,2vw,28px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Neeraj Juneja</div><div style="margin-top:5px; font-size:15px; color:var(--accent);">lead coach</div><p style="margin-top:14px; font-size:15px; line-height:1.6; color:var(--muted);">I am a builder and a passionate DIYer. Over the years, I have worked extensively with CNC, 3D printing, woodworking, and design, and I love using my hands (and brains) to design, create, fix, and improve things. I enjoy mentoring and coaching kids' robotics teams, where I can share my expertise and passion with aspiring young minds. It's really fulfilling to guide them through the process of designing and building robots. You can find some of my projects here: <a href="https://www.neerajjuneja.com/" target="_blank" rel="noopener noreferrer" style="color:var(--accent);" style-hover="opacity:.8;">neerajjuneja.com</a></p></div></div>
     </div>
   </section>
   </div>
@@ -1552,13 +1631,12 @@
   <sc-if value="{{ isPortfolio }}" hint-placeholder-val="{{ false }}">
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
-  <header style="position:relative; z-index:1; border-bottom:1px solid var(--rule); padding:clamp(52px,6vw,88px) var(--pad);">
-    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3 L16 12"></path><path d="M9 12 L23 12"></path><path d="M10.5 12 Q9.4 21 12 29 M13.6 12 Q13.2 21 14.2 29 M18.4 12 Q18.8 21 17.8 29 M21.5 12 Q22.6 21 20 29"></path></svg><span style="white-space:nowrap;">engineering notebook</span></div>
-    <h1 data-scramble="" style="font-size:clamp(44px,7vw,104px); font-family:var(--disp); font-weight:700; line-height:.86; letter-spacing:-.042em;">engineering<br>portfolio</h1>
+  <header style="position:relative; z-index:1; border-bottom:1px solid var(--rule); padding:clamp(52px,5.6vw,84px) var(--pad);">
+    <h1 data-scramble="" style="font-size:clamp(52px,9vw,148px); font-family:var(--disp); font-weight:700; line-height:.86; letter-spacing:-.042em;">engineering<br>portfolio</h1>
   </header>
 
-  <section style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
-    <p style="max-width:62ch; font-size:17px; line-height:1.65; color:var(--muted);">Every week we run the same pipeline: capture what we built in photos and CAD, write a dated entry in our shared notebook with the problem, the options we considered, and what we actually cut or coded, then tag each decision to a subsystem so judges can trace it. Before any competition we compile the season into a single PDF — executive summary up front, iteration log in the middle, outreach and budget in the back — and have two teammates who weren't on that subsystem read it cold to catch gaps. If they can't follow the story, we rewrite until they can.</p>
+  <section style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad) clamp(64px,6.6vw,96px);">
+    <p style="max-width:62ch; font-size:16.5px; line-height:1.65; color:var(--muted);">The plan for every build week: capture what we made in photos and CAD, write a dated entry with the problem, the options we considered, and what we actually cut or coded, then tag each decision to a subsystem so judges can trace it. Before our first competition we’ll compile the season into a single PDF — executive summary up front, iteration log in the middle, outreach and budget in the back — and have teammates who weren’t on that subsystem read it cold to catch gaps. If they can’t follow the story, we rewrite until they can. None of it exists yet — the season starts in October.</p>
   </section>
   </div>
   </sc-if>
@@ -1567,12 +1645,11 @@
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
   <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr); border-bottom:1px solid var(--rule);">
-    <div style="padding:clamp(52px,6vw,88px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:22px; height:22px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4 L14.5 18.5"></path><path d="M10.5 17 L16.5 14 L21 26.5 Q15 29.5 9 26.5 Z"></path><path d="M12.6 18.4 L11.4 26.6 M15.2 17.2 L15.2 27.6 M17.8 16.2 L19 26.6"></path></svg><span style="white-space:nowrap;">recruiting · rookie year</span></div>
-      <h1 data-scramble="" style="font-size:clamp(42px,6.5vw,98px); font-family:var(--disp); font-weight:700; line-height:.84; letter-spacing:-.042em;">join us</h1>
-      <p style="margin-top:24px; max-width:44ch; font-size:16.5px; line-height:1.6; color:var(--muted);">We need builders, coders, designers, and someone who actually enjoys writing. No experience needed — most of us had none. You can also reach out anytime at janitorsftcteam@googlegroups.com.</p>
+    <div style="padding:clamp(52px,5.6vw,84px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
+      <h1 data-scramble="" style="font-size:clamp(50px,8.5vw,140px); font-family:var(--disp); font-weight:700; line-height:.84; letter-spacing:-.042em;">join us</h1>
+      <p style="margin-top:24px; max-width:52ch; font-size:16.5px; line-height:1.6; color:var(--muted);">We need builders, coders, designers, and someone who actually enjoys writing. No experience needed — most of us had none. You can also reach out anytime at janitorsftcteam@googlegroups.com.</p>
       <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:32px;">
-        <a href="mailto:janitorsftcteam@googlegroups.com" data-magnet="" style="display:inline-flex; align-items:center; gap:9px; background:var(--accent); color:var(--ink); padding:15px 22px; font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:.14em; will-change:transform;">janitorsftcteam@googlegroups.com</a>
+        <a href="mailto:janitorsftcteam@googlegroups.com" data-magnet="" style="display:inline-flex; align-items:center; gap:9px; background:var(--accent); color:var(--ink); padding:16px 26px; font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:.14em; will-change:transform;">janitorsftcteam@googlegroups.com</a>
         <a class="jl-social-btn" href="https://discord.gg/HDxthJTbzb" target="_blank" rel="noopener noreferrer" data-magnet="" style="display:inline-flex; align-items:center; gap:9px; background:var(--key); border:1px solid var(--rule); box-shadow:0 4px 0 var(--edge); padding:15px 22px; font-family:var(--mono); font-size:12px; letter-spacing:.14em; transition:transform .1s ease, box-shadow .1s ease, background .2s;" style-hover="background:var(--keytop); color:var(--accent);" style-active="transform:translateY(4px); box-shadow:0 0 0 var(--edge);"><svg sc-camel-view-box="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M20.317 4.37a19.8 19.8 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.3 18.3 0 0 0-5.487 0 12.6 12.6 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.7 19.7 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.08.08 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14 14 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.8 19.8 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path></svg>Join Discord</a>
       </div>
     </div>
@@ -1585,12 +1662,12 @@
     </div>
   </header>
 
-  <section id="apply" class="jl-apply" style="position:relative; z-index:1; padding:clamp(64px,7vw,104px) var(--pad) clamp(80px,8.5vw,124px);">
+  <section id="apply" class="jl-apply" style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad) clamp(64px,6.6vw,96px);">
     <div style="flex:1 1 100%; width:100%; display:grid; grid-template-columns:minmax(0,1fr);">
       
       <div style="min-width:0;">
-        <h2 data-mask="" style="font-size:clamp(30px,4vw,56px); font-family:var(--disp); font-weight:700; letter-spacing:-.03em; line-height:1; text-transform:lowercase; margin:0;">apply</h2>
-        <p style="margin-top:16px; max-width:46ch; font-size:16.5px; line-height:1.6; color:var(--muted);">Fill out the questions below to apply! Prefer to talk first? Email us at janitorsftcteam@googlegroups.com or hop into Discord.</p>
+        <h2 data-mask="" style="font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">apply</h2>
+        <p style="margin-top:16px; max-width:52ch; font-size:16.5px; line-height:1.6; color:var(--muted);">Fill out the questions below to apply! Prefer to talk first? Email us at janitorsftcteam@googlegroups.com or hop into Discord.</p>
       </div>
     </div>
 
@@ -1698,7 +1775,7 @@
           <span style="font-size:20px; font-family:var(--disp); font-weight:700; letter-spacing:-.03em;">the janitors</span>
           <span style="font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.1em; color:var(--ink); background:var(--accent); padding:3px 6px;">36721</span>
         </div>
-        <p style="margin-top:16px; max-width:34ch; font-size:14.5px; line-height:1.6; color:var(--muted);">A student-run FIRST Tech Challenge team out of Dublin, CA. We build robots.</p>
+        <p style="margin-top:16px; max-width:34ch; font-size:15px; line-height:1.6; color:var(--muted);">A student-run FIRST Tech Challenge team out of Dublin, CA. We build robots.</p>
         <div style="display:flex; gap:5px; margin-top:22px;">
           <span style="width:36px; height:48px; display:flex; align-items:center; justify-content:center; background:var(--bg); border:1px solid var(--rule); font-family:var(--mono); font-size:22px; font-weight:700; color:var(--accent); animation:led 2.4s ease-in-out 0s infinite;">3</span>
           <span style="width:36px; height:48px; display:flex; align-items:center; justify-content:center; background:var(--bg); border:1px solid var(--rule); font-family:var(--mono); font-size:22px; font-weight:700; color:var(--accent); animation:led 2.4s ease-in-out .2s infinite;">6</span>
@@ -1708,8 +1785,8 @@
         </div>
       </div>
       <div>
-        <div style="font-size:16px; color:var(--text);">Pages</div>
-        <div style="display:flex; flex-direction:column; gap:11px; margin-top:16px; font-size:14.5px; color:var(--muted);">
+        <div style="font-size:16.5px; color:var(--text);">Pages</div>
+        <div style="display:flex; flex-direction:column; gap:11px; margin-top:16px; font-size:15px; color:var(--muted);">
           <a sc-camel-on-click="{{ navHome }}" style="background-image:linear-gradient(var(--accent),var(--accent)); background-repeat:no-repeat; background-position:0 100%; background-size:0% 1px; transition:color .2s ease, background-size .3s cubic-bezier(.2,.8,.3,1);" style-hover="color:var(--accent); background-size:100% 1px;">Home</a>
           <a sc-camel-on-click="{{ navRobot }}" style="background-image:linear-gradient(var(--accent),var(--accent)); background-repeat:no-repeat; background-position:0 100%; background-size:0% 1px; transition:color .2s ease, background-size .3s cubic-bezier(.2,.8,.3,1);" style-hover="color:var(--accent); background-size:100% 1px;">The Robot</a>
           <a sc-camel-on-click="{{ navSeason }}" style="background-image:linear-gradient(var(--accent),var(--accent)); background-repeat:no-repeat; background-position:0 100%; background-size:0% 1px; transition:color .2s ease, background-size .3s cubic-bezier(.2,.8,.3,1);" style-hover="color:var(--accent); background-size:100% 1px;">The Season</a>
@@ -1717,15 +1794,15 @@
         </div>
       </div>
       <div>
-        <div style="font-size:16px; color:var(--text);">Team</div>
-        <div style="display:flex; flex-direction:column; gap:11px; margin-top:16px; font-size:14.5px; color:var(--muted);">
+        <div style="font-size:16.5px; color:var(--text);">Team</div>
+        <div style="display:flex; flex-direction:column; gap:11px; margin-top:16px; font-size:15px; color:var(--muted);">
           <a sc-camel-on-click="{{ navTeam }}" style="background-image:linear-gradient(var(--accent),var(--accent)); background-repeat:no-repeat; background-position:0 100%; background-size:0% 1px; transition:color .2s ease, background-size .3s cubic-bezier(.2,.8,.3,1);" style-hover="color:var(--accent); background-size:100% 1px;">Meet the team</a>
           <a sc-camel-on-click="{{ navSponsors }}" style="background-image:linear-gradient(var(--accent),var(--accent)); background-repeat:no-repeat; background-position:0 100%; background-size:0% 1px; transition:color .2s ease, background-size .3s cubic-bezier(.2,.8,.3,1);" style-hover="color:var(--accent); background-size:100% 1px;">Sponsors</a>
         </div>
       </div>
       <div>
-        <div style="font-size:16px; color:var(--text);">Contact</div>
-        <div style="display:flex; flex-direction:column; gap:12px; margin-top:16px; font-size:14.5px; color:var(--muted);">
+        <div style="font-size:16.5px; color:var(--text);">Contact</div>
+        <div style="display:flex; flex-direction:column; gap:12px; margin-top:16px; font-size:15px; color:var(--muted);">
           <a href="mailto:janitorsftcteam@googlegroups.com" style="color:var(--accent);" style-hover="opacity:.8;">janitorsftcteam@googlegroups.com</a>
           <a href="https://discord.gg/HDxthJTbzb" target="_blank" rel="noopener noreferrer" style="color:var(--muted);" style-hover="color:var(--accent);">Discord</a>
           <a href="https://www.instagram.com/janitorsftcteam" target="_blank" rel="noopener noreferrer" style="color:var(--muted);" style-hover="color:var(--accent);">Instagram</a>
@@ -1734,7 +1811,7 @@
         </div>
       </div>
     </div>
-    <div style="border-top:1px solid var(--rule); padding:15px var(--pad); display:flex; flex-wrap:wrap; gap:10px 26px; justify-content:space-between; font-size:14px; color:var(--muted);">
+    <div style="border-top:1px solid var(--rule); padding:15px var(--pad); display:flex; flex-wrap:wrap; gap:10px 26px; justify-content:space-between; font-size:15px; color:var(--muted);">
       <span>© 2026 the janitors · ftc 36721</span>
       <span>FIRST® tech challenge · 2026/27</span>
       <span>built by the team</span>
@@ -1752,6 +1829,32 @@ class Component extends DCLogic {
   matchResults() { return (window.TEAM && window.TEAM.matches) || []; }
   routeSteps() { return (window.TEAM && window.TEAM.routeSteps) || []; }
   pageSequence() { return ["home", "robot", "season", "outreach", "sponsors", "team", "portfolio", "join"]; }
+  armCounters() {
+    if (typeof window === "undefined" || !window.IntersectionObserver) return;
+    const els = document.querySelectorAll("[data-count]");
+    if (!els.length) return;
+    if (this.countObs) this.countObs.disconnect();
+    const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const label = (el, v) => (el.getAttribute("data-prefix") || "") + Math.round(v).toLocaleString() + (el.getAttribute("data-suffix") || "");
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+    this.countObs = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        const el = en.target;
+        this.countObs.unobserve(el);
+        const target = parseFloat(el.getAttribute("data-count")) || 0;
+        if (reduced) { el.textContent = label(el, target); return; }
+        const t0 = performance.now();
+        const step = (now) => {
+          const p = Math.min(1, (now - t0) / 1150);
+          el.textContent = label(el, target * ease(p));
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.35 });
+    els.forEach((el) => { el.textContent = label(el, 0); this.countObs.observe(el); });
+  }
   goToPage(p) {
     if (p === this.state.page) { this.scrollToTop(); return; }
     const ord = this.pageSequence();
@@ -1875,6 +1978,7 @@ class Component extends DCLogic {
       this.startBootSequence();
     }
     this.initialize();
+    requestAnimationFrame(() => this.armCounters());
   }
   measureLockup() {
     if (typeof window === "undefined") return;
@@ -2455,7 +2559,7 @@ class Component extends DCLogic {
     const h = Math.ceil(((bar || nav).getBoundingClientRect().height) || 0);
     if (h > 0) document.documentElement.style.setProperty("--navh", h + "px");
   }
-  clearCache() { this.measureNav(); this.scrollDirty = true; this.barEl = null; this.percentEl = null; this.plateEl = null; this.trackEl = null; this.viewerEl = null; this.wipeEl = null; this.sweepEl = null; this.sweptEl = null; this.speckEls = null; this.magnetEls = null; this.tiltEls = null; this.parallaxEls = null; }
+  clearCache() { this.measureNav(); requestAnimationFrame(() => this.armCounters()); this.scrollDirty = true; this.barEl = null; this.percentEl = null; this.plateEl = null; this.trackEl = null; this.viewerEl = null; this.wipeEl = null; this.sweepEl = null; this.sweptEl = null; this.speckEls = null; this.magnetEls = null; this.tiltEls = null; this.parallaxEls = null; }
   sortBy(k) {
     const cur = this.state.sortKey;
     this.setState({ sortKey: k, sortDir: cur === k ? -(this.state.sortDir || 1) : 1 });
@@ -2551,7 +2655,7 @@ class Component extends DCLogic {
     const bar = (frac) => ({ display: "block", height: "100%", width: (frac * 100) + "%", background: accent, transition: "width .3s ease" });
     const annual = amount;
     const tiers = [
-      { min: 2500, name: "title partner", perks: "everything in gold · included in official team name · logo everywhere · featured at every event" },
+      { min: 2500, name: "title partner", perks: "everything in gold · named our title partner in team materials · largest logo on the robot and pit banner" },
       { min: 1000, name: "gold partner", perks: "everything in silver · full sized logo on the robot · dedicated page on the site" },
       { min: 500, name: "silver partner", perks: "everything in bronze · small logo on the robot · pit banner" },
       { min: 250, name: "bronze partner", perks: "logo on team hoodies · logo on the site · thank-you on social" },
@@ -2561,7 +2665,7 @@ class Component extends DCLogic {
     const stages = [
       { name: "the team", value: "the janitors", unit: "first tech challenge · rookie", note: "Six students, one shop, and a robot built from raw stock." },
       { name: "team number", value: "36721", unit: "dublin, ca · 2026", note: "Our rookie number. You'll see it on the pit banner this season." },
-      { name: "the robot", value: "mop-9000", unit: "mecanum · vision · lift", note: "Four-motor base, compliant intake, dual-stage lift, Java on the Control Hub." },
+      { name: "the robot", value: "mop-9000", unit: "swerve · in design", note: "One module drawn and being assembled. The rest of the robot comes after the drivetrain drives." },
       { name: "the record", value: "0 – 0", unit: "matches played so far", note: "Nothing on the board yet. Every number here is about to change." },
     ];
     const stageIdx = ((this.state.stage || 0) % 4 + 4) % 4;
@@ -2668,7 +2772,6 @@ class Component extends DCLogic {
       booting: !!this.state.booting,
       bootLockStyle: { position: "absolute", left: 0, right: 0, top: (this.state.lockY || 0) + "px", transform: "translateY(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: "18px", textAlign: "center", padding: "0 6vw", visibility: this.state.lockY ? "visible" : "hidden" },
 
-
       scrollTopFn: () => this.scrollToTop(),
       onRobotDown: (e) => this.startViewerDrag(e),
       subTitle: subs[subIndex].t, subDesc: subs[subIndex].d, subSpecA: subs[subIndex].a, subSpecB: subs[subIndex].b,
@@ -2686,4 +2789,4 @@ class Component extends DCLogic {
 }
 </script>
 
-Ø</body></html>
+</body></html>

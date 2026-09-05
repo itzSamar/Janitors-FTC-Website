@@ -4,6 +4,32 @@ class Component extends DCLogic {
   matchResults() { return (window.TEAM && window.TEAM.matches) || []; }
   routeSteps() { return (window.TEAM && window.TEAM.routeSteps) || []; }
   pageSequence() { return ["home", "robot", "season", "outreach", "sponsors", "team", "portfolio", "join"]; }
+  armCounters() {
+    if (typeof window === "undefined" || !window.IntersectionObserver) return;
+    const els = document.querySelectorAll("[data-count]");
+    if (!els.length) return;
+    if (this.countObs) this.countObs.disconnect();
+    const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const label = (el, v) => (el.getAttribute("data-prefix") || "") + Math.round(v).toLocaleString() + (el.getAttribute("data-suffix") || "");
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+    this.countObs = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        const el = en.target;
+        this.countObs.unobserve(el);
+        const target = parseFloat(el.getAttribute("data-count")) || 0;
+        if (reduced) { el.textContent = label(el, target); return; }
+        const t0 = performance.now();
+        const step = (now) => {
+          const p = Math.min(1, (now - t0) / 1150);
+          el.textContent = label(el, target * ease(p));
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.35 });
+    els.forEach((el) => { el.textContent = label(el, 0); this.countObs.observe(el); });
+  }
   goToPage(p) {
     if (p === this.state.page) { this.scrollToTop(); return; }
     const ord = this.pageSequence();
@@ -127,6 +153,7 @@ class Component extends DCLogic {
       this.startBootSequence();
     }
     this.initialize();
+    requestAnimationFrame(() => this.armCounters());
   }
   measureLockup() {
     if (typeof window === "undefined") return;
@@ -707,7 +734,7 @@ class Component extends DCLogic {
     const h = Math.ceil(((bar || nav).getBoundingClientRect().height) || 0);
     if (h > 0) document.documentElement.style.setProperty("--navh", h + "px");
   }
-  clearCache() { this.measureNav(); this.scrollDirty = true; this.barEl = null; this.percentEl = null; this.plateEl = null; this.trackEl = null; this.viewerEl = null; this.wipeEl = null; this.sweepEl = null; this.sweptEl = null; this.speckEls = null; this.magnetEls = null; this.tiltEls = null; this.parallaxEls = null; }
+  clearCache() { this.measureNav(); requestAnimationFrame(() => this.armCounters()); this.scrollDirty = true; this.barEl = null; this.percentEl = null; this.plateEl = null; this.trackEl = null; this.viewerEl = null; this.wipeEl = null; this.sweepEl = null; this.sweptEl = null; this.speckEls = null; this.magnetEls = null; this.tiltEls = null; this.parallaxEls = null; }
   sortBy(k) {
     const cur = this.state.sortKey;
     this.setState({ sortKey: k, sortDir: cur === k ? -(this.state.sortDir || 1) : 1 });
@@ -803,7 +830,7 @@ class Component extends DCLogic {
     const bar = (frac) => ({ display: "block", height: "100%", width: (frac * 100) + "%", background: accent, transition: "width .3s ease" });
     const annual = amount;
     const tiers = [
-      { min: 2500, name: "title partner", perks: "everything in gold · included in official team name · logo everywhere · featured at every event" },
+      { min: 2500, name: "title partner", perks: "everything in gold · named our title partner in team materials · largest logo on the robot and pit banner" },
       { min: 1000, name: "gold partner", perks: "everything in silver · full sized logo on the robot · dedicated page on the site" },
       { min: 500, name: "silver partner", perks: "everything in bronze · small logo on the robot · pit banner" },
       { min: 250, name: "bronze partner", perks: "logo on team hoodies · logo on the site · thank-you on social" },
@@ -813,7 +840,7 @@ class Component extends DCLogic {
     const stages = [
       { name: "the team", value: "the janitors", unit: "first tech challenge · rookie", note: "Six students, one shop, and a robot built from raw stock." },
       { name: "team number", value: "36721", unit: "dublin, ca · 2026", note: "Our rookie number. You'll see it on the pit banner this season." },
-      { name: "the robot", value: "mop-9000", unit: "mecanum · vision · lift", note: "Four-motor base, compliant intake, dual-stage lift, Java on the Control Hub." },
+      { name: "the robot", value: "mop-9000", unit: "swerve · in design", note: "One module drawn and being assembled. The rest of the robot comes after the drivetrain drives." },
       { name: "the record", value: "0 – 0", unit: "matches played so far", note: "Nothing on the board yet. Every number here is about to change." },
     ];
     const stageIdx = ((this.state.stage || 0) % 4 + 4) % 4;
@@ -919,7 +946,6 @@ class Component extends DCLogic {
       rootStyle,
       booting: !!this.state.booting,
       bootLockStyle: { position: "absolute", left: 0, right: 0, top: (this.state.lockY || 0) + "px", transform: "translateY(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: "18px", textAlign: "center", padding: "0 6vw", visibility: this.state.lockY ? "visible" : "hidden" },
-
 
       scrollTopFn: () => this.scrollToTop(),
       onRobotDown: (e) => this.startViewerDrag(e),
