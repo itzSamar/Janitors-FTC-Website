@@ -761,8 +761,8 @@ class Component extends DCLogic {
   renderVals() {
     this.initialize();
     const finishes = {
-      "Blackout": { bg: "#07090A", panel: "#0D1214", key: "#141A1D", keytop: "#1B2327", rule: "rgba(255,255,255,.13)", text: "#E9F6F8", muted: "#7A8B90", ink: "#04080A", edge: "rgba(0,0,0,.7)" },
-      "Lab Grey": { bg: "#DBDBD5", panel: "#E6E6E0", key: "#EDEDE7", keytop: "#F4F4EF", rule: "rgba(0,0,0,.2)", text: "#11161A", muted: "#5C6669", ink: "#0A0F11", edge: "rgba(0,0,0,.32)" },
+      "Blackout": { bg: "#07090A", panel: "#0D1214", key: "#141A1D", keytop: "#1B2327", rule: "rgba(255,255,255,.13)", text: "#E9F6F8", muted: "#D4E2E6", dust: "#7A8B90", ink: "#04080A", edge: "rgba(0,0,0,.7)" },
+      "Lab Grey": { bg: "#DBDBD5", panel: "#E6E6E0", key: "#EDEDE7", keytop: "#F4F4EF", rule: "rgba(0,0,0,.2)", text: "#11161A", muted: "#2A3236", dust: "#5C6669", ink: "#0A0F11", edge: "rgba(0,0,0,.32)" },
     };
     const defaultFinish = finishes[this.props.finish] ? this.props.finish : "Blackout";
     const finishName = this.state.noir ? (defaultFinish === "Blackout" ? "Lab Grey" : "Blackout") : defaultFinish;
@@ -770,7 +770,7 @@ class Component extends DCLogic {
     const accent = this.props.accentColor || "#22D3EE";
     const rootStyle = {
       "--bg": theme.bg, "--signal": this.props.signalColor || "#F2A93B", "--panel": theme.panel, "--key": theme.key, "--keytop": theme.keytop, "--rule": theme.rule,
-      "--text": theme.text, "--muted": theme.muted, "--accent": accent, "--ink": theme.ink, "--edge": theme.edge,
+      "--text": theme.text, "--muted": theme.muted, "--dust": theme.dust, "--accent": accent, "--ink": theme.ink, "--edge": theme.edge,
       background: theme.bg, color: theme.text, position: "relative", minHeight: "100vh",
       overflowX: "clip", maxWidth: "1720px", margin: "0 auto",
     };
