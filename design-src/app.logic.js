@@ -1,5 +1,5 @@
 class Component extends DCLogic {
-  state = { page: "home", sub: 0, booting: false, sound: false };
+  state = { page: "home", sub: 0, booting: false };
   buildLog() { return (window.TEAM && window.TEAM.buildLog) || []; }
   matchResults() { return (window.TEAM && window.TEAM.matches) || []; }
   routeSteps() { return (window.TEAM && window.TEAM.routeSteps) || []; }
@@ -57,13 +57,13 @@ class Component extends DCLogic {
     if (prev) prev.remove();
     const finishName = (() => {
       try {
-        const finishes = { "Blackout": 1, "Lab Grey": 1 };
+        const finishes = { "Blackout": 1 };
         const defaultFinish = finishes[this.props.finish] ? this.props.finish : "Blackout";
-        return this.state.noir ? (defaultFinish === "Blackout" ? "Lab Grey" : "Blackout") : defaultFinish;
+        return defaultFinish;
       } catch (e) { return "Blackout"; }
     })();
     const accent = (this.props && this.props.accentColor) || "#22D3EE";
-    const veil = finishName === "Lab Grey" ? "#DBDBD5" : "#07090A";
+    const veil = "#07090A";
     // Dark uniform, matches site aesthetic
     const suit = "#2E3A40";
     const suitDark = "#1A2226";
@@ -317,7 +317,7 @@ class Component extends DCLogic {
       const el = e.target && e.target.closest ? e.target.closest("[data-click]") : null;
       if (el) this.playClick(el.getAttribute("data-click") === "up" ? "up" : "down");
     };
-    document.addEventListener("pointerdown", this.handleClickSound);
+    
 
     this.handleOutsideClick = (e) => {
       if (!this.state.menuOpen) return;
@@ -674,7 +674,7 @@ class Component extends DCLogic {
     }
   }
   playClick(kind) {
-    if (!this.state.sound) return;
+    return;
     try {
       const AC = window.AudioContext || window.webkitAudioContext;
       if (!AC) return;
@@ -762,10 +762,10 @@ class Component extends DCLogic {
     this.initialize();
     const finishes = {
       "Blackout": { bg: "#07090A", panel: "#0D1214", key: "#141A1D", keytop: "#1B2327", rule: "rgba(255,255,255,.13)", text: "#E9F6F8", muted: "#D4E2E6", dust: "#7A8B90", ink: "#04080A", edge: "rgba(0,0,0,.7)" },
-      "Lab Grey": { bg: "#DBDBD5", panel: "#E6E6E0", key: "#EDEDE7", keytop: "#F4F4EF", rule: "rgba(0,0,0,.2)", text: "#11161A", muted: "#2A3236", dust: "#5C6669", ink: "#0A0F11", edge: "rgba(0,0,0,.32)" },
+      
     };
     const defaultFinish = finishes[this.props.finish] ? this.props.finish : "Blackout";
-    const finishName = this.state.noir ? (defaultFinish === "Blackout" ? "Lab Grey" : "Blackout") : defaultFinish;
+    const finishName = defaultFinish;
     const theme = finishes[finishName];
     const accent = this.props.accentColor || "#22D3EE";
     const rootStyle = {
@@ -922,13 +922,9 @@ class Component extends DCLogic {
       tierName: tier.name, tierPerks: tier.perks,
       menuOpen: !!this.state.menuOpen,
       toggleMenu: () => this.setState({ menuOpen: !this.state.menuOpen }),
-      toggleSound: () => this.setState({ sound: !this.state.sound }),
-      toggleFinish: () => this.setState({ noir: !this.state.noir }),
       replayBoot: () => { this.setState({ menuOpen: false }); this.startBootSequence(); },
       bootStep0: bp(0, "ok"), bletter1: bp(1, "ok"), bletter2: bp(2, "ok"), bletter3: bp(3, "ok"), bletter4: bp(4, "5 / 5"),
       gearStyle: { width: "15px", height: "15px", display: "block", transition: "transform .45s cubic-bezier(.2,.8,.3,1)", transform: this.state.menuOpen ? "rotate(90deg)" : "none" },
-      soundToggle: toggleTrack(!!this.state.sound), soundToggleKnob: knob(!!this.state.sound),
-      finishToggle: toggleTrack(!!this.state.noir), finishToggleKnob: knob(!!this.state.noir),
       menuButtonStyle: {
         display: "inline-flex", alignItems: "center", justifyContent: "center", marginRight: "4px",
         padding: "8px", background: this.state.menuOpen ? "var(--panel)" : "transparent",
