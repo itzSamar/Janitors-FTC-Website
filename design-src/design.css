@@ -1,5 +1,12 @@
 
-    :root{--pad:clamp(18px,4vw,44px);--mono:'JetBrains Mono',ui-monospace,monospace;--disp:'Space Grotesk','Archivo',system-ui,sans-serif;}
+    @font-face{
+      font-family:'Blowing';
+      font-style:normal;
+      font-weight:400;
+      font-display:swap;
+      src:url("/assets/Blowing.otf") format('opentype');
+    }
+    :root{--bg:#07090A;--panel:#0D1214;--key:#141A1D;--keytop:#1B2327;--rule:rgba(255,255,255,.13);--text:#E9F6F8;--muted:#D4E2E6;--dust:#7A8B90;--accent:#22D3EE;--signal:#F2A93B;--ink:#04080A;--edge:rgba(0,0,0,.7);--pad:clamp(18px,4vw,44px);--mono:'DM Mono','JetBrains Mono',ui-monospace,monospace;--serif:'Zilla Slab','Newsreader',Georgia,serif;--label:'Chakra Petch','Saira Condensed',system-ui,sans-serif;--hand:'Blowing',ui-rounded,cursive;--disp:'Archivo','Space Grotesk',system-ui,sans-serif;}
     *{box-sizing:border-box;}
     html{scroll-behavior:smooth;}
     body{margin:0;background:#07090A;font-family:'Archivo',system-ui,sans-serif;font-feature-settings:'ss01';-webkit-font-smoothing:antialiased;}
@@ -12,7 +19,8 @@
       section{break-inside:avoid;page-break-inside:avoid}
       @page{margin:14mm}
     }
-    @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}html{scroll-behavior:auto;}}
+    @media (prefers-reduced-motion: reduce){
+      [style*="jlFall"]{animation:none !important; opacity:0 !important;}*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}html{scroll-behavior:auto;}}
     @keyframes jl-cog{to{transform:rotate(360deg)}}
     @keyframes tick{to{transform:translateX(-50%)}}
     @keyframes blink{0%,45%{opacity:1}50%,100%{opacity:.12}}
@@ -63,8 +71,7 @@
       border:1px solid var(--rule);
       border-radius:0;
       padding:14px 16px;
-      font-family:var(--disp);
-      font-size:16.5px;
+            font-family:var(--serif); font-size:17.5px;
       line-height:1.4;
       outline:none;
       transition:border-color .18s ease, box-shadow .18s ease;
@@ -75,6 +82,7 @@
       border-color:var(--accent);
       box-shadow:0 0 0 1px var(--accent);
     }
+    image-slot[data-avatar]::part(empty){opacity:0;}
     .jl-apply input::placeholder,
     .jl-apply textarea::placeholder{color:var(--muted); opacity:.7;}
     .jl-apply .jl-q{
@@ -102,8 +110,7 @@
       color:var(--text);
       letter-spacing:.04em;
       text-transform:none;
-      font-family:var(--disp);
-      font-size:16.5px;
+            font-family:var(--serif); font-size:17.5px;
       font-weight:600;
     }
     .jl-apply .jl-interests{
@@ -265,6 +272,12 @@
       max-width:100%;
       pointer-events:none;
     }
+    @keyframes jlFall{
+      0%{transform:translate3d(0,-14vh,0) rotate(0deg); opacity:0}
+      9%{opacity:.1}
+      86%{opacity:.1}
+      100%{transform:translate3d(var(--dx,14px),108vh,0) rotate(var(--spin,300deg)); opacity:0}
+    }
     @keyframes jl-find-drift{
       0%,100%{ transform:translate3d(0,0,0); }
       35%{ transform:translate3d(7px,-3px,0); }
@@ -323,8 +336,8 @@
         grid-template-columns:1fr !important;
         row-gap:18px !important;
       }
-      .jl-photo-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+      .jl-shop-hero{
+        grid-template-columns:1fr !important;
       }
       .jl-goal-cols{
         grid-template-columns:1fr !important;
@@ -334,16 +347,8 @@
         grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
         row-gap:16px !important;
       }
-      .jl-offset{
-        padding-left:var(--pad) !important;
-        padding-right:var(--pad) !important;
-      }
       .jl-tier-row > div:first-child{
         grid-column:1 / -1;
-      }
-      .jl-photo-grid > div{
-        grid-column:auto !important;
-        grid-row:auto !important;
       }
       .jl-why-top,
       .jl-why-close{
@@ -457,11 +462,3 @@
       }
     }
   
-
-
-                    .jp{animation:jlPush .28s ease-in-out infinite;transform-origin:120px 140px}
-                    .jm{animation:jlMopScrub .28s ease-in-out infinite;transform-origin:210px 186px}
-                    .jhip{transform-box:fill-box;transform-origin:50% 0%}
-                    .jlegA{animation:jlThighBack .28s linear infinite}
-                    .jlegB{animation:jlThighFront .28s linear infinite}
-                  

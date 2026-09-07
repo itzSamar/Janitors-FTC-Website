@@ -64,7 +64,7 @@ class Component extends DCLogic {
     })();
     const accent = (this.props && this.props.accentColor) || "#22D3EE";
     const veil = finishName === "Lab Grey" ? "#DBDBD5" : "#07090A";
-    // Dark uniform — matches site aesthetic (not high-contrast white)
+    // Dark uniform, matches site aesthetic
     const suit = "#2E3A40";
     const suitDark = "#1A2226";
     const skin = "#C4A484";
@@ -110,7 +110,7 @@ class Component extends DCLogic {
                       <rect x="182" y="158" width="50" height="10" rx="2" fill="${wood}"></rect>
                     </g>
 
-                    <!-- legs pivot at hips — actual run cycle -->
+                    <!-- legs pivot at hips, actual run cycle -->
                     <g class="jhip jlegA">
                       <path d="M112 132 L96 158" fill="none" stroke="${suitDark}" stroke-width="17"></path>
                       <path d="M96 158 L84 178" fill="none" stroke="${suitDark}" stroke-width="15"></path>
@@ -269,12 +269,12 @@ class Component extends DCLogic {
           form.reset();
           syncChips();
           if (status) {
-            status.textContent = "Application sent — we'll be in touch";
+            status.textContent = "Application sent, we'll be in touch";
             status.className = "jl-status is-ok";
           }
         }).catch(() => {
           if (status) {
-            status.textContent = "Send failed — email janitorsftcteam@googlegroups.com";
+            status.textContent = "Send failed. Email janitorsftcteam@googlegroups.com";
             status.className = "jl-status is-err";
           }
         }).then(() => {
@@ -771,7 +771,7 @@ class Component extends DCLogic {
     const rootStyle = {
       "--bg": theme.bg, "--signal": this.props.signalColor || "#F2A93B", "--panel": theme.panel, "--key": theme.key, "--keytop": theme.keytop, "--rule": theme.rule,
       "--text": theme.text, "--muted": theme.muted, "--dust": theme.dust, "--accent": accent, "--ink": theme.ink, "--edge": theme.edge,
-      background: theme.bg, color: theme.text, position: "relative", minHeight: "100vh",
+      background: theme.bg, color: theme.text, position: "relative",
       overflowX: "clip", maxWidth: "1720px", margin: "0 auto",
     };
     const page = this.state.page || "home";
