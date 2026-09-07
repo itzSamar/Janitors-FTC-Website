@@ -402,7 +402,7 @@
     :root{--bg:#07090A;--panel:#0D1214;--key:#141A1D;--keytop:#1B2327;--rule:rgba(255,255,255,.13);--text:#E9F6F8;--muted:#D4E2E6;--dust:#7A8B90;--accent:#22D3EE;--signal:#F2A93B;--ink:#04080A;--edge:rgba(0,0,0,.7);--pad:clamp(18px,4vw,44px);--mono:'DM Mono','JetBrains Mono',ui-monospace,monospace;--serif:'Zilla Slab','Newsreader',Georgia,serif;--label:'Chakra Petch','Saira Condensed',system-ui,sans-serif;--hand:'Blowing',ui-rounded,cursive;--disp:'Archivo','Space Grotesk',system-ui,sans-serif;}
     *{box-sizing:border-box;}
     html{scroll-behavior:smooth;}
-    body{margin:0;background:#07090A;font-family:'Archivo',system-ui,sans-serif;font-feature-settings:'ss01';-webkit-font-smoothing:antialiased;}
+    body{margin:0;background:#07090A;color:#E9F6F8;font-family:'Archivo',system-ui,sans-serif;font-feature-settings:'ss01';-webkit-font-smoothing:antialiased;}
     a{text-decoration:none;color:inherit;cursor:pointer;}
     h1,h2,h3,p{margin:0;}
     image-slot{display:block;}
@@ -434,6 +434,10 @@
     @keyframes wipe{0%{transform:translateX(-102%)}100%{transform:translateX(102%)}}
     @keyframes wipeBack{0%{transform:translateX(102%)}100%{transform:translateX(-102%)}}
     @keyframes pageIn{0%{transform:translateY(18px)}100%{transform:none}}
+    body.jl-travel [data-pagewrap]{animation:none !important;transform:translateX(var(--tvx,0px)) translateZ(0);filter:blur(var(--tvb,0px));opacity:var(--tvo,1);will-change:transform,filter,opacity;backface-visibility:hidden;}
+    body.jl-travel [data-pagewrap] > *:nth-child(n+3){content-visibility:hidden;}
+    body.jl-travel [data-pagewrap] canvas,
+    body.jl-travel [data-pagewrap] img{visibility:hidden;}
     @keyframes led{0%,100%{opacity:.55}50%{opacity:1}}
     @keyframes swell{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
     @keyframes halo{0%{transform:scale(.7);opacity:.5}100%{transform:scale(2.1);opacity:0}}
@@ -690,6 +694,17 @@
       height:30px;
     }
     @media (max-width:1100px){
+      .jl-tier-row{
+        grid-template-columns:minmax(0,1fr) !important;
+        row-gap:18px !important;
+      }
+      .jl-nb-row,
+      .jl-nb-strip{
+        grid-template-columns:minmax(0,1fr) !important;
+      }
+      .jl-nb-strip > figure{
+        grid-column:auto !important;
+      }
       .jl-cad-row{
         grid-template-columns:repeat(2,minmax(0,1fr)) !important;
       }
@@ -757,6 +772,17 @@
       }
     }
     @media (max-width:720px){
+      .jl-tier-row{
+        grid-template-columns:minmax(0,1fr) !important;
+        row-gap:18px !important;
+      }
+      .jl-nb-row,
+      .jl-nb-strip{
+        grid-template-columns:minmax(0,1fr) !important;
+      }
+      .jl-nb-strip > figure{
+        grid-column:auto !important;
+      }
       .jl-cad-row{
         grid-template-columns:1fr !important;
       }
@@ -1067,7 +1093,7 @@
         <div aria-hidden="true" style="position:absolute; left:50%; top:50%; width:min(1420px,100vw); height:min(760px,74vh); transform:translate(-50%,-50%); z-index:0; pointer-events:none; overflow:hidden;">
           <svg sc-camel-view-box="0 0 24 24" fill="none" stroke="var(--dust)" stroke-width=".9" style="position:absolute; left:-7%; top:-13%; width:clamp(170px,22vw,300px); height:auto; opacity:.17; animation:jl-cog 92s linear infinite;"><circle cx="12" cy="12" r="3.2"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1.08 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
           <svg sc-camel-view-box="0 0 120 120" fill="none" style="position:absolute; right:-6%; bottom:-16%; width:clamp(160px,21vw,290px); height:auto; opacity:.5;"><g stroke="var(--rule)" stroke-linejoin="round"><path d="M60 6 L106 32 L106 88 L60 114 L14 88 L14 32 Z" stroke-width="6"></path><path d="M60 18 L96 38 L96 82 L60 102 L24 82 L24 38 Z" stroke-width="2" opacity="0.5"></path><circle cx="60" cy="6" r="5" fill="var(--rule)" stroke="none"></circle><circle cx="106" cy="32" r="5" fill="var(--rule)" stroke="none"></circle><circle cx="14" cy="32" r="5" fill="var(--rule)" stroke="none"></circle></g></svg>
-          <img src="/logo-transparent.png" alt="" decoding="async" style="position:absolute; left:50%; top:50%; width:min(660px,66vw); transform:translate(-50%,-50%); opacity:.075; object-fit:contain;">
+          <img src="/logo-transparent.png" alt="" decoding="async" style="position:absolute; left:50%; top:50%; width:min(700px,68vw); transform:translate(-50%,-50%); opacity:.19; object-fit:contain;">
           <div style="position:absolute; left:4%; right:38%; top:15%; height:9px; background:repeating-linear-gradient(90deg, var(--rule) 0 1px, rgba(0,0,0,0) 1px 26px); opacity:.55;"></div>
           <div style="position:absolute; left:46%; right:5%; bottom:15%; height:9px; background:repeating-linear-gradient(90deg, var(--rule) 0 1px, rgba(0,0,0,0) 1px 26px); opacity:.55;"></div>
           <div style="position:absolute; left:31%; top:15%; bottom:15%; width:1px; background:var(--rule); opacity:.3;"></div>
@@ -1094,7 +1120,7 @@
       <div class="jl-hero-bottom" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(200px,auto); align-items:stretch; gap:0; border-top:1px solid var(--rule); padding-top:clamp(18px,2.6vh,28px);">
 
         <div class="jl-hero-cell" style="display:flex; flex-direction:column; justify-content:space-between; gap:clamp(14px,2vh,22px); padding-right:clamp(20px,3vw,44px); min-width:0;">
-          <p style="margin:0; font-size:clamp(34px,3.8vw,54px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.04em; line-height:1.2; color:var(--accent); text-shadow:2px 3px 0 rgba(233,246,248,.85), 5px 6px 14px rgba(0,0,0,.55); text-wrap:pretty; max-width:13em;">We clean up the competition.</p>
+          <p style="margin:0; font-size:clamp(34px,3.8vw,54px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.115em; line-height:1.2; color:var(--accent); text-shadow:2px 3px 0 rgba(233,246,248,.85), 5px 6px 14px rgba(0,0,0,.55); text-wrap:pretty; max-width:13em;">We clean up the competition.</p>
           <p style="margin:0; max-width:34ch; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted); text-wrap:pretty;">Six of us, one shop, and a robot we’re still arguing about.</p>
         </div>
 
@@ -1156,8 +1182,8 @@
         <h2 data-mask="" style="font-size:clamp(28px,3.4vw,46px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1; text-transform:lowercase; margin:0;">the shop</h2>
         <p style="margin:14px 0 0; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Everything on this site was built on that table. The build log has the rest.</p>
         <div style="margin-top:14px; display:flex; flex-direction:column; gap:4px;">
-          <span style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--dust);">the bench</span>
-          <span style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--dust);">dublin, ca &middot; 08 / 26</span>
+          <span style="font-family:var(--serif); font-size:16px; color:var(--dust);">The bench.</span>
+          <span style="font-family:var(--serif); font-size:16px; color:var(--dust);">dublin, ca &middot; 08 / 26</span>
         </div>
         <a sc-camel-on-click="{{ navRobot }}" style="display:inline-flex; align-items:center; gap:8px; margin-top:20px; font-family:var(--label); font-size:12.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); cursor:pointer; background-image:linear-gradient(var(--accent),var(--accent)); background-repeat:no-repeat; background-position:0 100%; background-size:0% 1px; transition:background-size .3s ease;" style-hover="background-size:100% 1px;">See the robot page &rarr;</a>
       </div>
@@ -1171,7 +1197,7 @@
 
   <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,1fr); border-bottom:1px solid var(--rule);">
     <div style="padding:clamp(52px,5.6vw,84px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
-    <h1 data-scramble="" style="font-size:clamp(56px,10vw,168px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.045em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">the robot</h1>
+    <h1 data-scramble="" style="font-size:clamp(56px,10vw,168px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">the robot</h1>
     </div>
     <div style="border-left:1px solid var(--rule); background:var(--panel);">
       <image-slot id="robot-hero" style="width:100%; height:100%; min-height:320px; color:var(--muted);" shape="rect" placeholder="Robot photo / CAD"></image-slot>
@@ -1193,13 +1219,13 @@
           <div style="background:#ffffff; padding:clamp(8px,1vw,14px);">
             <img src="/assets/photos/swerve-module-cad.jpg" alt="CAD render of one swerve module" loading="lazy" decoding="async" style="width:100%; height:auto; aspect-ratio:5/4; object-fit:contain; display:block;">
           </div>
-          <figcaption style="border-top:1px solid var(--rule); padding:11px 13px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">module 1/4 · cad</figcaption>
+          <figcaption style="padding:10px 0 0; font-family:var(--serif); font-size:16px; color:var(--dust);">Module 1 of 4, as drawn.</figcaption>
         </figure>
         <figure style="margin:0; min-width:0; border:1px solid var(--rule);">
           <div style="background:#ffffff; padding:clamp(8px,1vw,14px);">
             <img src="/assets/photos/swerve-module-cad-2.jpg" alt="CAD render of the swerve module on its mount" loading="lazy" decoding="async" style="width:100%; height:auto; aspect-ratio:5/4; object-fit:contain; display:block;">
           </div>
-          <figcaption style="border-top:1px solid var(--rule); padding:11px 13px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">module 1/4 · mounted</figcaption>
+          <figcaption style="padding:10px 0 0; font-family:var(--serif); font-size:16px; color:var(--dust);">Module 1 of 4, mounted.</figcaption>
         </figure>
       </div>
     </div>
@@ -1232,7 +1258,7 @@
     </div>
 
     <div style="margin-top:clamp(34px,4vw,56px); display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1fr); gap:clamp(24px,5vw,80px); align-items:start;" class="jl-why-close">
-      <p style="margin:0; font-size:clamp(34px,5.2vw,72px); font-family:var(--hand); text-transform:uppercase; font-weight:400; letter-spacing:.04em; line-height:1.05; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">Mobility<br>wins matches.</p>
+      <p style="margin:0; font-size:clamp(34px,5.2vw,72px); font-family:var(--hand); text-transform:uppercase; font-weight:400; letter-spacing:.115em; line-height:1.05; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">Mobility<br>wins matches.</p>
       <div style="min-width:0;">
       <div style="padding:0 0 18px;"><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted); text-wrap:pretty;">Four modules is four times the chance of a part being wrong. If the drivetrain isn’t reliable by our first meet, nothing else on the robot matters. So the plan is simple: one module working completely before we cut parts for the other three.</p></div>
       <div style="border-top:1px solid var(--rule); padding:18px 0;"><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted); text-wrap:pretty;">The code is genuinely harder: swerve kinematics, four steering encoders, and module offsets that all have to agree. We’d rather write it ourselves than pull in a library, though that call isn’t final.</p></div>
@@ -1259,17 +1285,17 @@
       <img src="/assets/photos/shop-garage.jpg" alt="The garage shop where we build" loading="lazy" decoding="async" style="width:100%; aspect-ratio:16/9; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);">
       <div style="padding:0 var(--pad) clamp(4px,1vw,14px) 0;">
         <p style="margin:0; font-family:var(--serif); font-size:19px; line-height:1.45; letter-spacing:-.01em;">One garage, one patio table, and whatever the drill press will hold.</p>
-        <div style="margin-top:14px; display:flex; flex-direction:column; gap:5px;"><span style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--dust);">the shop</span><span style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--dust);">dublin, ca</span><span style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--dust);">08 / 26</span></div>
+        <div style="margin-top:14px; display:flex; flex-direction:column; gap:5px;"><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">the shop</span><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">dublin, ca</span><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">08 / 26</span></div>
       </div>
     </div>
     <div class="jl-shop-strip" style="display:flex; gap:clamp(12px,1.4vw,18px); margin-top:clamp(16px,1.8vw,24px); overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:8px; scrollbar-width:thin;">
-      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(300px,30vw,400px); max-width:82vw;"><img src="/assets/photos/shop-drivetrain.jpg" alt="Drivetrain plate with motors mounted" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="margin-top:9px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--dust);">drivetrain plate · v1</figcaption></figure>
-      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(230px,22vw,290px); max-width:82vw;"><img src="/assets/photos/shop-rails.jpg" alt="Bolting a rail into the chassis" loading="lazy" decoding="async" style="width:100%; aspect-ratio:1/1; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="margin-top:9px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--dust);">rail assembly</figcaption></figure>
-      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(230px,22vw,290px); max-width:82vw;"><img src="/assets/photos/shop-assembly.jpg" alt="Assembling the frame on the patio table" loading="lazy" decoding="async" style="width:100%; aspect-ratio:1/1; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="margin-top:9px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--dust);">frame build</figcaption></figure>
-      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(270px,26vw,340px); max-width:82vw;"><img src="/assets/photos/shop-sorting.jpg" alt="Sorting hardware and wheels" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="margin-top:9px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--dust);">hardware sort</figcaption></figure>
-      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(380px,38vw,520px); max-width:82vw;"><img src="/assets/photos/shop-drill.jpg" alt="Driving screws into a channel" loading="lazy" decoding="async" style="width:100%; aspect-ratio:21/9; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="margin-top:9px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--dust);">channel work</figcaption></figure>
+      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(300px,30vw,400px); max-width:82vw;"><img src="/assets/photos/shop-drivetrain.jpg" alt="Drivetrain plate with motors mounted" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:16px; color:var(--dust);">The drivetrain plate, v1.</figcaption></figure>
+      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(230px,22vw,290px); max-width:82vw;"><img src="/assets/photos/shop-rails.jpg" alt="Bolting a rail into the chassis" loading="lazy" decoding="async" style="width:100%; aspect-ratio:1/1; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:16px; color:var(--dust);">Rail assembly.</figcaption></figure>
+      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(230px,22vw,290px); max-width:82vw;"><img src="/assets/photos/shop-assembly.jpg" alt="Assembling the frame on the patio table" loading="lazy" decoding="async" style="width:100%; aspect-ratio:1/1; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:16px; color:var(--dust);">Frame going together.</figcaption></figure>
+      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(270px,26vw,340px); max-width:82vw;"><img src="/assets/photos/shop-sorting.jpg" alt="Sorting hardware and wheels" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:16px; color:var(--dust);">Sorting hardware.</figcaption></figure>
+      <figure style="flex:none; scroll-snap-align:start; margin:0; width:clamp(380px,38vw,520px); max-width:82vw;"><img src="/assets/photos/shop-drill.jpg" alt="Driving screws into a channel" loading="lazy" decoding="async" style="width:100%; aspect-ratio:21/9; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:16px; color:var(--dust);">Channel work.</figcaption></figure>
     </div>
-    <div style="margin-top:10px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dust);">scroll →</div>
+    <div style="margin-top:10px; font-family:var(--serif); font-size:16px; color:var(--dust);">scroll →</div>
   </section>
   </div>
   </sc-if>
@@ -1279,7 +1305,7 @@
 
   <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,1fr); border-bottom:1px solid var(--rule);">
     <div style="padding:clamp(52px,5.6vw,84px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
-      <h1 data-scramble="" style="font-size:clamp(54px,9.5vw,156px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.045em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">the game</h1>
+      <h1 data-scramble="" style="font-size:clamp(54px,9.5vw,156px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">the game</h1>
       <p style="margin-top:24px; max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);"><strong style="color:var(--text); font-weight:600;">BIOBUZZ</strong>, presented by RTX, part of the FIRST CANOPY season. Scoring uses Pollen. Full rules release at kickoff on September 12, 2026.</p>
     </div>
     <div style="border-left:1px solid var(--rule); background:var(--panel);">
@@ -1320,7 +1346,7 @@
   <section class="jl-offset" data-lag="0.05" style="position:relative; z-index:1; background:var(--accent); color:var(--ink); padding:clamp(52px,5.6vw,84px) var(--pad) clamp(52px,5.6vw,84px) var(--pad);">
     <div style="display:flex; flex-wrap:wrap; gap:clamp(26px,5vw,72px); align-items:flex-end; justify-content:space-between;">
       <div>
-        <div style="font-size:clamp(48px,7.6vw,104px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.045em; line-height:1.02; padding-bottom:.06em; text-shadow:3px 4px 0 rgba(4,8,10,.5);">first season</div>
+        <div style="font-size:clamp(48px,7.6vw,104px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.125em; line-height:1.02; padding-bottom:.06em; text-shadow:3px 4px 0 rgba(4,8,10,.5);">first season</div>
         <div style="font-family:var(--label); font-size:13.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; margin-top:14px;">2026 / 27 · team 36721</div>
       </div>
       <p style="max-width:32ch; font-family:var(--serif); font-size:19px; line-height:1.45; letter-spacing:-.01em; margin:0;">Everything on this page is a first. That’s the whole point of a rookie year.</p>
@@ -1358,7 +1384,7 @@
   <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr); border-bottom:1px solid var(--rule); overflow:hidden;">
     <div style="position:relative; padding:clamp(52px,5.6vw,84px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
       <svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="position:absolute; left:-4%; top:50%; transform:translateY(-50%) rotate(-12deg); width:clamp(220px,26vw,380px); height:auto; color:var(--text); opacity:.045; pointer-events:none;" fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4 L14.5 18.5"></path><path d="M10.5 17 L16.5 14 L21 26.5 Q15 29.5 9 26.5 Z"></path><path d="M12.6 18.4 L11.4 26.6 M15.2 17.2 L15.2 27.6 M17.8 16.2 L19 26.6"></path></svg>
-      <h1 data-scramble="" style="position:relative; font-size:clamp(52px,9vw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.045em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">outreach</h1>
+      <h1 data-scramble="" style="position:relative; font-size:clamp(52px,9vw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">outreach</h1>
       <p style="position:relative; margin-top:26px; max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">We’re taking the robot around the Bay Area to show robotics to kids, especially the ones with less access to STEM. Hands-on learning wherever we can get it. First planned event is with FTC team Olympians.</p>
     </div>
     <div style="border-left:1px solid var(--rule); background:var(--panel);">
@@ -1411,24 +1437,22 @@
     </div>
     </div>
     <div style="display:flex; flex-direction:column; border-top:1px solid var(--rule); margin-top:clamp(30px,3.4vw,42px);" data-stagger="left">
-      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr) minmax(120px,auto); gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">build workshops</span><p style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Kids wire it, code it, and drive it. Usually into a wall first.</p><span style="text-align:right;"><span style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">planned</span></span></div>
-      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr) minmax(120px,auto); gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">mentorship</span><p style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Sitting in on build sessions with new teams and answering the questions we’re asking ourselves right now.</p><span style="text-align:right;"><span style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">planned</span></span></div>
-      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr) minmax(120px,auto); gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">stem demos</span><p style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Assembly demos for younger students, with the robot doing laps behind us.</p><span style="text-align:right;"><span style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">planned</span></span></div>
-      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr) minmax(120px,auto); gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">community</span><p style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Library nights, street fairs, and maker festivals around the area.</p><span style="text-align:right;"><span style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">planned</span></span></div>
+      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr); gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">build workshops</span><p style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Kids wire it, code it, and drive it. Usually into a wall first.</p></div>
+      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr); gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">mentorship</span><p style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Sitting in on build sessions with new teams and answering the questions we’re asking ourselves right now.</p></div>
+      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr); gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">stem demos</span><p style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Assembly demos for younger students, with the robot doing laps behind us.</p></div>
+      <div style="display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr); gap:clamp(14px,2.6vw,40px); align-items:baseline; padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1), color .24s ease;" style-hover="padding-left:20px; color:var(--accent);"><span style="font-size:clamp(24px,3vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95;">community</span><p style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Library nights, street fairs, and maker festivals around the area.</p></div>
     </div>
   </section>
 
   <section style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.45fr) minmax(300px,1fr);">
     <div style="position:relative; min-height:clamp(360px,46vh,520px);">
       <iframe title="Map of our outreach area in Dublin, CA" src="https://www.openstreetmap.org/export/embed.html?bbox=-121.99%2C37.68%2C-121.88%2C37.75&amp;layer=mapnik&amp;marker=37.7022%2C-121.9358" style="position:absolute; inset:0; width:100%; height:100%; border:0; display:block; filter:grayscale(.62) contrast(1.06) brightness(.86);" loading="lazy"></iframe>
-      <div style="position:absolute; left:0; top:0; display:flex; align-items:center; gap:9px; padding:11px 15px; background:var(--bg); border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);"><svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="width:18px; height:18px; flex:none; color:var(--accent);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4 L14.5 18.5"></path><path d="M10.5 17 L16.5 14 L21 26.5 Q15 29.5 9 26.5 Z"></path><path d="M12.6 18.4 L11.4 26.6 M15.2 17.2 L15.2 27.6 M17.8 16.2 L19 26.6"></path></svg><span style="white-space:nowrap;">service area</span></div>
-    </div>
     <div style="border-left:1px solid var(--rule); padding:clamp(20px,2.2vw,28px);">
       <div style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Where we’re starting</div>
       <div style="margin-top:20px; border-top:1px solid var(--rule);">
-        <div style="padding:18px 0; border-bottom:1px solid var(--rule);"><div><div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;"><span style="font-family:var(--serif); font-size:17.5px; font-weight:600; letter-spacing:-.02em;">Dublin</span><span style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">target</span></div><p style="margin-top:6px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Our own city first. Weekend drive-the-robot nights at the library, then the schools we came from.</p></div></div>
-        <div style="padding:18px 0; border-bottom:1px solid var(--rule);"><div><div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;"><span style="font-family:var(--serif); font-size:17.5px; font-weight:600; letter-spacing:-.02em;">Pleasanton</span><span style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">target</span></div><p style="margin-top:6px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Elementary and middle school assembly demos, once the robot is reliable enough to travel.</p></div></div>
-        <div style="padding:18px 0; border-bottom:1px solid var(--rule);"><div><div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;"><span style="font-family:var(--serif); font-size:17.5px; font-weight:600; letter-spacing:-.02em;">Rookie teams</span><span style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); white-space:nowrap;">target</span></div><p style="margin-top:6px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Any new team in the area that wants a second pair of hands on their first drivetrain.</p></div></div>
+        <div style="padding:18px 0; border-bottom:1px solid var(--rule);"><div><div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;"><span style="font-family:var(--serif); font-size:17.5px; font-weight:600; letter-spacing:-.02em;">Dublin</span></div><p style="margin-top:6px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Our own city first. Weekend drive-the-robot nights at the library, then the schools we came from.</p></div></div>
+        <div style="padding:18px 0; border-bottom:1px solid var(--rule);"><div><div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;"><span style="font-family:var(--serif); font-size:17.5px; font-weight:600; letter-spacing:-.02em;">Pleasanton</span></div><p style="margin-top:6px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Elementary and middle school assembly demos, once the robot is reliable enough to travel.</p></div></div>
+        <div style="padding:18px 0; border-bottom:1px solid var(--rule);"><div><div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;"><span style="font-family:var(--serif); font-size:17.5px; font-weight:600; letter-spacing:-.02em;">Rookie teams</span></div><p style="margin-top:6px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Any new team in the area that wants a second pair of hands on their first drivetrain.</p></div></div>
       </div>
     </div>
   </section>
@@ -1447,12 +1471,12 @@
         <span style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">with team olympians</span>
       </div>
       <div class="jl-event-grid" style="display:flex; gap:clamp(10px,1.2vw,16px); margin-top:clamp(18px,2vw,26px); overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:8px; scrollbar-width:thin; align-items:flex-start;">
-        <figure style="margin:0; flex:none; scroll-snap-align:start; width:clamp(240px,25vw,320px); max-width:74vw; display:flex; flex-direction:column; background:var(--bg); border:1px solid var(--rule);"><img src="/assets/photos/outreach-olympians-2.jpg" alt="Presenting what FTC is to a room at the library" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="border-top:1px solid var(--rule); padding:10px 12px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">what is ftc?</figcaption></figure>
-        <figure style="margin:0; flex:none; scroll-snap-align:start; width:clamp(240px,25vw,320px); max-width:74vw; display:flex; flex-direction:column; background:var(--bg); border:1px solid var(--rule);"><img src="/assets/photos/outreach-olympians-1.jpg" alt="Kids at the hands-on station with a laptop and cutter" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="border-top:1px solid var(--rule); padding:10px 12px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">hands-on station</figcaption></figure>
-        <figure style="margin:0; flex:none; scroll-snap-align:start; width:clamp(240px,25vw,320px); max-width:74vw; display:flex; flex-direction:column; background:var(--bg); border:1px solid var(--rule);"><img src="/assets/photos/outreach-olympians-4.jpg" alt="Driver controls set out on the table" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="border-top:1px solid var(--rule); padding:10px 12px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">driver controls</figcaption></figure>
-        <figure style="margin:0; flex:none; scroll-snap-align:start; width:clamp(240px,25vw,320px); max-width:74vw; display:flex; flex-direction:column; background:var(--bg); border:1px solid var(--rule);"><img src="/assets/photos/outreach-olympians-3.jpg" alt="Team answering questions from the room" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="border-top:1px solid var(--rule); padding:10px 12px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">questions from the room</figcaption></figure>
+        <figure style="margin:0; flex:none; scroll-snap-align:start; width:clamp(240px,25vw,320px); max-width:74vw; display:flex; flex-direction:column;"><img src="/assets/photos/outreach-olympians-2.jpg" alt="Presenting what FTC is to a room at the library" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="padding:10px 0 0; font-family:var(--serif); font-size:16px; color:var(--dust);">Explaining what FTC actually is.</figcaption></figure>
+        <figure style="margin:0; flex:none; scroll-snap-align:start; width:clamp(240px,25vw,320px); max-width:74vw; display:flex; flex-direction:column;"><img src="/assets/photos/outreach-olympians-1.jpg" alt="Kids at the hands-on station with a laptop and cutter" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="padding:10px 0 0; font-family:var(--serif); font-size:16px; color:var(--dust);">The hands-on table.</figcaption></figure>
+        <figure style="margin:0; flex:none; scroll-snap-align:start; width:clamp(240px,25vw,320px); max-width:74vw; display:flex; flex-direction:column;"><img src="/assets/photos/outreach-olympians-4.jpg" alt="Driver controls set out on the table" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="padding:10px 0 0; font-family:var(--serif); font-size:16px; color:var(--dust);">Driver station, out for anyone who wanted a turn.</figcaption></figure>
+        <figure style="margin:0; flex:none; scroll-snap-align:start; width:clamp(240px,25vw,320px); max-width:74vw; display:flex; flex-direction:column;"><img src="/assets/photos/outreach-olympians-3.jpg" alt="Team answering questions from the room" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; filter:saturate(.94) contrast(1.02);"><figcaption style="padding:10px 0 0; font-family:var(--serif); font-size:16px; color:var(--dust);">Questions from the room.</figcaption></figure>
       </div>
-      <div style="margin-top:10px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dust);">scroll →</div>
+      <div style="margin-top:10px; font-family:var(--serif); font-size:16px; color:var(--dust);">scroll →</div>
       <p style="margin:clamp(16px,1.8vw,22px) 0 0; max-width:62ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Our first one. Olympians ran the intro slides, we brought the driver station and helped at the tables. Kids asked better questions than we expected.</p>
     </div>
 
@@ -1473,7 +1497,7 @@
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
   <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr); align-items:end; gap:40px; border-bottom:1px solid var(--rule); padding:clamp(52px,5.6vw,84px) var(--pad);">
-    <div><h1 data-scramble="" style="font-size:clamp(52px,9vw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.045em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">sponsors</h1><div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;"><a href="/Team_Janitors_36721_Sponsorship_Packet.pdf" target="_blank" rel="noopener noreferrer" data-click="" data-noprint="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); padding:12px 18px; font-family:var(--serif); font-size:17.5px; color:var(--muted); cursor:pointer; white-space:nowrap;" style-hover="border-color:var(--accent); color:var(--accent);">Print the sponsor one-pager →</a><a href="https://hcb.hackclub.com/donations/start/janitorsftcteam" target="_blank" rel="noopener noreferrer" data-click="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); padding:12px 18px; font-family:var(--serif); font-size:17.5px; color:var(--muted); cursor:pointer;" style-hover="border-color:var(--accent); color:var(--accent);">Donate via Hack Club →</a></div></div>
+    <div><h1 data-scramble="" style="font-size:clamp(52px,9vw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">sponsors</h1><div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;"><a href="/Team_Janitors_36721_Sponsorship_Packet.pdf" target="_blank" rel="noopener noreferrer" data-click="" data-noprint="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); padding:12px 18px; font-family:var(--serif); font-size:17.5px; color:var(--muted); cursor:pointer; white-space:nowrap;" style-hover="border-color:var(--accent); color:var(--accent);">Print the sponsor one-pager →</a><a href="https://hcb.hackclub.com/donations/start/janitorsftcteam" target="_blank" rel="noopener noreferrer" data-click="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); padding:12px 18px; font-family:var(--serif); font-size:17.5px; color:var(--muted); cursor:pointer;" style-hover="border-color:var(--accent); color:var(--accent);">Donate via Hack Club →</a></div></div>
     <p style="max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">We’re a rookie team, and students do the engineering, the outreach, and the fundraising. Below is what the season actually costs and where sponsorship money goes.</p>
   </header>
 
@@ -1482,7 +1506,7 @@
       
       <p style="margin:10px 0 0; max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--text);">Ask what we need, what we’d put your logo on, or where the money goes. We answer every email.</p>
     </div>
-    <a href="mailto:mayukhm.janitorsftc@gmail.com" data-magnet="" data-click="" style="display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:var(--ink); padding:16px 26px; font-family:var(--serif); font-size:17.5px; font-weight:700; white-space:nowrap; will-change:transform;">Contact us<span aria-hidden="true">→</span></a>
+    <a href="mailto:janitorsftcteam@googlegroups.com" data-magnet="" data-click="" style="display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:var(--ink); padding:16px 26px; font-family:var(--serif); font-size:17.5px; font-weight:700; white-space:nowrap; will-change:transform;">Contact us<span aria-hidden="true">→</span></a>
   </section>
 
   <section style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad);">
@@ -1510,13 +1534,13 @@
         <div style="font-family:var(--serif); font-size:17.5px; color:var(--muted);">That makes you a</div>
         <div style="font-size:clamp(30px,4vw,52px); font-family:var(--disp); font-weight:700; letter-spacing:-.038em; line-height:.92;">{{ tierName }}</div>
         <div style="font-family:var(--mono); font-size:12px; line-height:1.9; color:var(--muted); border-top:1px solid var(--rule); padding-top:14px; margin-top:8px;">{{ tierPerks }}</div>
-        <a href="mailto:mayukhm.janitorsftc@gmail.com" data-click="" style="margin-top:12px; display:inline-flex; align-items:center; justify-content:center; gap:9px; background:var(--accent); color:var(--ink); padding:16px 26px; font-family:var(--serif); font-size:17.5px; font-weight:600; white-space:nowrap; align-self:flex-start;">Talk to us</a>
+        <a href="mailto:janitorsftcteam@googlegroups.com" data-click="" style="margin-top:12px; display:inline-flex; align-items:center; justify-content:center; gap:9px; background:var(--accent); color:var(--ink); padding:16px 26px; font-family:var(--serif); font-size:17.5px; font-weight:600; white-space:nowrap; align-self:flex-start;">Talk to us</a>
       </div>
     </div>
     <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(16px,2.4vw,28px); margin-top:clamp(30px,3.4vw,42px); border-top:1px solid var(--rule); padding-top:clamp(24px,2.8vw,34px);">
       <div><div data-count="3000" data-prefix="$" data-suffix="+" style="font-size:clamp(28px,3vw,40px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; color:var(--accent); font-variant-numeric:tabular-nums;">$3000+</div><div style="margin-top:6px; font-size:15px; color:var(--muted);">raised so far</div></div>
       <div><div data-count="6" style="font-size:clamp(28px,3vw,40px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; color:var(--accent); font-variant-numeric:tabular-nums;">6</div><div style="margin-top:6px; font-size:15px; color:var(--muted);">students on the team</div></div>
-      <div><div data-count="6" style="font-size:clamp(28px,3vw,40px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; color:var(--accent); font-variant-numeric:tabular-nums;">6</div><div style="margin-top:6px; font-size:15px; color:var(--muted);">events this season</div></div>
+      <div><div data-count="6" style="font-size:clamp(28px,3vw,40px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; color:var(--accent); font-variant-numeric:tabular-nums;">6</div><div style="margin-top:6px; font-size:15px; color:var(--muted);">planned events</div></div>
     </div>
   </section>
 
@@ -1525,16 +1549,16 @@
     
     <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(20px,4vw,64px); align-items:end;" class="jl-why-top">
       <h2 data-mask="" style="font-size:clamp(34px,5.2vw,72px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">sponsor tiers</h2>
-      <p style="margin:0; max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">One-time tiers, paid through our <a href="https://hcb.hackclub.com/donations/start/janitorsftcteam" target="_blank" rel="noopener noreferrer" data-click="" style="color:var(--accent);">Hack Club donation page</a>. Custom amounts welcome. Contact Mayukh Mondal, Finance Director, at <a href="mailto:mayukhm.janitorsftc@gmail.com" data-click="" style="color:var(--accent);">mayukhm.janitorsftc@gmail.com</a> or +1 (925) 315-6433.</p>
+      <p style="margin:0; max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">One-time tiers, paid through our <a href="https://hcb.hackclub.com/donations/start/janitorsftcteam" target="_blank" rel="noopener noreferrer" data-click="" style="color:var(--accent);">Hack Club donation page</a>. Custom amounts welcome. Questions about tiers or a custom amount, email us at <a href="mailto:janitorsftcteam@googlegroups.com" data-click="" style="color:var(--accent);">janitorsftcteam@googlegroups.com</a> or +1 (925) 315-6433.</p>
     </div>
       <div style="margin-top:clamp(30px,3.4vw,42px); border-top:1px solid var(--rule);" data-stagger="left">
-      <div class="jl-tier-row" style="display:grid; grid-template-columns:minmax(148px,.6fr) minmax(0,1.35fr) minmax(0,1fr); gap:clamp(16px,3vw,48px); align-items:baseline; padding:clamp(24px,3vw,38px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:14px;"><div style="min-width:0;"><div style="font-size:clamp(22px,2.6vw,34px); font-family:var(--disp); font-weight:700; letter-spacing:-.04em; line-height:.9; font-variant-numeric:tabular-nums;">$250</div><div style="margin-top:9px; font-family:var(--serif); font-size:17.5px; color:var(--muted);">bronze partner</div></div><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; letter-spacing:-.01em; color:var(--text);">Raw material. Aluminum, hardware, a set of wheels.</p><div style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">logo on team hoodies<br>logo on the site<br>thank-you on social</div></div>
-      <div class="jl-tier-row" style="display:grid; grid-template-columns:minmax(148px,.6fr) minmax(0,1.35fr) minmax(0,1fr); gap:clamp(16px,3vw,48px); align-items:baseline; padding:clamp(24px,3vw,38px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:14px;"><div style="min-width:0;"><div style="font-size:clamp(27px,3.2vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.04em; line-height:.9; font-variant-numeric:tabular-nums;">$500</div><div style="margin-top:9px; font-family:var(--serif); font-size:17.5px; color:var(--muted);">silver partner</div></div><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; letter-spacing:-.01em; color:var(--text);">Electronics. Motors, encoders, and the wiring around them.</p><div style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">everything in bronze<br>small logo on the robot<br>pit banner</div></div>
-      <div class="jl-tier-row" style="display:grid; grid-template-columns:minmax(148px,.6fr) minmax(0,1.35fr) minmax(0,1fr); gap:clamp(16px,3vw,48px); align-items:baseline; padding:clamp(24px,3vw,38px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:14px;"><div style="min-width:0;"><div style="font-size:clamp(34px,4.1vw,54px); font-family:var(--disp); font-weight:700; letter-spacing:-.04em; line-height:.9; font-variant-numeric:tabular-nums;">$1,000</div><div style="margin-top:9px; font-family:var(--serif); font-size:17.5px; color:var(--muted);">gold partner</div></div><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; letter-spacing:-.01em; color:var(--text);">A whole subsystem. One swerve module, or the control system.</p><div style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">everything in silver<br>full sized logo on the robot<br>dedicated page on the site</div></div>
-      <div class="jl-tier-row" style="display:grid; grid-template-columns:minmax(148px,.6fr) minmax(0,1.35fr) minmax(0,1fr); gap:clamp(16px,3vw,48px); align-items:baseline; padding:clamp(24px,3vw,38px) 0 0; transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:14px;"><div style="min-width:0;"><div style="font-size:clamp(43px,5.2vw,68px); font-family:var(--disp); font-weight:700; letter-spacing:-.04em; line-height:.9; font-variant-numeric:tabular-nums; color:var(--accent);">$2,500</div><div style="margin-top:9px; font-family:var(--serif); font-size:17.5px; color:var(--accent);">title partner</div></div><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; letter-spacing:-.01em; color:var(--text);">Most of a season. Parts, entry fees, and getting to events.</p><div style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">everything in gold<br>named our title partner in team materials<br>largest logo on the robot and pit banner</div></div>
+      <div class="jl-tier-row" style="display:grid; grid-template-columns:minmax(148px,.6fr) minmax(0,1.35fr) minmax(0,1fr); gap:clamp(16px,3vw,48px); align-items:baseline; padding:clamp(24px,3vw,38px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:14px;"><div style="min-width:0;"><div style="font-size:clamp(22px,2.6vw,34px); font-family:var(--disp); font-weight:700; letter-spacing:-.04em; line-height:.9; font-variant-numeric:tabular-nums;">$250</div><div style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">bronze partner</div></div><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; letter-spacing:-.01em; color:var(--text);">Raw material. Aluminum, hardware, a set of wheels.</p><div style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">logo on team hoodies<br>logo on the site<br>thank-you on social</div></div>
+      <div class="jl-tier-row" style="display:grid; grid-template-columns:minmax(148px,.6fr) minmax(0,1.35fr) minmax(0,1fr); gap:clamp(16px,3vw,48px); align-items:baseline; padding:clamp(24px,3vw,38px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:14px;"><div style="min-width:0;"><div style="font-size:clamp(27px,3.2vw,42px); font-family:var(--disp); font-weight:700; letter-spacing:-.04em; line-height:.9; font-variant-numeric:tabular-nums;">$500</div><div style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">silver partner</div></div><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; letter-spacing:-.01em; color:var(--text);">Electronics. Motors, encoders, and the wiring around them.</p><div style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">everything in bronze<br>small logo on the robot<br>pit banner</div></div>
+      <div class="jl-tier-row" style="display:grid; grid-template-columns:minmax(148px,.6fr) minmax(0,1.35fr) minmax(0,1fr); gap:clamp(16px,3vw,48px); align-items:baseline; padding:clamp(24px,3vw,38px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:14px;"><div style="min-width:0;"><div style="font-size:clamp(34px,4.1vw,54px); font-family:var(--disp); font-weight:700; letter-spacing:-.04em; line-height:.9; font-variant-numeric:tabular-nums;">$1,000</div><div style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">gold partner</div></div><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; letter-spacing:-.01em; color:var(--text);">A subsystem. One swerve module, or the control system that drives them.</p><div style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">everything in silver<br>full sized logo on the robot<br>dedicated page on the site</div></div>
+      <div class="jl-tier-row" style="display:grid; grid-template-columns:minmax(148px,.6fr) minmax(0,1.35fr) minmax(0,1fr); gap:clamp(16px,3vw,48px); align-items:baseline; padding:clamp(24px,3vw,38px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:14px;"><div style="min-width:0;"><div style="font-size:clamp(43px,5.2vw,68px); font-family:var(--disp); font-weight:700; letter-spacing:-.04em; line-height:.9; font-variant-numeric:tabular-nums;">$2,500</div><div style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">title partner</div></div><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; letter-spacing:-.01em; color:var(--text);">A major piece of the season. Parts, entry fees, and getting to events.</p><div style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">everything in gold<br>named our title partner in team materials<br>largest logo on the robot and pit banner</div></div>
       </div>
       <div style="margin-top:clamp(44px,5vw,64px); border-top:1px solid var(--rule); padding-top:clamp(30px,3.4vw,42px);">
-        <p style="margin:0; max-width:15em; font-size:clamp(38px,4.8vw,70px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.04em; line-height:1.2; color:var(--accent); text-shadow:2px 3px 0 rgba(233,246,248,.85), 5px 6px 14px rgba(0,0,0,.55); text-wrap:pretty;">It’s the team’s rookie year, not the members’.</p>
+        <p style="margin:0; max-width:15em; font-size:clamp(38px,4.8vw,70px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.115em; line-height:1.2; color:var(--accent); text-shadow:2px 3px 0 rgba(233,246,248,.85), 5px 6px 14px rgba(0,0,0,.55); text-wrap:pretty;">It’s the team’s rookie year, not the members’.</p>
         <div style="margin-top:clamp(26px,3vw,40px); display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(24px,4vw,64px);" class="jl-why-close"><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.7; color:var(--muted); text-wrap:pretty;">Most of us have built and driven in FTC before. This is just the first season we’re doing it on our own.</p><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.7; color:var(--muted); text-wrap:pretty;">Students run the engineering, the outreach, and the fundraising. Sponsorship goes into parts and entry fees, and in exchange your logo goes in front of every gym, library, and classroom we visit.</p></div>
       </div>
   </section>
@@ -1542,7 +1566,7 @@
   <section class="jl-offset" style="background:var(--panel); position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad) clamp(52px,5.6vw,84px) var(--pad); border-top:1px solid var(--rule);">
     <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(20px,4vw,64px); align-items:end;" class="jl-why-top">
       <h2 data-mask="" style="font-size:clamp(34px,5.2vw,72px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">our sponsors</h2>
-      <p style="margin:0; max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">We’re a rookie team, so these spots are open. Sponsor us and your logo goes here, on the robot, and on our hoodies. <a href="mailto:mayukhm.janitorsftc@gmail.com">get in touch</a>.</p>
+      <p style="margin:0; max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">We’re a rookie team, so these spots are open. Sponsor us and your logo goes here, on the robot, and on our hoodies. <a href="mailto:janitorsftcteam@googlegroups.com">get in touch</a>.</p>
     </div>
     <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:clamp(22px,2.4vw,30px);" class="jl-sponsor-wall">
       <a href="https://www.fabworks.com/" target="_blank" rel="noopener noreferrer" style="position:relative; width:100%; aspect-ratio:16/9; background:var(--bg); display:flex; align-items:center; justify-content:center; padding:clamp(20px,2.2vw,28px); transition:background .2s ease;" style-hover="background:var(--panel);"><img src="/assets/photos/sponsor-fabworks.png" alt="Fabworks" loading="lazy" decoding="async" style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block; opacity:.9;"></a>
@@ -1562,8 +1586,8 @@
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
   <header style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad); border-bottom:1px solid var(--rule); display:flex; align-items:flex-end; justify-content:space-between; gap:30px; flex-wrap:wrap;">
-    <div><h1 data-scramble="" style="font-size:clamp(52px,9vw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.045em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">the team</h1></div>
-      <div style="min-width:0; display:flex; flex-direction:column; align-items:flex-start;">    <p style="margin:0; max-width:14em; font-size:clamp(32px,3.7vw,52px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.035em; line-height:1.1; color:var(--accent); text-shadow:2px 3px 0 rgba(233,246,248,.85), 5px 6px 14px rgba(0,0,0,.55); text-wrap:pretty;">Two captains, four leads, two coaches.</p><p style="margin:14px 0 0; max-width:38ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Everyone owns a piece of the robot.</p></div>
+    <div><h1 data-scramble="" style="font-size:clamp(52px,9vw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">the team</h1></div>
+      <div style="min-width:0; display:flex; flex-direction:column; align-items:flex-start;">    <p style="margin:0; max-width:14em; font-size:clamp(32px,3.7vw,52px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.105em; line-height:1.1; color:var(--accent); text-shadow:2px 3px 0 rgba(233,246,248,.85), 5px 6px 14px rgba(0,0,0,.55); text-wrap:pretty;">Two captains, four leads, two coaches.</p><p style="margin:14px 0 0; max-width:38ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Everyone owns a piece of the robot.</p></div>
   </header>
 
   <section class="jl-team-members" style="position:relative; z-index:1;">
@@ -1573,7 +1597,7 @@
         <div style="padding:clamp(20px,2.2vw,28px);">
           <div style="font-size:clamp(19px,1.6vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Samar B.</div>
           <div style="margin-top:8px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--accent);">team captain · software co-lead · strategy lead · driver</div>
-            <div class="jl-tagrow" style="margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;"><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--label); font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">programming</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--label); font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">strategy</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--label); font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">driver</span></div>
+            <div class="jl-tagrow" style="margin-top:12px; display:flex; flex-wrap:wrap; gap:4px 14px;"><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">programming</span><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">strategy</span><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">driver</span></div>
           <p style="margin-top:14px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Started coding in third grade on Python Turtle projects with my dad, and picked up four more languages since. FLL that same year, then four years of FTC as programmer and driver every season, plus a year of FRC on Team 7419. I’m here to write code and drive.</p>
         </div>
       </div>
@@ -1582,8 +1606,8 @@
         <div style="padding:clamp(20px,2.2vw,28px);">
           <div style="font-size:clamp(19px,1.6vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Mayukh M.</div>
           <div style="margin-top:8px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--accent);">team captain · hardware &amp; fabrication co-lead · finance lead</div>
-            <div class="jl-tagrow" style="margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;"><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--label); font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">fabrication</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--label); font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">hardware</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--label); font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">finance</span></div>
-        <p style="margin-top:14px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Over six years of FIRST robotics and custom projects, my early interest in making things move has turned into solid experience in CAD, prototyping, and building hardware. Serving as Team Captain, I pair these technical skills with budget &amp; financial management capabilities to lead our team to the World Championship stage.</p>
+            <div class="jl-tagrow" style="margin-top:12px; display:flex; flex-wrap:wrap; gap:4px 14px;"><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">fabrication</span><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">hardware</span><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">finance</span></div>
+        <p style="margin-top:14px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Six years of FIRST and a lot of parts that didn’t fit the first time. Does most of the CAD and the fabrication, then handles the budget nobody else wants to look at. Runs the team when everyone is arguing.</p>
         </div>
       </div>
       <div style="background:var(--bg); transition:background .2s;" style-hover="background:var(--panel);">
@@ -1591,7 +1615,7 @@
         <div style="padding:clamp(20px,2.2vw,28px);">
           <div style="font-size:clamp(19px,1.6vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Arnav J.</div>
           <div style="margin-top:8px; font-size:13.5px; line-height:1.5; color:var(--accent);">software co-lead · hardware &amp; fabrication co-lead</div>
-            <div class="jl-tagrow" style="margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;"><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--label); font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">programming</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--label); font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">fabrication</span></div>
+            <div class="jl-tagrow" style="margin-top:12px; display:flex; flex-wrap:wrap; gap:4px 14px;"><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">programming</span><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">fabrication</span></div>
         <p style="margin-top:14px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Eight years in FIRST, from FLL in fourth grade through four seasons of FTC. I’ve programmed and driven every season, plus CAD, electronics, and outreach along the way. Most of what I know came from building something, watching it fail, and fixing it.</p>
         </div>
       </div>
@@ -1600,7 +1624,7 @@
         <div style="padding:clamp(20px,2.2vw,28px);">
           <div style="font-size:clamp(19px,1.6vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Adarsh U.</div>
           <div style="margin-top:8px; font-size:13.5px; line-height:1.5; color:var(--accent);">design co-lead · strategy co-lead</div>
-            <div class="jl-tagrow" style="margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;"><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--label); font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">cad</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--label); font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">design</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--label); font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">strategy</span></div>
+            <div class="jl-tagrow" style="margin-top:12px; display:flex; flex-wrap:wrap; gap:4px 14px;"><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">cad</span><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">design</span><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">strategy</span></div>
           <p style="margin-top:14px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Draws most of what we machine. Spends the meetings arguing about tolerances.</p>
         </div>
       </div>
@@ -1609,7 +1633,7 @@
         <div style="padding:clamp(20px,2.2vw,28px);">
           <div style="font-size:clamp(19px,1.6vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Kanav</div>
           <div style="margin-top:8px; font-size:13.5px; line-height:1.5; color:var(--accent);">design co-lead · outreach co-lead</div>
-            <div class="jl-tagrow" style="margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;"><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--label); font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">design</span><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--label); font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">outreach</span></div>
+            <div class="jl-tagrow" style="margin-top:12px; display:flex; flex-wrap:wrap; gap:4px 14px;"><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">design</span><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">outreach</span></div>
           <p style="margin-top:14px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Runs design with Adarsh and outreach with Niraj. Writes the emails nobody else wants to write.</p>
         </div>
       </div>
@@ -1618,7 +1642,7 @@
         <div style="padding:clamp(20px,2.2vw,28px);">
           <div style="font-size:clamp(19px,1.6vw,24px); font-family:var(--disp); font-weight:700; letter-spacing:-.035em;">Niraj</div>
           <div style="margin-top:8px; font-size:13.5px; line-height:1.5; color:var(--accent);">outreach co-lead</div>
-            <div class="jl-tagrow" style="margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;"><span style="display:inline-flex; align-items:center; padding:4px 8px; border:1px solid var(--rule); font-family:var(--label); font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">outreach</span></div>
+            <div class="jl-tagrow" style="margin-top:12px; display:flex; flex-wrap:wrap; gap:4px 14px;"><span style="font-family:var(--serif); font-size:16px; color:var(--dust);">outreach</span></div>
           <p style="margin-top:14px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Handles outreach. The reason we end up in libraries on Saturdays.</p>
         </div>
       </div>
@@ -1644,11 +1668,55 @@
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
   <header style="position:relative; z-index:1; border-bottom:1px solid var(--rule); padding:clamp(52px,5.6vw,84px) var(--pad);">
-    <h1 data-scramble="" style="font-size:clamp(52px,9vw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.045em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">engineering<br>portfolio</h1>
+    <h1 data-scramble="" style="font-size:clamp(52px,9vw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">engineering<br>portfolio</h1>
   </header>
 
   <section style="background:var(--panel); position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad) clamp(64px,6.6vw,96px);">
-    <p style="max-width:62ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">The plan for every build week: photograph what we made, save the CAD, and write a dated entry with the problem, the options we looked at, and what we actually cut or coded. Every decision gets tagged to a subsystem so judges can trace it. Before our first competition we’ll pull the season into one PDF. Executive summary up front, iteration log in the middle, outreach and budget in the back. Then teammates who weren’t on that subsystem read it cold to catch the gaps. If they can’t follow the story, we rewrite until they can. None of it exists yet. The season starts in October.</p>
+    <p style="max-width:62ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">The plan for every build week: photograph what we made, save the CAD, and write a dated entry with the problem, the options we looked at, and what we actually cut or coded. Every decision gets tagged to a subsystem so judges can trace it. Before our first competition we’ll pull the season into one PDF. Executive summary up front, iteration log in the middle, outreach and budget in the back. Then teammates who weren’t on that subsystem read it cold to catch the gaps. If they can’t follow the story, we rewrite until they can. Entries start at kickoff. The drivetrain below is the first one.</p>
+  </section>
+
+  <section style="position:relative; z-index:1; padding:clamp(52px,5.6vw,84px) var(--pad) clamp(64px,6.6vw,96px);">
+    <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 20px;">
+      <span style="font-family:var(--mono); font-size:13px; color:var(--accent);">01</span>
+      <h2 style="margin:0; font-size:clamp(30px,4.6vw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95; text-transform:lowercase;">swerve drivetrain, v1</h2>
+      <span style="font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted);">built · one module of four</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:clamp(24px,4vw,68px); margin-top:clamp(28px,3.4vw,44px); align-items:start;" class="jl-nb-row">
+      <div style="display:flex; flex-direction:column; gap:clamp(20px,2.4vw,30px);">
+        <p style="margin:0; max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--text);">Three ways to move a robot around a field, and we picked the hardest one. Tank is simple and loses pushing matches sideways. Mecanum slips under load. Swerve keeps full traction while pointing anywhere, which is the whole reason we can drive out of a pin instead of waiting it out.</p>
+        <p style="margin:0; max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted);">The cost is four modules to build, four to tune, and code that solves for all of them at once. We decided that was worth it in the offseason, when breaking things is cheap.</p>
+        <div style="font-family:var(--hand); text-transform:uppercase; letter-spacing:.09em; font-size:clamp(17px,1.7vw,22px); color:var(--accent); line-height:1.25; max-width:26ch;">tank loses matches sideways</div>
+      </div>
+      <figure style="margin:0;">
+        <img src="/assets/photos/swerve-module-cad.jpg" alt="CAD of one swerve module" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block;">
+        <figcaption style="margin-top:10px; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted);">Module 1 of 4, as drawn.</figcaption>
+      </figure>
+    </div>
+
+    <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.6fr); gap:clamp(24px,4vw,68px); margin-top:clamp(40px,4.6vw,72px); align-items:end;" class="jl-nb-row">
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="font-family:var(--hand); text-transform:uppercase; letter-spacing:.09em; font-size:clamp(17px,1.7vw,22px); color:var(--accent); line-height:1.25;">then we cut it</div>
+        <p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted);">Drilling the plate. The holes are the part you cannot fix later.</p>
+      </div>
+      <figure style="margin:0;"><img src="/assets/photos/shop-drill.jpg" alt="Drilling the drivetrain plate" loading="lazy" decoding="async" style="width:100%; aspect-ratio:16/10; object-fit:cover; display:block;"></figure>
+    </div>
+
+    <div style="margin-top:clamp(40px,4.6vw,72px); display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(12px,1.6vw,20px);" class="jl-nb-strip">
+      <figure style="margin:0; grid-column:span 2;"><img src="/assets/photos/shop-drivetrain.jpg" alt="The drivetrain frame coming together" loading="lazy" decoding="async" style="width:100%; aspect-ratio:16/10; object-fit:cover; display:block;"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted);">Frame square, module mounted.</figcaption></figure>
+      <figure style="margin:0;"><img src="/assets/photos/shop-rails.jpg" alt="Rail stock on the bench" loading="lazy" decoding="async" style="width:100%; aspect-ratio:3/4; object-fit:cover; display:block;"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted);">Rail stock.</figcaption></figure>
+    </div>
+
+    <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(24px,4vw,68px); margin-top:clamp(40px,4.6vw,72px); align-items:start;" class="jl-nb-row">
+      <div>
+        <div style="font-family:var(--hand); text-transform:uppercase; letter-spacing:.09em; font-size:clamp(17px,1.7vw,22px); color:var(--accent); line-height:1.25;">what changed from the CAD</div>
+        <p style="margin:12px 0 0; max-width:48ch; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted);">The steering gear has more play than the drawing suggested, so the module hunts a few degrees before it settles. We think it is the mount geometry rather than the gear. That is the next revision, and the reason there is one module built instead of four.</p>
+      </div>
+      <div>
+        <div style="font-family:var(--hand); text-transform:uppercase; letter-spacing:.09em; font-size:clamp(17px,1.7vw,22px); color:var(--accent); line-height:1.25;">next</div>
+        <p style="margin:12px 0 0; max-width:48ch; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted);">Fix the play, then build the other three to whatever the fix turns out to be. Field-oriented drive after that. Nothing here is tuned, and none of it has seen a match.</p>
+      </div>
+    </div>
   </section>
   </div>
   </sc-if>
@@ -1658,7 +1726,7 @@
 
   <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr); border-bottom:1px solid var(--rule);">
     <div style="padding:clamp(52px,5.6vw,84px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
-      <h1 data-scramble="" style="font-size:clamp(50px,8.5vw,140px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.045em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">join us</h1>
+      <h1 data-scramble="" style="font-size:clamp(50px,8.5vw,140px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">join us</h1>
       <p style="margin-top:24px; max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">We need builders, coders, designers, and someone who actually enjoys writing. No experience needed. Most of us had none. You can reach us anytime at janitorsftcteam@googlegroups.com.</p>
       <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:32px;">
         <a href="mailto:janitorsftcteam@googlegroups.com" data-magnet="" style="display:inline-flex; align-items:center; gap:9px; background:var(--accent); color:var(--ink); padding:16px 26px; font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:.14em; will-change:transform;">janitorsftcteam@googlegroups.com</a>
@@ -1784,7 +1852,7 @@
       <div>
         <div style="display:flex; align-items:center; gap:12px;">
           <img class="jl-brand-mark jl-brand-mark-lg" src="/logo-transparent.png" width="30" height="30" alt="" decoding="async">
-          <span style="font-size:28px; font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.04em; color:var(--accent); text-shadow:2px 2px 0 rgba(233,246,248,.85);">the janitors</span>
+          <span style="font-size:28px; font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.115em; color:var(--accent); text-shadow:2px 2px 0 rgba(233,246,248,.85);">the janitors</span>
           <span style="font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.1em; color:var(--ink); background:var(--accent); padding:3px 6px;">36721</span>
         </div>
         <p style="margin-top:16px; max-width:34ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">A student-run FIRST Tech Challenge team out of Dublin, CA. We build robots.</p>
@@ -1841,6 +1909,67 @@ class Component extends DCLogic {
   matchResults() { return (window.TEAM && window.TEAM.matches) || []; }
   routeSteps() { return (window.TEAM && window.TEAM.routeSteps) || []; }
   pageSequence() { return ["home", "robot", "season", "outreach", "sponsors", "team", "portfolio", "join"]; }
+  pageLabel(p) {
+    const map = { home: "home", robot: "the robot", season: "the game", outreach: "outreach", sponsors: "sponsors", team: "the team", portfolio: "portfolio", join: "join us" };
+    return map[p] || p;
+  }
+  travelTo(ord, from, to) {
+    if (typeof document === "undefined") { this.setState({ page: ord[to] }); return; }
+    const step = to > from ? 1 : -1;
+    const path = [];
+    for (let i = from + step; i !== to + step; i += step) path.push(ord[i]);
+    let seq = path;
+    if (path.length > 4) {
+      const mids = path.slice(0, -1);
+      const pick = [mids[0], mids[Math.round((mids.length - 1) / 2)], mids[mids.length - 1]];
+      seq = pick.filter((v, i, arr) => v && arr.indexOf(v) === i).concat(path[path.length - 1]);
+    }
+    const dir = step > 0 ? 1 : -1;
+    const hop = 190;
+    const n = seq.length;
+    const total = hop * n + 200;
+    const span = 260;
+    const de = document.documentElement;
+    if (this.travelTimers) this.travelTimers.forEach((t) => clearTimeout(t));
+    this.travelTimers = [];
+    if (this.travelRaf) cancelAnimationFrame(this.travelRaf);
+    if (this.swapTimer) clearTimeout(this.swapTimer);
+    if (this.scrambleTimer) clearTimeout(this.scrambleTimer);
+    const set = (e) => {
+      de.style.setProperty("--tvx", (dir * span * (1 - e)).toFixed(2) + "px");
+      de.style.setProperty("--tvo", (0.42 + 0.58 * e).toFixed(3));
+      de.style.setProperty("--tvb", (5.4 * (1 - e) * (1 - e)).toFixed(2) + "px");
+    };
+    set(0);
+    document.body.classList.add("jl-travel");
+    const t0 = performance.now();
+    const tick = () => {
+      const p = Math.min(1, (performance.now() - t0) / total);
+      set(1 - Math.pow(1 - p, 2.4));
+      if (p < 1) { this.travelRaf = requestAnimationFrame(tick); return; }
+      this.travelRaf = null;
+      document.body.classList.remove("jl-travel");
+      ["--tvx", "--tvo", "--tvb"].forEach((k) => de.style.removeProperty(k));
+    };
+    this.travelRaf = requestAnimationFrame(tick);
+    seq.forEach((pg, idx) => {
+      const last = idx === n - 1;
+      this.travelTimers.push(setTimeout(() => {
+        this.setState({ page: pg });
+        this.jumpTo(0);
+        if (last) {
+          setTimeout(() => {
+            this.clearCache();
+            if (this.scanReveals) this.scanReveals();
+            this.drawBot();
+            this.drawRoute();
+            if (this.setupApplyForm) this.setupApplyForm();
+            this.scrambleText();
+          }, 30);
+        }
+      }, hop * idx));
+    });
+  }
   armCounters() {
     if (typeof window === "undefined" || !window.IntersectionObserver) return;
     const els = document.querySelectorAll("[data-count]");
@@ -1880,6 +2009,7 @@ class Component extends DCLogic {
     if (this.swapTimer) clearTimeout(this.swapTimer);
     if (this.wipeTimer) clearTimeout(this.wipeTimer);
     if (this.scrambleTimer) clearTimeout(this.scrambleTimer);
+    if (from > -1 && to > -1 && Math.abs(to - from) >= 2) { this.travelTo(ord, from, to); return; }
     this.playMopWipe(back);
     this.swapTimer = setTimeout(() => {
       this.setState({ page: p });
@@ -2285,16 +2415,9 @@ class Component extends DCLogic {
       });
       document.querySelectorAll("[data-count],[data-fill]").forEach((el) => { if (el.getAttribute("data-armed")) return; el.setAttribute("data-armed", "1"); this.counterObserver.observe(el); });
       document.querySelectorAll("[data-mask]").forEach((h) => {
-        if (h.getAttribute("data-armed")) return;
-        h.setAttribute("data-armed", "1");
-        h.style.overflow = "hidden";
-        const inner = document.createElement("span");
-        inner.style.display = "block";
-        inner.style.transform = "translateY(105%)";
-        inner.style.transition = "transform .78s cubic-bezier(.16,.84,.24,1)";
-        while (h.firstChild) inner.appendChild(h.firstChild);
-        h.appendChild(inner);
-        this.maskObserver.observe(h);
+        h.style.overflow = "visible";
+        const inner = h.querySelector(":scope > span");
+        if (inner && inner.style.transform) inner.style.transform = "none";
       });
       document.querySelectorAll("[data-stagger]").forEach((g) => { if (g.getAttribute("data-armed")) return; g.setAttribute("data-armed", "1"); this.staggerObserver.observe(g); });
     };

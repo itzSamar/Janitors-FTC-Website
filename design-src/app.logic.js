@@ -4,6 +4,67 @@ class Component extends DCLogic {
   matchResults() { return (window.TEAM && window.TEAM.matches) || []; }
   routeSteps() { return (window.TEAM && window.TEAM.routeSteps) || []; }
   pageSequence() { return ["home", "robot", "season", "outreach", "sponsors", "team", "portfolio", "join"]; }
+  pageLabel(p) {
+    const map = { home: "home", robot: "the robot", season: "the game", outreach: "outreach", sponsors: "sponsors", team: "the team", portfolio: "portfolio", join: "join us" };
+    return map[p] || p;
+  }
+  travelTo(ord, from, to) {
+    if (typeof document === "undefined") { this.setState({ page: ord[to] }); return; }
+    const step = to > from ? 1 : -1;
+    const path = [];
+    for (let i = from + step; i !== to + step; i += step) path.push(ord[i]);
+    let seq = path;
+    if (path.length > 4) {
+      const mids = path.slice(0, -1);
+      const pick = [mids[0], mids[Math.round((mids.length - 1) / 2)], mids[mids.length - 1]];
+      seq = pick.filter((v, i, arr) => v && arr.indexOf(v) === i).concat(path[path.length - 1]);
+    }
+    const dir = step > 0 ? 1 : -1;
+    const hop = 190;
+    const n = seq.length;
+    const total = hop * n + 200;
+    const span = 260;
+    const de = document.documentElement;
+    if (this.travelTimers) this.travelTimers.forEach((t) => clearTimeout(t));
+    this.travelTimers = [];
+    if (this.travelRaf) cancelAnimationFrame(this.travelRaf);
+    if (this.swapTimer) clearTimeout(this.swapTimer);
+    if (this.scrambleTimer) clearTimeout(this.scrambleTimer);
+    const set = (e) => {
+      de.style.setProperty("--tvx", (dir * span * (1 - e)).toFixed(2) + "px");
+      de.style.setProperty("--tvo", (0.42 + 0.58 * e).toFixed(3));
+      de.style.setProperty("--tvb", (5.4 * (1 - e) * (1 - e)).toFixed(2) + "px");
+    };
+    set(0);
+    document.body.classList.add("jl-travel");
+    const t0 = performance.now();
+    const tick = () => {
+      const p = Math.min(1, (performance.now() - t0) / total);
+      set(1 - Math.pow(1 - p, 2.4));
+      if (p < 1) { this.travelRaf = requestAnimationFrame(tick); return; }
+      this.travelRaf = null;
+      document.body.classList.remove("jl-travel");
+      ["--tvx", "--tvo", "--tvb"].forEach((k) => de.style.removeProperty(k));
+    };
+    this.travelRaf = requestAnimationFrame(tick);
+    seq.forEach((pg, idx) => {
+      const last = idx === n - 1;
+      this.travelTimers.push(setTimeout(() => {
+        this.setState({ page: pg });
+        this.jumpTo(0);
+        if (last) {
+          setTimeout(() => {
+            this.clearCache();
+            if (this.scanReveals) this.scanReveals();
+            this.drawBot();
+            this.drawRoute();
+            if (this.setupApplyForm) this.setupApplyForm();
+            this.scrambleText();
+          }, 30);
+        }
+      }, hop * idx));
+    });
+  }
   armCounters() {
     if (typeof window === "undefined" || !window.IntersectionObserver) return;
     const els = document.querySelectorAll("[data-count]");
@@ -43,6 +104,7 @@ class Component extends DCLogic {
     if (this.swapTimer) clearTimeout(this.swapTimer);
     if (this.wipeTimer) clearTimeout(this.wipeTimer);
     if (this.scrambleTimer) clearTimeout(this.scrambleTimer);
+    if (from > -1 && to > -1 && Math.abs(to - from) >= 2) { this.travelTo(ord, from, to); return; }
     this.playMopWipe(back);
     this.swapTimer = setTimeout(() => {
       this.setState({ page: p });
@@ -448,16 +510,9 @@ class Component extends DCLogic {
       });
       document.querySelectorAll("[data-count],[data-fill]").forEach((el) => { if (el.getAttribute("data-armed")) return; el.setAttribute("data-armed", "1"); this.counterObserver.observe(el); });
       document.querySelectorAll("[data-mask]").forEach((h) => {
-        if (h.getAttribute("data-armed")) return;
-        h.setAttribute("data-armed", "1");
-        h.style.overflow = "hidden";
-        const inner = document.createElement("span");
-        inner.style.display = "block";
-        inner.style.transform = "translateY(105%)";
-        inner.style.transition = "transform .78s cubic-bezier(.16,.84,.24,1)";
-        while (h.firstChild) inner.appendChild(h.firstChild);
-        h.appendChild(inner);
-        this.maskObserver.observe(h);
+        h.style.overflow = "visible";
+        const inner = h.querySelector(":scope > span");
+        if (inner && inner.style.transform) inner.style.transform = "none";
       });
       document.querySelectorAll("[data-stagger]").forEach((g) => { if (g.getAttribute("data-armed")) return; g.setAttribute("data-armed", "1"); this.staggerObserver.observe(g); });
     };
