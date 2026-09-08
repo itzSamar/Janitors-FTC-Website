@@ -92,6 +92,7 @@ class Component extends DCLogic {
     els.forEach((el) => { el.textContent = label(el, 0); this.countObs.observe(el); });
   }
   goToPage(p) {
+    if (this.state.mobNav || this.state.menuOpen) this.setState({ mobNav: false, menuOpen: false });
     if (p === this.state.page) { this.scrollToTop(); return; }
     const ord = this.pageSequence();
     const from = ord.indexOf(this.state.page || "home");
@@ -148,7 +149,7 @@ class Component extends DCLogic {
           <div style="position:relative;flex:0 0 0;width:0;height:100%;">
             <div style="position:absolute;top:0;bottom:0;${back ? "left:0;" : "right:0;transform:translateX(-100%);"}width:90px;background:${edgeGlow};pointer-events:none;"></div>
             <div style="position:absolute;top:-4%;bottom:-4%;left:0;width:2px;transform:translateX(-50%);background:${accent};box-shadow:0 0 14px ${accent};animation:mopWet .35s ease-in-out infinite;"></div>
-            <div style="position:absolute;left:0;bottom:3%;width:min(320px,66vw);height:min(300px,58vh);transform:translate(-42%,0) ${face};transform-origin:50% 100%;">
+            <div style="position:absolute;left:0;bottom:3%;width:min(320px,66cqw);height:min(300px,58vh);transform:translate(-42%,0) ${face};transform-origin:50% 100%;">
               <div style="width:100%;height:100%;animation:jlBob .28s ease-in-out infinite;">
                 <svg viewBox="0 0 260 200" width="100%" height="100%" style="display:block;overflow:visible;">
                   <style>
@@ -223,7 +224,7 @@ class Component extends DCLogic {
       const el = document.querySelector("[data-mark]");
       if (!el) return;
       const r = el.getBoundingClientRect();
-      const y = r.top + r.height / 2;
+      const y = Math.max(r.top + r.height / 2, 150);
       if (y > 0 && Math.abs(y - (this.state.lockY || 0)) > 0.5) this.setState({ lockY: y });
     };
     requestAnimationFrame(run);
@@ -382,8 +383,10 @@ class Component extends DCLogic {
     
 
     this.handleOutsideClick = (e) => {
+      const t = e.target && e.target.closest ? e.target : null;
+      if (this.state.mobNav && t && !t.closest(".jl-mobnav") && !t.closest(".jl-burger")) this.setState({ mobNav: false });
       if (!this.state.menuOpen) return;
-      const el = e.target && e.target.closest ? e.target.closest("[data-menu]") : null;
+      const el = t ? t.closest("[data-menu]") : null;
       if (!el) this.setState({ menuOpen: false });
     };
     document.addEventListener("pointerdown", this.handleOutsideClick);
@@ -798,7 +801,7 @@ class Component extends DCLogic {
     if (this.bootTimer) clearTimeout(this.bootTimer);
     if (this.bootInterval) clearInterval(this.bootInterval);
     this.setState({ booting: true });
-    this.bootTimer = setTimeout(() => this.setState({ booting: false }), 5600);
+    this.bootTimer = setTimeout(() => this.setState({ booting: false }), 3200);
   }
   toggleMatchClock() {
     if (this.matchTimer) { clearInterval(this.matchTimer); this.matchTimer = null; this.setState({ t: null }); return; }
@@ -829,18 +832,100 @@ class Component extends DCLogic {
       background: theme.bg, color: theme.text, position: "relative",
       overflowX: "clip", maxWidth: "1720px", margin: "0 auto",
     };
+    const phone = this.props.previewDevice === "phone";
     const page = this.state.page || "home";
     const nav = (p) => () => this.goToPage(p);
-    const key = (p) => ({
-      position: "relative", display: "inline-flex", alignItems: "center", padding: "10px 2px",
-      fontSize: "clamp(14px,1.35vw,17px)", fontWeight: 500, letterSpacing: "-.01em",
-      whiteSpace: "nowrap", flexShrink: 0, lineHeight: 1,
-      backgroundImage: "linear-gradient(" + accent + "," + accent + ")",
-      backgroundRepeat: "no-repeat", backgroundPosition: "0 100%",
-      backgroundSize: page === p ? "100% 2px" : "0% 2px",
-      color: page === p ? theme.text : theme.muted,
-      transition: "color .2s ease, background-size .34s cubic-bezier(.2,.8,.3,1)",
-    });
+    const mnItem = (p) => {
+      const on = p && page === p;
+      return {
+        display: "flex", alignItems: "center", gap: "14px", padding: "16px 20px",
+        minHeight: "52px", borderBottom: "1px solid " + theme.rule, cursor: "pointer",
+        textDecoration: "none", fontFamily: "var(--label)", fontSize: "18px",
+        fontWeight: on ? 700 : 500, letterSpacing: ".08em", textTransform: "lowercase",
+        background: on ? theme.panel : "transparent",
+        color: on ? accent : theme.muted,
+        boxShadow: on ? "inset 3px 0 0 " + accent : "none",
+      };
+    };
+    const headerKind = ["simple", "parts", "telemetry", "plate", "sheet"].indexOf(this.props.headerStyle) > -1 ? this.props.headerStyle : "simple";
+    const baseCell = {
+      position: "relative", cursor: "pointer", textDecoration: "none",
+      fontFamily: "var(--disp)", letterSpacing: "-.015em", textTransform: "lowercase",
+      whiteSpace: "nowrap", lineHeight: 1, minWidth: 0, overflow: "hidden",
+      transition: "color .18s ease, background .18s ease",
+    };
+    const key = (p) => {
+      const on = page === p;
+      if (headerKind === "simple") return Object.assign({}, baseCell, {
+        display: "inline-flex", alignItems: "center", padding: "10px 2px",
+        fontSize: "clamp(14px,1.35cqw,17px)", fontWeight: 500,
+        backgroundImage: "linear-gradient(" + accent + "," + accent + ")",
+        backgroundRepeat: "no-repeat", backgroundPosition: "0 100%",
+        backgroundSize: on ? "100% 2px" : "0% 2px",
+        color: on ? theme.text : theme.muted,
+        transition: "color .2s ease, background-size .34s cubic-bezier(.2,.8,.3,1)",
+      });
+      if (headerKind === "parts") return Object.assign({}, baseCell, {
+        display: "inline-flex", alignItems: "baseline", gap: "8px",
+        padding: "13px clamp(8px,1.1cqw,16px)", borderRight: "1px solid " + theme.rule,
+        fontSize: "clamp(14px,1.4cqw,16.5px)", fontWeight: on ? 700 : 500,
+        background: on ? "rgba(34,211,238,.1)" : "transparent",
+        boxShadow: on ? "inset 0 -2px 0 " + accent : "none",
+        color: on ? theme.text : theme.muted,
+      });
+      if (headerKind === "telemetry") return Object.assign({}, baseCell, {
+        display: "inline-flex", alignItems: "center", gap: "7px", justifyContent: "center",
+        padding: "6px 2px",
+        fontSize: "clamp(14.5px,1.45cqw,17px)", fontWeight: on ? 600 : 400,
+        color: on ? theme.text : theme.muted,
+      });
+      if (headerKind === "plate") return Object.assign({}, baseCell, {
+        display: "inline-flex", alignItems: "center", justifyContent: "center",
+        padding: "12px clamp(8px,1.1cqw,15px)", borderLeft: "1px solid rgba(255,255,255,.09)",
+        fontSize: "clamp(14px,1.4cqw,16.5px)", fontWeight: on ? 600 : 500,
+        background: on ? accent : "transparent",
+        boxShadow: on ? "inset 0 -2px 0 rgba(0,0,0,.25)" : "none",
+        color: on ? theme.ink : theme.muted,
+      });
+      return Object.assign({}, baseCell, {
+        display: "inline-flex", alignItems: "center", justifyContent: "center",
+        margin: "0 3px", marginBottom: on ? "-1px" : "0",
+        padding: on ? "11px clamp(8px,1.1cqw,15px) 13px" : "9px clamp(8px,1.1cqw,15px)",
+        alignSelf: "flex-end",
+        border: "1px solid " + (on ? accent : theme.rule), borderBottom: on ? "1px solid " + theme.panel : "none",
+        background: on ? theme.panel : "transparent",
+        fontSize: "clamp(14px,1.4cqw,16.5px)", fontWeight: on ? 600 : 500,
+        color: on ? theme.text : theme.muted,
+      });
+    };
+    const navStyle = {
+      position: "relative",
+      background: headerKind === "plate" ? "linear-gradient(180deg," + theme.keytop + "," + theme.key + ")" : ((headerKind === "sheet" || headerKind === "simple") ? theme.bg : theme.panel),
+      borderBottom: "1px solid " + (headerKind === "sheet" ? accent : theme.rule),
+      boxShadow: headerKind === "plate" ? "inset 0 1px 0 rgba(255,255,255,.07)" : "none",
+    };
+    const navRowStyle = headerKind === "simple"
+      ? { display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center", gap: "clamp(10px,2cqw,26px)", padding: "11px var(--pad)", minWidth: 0 }
+      : headerKind === "parts"
+      ? { display: "flex", alignItems: "stretch", minWidth: 0 }
+      : { display: "flex", alignItems: headerKind === "sheet" ? "flex-end" : "center", justifyContent: "space-between", gap: "clamp(18px,3cqw,44px)", padding: headerKind === "sheet" ? "13px var(--pad) 0" : "14px var(--pad)", minWidth: 0 };
+    const brandCellStyle = Object.assign(
+      { display: "flex", alignItems: "center", gap: "11px", flex: "none", cursor: "pointer", textDecoration: "none", minWidth: 0 },
+      headerKind === "parts" ? { padding: "0 clamp(14px,1.8cqw,22px)", borderRight: "1px solid " + theme.rule } : { justifySelf: "start" },
+      headerKind === "sheet" ? { paddingBottom: "12px" } : {}
+    );
+    const linksWrapStyle = headerKind === "simple"
+      ? { display: "flex", alignItems: "center", justifyContent: "center", gap: "clamp(10px,1.7cqw,24px)", minWidth: 0, overflowX: "auto", scrollbarWidth: "none" }
+      : headerKind === "parts"
+      ? { display: "grid", gridTemplateColumns: "repeat(6,minmax(0,1fr))", alignItems: "stretch", flex: "1 1 auto", minWidth: 0 }
+      : { display: "flex", alignItems: headerKind === "sheet" ? "flex-end" : "center", gap: headerKind === "plate" ? "2px" : "clamp(12px,1.9cqw,30px)", minWidth: 0, overflowX: "auto", scrollbarWidth: "none" };
+    const gearCellStyle = Object.assign(
+      { position: "relative", flex: "none", display: "flex", alignItems: "center" },
+      headerKind === "parts" ? { padding: "0 clamp(10px,1.2cqw,16px)", borderLeft: "1px solid " + theme.rule } : { justifySelf: "end", paddingBottom: headerKind === "sheet" ? "10px" : 0 }
+    );
+    const numStyle = { fontFamily: "var(--mono)", fontSize: "10.5px", letterSpacing: ".06em", opacity: .55, flex: "none", display: headerKind === "parts" ? "inline-block" : "none" };
+    const caret = (p) => ({ color: accent, flex: "none", display: (headerKind === "telemetry" && page === p) ? "inline-block" : "none" });
+    const rivet = { position: "absolute", width: "5px", height: "5px", borderRadius: "50%", background: "#3A464B", boxShadow: "inset 0 1px 1px rgba(0,0,0,.8)", display: headerKind === "plate" ? "block" : "none" };
     const subs = [
       { t: "drivetrain", d: "Four motors, mecanum wheels. It can drive any direction, which helps against defense.", a: "4× motors", b: "field-centric" },
       { t: "intake", d: "Compliant-wheel active intake swallows game elements at almost any approach angle.", a: "1× motor", b: "0.4 s grab" },
@@ -943,7 +1028,7 @@ class Component extends DCLogic {
       daysLeft: daysLeft, hoursLeft: hoursLeft, minutesLeft: minutesLeft, secondsLeft: secondsLeft,
       stageIndex: "0" + (stageIdx + 1), stageName: stage.name, stageValue: stage.value, stageUnit: stage.unit, stageNote: stage.note,
       stageDot0: stageDot(0), stageDot1: stageDot(1), stageDot2: stageDot(2), stageDot3: stageDot(3),
-      stageFade: { animation: "rise .55s cubic-bezier(.16,.84,.24,1) both", minHeight: "clamp(170px,20vw,240px)" },
+      stageFade: { animation: "rise .55s cubic-bezier(.16,.84,.24,1) both", minHeight: "clamp(170px,20cqw,240px)" },
       printPage: () => { if (typeof window !== "undefined") window.print(); },
       resetBot: () => { this.bot = { x: 0, y: 0, h: 0, vx: 0, vy: 0, vh: 0 }; this.heldKeys = {}; this.drawBot(); },
       autoPos: this.state.autoPos || 0,
@@ -976,8 +1061,14 @@ class Component extends DCLogic {
       barTravel: bar(0.18), barOut: bar(0.18), barOps: bar(0.12),
       tierName: tier.name, tierPerks: tier.perks,
       menuOpen: !!this.state.menuOpen,
+      mobNav: !!this.state.mobNav,
+      burgerCls: this.state.mobNav ? "jl-burger-on" : "",
+      toggleMobNav: () => this.setState({ mobNav: !this.state.mobNav, menuOpen: false }),
+      mnHome: mnItem("home"), mnRobot: mnItem("robot"), mnSeason: mnItem("season"),
+      mnOutreach: mnItem("outreach"), mnSponsors: mnItem("sponsors"), mnTeam: mnItem("team"),
+      mnPortfolio: mnItem("portfolio"), mnReplay: mnItem(null),
       toggleMenu: () => this.setState({ menuOpen: !this.state.menuOpen }),
-      replayBoot: () => { this.setState({ menuOpen: false }); this.startBootSequence(); },
+      replayBoot: () => { this.setState({ menuOpen: false, mobNav: false }); if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "auto" }); this.startBootSequence(); },
       bootStep0: bp(0, "ok"), bletter1: bp(1, "ok"), bletter2: bp(2, "ok"), bletter3: bp(3, "ok"), bletter4: bp(4, "5 / 5"),
       gearStyle: { width: "15px", height: "15px", display: "block", transition: "transform .45s cubic-bezier(.2,.8,.3,1)", transform: this.state.menuOpen ? "rotate(90deg)" : "none" },
       menuButtonStyle: {
@@ -995,8 +1086,9 @@ class Component extends DCLogic {
       toggleClock: () => this.toggleMatchClock(),
       clockBarStyle: { height: "100%", width: ((150 - secs) / 150 * 100).toFixed(1) + "%", background: "var(--accent)", transition: "width 1s linear" },
       rootStyle,
+      rootCls: phone ? "jl-force-mobile" : "",
       booting: !!this.state.booting,
-      bootLockStyle: { position: "absolute", left: 0, right: 0, top: (this.state.lockY || 0) + "px", transform: "translateY(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: "18px", textAlign: "center", padding: "0 6vw", visibility: this.state.lockY ? "visible" : "hidden" },
+      bootLockStyle: { position: "absolute", left: 0, right: 0, top: (this.state.lockY || 0) + "px", transform: "translateY(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: "18px", textAlign: "center", padding: "0 6cqw", visibility: this.state.lockY ? "visible" : "hidden" },
 
       scrollTopFn: () => this.scrollToTop(),
       onRobotDown: (e) => this.startViewerDrag(e),
@@ -1008,6 +1100,14 @@ class Component extends DCLogic {
       isPortfolio: page === "portfolio", navPortfolio: nav("portfolio"), navPortfolioStyle: key("portfolio"),
       navHome: nav("home"), navRobot: nav("robot"), navSeason: nav("season"), navOutreach: nav("outreach"),
       navSponsors: nav("sponsors"), navTeam: nav("team"), navJoin: nav("join"),
+      navStyle, navRowStyle, brandCellStyle, linksWrapStyle, gearCellStyle, numStyle,
+      navRobotCaret: caret("robot"), navSeasonCaret: caret("season"), navOutreachCaret: caret("outreach"),
+      navSponsorsCaret: caret("sponsors"), navTeamCaret: caret("team"), navPortfolioCaret: caret("portfolio"),
+      rivetTL: Object.assign({ left: "7px", top: "7px" }, rivet),
+      rivetTR: Object.assign({ right: "7px", top: "7px" }, rivet),
+      rivetBL: Object.assign({ left: "7px", bottom: "7px" }, rivet),
+      rivetBR: Object.assign({ right: "7px", bottom: "7px" }, rivet),
+      showChip: headerKind === "parts" || headerKind === "sheet",
       navRobotStyle: key("robot"), navSeasonStyle: key("season"), navOutreachStyle: key("outreach"),
       navSponsorsStyle: key("sponsors"), navTeamStyle: key("team"),
     };
