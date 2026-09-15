@@ -5,8 +5,6 @@ export default defineConfig({
   base: process.env.BASE_PATH ?? '/',
   build: {
     target: 'es2020',
-    minify: 'esbuild',
-    cssMinify: 'esbuild',
     assetsInlineLimit: 4096,
     reportCompressedSize: false,
     rollupOptions: {
