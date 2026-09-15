@@ -3,9 +3,16 @@ class Component extends DCLogic {
   buildLog() { return (window.TEAM && window.TEAM.buildLog) || []; }
   matchResults() { return (window.TEAM && window.TEAM.matches) || []; }
   routeSteps() { return (window.TEAM && window.TEAM.routeSteps) || []; }
-  pageSequence() { return ["home", "robot", "season", "outreach", "sponsors", "team", "portfolio", "join"]; }
+  endTravel() {
+    if (this.travelRaf) { cancelAnimationFrame(this.travelRaf); this.travelRaf = null; }
+    if (this.travelGuard) { clearTimeout(this.travelGuard); this.travelGuard = null; }
+    document.body.classList.remove("jl-travel");
+    const de = document.documentElement;
+    ["--tvx", "--tvo", "--tvb"].forEach((k) => de.style.removeProperty(k));
+  }
+  pageSequence() { return ["home", "robot", "season", "outreach", "sponsors", "team", "portfolio"]; }
   pageLabel(p) {
-    const map = { home: "home", robot: "the robot", season: "the game", outreach: "outreach", sponsors: "sponsors", team: "the team", portfolio: "portfolio", join: "join us" };
+    const map = { home: "home", robot: "the robot", season: "the game", outreach: "outreach", sponsors: "sponsors", team: "the team", portfolio: "portfolio" };
     return map[p] || p;
   }
   travelTo(ord, from, to) {
@@ -42,11 +49,13 @@ class Component extends DCLogic {
       const p = Math.min(1, (performance.now() - t0) / total);
       set(1 - Math.pow(1 - p, 2.4));
       if (p < 1) { this.travelRaf = requestAnimationFrame(tick); return; }
-      this.travelRaf = null;
-      document.body.classList.remove("jl-travel");
-      ["--tvx", "--tvo", "--tvb"].forEach((k) => de.style.removeProperty(k));
+      this.endTravel();
     };
     this.travelRaf = requestAnimationFrame(tick);
+    /* rAF is paused on hidden tabs and cancelled on re-entry, either of which
+       can strand jl-travel and leave most of the page content-visibility:hidden */
+    if (this.travelGuard) clearTimeout(this.travelGuard);
+    this.travelGuard = setTimeout(() => this.endTravel(), total + 600);
     seq.forEach((pg, idx) => {
       const last = idx === n - 1;
       this.travelTimers.push(setTimeout(() => {
@@ -91,7 +100,40 @@ class Component extends DCLogic {
     }, { threshold: 0.35 });
     els.forEach((el) => { el.textContent = label(el, 0); this.countObs.observe(el); });
   }
+  syncPageMeta(p) {
+    const meta = {
+      home: ["The Janitors · FTC Team 36721", "The Janitors are FIRST Tech Challenge team 36721, six students in Dublin, CA building our first competition robot. Build log, engineering notebook, and how to join."],
+      robot: ["The robot · MOP-9000 · The Janitors FTC 36721", "MOP-9000, our rookie swerve drivetrain: why we chose swerve over tank and mecanum, the CAD, the build, and what changed once we cut metal."],
+      season: ["The season · BIOBUZZ 2026/27 · The Janitors FTC 36721", "BIOBUZZ presented by RTX explained by a rookie team: how a match plays, Pollen and Nectar, what FIRST changed in the manual this year, and our event schedule."],
+      outreach: ["Outreach · The Janitors FTC 36721", "How FTC team 36721 works with libraries and schools around Dublin, California, bringing the robot and the practice field to people who have never driven one."],
+      sponsors: ["Sponsor us · The Janitors FTC 36721", "Sponsorship tiers for FIRST Tech Challenge rookie team 36721 in Dublin, CA. See what each tier funds, where the money goes, and how to reach us."],
+      team: ["The team · The Janitors FTC 36721", "The six students behind FTC team 36721 in Dublin, California, what each of us runs, and how to reach us if you want to join."],
+      portfolio: ["Engineering portfolio · The Janitors FTC 36721", "Our engineering notebook: build decisions, CAD, what failed, and what we changed. Entry 01 covers the swerve drivetrain."],
+    };
+    const entry = meta[p] || meta.home;
+    this.wantTitle = entry[0];
+    const setTitle = () => { try { if (document.title !== this.wantTitle) document.title = this.wantTitle; } catch (err) {} };
+    try {
+      setTitle();
+      /* the season page re-renders on the countdown tick, which re-applies the
+         authored <title>; watch the node instead of racing it with timers */
+      if (!this.titleObs) {
+        const node = document.querySelector("title");
+        if (node && typeof MutationObserver === "function") {
+          this.titleObs = new MutationObserver(setTitle);
+          this.titleObs.observe(node, { childList: true, characterData: true, subtree: true });
+        }
+      }
+      let d = document.querySelector('meta[name="description"]');
+      if (d) d.setAttribute("content", entry[1]);
+      let ot = document.querySelector('meta[property="og:title"]');
+      if (ot) ot.setAttribute("content", entry[0]);
+      let od = document.querySelector('meta[property="og:description"]');
+      if (od) od.setAttribute("content", entry[1]);
+    } catch (err) {}
+  }
   goToPage(p) {
+    this.syncPageMeta(p);
     if (this.state.mobNav || this.state.menuOpen) this.setState({ mobNav: false, menuOpen: false });
     if (p === this.state.page) { this.scrollToTop(); return; }
     const ord = this.pageSequence();
@@ -210,6 +252,25 @@ class Component extends DCLogic {
     this.wipeTimer = setTimeout(() => { if (host.parentNode) host.remove(); }, 1000);
   }
 
+  guardImages() {
+    const root = this.rootEl || document;
+    root.querySelectorAll("img:not([data-imgguard])").forEach((img) => {
+      img.setAttribute("data-imgguard", "");
+      const fail = () => {
+        const fig = img.closest("figure") || img.parentElement;
+        img.style.display = "none";
+        if (fig && !fig.querySelector("[data-imgfallback]")) {
+          const note = document.createElement("div");
+          note.setAttribute("data-imgfallback", "");
+          note.textContent = img.getAttribute("alt") || "Photo unavailable";
+          note.style.cssText = "display:flex;align-items:center;justify-content:center;min-height:120px;padding:18px;background:var(--panel);border:1px solid var(--rule);font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dust);text-align:center;";
+          fig.appendChild(note);
+        }
+      };
+      if (img.complete && img.naturalWidth === 0 && img.getAttribute("src")) fail();
+      img.addEventListener("error", fail, { once: true });
+    });
+  }
   componentDidMount() {
     if (typeof window !== "undefined" && !window.janitorsBootShown) {
       window.janitorsBootShown = true;
@@ -235,13 +296,24 @@ class Component extends DCLogic {
     if (this.initialized || typeof window === "undefined") return;
     this.initialized = true;
     this.handleScroll = () => { this.scrollDirty = true; };
-    this.handleResize = () => { this.scrollDirty = true; this.measureNav(); this.measureLockup(); };
+    this.handleResize = () => {
+      this.scrollDirty = true;
+      if (this.resizeTimer) clearTimeout(this.resizeTimer);
+      this.resizeTimer = setTimeout(() => { this.measureNav(); this.measureLockup(); }, 120);
+    };
     this.measureNav();
     this.measureLockup();
     window.addEventListener("scroll", this.handleScroll, { passive: true });
-    window.addEventListener("resize", this.handleResize);
-    this.secondTimer = setInterval(() => { const p = this.state.page; if (p === "season" || p === "home") this.setState({ now: Date.now() }); }, 1000);
-    if (!this.state.now) this.setState({ now: Date.now() });
+    window.addEventListener("resize", this.handleResize, { passive: true });
+    this.handleVisibility = () => {
+      if (document.hidden) {
+        if (this.frameId) { cancelAnimationFrame(this.frameId); this.frameId = null; }
+      } else if (!this.frameId && this.renderLoop) {
+        this.scrollDirty = true;
+        this.frameId = requestAnimationFrame(this.renderLoop);
+      }
+    };
+    document.addEventListener("visibilitychange", this.handleVisibility);
     this.scrollDirty = true; this.plateOffsetY = 0; this.plateOffsetX = 0;
     this.renderLoop = () => {
       try { this.updateFrame(); } catch (e) {}
@@ -303,12 +375,28 @@ class Component extends DCLogic {
           }
           return;
         }
-        const val = (key) => String(fd.get(key) || "").trim();
+        if (String(fd.get("company") || "").trim() !== "") {
+          form.reset();
+          if (status) { status.textContent = "Application sent, we'll be in touch"; status.className = "jl-status is-ok"; }
+          return;
+        }
+        const LIMIT_MS = 45000;
+        let last = 0;
+        try { last = Number(sessionStorage.getItem("jl-apply-sent")) || 0; } catch (err) { last = 0; }
+        const since = Date.now() - last;
+        if (last && since < LIMIT_MS) {
+          if (status) {
+            status.textContent = "Just sent one. Wait " + Math.ceil((LIMIT_MS - since) / 1000) + "s before sending again";
+            status.className = "jl-status is-err";
+          }
+          return;
+        }
+        const val = (key, max) => String(fd.get(key) || "").trim().slice(0, max || 1200);
         const payload = {
-          name: val("name"),
-          age: val("age"),
-          location: val("location"),
-          email: val("email"),
+          name: val("name", 80),
+          age: val("age", 3),
+          location: val("location", 90),
+          email: val("email", 120),
           ftc: val("ftc"),
           outreach: val("outreach"),
           design: val("design"),
@@ -329,15 +417,24 @@ class Component extends DCLogic {
           headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify(payload),
         }).then(() => {
+          try { sessionStorage.setItem("jl-apply-sent", String(Date.now())); } catch (err) {}
           form.reset();
           syncChips();
-          if (status) {
+          const thanks = document.getElementById("jl-apply-thanks");
+          if (thanks) {
+            Array.prototype.forEach.call(form.children, (el) => { if (el !== thanks) el.style.display = "none"; });
+            thanks.style.display = "block";
+            thanks.setAttribute("tabindex", "-1");
+            try { thanks.focus({ preventScroll: true }); } catch (err) {}
+          } else if (status) {
             status.textContent = "Application sent, we'll be in touch";
             status.className = "jl-status is-ok";
           }
         }).catch(() => {
           if (status) {
-            status.textContent = "Send failed. Email janitorsftcteam@googlegroups.com";
+            status.textContent = (typeof navigator !== "undefined" && navigator.onLine === false)
+              ? "You appear to be offline. Reconnect and send again."
+              : "Send failed. Email janitorsftcteam@googlegroups.com";
             status.className = "jl-status is-err";
           }
         }).then(() => {
@@ -345,7 +442,7 @@ class Component extends DCLogic {
         });
       });
     };
-    setTimeout(() => { this.clearCache(); this.setupReveals(); this.scrambleText(); this.setupDriving(); this.drawRoute(); this.setupApplyForm(); }, 140);
+    setTimeout(() => { this.clearCache(); this.setupReveals(); this.scrambleText(); this.setupDriving(); this.drawRoute(); this.setupApplyForm(); this.guardImages(); }, 140);
     this.viewer = { rx: -16, ry: -28, dragging: false, lx: 0, ly: 0 };
     this.handleViewerMove = (e) => { if (!this.viewer.dragging) return; const x = e.touches ? e.touches[0].clientX : e.clientX; const y = e.touches ? e.touches[0].clientY : e.clientY; this.viewer.ry += (x - this.viewer.lx) * 0.55; this.viewer.rx = Math.max(-82, Math.min(82, this.viewer.rx - (y - this.viewer.ly) * 0.4)); this.viewer.lx = x; this.viewer.ly = y; this.applyViewerRotation(); };
     this.handleViewerRelease = () => { this.viewer.dragging = false; };
@@ -399,8 +496,10 @@ class Component extends DCLogic {
     document.addEventListener("touchend", this.handleCompareUp);
   }
   componentWillUnmount() {
+    this.endTravel();
+    if (this.resizeTimer) clearTimeout(this.resizeTimer);
+    if (this.handleVisibility) document.removeEventListener("visibilitychange", this.handleVisibility);
     if (this.frameId) cancelAnimationFrame(this.frameId);
-    if (this.secondTimer) clearInterval(this.secondTimer);
     if (this.handleScroll) { window.removeEventListener("scroll", this.handleScroll); window.removeEventListener("resize", this.handleResize); }
     if (this.matchTimer) clearInterval(this.matchTimer);
     if (this.handleOutsideClick) document.removeEventListener("pointerdown", this.handleOutsideClick);
@@ -834,7 +933,7 @@ class Component extends DCLogic {
     };
     const phone = this.props.previewDevice === "phone";
     const page = this.state.page || "home";
-    const nav = (p) => () => this.goToPage(p);
+    const nav = (p) => (e) => { if (e && typeof e.preventDefault === "function") e.preventDefault(); this.goToPage(p); };
     const mnItem = (p) => {
       const on = p && page === p;
       return {
@@ -1064,6 +1163,13 @@ class Component extends DCLogic {
       mobNav: !!this.state.mobNav,
       burgerCls: this.state.mobNav ? "jl-burger-on" : "",
       toggleMobNav: () => this.setState({ mobNav: !this.state.mobNav, menuOpen: false }),
+      keyActivate: (e) => {
+        if (!e) return;
+        if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+          e.preventDefault();
+          if (e.currentTarget && typeof e.currentTarget.click === "function") e.currentTarget.click();
+        }
+      },
       mnHome: mnItem("home"), mnRobot: mnItem("robot"), mnSeason: mnItem("season"),
       mnOutreach: mnItem("outreach"), mnSponsors: mnItem("sponsors"), mnTeam: mnItem("team"),
       mnPortfolio: mnItem("portfolio"), mnReplay: mnItem(null),
@@ -1095,11 +1201,11 @@ class Component extends DCLogic {
       subTitle: subs[subIndex].t, subDesc: subs[subIndex].d, subSpecA: subs[subIndex].a, subSpecB: subs[subIndex].b,
       subKey0: subKey(0), subKey1: subKey(1), subKey2: subKey(2), subKey3: subKey(3),
       selDrive: pick(0), selIntake: pick(1), selLift: pick(2), selCode: pick(3),
-      isHome: page === "home", isRobot: page === "robot", isSeason: page === "season",
-      isOutreach: page === "outreach", isSponsors: page === "sponsors", isTeam: page === "team", isJoin: page === "join",
+      isHome: page === "home", notHome: page !== "home", isRobot: page === "robot", isSeason: page === "season",
+      isOutreach: page === "outreach", isSponsors: page === "sponsors", isTeam: page === "team",
       isPortfolio: page === "portfolio", navPortfolio: nav("portfolio"), navPortfolioStyle: key("portfolio"),
       navHome: nav("home"), navRobot: nav("robot"), navSeason: nav("season"), navOutreach: nav("outreach"),
-      navSponsors: nav("sponsors"), navTeam: nav("team"), navJoin: nav("join"),
+      navSponsors: nav("sponsors"), navTeam: nav("team"),
       navStyle, navRowStyle, brandCellStyle, linksWrapStyle, gearCellStyle, numStyle,
       navRobotCaret: caret("robot"), navSeasonCaret: caret("season"), navOutreachCaret: caret("outreach"),
       navSponsorsCaret: caret("sponsors"), navTeamCaret: caret("team"), navPortfolioCaret: caret("portfolio"),
