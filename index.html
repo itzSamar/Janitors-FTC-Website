@@ -422,6 +422,28 @@
     a{text-decoration:none;color:inherit;cursor:pointer;}
     h1,h2,h3,p{margin:0;}
     image-slot{display:block;}
+
+    /* faq: native disclosure, so it works with no script and prints open */
+    .jl-faq{border-bottom:1px solid var(--rule);}
+    .jl-faq summary{list-style:none; cursor:pointer; display:grid; grid-template-columns:minmax(0,1fr) 26px; align-items:center; gap:20px;
+      padding:clamp(20px,2.4cqw,28px) 0; min-height:56px;
+      font-family:var(--disp); font-weight:600; font-size:clamp(17px,1.9cqw,23px); letter-spacing:-.02em; line-height:1.3; color:var(--text);
+      transition:color .22s ease, padding-left .28s cubic-bezier(.2,.8,.3,1);}
+    .jl-faq summary::-webkit-details-marker{display:none;}
+    .jl-faq summary:hover{color:var(--accent); padding-left:12px;}
+    .jl-faq summary:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+    .jl-faq[open] summary{color:var(--accent);}
+    .jl-faq-x{position:relative; width:18px; height:18px; justify-self:end; flex:none;}
+    .jl-faq-x::before,.jl-faq-x::after{content:""; position:absolute; left:50%; top:50%; background:currentColor;
+      transition:transform .3s cubic-bezier(.2,.8,.3,1), opacity .3s ease;}
+    .jl-faq-x::before{width:18px; height:1.5px; transform:translate(-50%,-50%);}
+    .jl-faq-x::after{width:1.5px; height:18px; transform:translate(-50%,-50%);}
+    .jl-faq[open] .jl-faq-x::after{transform:translate(-50%,-50%) rotate(90deg); opacity:0;}
+    .jl-faq-a{overflow:hidden; padding:0 0 clamp(22px,2.6cqw,30px); animation:faqIn .34s cubic-bezier(.2,.8,.3,1);}
+    @keyframes faqIn{from{opacity:0; transform:translateY(-6px);} to{opacity:1; transform:none;}}
+    @media print{.jl-faq-a{display:block !important; animation:none;} .jl-faq-x{display:none;}}
+
+
     @media print{
       nav,footer,#scroll-bar,[data-noprint]{display:none !important}
       *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -1053,7 +1075,7 @@
       footer > div:not([aria-hidden="true"]) > div:nth-child(4){grid-column:1 / -1;}
       footer > div:not([aria-hidden="true"]) > div:first-child > div:first-child{flex-wrap:wrap !important;}
       footer [style*="var(--hand)"]{white-space:nowrap !important;}
-      [style*="var(--hand)"]{text-shadow:1px 1.5px 0 rgba(233,246,248,.8) !important;}
+      [style*="var(--hand)"]{text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5) !important;}
       .jl-find-us{margin-top:4px !important;}
       .jl-tl-rail{left:4px !important; right:auto !important; top:8px !important; bottom:10px !important; width:1px !important; height:auto !important;}
       [style*="min-height: 340px"],[style*="min-height:340px"]{min-height:200px !important;}
@@ -1260,7 +1282,7 @@
       <div class="jl-navrow" style="{{ navRowStyle }}">
       <a sc-camel-on-click="{{ navHome }}" role="link" sc-camel-tab-index="0" sc-camel-on-key-down="{{ keyActivate }}" aria-label="The Janitors, team 36721 · home" style="{{ brandCellStyle }}">
         <img class="jl-brand-mark" src="/logo-transparent.png" width="26" height="26" alt="" decoding="async" fetchpriority="high">
-        <span style="font-size:clamp(19px,2.1cqw,26px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--accent); text-shadow:1.5px 2px 0 rgba(233,246,248,.72); white-space:nowrap;">The Janitors</span>
+        <span style="font-size:clamp(19px,2.1cqw,26px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5); white-space:nowrap;">The Janitors</span>
         <sc-if value="{{ showChip }}" hint-placeholder-val="{{ true }}"><span style="font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; color:var(--ink); background:var(--accent); padding:3px 6px; flex:none;">36721</span></sc-if>
       </a>
       <div class="jl-navlinks" style="{{ linksWrapStyle }}">
@@ -1347,7 +1369,7 @@
       <div class="jl-hero-bottom" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(200px,auto); align-items:stretch; gap:0; border-top:1px solid var(--rule); padding-top:clamp(18px,2.6vh,28px);">
 
         <div class="jl-hero-cell" style="display:flex; flex-direction:column; justify-content:space-between; gap:clamp(14px,2vh,22px); padding-right:clamp(20px,3cqw,44px); min-width:0;">
-          <p style="margin:0; font-size:clamp(24px,3.8cqw,54px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.115em; line-height:1.2; color:var(--accent); text-shadow:2px 3px 0 rgba(233,246,248,.85), 5px 6px 14px rgba(0,0,0,.55); text-wrap:pretty; max-width:13em;">We clean up the competition.</p>
+          <p style="margin:0; font-size:clamp(24px,3.8cqw,54px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.115em; line-height:1.2; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5); text-wrap:pretty; max-width:13em;">We clean up the competition.</p>
           <div class="jl-hero-cta" style="display:flex; flex-wrap:wrap; gap:10px;">
             <a href="#sponsors" sc-camel-on-click="{{ navSponsors }}" data-click="" style="display:inline-flex; align-items:center; gap:9px; background:var(--accent); color:var(--ink); padding:14px 24px; min-height:48px; font-family:var(--label); font-size:14px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; text-decoration:none; cursor:pointer; white-space:nowrap;" style-hover="filter:brightness(1.08);">Sponsor the team</a>
             <a href="#team" sc-camel-on-click="{{ navTeam }}" data-click="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); color:var(--text); padding:14px 24px; min-height:48px; font-family:var(--label); font-size:14px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; text-decoration:none; cursor:pointer; white-space:nowrap;" style-hover="border-color:var(--accent); color:var(--accent);">Join us</a>
@@ -1428,7 +1450,7 @@
 
   <header style="position:relative; overflow:hidden; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,1fr); border-bottom:1px solid var(--rule);">
     <div style="padding:clamp(52px,5.6cqw,84px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
-    <h1 data-scramble="" style="font-size:clamp(46px,10cqw,168px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">the robot</h1>
+    <h1 data-scramble="" style="font-size:clamp(46px,10cqw,168px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5);">the robot</h1>
     </div>
     <div style="border-left:1px solid var(--rule); background:var(--panel);">
       <image-slot id="robot-hero" style="width:100%; height:100%; min-height:320px; color:var(--muted);" shape="rect" placeholder="Robot photo / CAD"></image-slot>
@@ -1450,13 +1472,13 @@
           <div style="background:#ffffff; padding:clamp(8px,1cqw,14px);">
             <img src="/assets/photos/swerve-module-cad.webp" alt="CAD render of one swerve module" loading="lazy" decoding="async" style="width:100%; height:auto; aspect-ratio:5/4; object-fit:contain; display:block;">
           </div>
-          <figcaption style="padding:10px 0 0; font-family:var(--serif); font-size:16px; color:var(--dust);">Module 1 of 4, as drawn.</figcaption>
+          <figcaption style="padding:10px 0 0; font-family:var(--serif); font-size:16px; color:var(--dust);">The module, as drawn.</figcaption>
         </figure>
         <figure style="margin:0; min-width:0; border:1px solid var(--rule);">
           <div style="background:#ffffff; padding:clamp(8px,1cqw,14px);">
             <img src="/assets/photos/swerve-module-cad-2.webp" alt="CAD render of the swerve module on its mount" loading="lazy" decoding="async" style="width:100%; height:auto; aspect-ratio:5/4; object-fit:contain; display:block;">
           </div>
-          <figcaption style="padding:10px 0 0; font-family:var(--serif); font-size:16px; color:var(--dust);">Module 1 of 4, mounted.</figcaption>
+          <figcaption style="padding:10px 0 0; font-family:var(--serif); font-size:16px; color:var(--dust);">A module mounted.</figcaption>
         </figure>
       </div>
     </div>
@@ -1489,9 +1511,9 @@
     </div>
 
     <div style="margin-top:clamp(34px,4cqw,56px); display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1fr); gap:clamp(24px,5cqw,80px); align-items:start;" class="jl-why-close">
-      <p style="margin:0; font-size:clamp(30px,6.8cqw,104px); font-family:var(--hand); text-transform:uppercase; font-weight:400; letter-spacing:.115em; line-height:1.02; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">Mobility<br>wins matches.</p>
+      <p style="margin:0; font-size:clamp(30px,6.8cqw,104px); font-family:var(--hand); text-transform:uppercase; font-weight:400; letter-spacing:.115em; line-height:1.02; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5);">Mobility<br>wins matches.</p>
       <div style="min-width:0;">
-      <div style="padding:0 0 18px;"><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted); text-wrap:pretty;">Four modules is four times the chance of a part being wrong. If the drivetrain isn’t reliable by our first meet, nothing else on the robot matters. So the plan is simple: one module working completely before we cut parts for the other three.</p></div>
+      <div style="padding:0 0 18px;"><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted); text-wrap:pretty;">Four modules is four times the chance of a part being wrong. If the drivetrain isn’t reliable by our first meet, nothing else on the robot matters. So we built all four to the same drawing, and we tune them against each other rather than one at a time.</p></div>
       <div style="border-top:1px solid var(--rule); padding:18px 0;"><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted); text-wrap:pretty;">The code is genuinely harder: swerve kinematics, four steering encoders, and module offsets that all have to agree. We’d rather write it ourselves than pull in a library, though that call isn’t final.</p></div>
       <div style="border-top:1px solid var(--rule); padding:18px 0;"><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted); text-wrap:pretty;">Custom plates mean no replacement in a bag at competition. Spares for the parts most likely to fail are on the list before our first meet, and mecanum stays on the shelf as the fallback.</p></div>
       </div>
@@ -1504,7 +1526,7 @@
       <p style="margin:0; max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">What we did, what broke, and what we changed because of it. The failures are the useful part, so they stay in.</p>
     </div>
     <div style="margin-top:clamp(22px,2.4cqw,30px); border-top:1px solid var(--rule);">
-      <div style="display:grid; grid-template-columns:104px minmax(0,1fr) auto; gap:clamp(14px,2.4cqw,32px); align-items:start; padding:clamp(20px,2.4cqw,30px) 0; border-bottom:1px solid var(--rule);" class="jl-log-row"><span style="font-family:var(--mono); font-size:13px; color:var(--muted); white-space:nowrap;">offseason</span><div style="min-width:0;"><div style="font-size:clamp(16.5px,1.9cqw,23px); font-family:var(--disp); font-weight:700; letter-spacing:-.026em;">swerve module, first revision</div><p style="margin-top:7px; max-width:62ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Four independent steerable modules, designed from scratch instead of bought. The first one is drawn and going together now. The CAD above is where it stands. Everything else on the robot waits on it.</p></div><span style="text-align:right;"><span style="display:inline-flex; align-items:center; gap:9px; font-family:var(--label); font-size:11.5px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--accent); white-space:nowrap;"><span style="display:inline-flex; align-items:flex-end; gap:2px; height:10px;"><span style="width:3px; height:10px; background:var(--accent); flex:none;"></span><span style="width:3px; height:8px; background:var(--accent); flex:none;"></span><span style="width:3px; height:6px; background:var(--rule); flex:none;"></span></span>in progress</span></span></div>
+      <div style="display:grid; grid-template-columns:104px minmax(0,1fr) auto; gap:clamp(14px,2.4cqw,32px); align-items:start; padding-top:clamp(20px,2.4cqw,30px); padding-bottom:clamp(20px,2.4cqw,30px); padding-right:0; border-bottom:1px solid var(--rule);" class="jl-log-row"><span style="font-family:var(--mono); font-size:13px; color:var(--muted); white-space:nowrap;">offseason</span><div style="min-width:0;"><div style="font-size:clamp(16.5px,1.9cqw,23px); font-family:var(--disp); font-weight:700; letter-spacing:-.026em;">swerve module, first revision</div><p style="margin-top:7px; max-width:62ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Four independent steerable modules, designed from scratch instead of bought. The first one is drawn and going together now. The CAD above is where it stands. Everything else on the robot waits on it.</p></div><span style="text-align:right;"><span style="display:inline-flex; align-items:center; gap:9px; font-family:var(--label); font-size:11.5px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--accent); white-space:nowrap;"><span style="display:inline-flex; align-items:flex-end; gap:2px; height:10px;"><span style="width:3px; height:10px; background:var(--accent); flex:none;"></span><span style="width:3px; height:8px; background:var(--accent); flex:none;"></span><span style="width:3px; height:6px; background:var(--rule); flex:none;"></span></span>in progress</span></span></div>
       <div style="padding:18px 0; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Season entries start once we’re in the build. Roughly weekly, dated and photographed, and honest about what went wrong.</div>
     </div>
   </section>
@@ -1536,7 +1558,7 @@
 
   <header style="position:relative; overflow:hidden; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,1fr); border-bottom:1px solid var(--rule);">
     <div style="padding:clamp(52px,5.6cqw,84px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
-      <h1 data-scramble="" style="font-size:clamp(44px,9.5cqw,156px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">the game</h1>
+      <h1 data-scramble="" style="font-size:clamp(44px,9.5cqw,156px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5);">the game</h1>
       <p style="margin-top:24px; max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);"><strong style="color:var(--text); font-weight:600;">BIOBUZZ</strong>, presented by RTX, part of the FIRST CANOPY season. Kickoff was September 12 and the manual is out. Two alliances of two teams each score balls into a Hive in the middle of the field and into four Flowers on the walls. This page is the short version: how points work, what the field looks like, and what a robot has to do to be competitive.</p>
     </div>
     <div style="border-left:1px solid var(--rule); background:var(--panel);">
@@ -1548,7 +1570,7 @@
 
   <section class="jl-offset" style="background:var(--panel); position:relative; z-index:1; padding:clamp(36px,3.8cqw,56px) var(--pad) clamp(40px,4.2cqw,60px) var(--pad);">
     <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:14px 22px;">
-      <div style="font-family:var(--hand); font-size:clamp(26px,3.4cqw,46px); font-weight:400; text-transform:uppercase; letter-spacing:.1em; line-height:1; color:var(--accent); text-shadow:2px 2.5px 0 rgba(233,246,248,.85);">the clock</div>
+      <div style="font-family:var(--hand); font-size:clamp(26px,3.4cqw,46px); font-weight:400; text-transform:uppercase; letter-spacing:.1em; line-height:1; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5);">the clock</div>
       <p style="margin:0; max-width:52ch; font-family:var(--serif); font-size:16.5px; line-height:1.5; color:var(--muted); text-wrap:pretty;">Two and a half minutes, counting down. Two moments decide the match.</p>
     </div>
     <div style="margin-top:clamp(24px,2.8cqw,34px); display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(18px,2.6cqw,40px); border-top:1px solid var(--rule); padding-top:22px;" class="jl-outreach-cols">
@@ -1588,7 +1610,7 @@
       <div style="background:var(--panel); padding:clamp(18px,2cqw,26px) clamp(18px,2.2cqw,30px);">
         <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px;">
           <div style="font-family:var(--disp); font-weight:700; font-size:clamp(17px,2cqw,24px); letter-spacing:-.03em; text-transform:lowercase;">the hive</div>
-          <div style="font-family:var(--hand); font-size:clamp(26px,3.2cqw,42px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--accent); text-shadow:2px 2.5px 0 rgba(233,246,248,.85); white-space:nowrap;">20</div>
+          <div style="font-family:var(--hand); font-size:clamp(26px,3.2cqw,42px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5); white-space:nowrap;">20</div>
         </div>
         <div style="margin-top:6px; font-family:var(--mono); font-size:13px; letter-spacing:.06em; color:var(--dust);">per tip, auto or teleop</div>
         <p style="margin:12px 0 0; font-family:var(--serif); font-size:17px; line-height:1.55; color:var(--muted); text-wrap:pretty;">Two cells on a pivot, one facing up. Launch balls into the upward cell until it flips. A tip is 20 points, ten times anything else on the field, and it is the only way to release more of your Nectar.</p>
@@ -1596,7 +1618,7 @@
       <div style="background:var(--panel); padding:clamp(18px,2cqw,26px) clamp(18px,2.2cqw,30px);">
         <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px;">
           <div style="font-family:var(--disp); font-weight:700; font-size:clamp(17px,2cqw,24px); letter-spacing:-.03em; text-transform:lowercase;">the flowers</div>
-          <div style="font-family:var(--hand); font-size:clamp(26px,3.2cqw,42px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--accent); text-shadow:2px 2.5px 0 rgba(233,246,248,.85); white-space:nowrap;">2</div>
+          <div style="font-family:var(--hand); font-size:clamp(26px,3.2cqw,42px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5); white-space:nowrap;">2</div>
         </div>
         <div style="margin-top:6px; font-family:var(--mono); font-size:13px; letter-spacing:.06em; color:var(--dust);">per ball, if you own it</div>
         <p style="margin:12px 0 0; font-family:var(--serif); font-size:17px; line-height:1.55; color:var(--muted); text-wrap:pretty;">Four posts on the walls. They stay locked until 1:00 remains. Own one and you score 2 points for every ball inside it, including balls your opponent put there. Your lowest Nectar in a Flower adds 5 more.</p>
@@ -1604,7 +1626,7 @@
       <div style="background:var(--panel); padding:clamp(18px,2cqw,26px) clamp(18px,2.2cqw,30px);">
         <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px;">
           <div style="font-family:var(--disp); font-weight:700; font-size:clamp(17px,2cqw,24px); letter-spacing:-.03em; text-transform:lowercase;">the gardens</div>
-          <div style="font-family:var(--hand); font-size:clamp(26px,3.2cqw,42px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--accent); text-shadow:2px 2.5px 0 rgba(233,246,248,.85); white-space:nowrap;">1</div>
+          <div style="font-family:var(--hand); font-size:clamp(26px,3.2cqw,42px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5); white-space:nowrap;">1</div>
         </div>
         <div style="margin-top:6px; font-family:var(--mono); font-size:13px; letter-spacing:.06em; color:var(--dust);">per ball</div>
         <p style="margin:12px 0 0; font-family:var(--serif); font-size:17px; line-height:1.55; color:var(--muted); text-wrap:pretty;">A tape strip in each of two opposite corners. Balls inside score 1 point each for that Garden’s colour, no matter who placed them. Gardens are not protected, so the other alliance can drive over and take them back out.</p>
@@ -1612,7 +1634,7 @@
       <div style="background:var(--panel); padding:clamp(18px,2cqw,26px) clamp(18px,2.2cqw,30px);">
         <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px;">
           <div style="font-family:var(--disp); font-weight:700; font-size:clamp(17px,2cqw,24px); letter-spacing:-.03em; text-transform:lowercase;">the loading zones</div>
-          <div style="font-family:var(--hand); font-size:clamp(26px,3.2cqw,42px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--accent); text-shadow:2px 2.5px 0 rgba(233,246,248,.85); white-space:nowrap;">5</div>
+          <div style="font-family:var(--hand); font-size:clamp(26px,3.2cqw,42px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5); white-space:nowrap;">5</div>
         </div>
         <div style="margin-top:6px; font-family:var(--mono); font-size:13px; letter-spacing:.06em; color:var(--dust);">per robot, parked</div>
         <p style="margin:12px 0 0; font-family:var(--serif); font-size:17px; line-height:1.55; color:var(--muted); text-wrap:pretty;">23 by 11 inches beside your alliance area. Finish at least partly inside it for 5 points, in auto and again in teleop. Auto pays 3 more just for driving off the wall.</p>
@@ -1669,22 +1691,22 @@
       <div style="font-family:var(--mono); font-size:13px; letter-spacing:.06em; color:var(--dust);">RANKING POINTS · ON TOP OF MATCH POINTS</div>
       <div class="jl-rp-wall" style="margin-top:22px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr));">
       <div style="position:relative; z-index:4; margin-top:10px; margin-left:0px; transform:rotate(-1.1deg); background:var(--panel); border:1px solid var(--rule); box-shadow:0 10px 26px rgba(0,0,0,.45); padding:clamp(18px,2cqw,26px) clamp(18px,2.2cqw,28px); min-width:0;">
-        <div style="font-family:var(--hand); font-size:clamp(30px,3.6cqw,48px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--signal); text-shadow:2px 2.5px 0 rgba(233,246,248,.85);">3 RP</div>
+        <div style="font-family:var(--hand); font-size:clamp(30px,3.6cqw,48px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--signal); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5);">3 RP</div>
         <div style="margin-top:10px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dust);">win</div>
         <p style="margin:9px 0 0; font-family:var(--serif); font-size:16.5px; line-height:1.5; color:var(--muted); text-wrap:pretty;">1 RP if you tie.</p>
       </div>
       <div style="position:relative; z-index:3; margin-top:0px; margin-left:-14px; transform:rotate(.7deg); background:var(--panel); border:1px solid var(--rule); box-shadow:0 10px 26px rgba(0,0,0,.45); padding:clamp(18px,2cqw,26px) clamp(18px,2.2cqw,28px); min-width:0;">
-        <div style="font-family:var(--hand); font-size:clamp(30px,3.6cqw,48px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--signal); text-shadow:2px 2.5px 0 rgba(233,246,248,.85);">1 RP</div>
+        <div style="font-family:var(--hand); font-size:clamp(30px,3.6cqw,48px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--signal); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5);">1 RP</div>
         <div style="margin-top:10px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dust);">swarm</div>
         <p style="margin:9px 0 0; font-family:var(--serif); font-size:16.5px; line-height:1.5; color:var(--muted); text-wrap:pretty;">Leave plus park adds up to 16 or more.</p>
       </div>
       <div style="position:relative; z-index:2; margin-top:18px; margin-left:-10px; transform:rotate(-.5deg); background:var(--panel); border:1px solid var(--rule); box-shadow:0 10px 26px rgba(0,0,0,.45); padding:clamp(18px,2cqw,26px) clamp(18px,2.2cqw,28px); min-width:0;">
-        <div style="font-family:var(--hand); font-size:clamp(30px,3.6cqw,48px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--signal); text-shadow:2px 2.5px 0 rgba(233,246,248,.85);">1 RP</div>
+        <div style="font-family:var(--hand); font-size:clamp(30px,3.6cqw,48px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--signal); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5);">1 RP</div>
         <div style="margin-top:10px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dust);">pollinator 1</div>
         <p style="margin:9px 0 0; font-family:var(--serif); font-size:16.5px; line-height:1.5; color:var(--muted); text-wrap:pretty;">Four hive tips in one match.</p>
       </div>
       <div style="position:relative; z-index:1; margin-top:4px; margin-left:-16px; transform:rotate(1.3deg); background:var(--panel); border:1px solid var(--rule); box-shadow:0 10px 26px rgba(0,0,0,.45); padding:clamp(18px,2cqw,26px) clamp(18px,2.2cqw,28px); min-width:0;">
-        <div style="font-family:var(--hand); font-size:clamp(30px,3.6cqw,48px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--signal); text-shadow:2px 2.5px 0 rgba(233,246,248,.85);">1 RP</div>
+        <div style="font-family:var(--hand); font-size:clamp(30px,3.6cqw,48px); font-weight:400; text-transform:uppercase; letter-spacing:.06em; line-height:1; color:var(--signal); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5);">1 RP</div>
         <div style="margin-top:10px; font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dust);">pollinator 2</div>
         <p style="margin:9px 0 0; font-family:var(--serif); font-size:16.5px; line-height:1.5; color:var(--muted); text-wrap:pretty;">Seven hive tips in one match.</p>
       </div>
@@ -1881,7 +1903,7 @@
   <header style="position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr); border-bottom:1px solid var(--rule); overflow:hidden;">
     <div style="position:relative; padding:clamp(52px,5.6cqw,84px) var(--pad); display:flex; flex-direction:column; justify-content:center;">
       <svg sc-camel-view-box="0 0 32 32" aria-hidden="true" style="position:absolute; left:-4%; top:50%; transform:translateY(-50%) rotate(-12deg); width:clamp(220px,26cqw,380px); height:auto; color:var(--text); opacity:.045; pointer-events:none;" fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4 L14.5 18.5"></path><path d="M10.5 17 L16.5 14 L21 26.5 Q15 29.5 9 26.5 Z"></path><path d="M12.6 18.4 L11.4 26.6 M15.2 17.2 L15.2 27.6 M17.8 16.2 L19 26.6"></path></svg>
-      <h1 data-scramble="" style="position:relative; font-size:clamp(42px,9cqw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">outreach</h1>
+      <h1 data-scramble="" style="position:relative; font-size:clamp(42px,9cqw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5);">outreach</h1>
       <p style="position:relative; margin-top:26px; max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">We’re taking the robot around the Bay Area to show robotics to kids, especially the ones with less access to STEM. Hands-on learning wherever we can get it. First planned event is with FTC team Olympians.</p>
     </div>
     <div style="border-left:1px solid var(--rule); background:var(--panel);">
@@ -1912,7 +1934,7 @@
       <div style="display:grid; grid-template-columns:104px minmax(0,1fr) minmax(120px,auto); gap:clamp(12px,2.2cqw,32px); align-items:baseline; padding:14px 0; border-bottom:1px solid var(--rule); font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);" class="jl-log-head">
         <span>date</span><span>where · what we ran</span><span style="text-align:right;">status</span>
       </div>
-      <a href="#sept5" style="display:grid; grid-template-columns:104px minmax(0,1fr) minmax(120px,auto); gap:clamp(12px,2.2cqw,32px); align-items:center; padding:clamp(20px,2.4cqw,30px) 0; border-bottom:1px solid var(--rule); color:inherit; text-decoration:none; transition:padding-left .3s cubic-bezier(.2,.75,.25,1);" style-hover="padding-left:14px;">
+      <a href="#sept5" style="display:grid; grid-template-columns:104px minmax(0,1fr) minmax(120px,auto); gap:clamp(12px,2.2cqw,32px); align-items:center; padding:clamp(20px,2.4cqw,30px) 0; border-bottom:1px solid var(--rule); color:inherit; text-decoration:none;">
         <span style="font-family:var(--mono); font-size:13px; letter-spacing:.04em; color:var(--accent);">09 / 05</span>
         <span style="min-width:0;"><span style="display:block; font-family:var(--serif); font-size:17.5px; font-weight:600; letter-spacing:-.02em;">Santa Clara City Library</span><span style="display:block; margin-top:5px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Joint FTC intro session with team Olympians. Slides on what FTC is, a hands-on station, driver controls on the table, and questions from the room.</span></span>
         <span style="text-align:right;"><span style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); white-space:nowrap;">photos ↓</span></span>
@@ -1995,7 +2017,7 @@
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
   <header style="position:relative; overflow:hidden; z-index:1; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr); align-items:end; gap:40px; border-bottom:1px solid var(--rule); padding:clamp(52px,5.6cqw,84px) var(--pad);">
-    <div><h1 data-scramble="" style="font-size:clamp(42px,9cqw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">sponsors</h1><div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;"><a href="/Team_Janitors_36721_Sponsorship_Packet.pdf" target="_blank" rel="noopener noreferrer" data-click="" data-noprint="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); padding:12px 18px; font-family:var(--serif); font-size:17.5px; color:var(--muted); cursor:pointer; white-space:nowrap;" style-hover="border-color:var(--accent); color:var(--accent);">Print the sponsor one-pager →</a><a href="https://hcb.hackclub.com/donations/start/janitorsftcteam" target="_blank" rel="noopener noreferrer" data-click="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); padding:12px 18px; font-family:var(--serif); font-size:17.5px; color:var(--muted); cursor:pointer; white-space:nowrap;" style-hover="border-color:var(--accent); color:var(--accent);">Donate via Hack Club →</a></div></div>
+    <div><h1 data-scramble="" style="font-size:clamp(42px,9cqw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5);">sponsors</h1><div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;"><a href="/Team_Janitors_36721_Sponsorship_Packet.pdf" target="_blank" rel="noopener noreferrer" data-click="" data-noprint="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); padding:12px 18px; font-family:var(--serif); font-size:17.5px; color:var(--muted); cursor:pointer; white-space:nowrap;" style-hover="border-color:var(--accent); color:var(--accent);">Print the sponsor one-pager<span aria-hidden="true">↓</span></a><a href="https://hcb.hackclub.com/donations/start/janitorsftcteam" target="_blank" rel="noopener noreferrer" data-click="" style="display:inline-flex; align-items:center; gap:9px; border:1px solid var(--rule); padding:12px 18px; font-family:var(--serif); font-size:17.5px; color:var(--muted); cursor:pointer; white-space:nowrap;" style-hover="border-color:var(--accent); color:var(--accent);">Donate via Hack Club<span aria-hidden="true">↗</span></a></div></div>
     <p style="max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">We’re a rookie team, and students do the engineering, the outreach, and the fundraising. Below is what the season actually costs and where sponsorship money goes.</p>
   </header>
 
@@ -2056,9 +2078,46 @@
       <div class="jl-tier-row" style="display:grid; grid-template-columns:minmax(148px,.6fr) minmax(0,1.35fr) minmax(0,1fr); gap:clamp(16px,3cqw,48px); align-items:baseline; padding:clamp(24px,3cqw,38px) 0; border-bottom:1px solid var(--rule); transition:padding-left .3s cubic-bezier(.2,.8,.3,1);" style-hover="padding-left:14px;"><div style="min-width:0;"><div style="font-size:clamp(32px,5.2cqw,68px); font-family:var(--disp); font-weight:700; letter-spacing:-.04em; line-height:.9; font-variant-numeric:tabular-nums;">$2,500</div><div style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">title partner</div></div><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.55; letter-spacing:-.01em; color:var(--text);">A major piece of the season. Parts, entry fees, and getting to events.</p><div style="font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">everything in gold<br>named our title partner in team materials<br>largest logo on the robot and pit banner</div></div>
       </div>
       <div style="margin-top:clamp(44px,5cqw,64px); border-top:1px solid var(--rule); padding-top:clamp(30px,3.4cqw,42px);">
-        <p style="margin:0; max-width:15em; font-size:clamp(30px,4.8cqw,70px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.115em; line-height:1.2; color:var(--accent); text-shadow:2px 3px 0 rgba(233,246,248,.85), 5px 6px 14px rgba(0,0,0,.55); text-wrap:pretty;">It’s the team’s rookie year, not the members’.</p>
+        <p style="margin:0; max-width:15em; font-size:clamp(30px,4.8cqw,70px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.115em; line-height:1.2; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5); text-wrap:pretty;">It’s the team’s rookie year, not the members’.</p>
         <div style="margin-top:clamp(26px,3cqw,40px); display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(24px,4cqw,64px);" class="jl-why-close"><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.7; color:var(--muted); text-wrap:pretty;">Most of us have built and driven in FTC before. This is just the first season we’re doing it on our own.</p><p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.7; color:var(--muted); text-wrap:pretty;">Students run the engineering, the outreach, and the fundraising. Sponsorship goes into parts and entry fees, and in exchange your logo goes in front of every gym, library, and classroom we visit.</p></div>
       </div>
+  </section>
+
+  <section class="jl-offset" style="position:relative; z-index:1; padding:clamp(52px,5.6cqw,84px) var(--pad); border-top:1px solid var(--rule);">
+    <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(20px,4cqw,64px); align-items:end;" class="jl-why-top">
+      <h2 data-mask="" style="font-size:clamp(30px,5.2cqw,72px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:1.12; text-transform:lowercase; margin:0; padding-bottom:.1em;">questions</h2>
+      <p style="margin:0; max-width:52ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">The ones we actually get asked. If yours is not here, email <a href="mailto:janitorsftcteam@googlegroups.com" data-click="" style="color:var(--accent);">janitorsftcteam@googlegroups.com</a>.</p>
+    </div>
+    <div style="margin-top:clamp(30px,3.4cqw,42px); border-top:1px solid var(--rule);" data-stagger="left">
+      <details class="jl-faq" name="jlfaq">
+        <summary><span>Where does the money actually go?</span><span class="jl-faq-x" aria-hidden="true"></span></summary>
+        <div class="jl-faq-a"><p style="margin:0; max-width:64ch; font-family:var(--serif); font-size:17.5px; line-height:1.7; color:var(--muted); text-wrap:pretty;">Parts, entry fees, and travel. A season runs us ten to twelve and a half thousand dollars. Roughly half of that is the robot itself, about a quarter is event registration, and the rest is tools, field elements, and getting six people and a robot to a venue. We keep the ledger public on our Hack Club donation page.</p></div>
+      </details>
+      <details class="jl-faq" name="jlfaq">
+        <summary><span>Is a donation tax deductible?</span><span class="jl-faq-x" aria-hidden="true"></span></summary>
+        <div class="jl-faq-a"><p style="margin:0; max-width:64ch; font-family:var(--serif); font-size:17.5px; line-height:1.7; color:var(--muted); text-wrap:pretty;">Our funds are held through Hack Club Bank, which is fiscally sponsored by The Hack Foundation, a 501(c)(3) nonprofit. Donations made through our donation page are processed by them and you get a receipt. Confirm with your accountant before you claim it, and ask us if you need the EIN.</p></div>
+      </details>
+      <details class="jl-faq" name="jlfaq">
+        <summary><span>What do we get for sponsoring?</span><span class="jl-faq-x" aria-hidden="true"></span></summary>
+        <div class="jl-faq-a"><p style="margin:0; max-width:64ch; font-family:var(--serif); font-size:17.5px; line-height:1.7; color:var(--muted); text-wrap:pretty;">It scales with the amount. Every tier puts your logo on the site and our hoodies. From five hundred up it goes on the robot itself, which means it is in front of every gym, library, and classroom we take it to. Title partners get named in our team materials and get the largest placement on the robot and the pit banner.</p></div>
+      </details>
+      <details class="jl-faq" name="jlfaq">
+        <summary><span>Can we donate materials instead of money?</span><span class="jl-faq-x" aria-hidden="true"></span></summary>
+        <div class="jl-faq-a"><p style="margin:0; max-width:64ch; font-family:var(--serif); font-size:17.5px; line-height:1.7; color:var(--muted); text-wrap:pretty;">Yes, and sometimes it helps more. Aluminum stock, fasteners, 3D printer filament, machine time, and shipping credit all go straight into the build. Tell us what you have and we will tell you honestly whether we can use it.</p></div>
+      </details>
+      <details class="jl-faq" name="jlfaq">
+        <summary><span>You are a rookie team. How do we know you will compete?</span><span class="jl-faq-x" aria-hidden="true"></span></summary>
+        <div class="jl-faq-a"><p style="margin:0; max-width:64ch; font-family:var(--serif); font-size:17.5px; line-height:1.7; color:var(--muted); text-wrap:pretty;">Fair question. The team is new but most of us are not. Members have run seasons in FTC, FRC on team 7419, and VEX V5 before this. We are registered for the 2026/27 BIOBUZZ season with six events planned, we have a drivetrain built and turning, and we have raised over seven thousand dollars already. Our first meet is October 2026.</p></div>
+      </details>
+      <details class="jl-faq" name="jlfaq">
+        <summary><span>What is FTC, and what is BIOBUZZ?</span><span class="jl-faq-x" aria-hidden="true"></span></summary>
+        <div class="jl-faq-a"><p style="margin:0; max-width:64ch; font-family:var(--serif); font-size:17.5px; line-height:1.7; color:var(--muted); text-wrap:pretty;">FIRST Tech Challenge is a robotics competition for students in grades seven through twelve. Each year FIRST releases a new game, and teams design, build, and program a robot to play it. BIOBUZZ is the 2026/27 game. Our season page walks through how it scores.</p></div>
+      </details>
+      <details class="jl-faq" name="jlfaq">
+        <summary><span>How do we join the team?</span><span class="jl-faq-x" aria-hidden="true"></span></summary>
+        <div class="jl-faq-a"><p style="margin:0; max-width:64ch; font-family:var(--serif); font-size:17.5px; line-height:1.7; color:var(--muted); text-wrap:pretty;">Email us. We meet in Dublin, CA and we are looking for people who want to build, program, or run outreach. No experience required, and we will teach you the tools. Tell us what you are interested in and we will get you to a meeting.</p></div>
+      </details>
+    </div>
   </section>
 
   <section class="jl-offset" style="background:var(--panel); position:relative; z-index:1; padding:clamp(52px,5.6cqw,84px) var(--pad) clamp(52px,5.6cqw,84px) var(--pad); border-top:1px solid var(--rule);">
@@ -2084,8 +2143,8 @@
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
   <header style="position:relative; overflow:hidden; z-index:1; padding:clamp(52px,5.6cqw,84px) var(--pad); border-bottom:1px solid var(--rule); display:flex; align-items:flex-end; justify-content:space-between; gap:30px; flex-wrap:wrap;">
-    <div><h1 data-scramble="" style="font-size:clamp(42px,9cqw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">the team</h1></div>
-      <div style="min-width:0; display:flex; flex-direction:column; align-items:flex-start;">    <p style="margin:0; max-width:14em; font-size:clamp(26px,3.7cqw,52px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.105em; line-height:1.1; color:var(--accent); text-shadow:2px 3px 0 rgba(233,246,248,.85), 5px 6px 14px rgba(0,0,0,.55); text-wrap:pretty;">Two captains, four leads, two coaches.</p><p style="margin:14px 0 0; max-width:38ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Everyone owns a piece of the robot.</p></div>
+    <div><h1 data-scramble="" style="font-size:clamp(42px,9cqw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5);">the team</h1></div>
+      <div style="min-width:0; display:flex; flex-direction:column; align-items:flex-start;">    <p style="margin:0; max-width:14em; font-size:clamp(26px,3.7cqw,52px); font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.105em; line-height:1.1; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5); text-wrap:pretty;">Two captains, four leads, two coaches.</p><p style="margin:14px 0 0; max-width:38ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">Everyone owns a piece of the robot.</p></div>
   </header>
 
   <section class="jl-team-members" style="position:relative; z-index:1;">
@@ -2178,7 +2237,7 @@
   <div data-pagewrap="" style="animation:pageIn .62s cubic-bezier(.2,.75,.25,1) forwards;">
 
   <header style="position:relative; z-index:1; border-bottom:1px solid var(--rule); padding:clamp(52px,5.6cqw,84px) var(--pad) clamp(34px,3.6cqw,52px);">
-    <h1 data-scramble="" style="margin:0; font-size:clamp(42px,9cqw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:3px 4px 0 rgba(233,246,248,.9), 7px 9px 22px rgba(0,0,0,.6);">engineering<br>portfolio</h1>
+    <h1 data-scramble="" style="margin:0; font-size:clamp(42px,9cqw,148px); font-family:var(--hand); text-transform:uppercase; font-weight:400; line-height:1.02; padding-bottom:.06em; letter-spacing:.125em; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5);">engineering<br>portfolio</h1>
     <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(20px,4cqw,64px); margin-top:clamp(22px,2.6cqw,34px);" class="jl-nb-row">
       <p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--text); text-wrap:pretty;">Every decision we make on the robot gets written down here while we still remember why we made it. What we tried, what broke, what we changed.</p>
       <p style="margin:0; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted); text-wrap:pretty;">The plan for every build week: photograph what we made, save the CAD, and write a dated entry with the problem, the options we looked at, and what we cut. Before our first competition we’ll pull the season into one PDF and have teammates who weren’t on that subsystem read it cold.</p>
@@ -2202,7 +2261,7 @@
     <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 20px;">
       <span style="font-family:var(--mono); font-size:13px; color:var(--accent);">01</span>
       <h2 style="margin:0; font-size:clamp(25px,4.6cqw,64px); font-family:var(--disp); font-weight:700; letter-spacing:-.034em; line-height:.95; text-transform:lowercase;">swerve drivetrain, v1</h2>
-      <span style="font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted);">one module of four, built and turning</span>
+      <span style="font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted);">four modules, built and turning</span>
     </div>
 
     <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(24px,4cqw,68px); margin-top:clamp(28px,3.4cqw,44px); align-items:start;" class="jl-nb-row">
@@ -2213,7 +2272,7 @@
         <div style="font-family:var(--hand); text-transform:uppercase; letter-spacing:.09em; font-size:clamp(16.5px,1.8cqw,24px); color:var(--accent); line-height:1.2; max-width:24ch;">tank loses matches sideways</div>
       </div>
       <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(12px,1.4cqw,18px);">
-        <figure style="margin:0; "><img src="/assets/photos/swerve-module-cad.webp" alt="CAD of one swerve module" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:var(--panel);"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--dust);">Module 1 of 4, as drawn.</figcaption></figure>
+        <figure style="margin:0; "><img src="/assets/photos/swerve-module-cad.webp" alt="CAD of one swerve module" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:var(--panel);"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--dust);">The module, as drawn.</figcaption></figure>
         <figure style="margin:0; "><img src="/assets/photos/swerve-module-cad-2.webp" alt="Second view of the swerve module CAD" loading="lazy" decoding="async" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:var(--panel);"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--dust);">Same module, gear side.</figcaption></figure>
       </div>
     </div>
@@ -2222,21 +2281,15 @@
       <div style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dust);">then we cut it</div>
       <div style="margin-top:clamp(16px,1.8cqw,22px); display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(12px,1.4cqw,18px);" class="jl-nb-strip">
         <figure style="margin:0; "><img src="/assets/photos/shop-drill.webp" alt="Drilling the drivetrain plate" loading="lazy" decoding="async" style="width:100%; aspect-ratio:1; object-fit:cover; display:block; background:var(--panel);"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--dust);">The holes are the part you cannot fix later.</figcaption></figure>
-        <figure style="margin:0; "><img src="/assets/photos/shop-drivetrain.webp" alt="The drivetrain frame coming together" loading="lazy" decoding="async" style="width:100%; aspect-ratio:1; object-fit:cover; display:block; background:var(--panel);"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--dust);">Frame square, module mounted.</figcaption></figure>
+        <figure style="margin:0; "><img src="/assets/photos/shop-drivetrain.webp" alt="The drivetrain frame coming together" loading="lazy" decoding="async" style="width:100%; aspect-ratio:1; object-fit:cover; display:block; background:var(--panel);"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--dust);">Frame square, modules mounted.</figcaption></figure>
         <figure style="margin:0; "><img src="/assets/photos/shop-rails.webp" alt="Driving a fastener into an aluminium channel bracket" loading="lazy" decoding="async" style="width:100%; aspect-ratio:1; object-fit:cover; display:block; background:var(--panel);"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--dust);">Fastening the channel, with gears and a wheel still waiting.</figcaption></figure>
         <figure style="margin:0; "><img src="/assets/photos/shop-garage.webp" alt="The garage the team builds in" loading="lazy" decoding="async" style="width:100%; aspect-ratio:1; object-fit:cover; display:block; background:var(--panel);"><figcaption style="margin-top:9px; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--dust);">The garage everything gets built in.</figcaption></figure>
       </div>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(24px,4cqw,68px); margin-top:clamp(40px,4.6cqw,72px); align-items:start;" class="jl-nb-row">
-      <div>
-        <div style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dust);">what changed from the CAD</div>
-        <p style="margin:12px 0 0; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted);">The steering gear has more play than the drawing suggested, so the module hunts a few degrees before it settles. We think it is the mount geometry rather than the gear. That is the next revision, and the reason there is one module built instead of four.</p>
-      </div>
-      <div>
-        <div style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dust);">next</div>
-        <p style="margin:12px 0 0; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted);">Fix the play, then build the other three to whatever the fix turns out to be. Field-oriented drive after that. Nothing here is tuned, and none of it has seen a match.</p>
-      </div>
+    <div style="margin-top:clamp(40px,4.6cqw,72px); max-width:68ch;">
+      <div style="font-family:var(--label); font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dust);">next</div>
+      <p style="margin:12px 0 0; font-family:var(--serif); font-size:17.5px; line-height:1.6; color:var(--muted);">Tune all four modules so they agree with each other, then field-oriented drive on top of that. Nothing here has seen a match yet.</p>
     </div>
   </section>
   </div>
@@ -2249,7 +2302,7 @@
       <div>
         <div style="display:flex; align-items:center; gap:12px;">
           <img class="jl-brand-mark jl-brand-mark-lg" src="/logo-transparent.png" width="30" height="30" alt="" decoding="async">
-          <span style="font-size:28px; font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.115em; color:var(--accent); text-shadow:2px 2px 0 rgba(233,246,248,.85);">the janitors</span>
+          <span style="font-size:28px; font-family:var(--hand); font-weight:400; text-transform:uppercase; letter-spacing:.115em; color:var(--accent); text-shadow:.04em .05em 0 rgba(233,246,248,.82), .08em .1em .22em rgba(0,0,0,.5);">the janitors</span>
           <span style="font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.1em; color:var(--ink); background:var(--accent); padding:3px 6px;">36721</span>
         </div>
         <p style="margin-top:16px; max-width:34ch; font-family:var(--serif); font-size:17.5px; line-height:1.55; color:var(--muted);">A student-run FIRST Tech Challenge team out of Dublin, CA. We build robots.</p>
@@ -3384,7 +3437,7 @@ class Component extends DCLogic {
     const stages = [
       { name: "the team", value: "the janitors", unit: "first tech challenge · rookie", note: "Six students, one shop, and a robot built from raw stock." },
       { name: "team number", value: "36721", unit: "dublin, ca · 2026", note: "Our rookie number. You'll see it on the pit banner this season." },
-      { name: "the robot", value: "mop-9000", unit: "swerve · in design", note: "One module drawn and being assembled. The rest of the robot comes after the drivetrain drives." },
+      { name: "the robot", value: "mop-9000", unit: "swerve · in design", note: "Four modules built and turning. The rest of the robot comes after the drivetrain drives." },
       { name: "the record", value: "0 – 0", unit: "matches played so far", note: "Nothing on the board yet. Every number here is about to change." },
     ];
     const stageIdx = ((this.state.stage || 0) % 4 + 4) % 4;

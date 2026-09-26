@@ -1079,7 +1079,7 @@ class Component extends DCLogic {
     const stages = [
       { name: "the team", value: "the janitors", unit: "first tech challenge · rookie", note: "Six students, one shop, and a robot built from raw stock." },
       { name: "team number", value: "36721", unit: "dublin, ca · 2026", note: "Our rookie number. You'll see it on the pit banner this season." },
-      { name: "the robot", value: "mop-9000", unit: "swerve · in design", note: "One module drawn and being assembled. The rest of the robot comes after the drivetrain drives." },
+      { name: "the robot", value: "mop-9000", unit: "swerve · in design", note: "Four modules built and turning. The rest of the robot comes after the drivetrain drives." },
       { name: "the record", value: "0 – 0", unit: "matches played so far", note: "Nothing on the board yet. Every number here is about to change." },
     ];
     const stageIdx = ((this.state.stage || 0) % 4 + 4) % 4;
