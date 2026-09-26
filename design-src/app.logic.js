@@ -272,6 +272,8 @@ class Component extends DCLogic {
     });
   }
   componentDidMount() {
+    this._spot = (e) => { const t = e.target; if (!t || !t.closest) return; const el = t.closest(".jl-spot,.jl-tier-row,.jl-outreach-cols > *,.jl-mosaic > div"); if (!el) return; const r = el.getBoundingClientRect(); el.style.setProperty("--mx", (e.clientX - r.left) + "px"); el.style.setProperty("--my", (e.clientY - r.top) + "px"); };
+    document.addEventListener("pointermove", this._spot, { passive: true });
     if (typeof window !== "undefined" && !window.janitorsBootShown) {
       window.janitorsBootShown = true;
       this.startBootSequence();
@@ -1026,7 +1028,7 @@ class Component extends DCLogic {
     const caret = (p) => ({ color: accent, flex: "none", display: (headerKind === "telemetry" && page === p) ? "inline-block" : "none" });
     const rivet = { position: "absolute", width: "5px", height: "5px", borderRadius: "50%", background: "#3A464B", boxShadow: "inset 0 1px 1px rgba(0,0,0,.8)", display: headerKind === "plate" ? "block" : "none" };
     const subs = [
-      { t: "drivetrain", d: "Four motors, mecanum wheels. It can drive any direction, which helps against defense.", a: "4× motors", b: "field-centric" },
+      { t: "drivetrain", d: "Four swerve modules that each steer on their own, so it can drive in any direction.", a: "4× motors", b: "field-centric" },
       { t: "intake", d: "Compliant-wheel active intake swallows game elements at almost any approach angle.", a: "1× motor", b: "0.4 s grab" },
       { t: "deposit", d: "A two-stage slide that reaches every height in under a second.", a: "2-stage", b: "0.8 m reach" },
       { t: "software", d: "Java on the Control Hub, AprilTag vision, tuned PID paths.", a: "java", b: "opencv" },
@@ -1065,6 +1067,7 @@ class Component extends DCLogic {
     });
 
     const amount = this.state.amount === undefined ? 250 : this.state.amount;
+    const chipS = (on) => ({ all: "unset", boxSizing: "border-box", cursor: "pointer", padding: "8px 14px", borderRadius: "999px", fontFamily: "var(--mono)", fontSize: "12.5px", letterSpacing: ".04em", color: on ? "var(--ink)" : "var(--muted)", background: on ? "var(--accent)" : "rgba(255,255,255,.05)", boxShadow: on ? "none" : "inset 0 0 0 1px rgba(255,255,255,.1)", transition: "background .2s ease, color .2s ease" });
     const money = (n) => "$" + Math.round(n).toLocaleString();
     const bar = (frac) => ({ display: "block", height: "100%", width: (frac * 100) + "%", background: accent, transition: "width .3s ease" });
     const annual = amount;
@@ -1152,6 +1155,9 @@ class Component extends DCLogic {
       mphLabel: (speed * 2.23694).toFixed(1) + " mph",
       fieldLabel: (3.66 / Math.max(speed, 0.01)).toFixed(1) + " s across the field",
       amount: amount, amountLabel: "$" + amount.toLocaleString(),
+      rangeStyle: { width: "100%", height: "8px", borderRadius: "999px", cursor: "pointer", background: "linear-gradient(90deg, var(--accent) 0%, var(--accent) " + ((amount - 250) / 22.5) + "%, rgba(255,255,255,.08) " + ((amount - 250) / 22.5) + "%)" },
+      setAmt250: () => this.setState({ amount: 250 }), setAmt500: () => this.setState({ amount: 500 }), setAmt1000: () => this.setState({ amount: 1000 }), setAmt2500: () => this.setState({ amount: 2500 }),
+      amtChip250: chipS(amount === 250), amtChip500: chipS(amount === 500), amtChip1000: chipS(amount === 1000), amtChip2500: chipS(amount === 2500),
       setAmount: (e) => this.setState({ amount: parseFloat(e.target.value) }),
       amtRobot: money(annual * 0.22), amtFab: money(annual * 0.15),
       amtComp: money(annual * 0.15), amtTravel: money(annual * 0.18),
