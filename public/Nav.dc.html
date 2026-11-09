@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/assets/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  *{box-sizing:border-box;}
+  a{text-decoration:none;}
+  .jn-pill,.jn-bar{transition:opacity .55s cubic-bezier(.76,0,.24,1), filter .55s cubic-bezier(.76,0,.24,1), visibility .55s;}
+  .jn-g{transition:opacity .5s cubic-bezier(.76,0,.24,1), transform .55s cubic-bezier(.76,0,.24,1), filter .5s ease;}
+  .jn-cta{transition:transform .25s cubic-bezier(.2,.7,.2,1);}
+  .jn-cta:hover{transform:translateY(-1px);opacity:1;}
+  .jn-cta .jn-sq{transition:transform .25s cubic-bezier(.2,.7,.2,1);}
+  .jn-cta:hover .jn-sq{transform:translateX(3px);}
+  .jn-burger{transition:transform .25s cubic-bezier(.2,.7,.2,1), background .2s ease;}
+  .jn-burger:hover{transform:translateY(-1px);}
+  .jn-burger:hover .jn-bz{background:#fff;}
+  .jn-scrim{transition:opacity .4s ease;}
+  .jn-side{transition:transform .46s cubic-bezier(.2,.75,.2,1);}
+  .jn-slink{display:flex;align-items:center;justify-content:space-between;padding:20px 4px;font-size:clamp(28px,4vw,46px);font-weight:500;letter-spacing:-0.03em;color:#0c0c0c;border-bottom:1px solid #e5e7eb;transition:padding .22s ease,color .18s ease;}
+  .jn-slink:hover{opacity:1;padding-left:16px;color:#000;}
+  .jn-slink .ar{opacity:0;transform:translateX(-10px);transition:all .24s ease;color:#9a978f;}
+  .jn-slink:hover .ar{opacity:1;transform:none;}
+  html.jdark .jn-side{background:#0e1013;color:#f2f3f5;}
+  html.jdark .jn-slink{color:#f2f3f5;border-color:#26282c;}
+  html.jdark .jn-slink:hover{color:#ffffff;}
+  html.jdark .jn-close{border-color:#f2f3f5 !important;}
+  html.jdark .jn-close svg{stroke:#f2f3f5 !important;}
+  html.jdark .jn-cta{background:#22d3ee !important;color:#06212a !important;}
+  html.jdark .jn-cta .jn-sq{background:#06212a !important;}
+  html.jdark .jn-cta .jn-sq svg{stroke:#22d3ee !important;}
+  html.jdark .jn-pill > div{background:#0e1013 !important;}
+  html.jdark .jn-pill .jn-plogo span, html.jdark .jn-pill .jn-pmid a{color:#f2f3f5 !important;}
+  html.jdark .jn-pill .jn-theme, html.jdark .jn-bar .jn-theme{border-color:rgba(255,255,255,.18) !important;color:#f2f3f5 !important;}
+  html.jdark .jn-pcta{background:#22d3ee !important;color:#06212a !important;}
+  html.jdark .jn-bar .jn-bleft span{color:#f2f3f5 !important;}
+</style>
+</helmet>
+
+<!-- TOP PILL (default) -->
+<nav class="jn-pill" style="position:fixed;top:24px;left:0;right:0;z-index:200;display:flex;justify-content:center;pointer-events:none;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <div style="pointer-events:auto;width:min(1359px,94vw);height:60px;background:#ffffff;border-radius:999px;box-shadow:0 18px 44px -18px rgba(30,30,40,0.22),0 2px 6px rgba(30,30,40,0.05);display:flex;align-items:center;justify-content:space-between;gap:clamp(8px,2vw,28px);padding:0 10px 0 26px;">
+    <a href="#top" class="jn-g jn-plogo" style="display:flex;align-items:center;gap:11px;color:#0c0c0c;white-space:nowrap;flex:none;">
+      <img src="/assets/logo-transparent.png" alt="" width="28" height="28" style="display:block;object-fit:contain;">
+      <span style="font-size:22px;font-weight:600;letter-spacing:-0.02em;white-space:nowrap;">The Janitors</span>
+    </a>
+    <div class="jn-g jn-pmid" style="display:flex;align-items:center;gap:clamp(6px,1.7vw,34px);font-size:clamp(13px,1.15vw,17px);color:#1a1a1a;flex:1;justify-content:center;min-width:0;">
+      <a href="#robot" style="color:#1a1a1a;">Robot</a>
+      <a href="#season" style="color:#1a1a1a;">Season</a>
+      <a href="#outreach" style="color:#1a1a1a;">Outreach</a>
+      <a href="#support" style="color:#1a1a1a;">Sponsors</a>
+      <a href="#team" style="color:#1a1a1a;">Team</a>
+      <a href="#portfolio" style="color:#1a1a1a;">Portfolio</a>
+    </div>
+    <button class="jn-g jn-theme" aria-label="Toggle dark mode" style="flex:none;width:42px;height:42px;border-radius:50%;border:1px solid #e5e7eb;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#0c0c0c;"><svg class="jn-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path></svg><svg class="jn-moon" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg></button>
+    <a href="#support" class="jn-g jn-pcta" style="background:#0a0a0a;color:#fff;font-size:clamp(13px,1vw,16px);padding:0 clamp(16px,1.6vw,26px);height:46px;line-height:46px;text-align:center;border-radius:999px;white-space:nowrap;flex:none;">Sponsor Us</a>
+  </div>
+</nav>
+
+<!-- SCROLLED FLAT BAR -->
+<nav class="jn-bar" style="position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;height:82px;padding:0 clamp(16px,3.4vw,54px);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:transparent;opacity:0;visibility:hidden;filter:blur(10px);">
+  <a href="#top" class="jn-g jn-bleft" style="display:flex;align-items:center;gap:13px;color:#0c0c0c;min-width:0;opacity:0;transform:translateX(-28px);">
+    <img src="/assets/logo-transparent.png" alt="" width="38" height="38" style="display:block;object-fit:contain;flex:none;">
+    <span style="font-size:22px;font-weight:600;letter-spacing:-0.02em;white-space:nowrap;">The Janitors</span>
+  </a>
+  <div class="jn-g jn-bright" style="display:flex;align-items:center;gap:12px;flex:none;opacity:0;transform:translateX(28px);">
+    <button class="jn-theme" aria-label="Toggle dark mode" style="flex:none;width:50px;height:50px;border-radius:50%;border:1px solid #e5e7eb;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#0c0c0c;"><svg class="jn-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path></svg><svg class="jn-moon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg></button>
+    <a href="#support" class="jn-cta" style="display:flex;align-items:center;gap:14px;background:#0a0a0a;color:#fff;height:50px;padding:0 6px 0 22px;border-radius:999px;font-size:13.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;white-space:nowrap;">
+      <span>Sponsor Us</span>
+      <span class="jn-sq" style="width:38px;height:38px;border-radius:50%;background:#262626;display:flex;align-items:center;justify-content:center;flex:none;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="19" y2="12"></line><polyline points="13 6 19 12 13 18"></polyline></svg>
+      </span>
+    </a>
+    <button class="jn-burger" aria-label="Open menu" style="width:50px;height:50px;border-radius:50%;border:0;background:#0a0a0a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;flex:none;">
+      <span class="jn-bz" style="width:18px;height:2px;background:#fff;border-radius:2px;transition:background .2s ease;"></span>
+      <span class="jn-bz" style="width:11px;height:2px;background:#fff;border-radius:2px;transition:background .2s ease;"></span>
+      <span class="jn-bz" style="width:15px;height:2px;background:#fff;border-radius:2px;transition:background .2s ease;"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- FULL-HEIGHT SIDEBAR -->
+<div class="jn-scrim" style="position:fixed;inset:0;z-index:300;background:rgba(14,14,14,0.38);opacity:0;pointer-events:none;"></div>
+<aside class="jn-side" style="position:fixed;top:0;right:0;z-index:301;height:100vh;width:min(460px,88vw);background:#ffffff;box-shadow:-30px 0 70px -30px rgba(20,20,25,0.4);transform:translateX(100%);display:flex;flex-direction:column;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:82px;padding:0 clamp(24px,3vw,40px);flex:none;">
+    <span style="display:flex;align-items:center;gap:11px;"><img src="/assets/logo-transparent.png" alt="" width="30" height="30" style="object-fit:contain;"><span style="font-size:20px;font-weight:700;letter-spacing:-0.02em;">The Janitors</span></span>
+    <span style="display:flex;align-items:center;gap:10px;">
+    <button class="jn-theme" aria-label="Toggle dark mode" style="width:46px;height:46px;border-radius:12px;border:1.6px solid #e5e7eb;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#0c0c0c;"><svg class="jn-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path></svg><svg class="jn-moon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg></button>
+    <button class="jn-close" aria-label="Close menu" style="width:46px;height:46px;border-radius:12px;border:1.6px solid #0a0a0a;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+    </button>
+    </span>
+  </div>
+  <nav style="flex:1;display:flex;flex-direction:column;padding:clamp(12px,3vh,40px) clamp(24px,3vw,40px) 0;overflow-y:auto;">
+    <a class="jn-slink" href="#top">home<span class="ar">→</span></a>
+    <a class="jn-slink" href="#robot">robot<span class="ar">→</span></a>
+    <a class="jn-slink" href="#season">season<span class="ar">→</span></a>
+    <a class="jn-slink" href="#outreach">outreach<span class="ar">→</span></a>
+    <a class="jn-slink" href="#support">sponsors<span class="ar">→</span></a>
+    <a class="jn-slink" href="#team">team<span class="ar">→</span></a>
+    <a class="jn-slink" href="#portfolio" style="border-bottom:0;">portfolio<span class="ar">→</span></a>
+  </nav>
+  <div style="padding:clamp(20px,3vh,36px) clamp(24px,3vw,40px);flex:none;">
+    <a href="#support" class="jn-cta" style="display:flex;align-items:center;justify-content:center;gap:14px;background:#0a0a0a;color:#fff;height:58px;border-radius:14px;font-size:15px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;">
+      <span>sponsor us</span>
+      <span class="jn-sq" style="width:38px;height:38px;border-radius:9px;background:#262626;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="19" y2="12"></line><polyline points="13 6 19 12 13 18"></polyline></svg></span>
+    </a>
+  </div>
+</aside>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    const q=(s)=>document.querySelector(s);
+    const pill=q('.jn-pill'), bar=q('.jn-bar');
+    const plogo=q('.jn-plogo'), pmid=q('.jn-pmid'), pcta=q('.jn-pcta');
+    const bleft=q('.jn-bleft'), bright=q('.jn-bright');
+    const burger=q('.jn-burger'), close=q('.jn-close'), side=q('.jn-side'), scrim=q('.jn-scrim');
+    if(!pill||!bar) return;
+    let open=false;
+    const setOpen=(o)=>{ open=o; side.style.transform=o?'translateX(0)':'translateX(100%)'; scrim.style.opacity=o?'1':'0'; scrim.style.pointerEvents=o?'auto':'none'; };
+    burger.addEventListener('click',(e)=>{ e.stopPropagation(); setOpen(!open); });
+    close.addEventListener('click',()=>setOpen(false));
+    scrim.addEventListener('click',()=>setOpen(false));
+    side.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>setOpen(false),80)));
+    document.querySelectorAll('.jn-theme').forEach(b=>b.addEventListener('click',(e)=>{ const r=b.getBoundingClientRect(); if(window.__toggleTheme) window.__toggleTheme(r.left+r.width/2, r.top+r.height/2); }));
+    let lastS=null;
+    const apply=(s)=>{
+      // pill splits apart like water: name drifts left, links flow right, both dissolve
+      pill.style.opacity=s?'0':'1'; pill.style.visibility=s?'hidden':'visible'; pill.style.filter=s?'blur(10px)':'none';
+      plogo.style.transform=s?'translateX(-46px)':'none'; plogo.style.opacity=s?'0':'1'; plogo.style.filter=s?'blur(6px)':'none';
+      pmid.style.transform=s?'translateX(60px)':'none'; pmid.style.opacity=s?'0':'1'; pmid.style.filter=s?'blur(6px)':'none';
+      pcta.style.opacity=s?'0':'1';
+      // bar reforms: left half and right half arrive and sharpen
+      bar.style.opacity=s?'1':'0'; bar.style.visibility=s?'visible':'hidden'; bar.style.filter=s?'none':'blur(10px)';
+      bleft.style.transform=s?'none':'translateX(-28px)'; bleft.style.opacity=s?'1':'0';
+      bright.style.transform=s?'none':'translateX(28px)'; bright.style.opacity=s?'1':'0';
+      bleft.style.transitionDelay=s?'0.14s':'0s'; bright.style.transitionDelay=s?'0.14s':'0s';
+      plogo.style.transitionDelay=pmid.style.transitionDelay=pcta.style.transitionDelay=s?'0s':'0.1s';
+    };
+    apply(false);
+    const check=()=>{
+      const top=document.getElementById('top');
+      const visible = top && top.offsetParent!==null;
+      const y=(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop||0);
+      const s = visible ? (top.getBoundingClientRect().top < -110) : (y>80);
+      if(s!==lastS){ lastS=s; apply(s); if(!s) setOpen(false); }
+      requestAnimationFrame(check);
+    };
+    requestAnimationFrame(check);
+  }
+}
+</script>
+</body>
+</html>
