@@ -39,8 +39,7 @@
   html.jdark .jn-pill .jn-theme, html.jdark .jn-bar .jn-theme{border-color:rgba(255,255,255,.18) !important;color:#f2f3f5 !important;}
   html.jdark .jn-pcta{background:#22d3ee !important;color:#06212a !important;}
   html.jdark .jn-bar .jn-bleft span{color:#f2f3f5 !important;}
-  /* logo stays visible on dark surfaces */
-  @media (max-width: 820px){
+    @media (max-width: 820px){
     .jn-pill{display:none !important;}
     .jn-bar{opacity:1 !important;visibility:visible !important;filter:none !important;height:66px !important;background:rgba(252,252,252,0.92) !important;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,0,0,0.06);}
     html.jdark .jn-bar{background:rgba(10,12,14,0.92) !important;border-bottom-color:rgba(255,255,255,0.08) !important;}
@@ -52,8 +51,7 @@
     .jn-bleft img{width:32px !important;height:32px !important;}
     .jn-bleft span{font-size:19px !important;}
   }
-  /* active-page indicator */
-  .jn-pmid a{position:relative;}
+    .jn-pmid a{position:relative;}
   .jn-pmid a.jn-active{color:#0e8aa8;}
   .jn-pmid a.jn-active::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:2px;background:#22d3ee;border-radius:2px;}
   .jn-slink.jn-active{color:#1796a8;}
@@ -61,7 +59,6 @@
 </style>
 </helmet>
 
-<!-- TOP PILL (default) -->
 <nav class="jn-pill" style="position:fixed;top:24px;left:0;right:0;z-index:200;display:flex;justify-content:center;pointer-events:none;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
   <div style="pointer-events:auto;width:min(1359px,94vw);height:60px;background:#ffffff;border-radius:999px;box-shadow:0 18px 44px -18px rgba(30,30,40,0.22),0 2px 6px rgba(30,30,40,0.05);display:flex;align-items:center;justify-content:space-between;gap:clamp(8px,2vw,28px);padding:0 10px 0 26px;">
     <a href="#top" class="jn-g jn-plogo" style="display:flex;align-items:center;gap:11px;color:#0c0c0c;white-space:nowrap;flex:none;">
@@ -80,7 +77,6 @@
   </div>
 </nav>
 
-<!-- SCROLLED FLAT BAR -->
 <nav class="jn-bar" style="position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;height:82px;padding:0 clamp(16px,3.4vw,54px);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:transparent;opacity:0;visibility:hidden;filter:blur(10px);">
   <a href="#top" class="jn-g jn-bleft" style="display:flex;align-items:center;gap:13px;color:#0c0c0c;min-width:0;opacity:0;transform:translateX(-28px);">
     <img src="/assets/logo-transparent.png" alt="" width="38" height="38" style="display:block;object-fit:contain;flex:none;">
@@ -102,7 +98,6 @@
   </div>
 </nav>
 
-<!-- FULL-HEIGHT SIDEBAR -->
 <div class="jn-scrim" style="position:fixed;inset:0;z-index:300;background:rgba(14,14,14,0.38);opacity:0;pointer-events:none;"></div>
 <aside class="jn-side" style="position:fixed;top:0;right:0;z-index:301;height:100vh;width:min(460px,88vw);background:#ffffff;box-shadow:-30px 0 70px -30px rgba(20,20,25,0.4);transform:translateX(100%);display:flex;flex-direction:column;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
   <div style="display:flex;align-items:center;justify-content:space-between;height:82px;padding:0 clamp(24px,3vw,40px);flex:none;">
